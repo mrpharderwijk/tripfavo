@@ -1,0 +1,15 @@
+import { Canvas, Meta, Source, ArgTypes } from '@storybook/blocks';
+
+import * as BoxStories from './box.stories';
+
+<Meta of={BoxStories} />
+
+# Box
+
+A `Box` is a component that allows you to lay out items. The `Box` component should only be used to create molecules. Molecules can be used in consumers, but this `Box` component should not be used.
+
+<Canvas of={BoxStories.Padding} />
+
+<Canvas of={BoxStories.Margin} />
+
+<ArgTypes of={BoxStories} />

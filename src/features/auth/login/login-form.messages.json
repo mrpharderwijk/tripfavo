@@ -1,0 +1,13 @@
+{
+  "en-US": {
+    "signUpForm": {
+      "heading": "Sign up for an account",
+      "title": "Welcome to Casabnb",
+      "submit": "Continue",
+      "login": {
+        "text": "Already have an account?",
+        "label": "Log in"
+      }
+    }
+  }
+}

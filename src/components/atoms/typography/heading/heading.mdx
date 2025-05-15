@@ -1,0 +1,24 @@
+import { Canvas, Meta, Source, ArgTypes } from '@storybook/blocks';
+
+import * as HeadingStories from './heading.stories';
+
+<Meta of={HeadingStories} />
+
+# Heading
+
+A `Heading` is a component that allows you to render `h1` to `h6`. It uses the `Text` component as a base.
+
+# Heading overview
+
+<Canvas of={HeadingStories.Overview} />
+
+# H1
+
+<Canvas of={HeadingStories.H1} />
+<Canvas of={HeadingStories.H2} />
+<Canvas of={HeadingStories.H3} />
+<Canvas of={HeadingStories.H4} />
+<Canvas of={HeadingStories.H5} />
+<Canvas of={HeadingStories.H6} />
+
+{/* <ArgTypes of={HeadingStories} /> */}

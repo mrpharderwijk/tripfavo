@@ -1,0 +1,60 @@
+{
+  "userMenu": {
+    "host": "Host your property",
+    "myFavorites": "My favorites",
+    "myReservations": "My reservations",
+    "myProperties": "My properties",
+    "logout": "Logout",
+    "login": "Login",
+    "signUp": "Sign up"
+  },
+  "auth": {
+    "loginForm": {
+      "heading": "Log in to your account",
+      "title": "Welcome back!",
+      "submit": "Continue",
+      "register": {
+        "text": "Don't have an account?",
+        "label": "Sign up"
+      }
+    },
+    "signUpForm": {
+      "heading": "Sign up for an account",
+      "title": "Welcome to Casabnb",
+      "submit": "Continue",
+      "login": {
+        "text": "Already have an account?",
+        "label": "Log in"
+      }
+    }
+  },
+  "common": {
+    "forms": {
+      "firstName": {
+        "label": "First name",
+        "placeholder": "John"
+      },
+      "middleName": {
+        "label": "Middle name",
+        "placeholder": "Doe"
+      },
+      "lastName": {
+        "label": "Last name",
+        "placeholder": "Doe"
+      },
+      "email": {
+        "label": "Email address",
+        "placeholder": "johndoe@example.com"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "********"
+      },
+      "passwordConfirm": {
+        "label": "Confirm password",
+        "placeholder": "********"
+      },
+      "required": "Please fill in your {field}"
+    }
+  }
+}

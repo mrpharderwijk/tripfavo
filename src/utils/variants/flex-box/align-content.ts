@@ -1,0 +1,42 @@
+export const alignContentVariants = {
+  'align-content': {
+    start: 'content-start',
+    end: 'content-end',
+    center: 'content-center',
+    between: 'content-between',
+    around: 'content-around',
+    stretch: 'content-stretch',
+  },
+  'align-content-sm': {
+    start: 'sm:content-start',
+    end: 'sm:content-end',
+    center: 'sm:content-center',
+    between: 'sm:content-between',
+    around: 'sm:content-around',
+    stretch: 'sm:content-stretch',
+  },
+  'align-content-md': {
+    start: 'md:content-start',
+    end: 'md:content-end',
+    center: 'md:content-center',
+    between: 'md:content-between',
+    around: 'md:content-around',
+    stretch: 'md:content-stretch',
+  },
+  'align-content-lg': {
+    start: 'lg:content-start',
+    end: 'lg:content-end',
+    center: 'lg:content-center',
+    between: 'lg:content-between',
+    around: 'lg:content-around',
+    stretch: 'lg:content-stretch',
+  },
+  'align-content-xl': {
+    start: 'xl:content-start',
+    end: 'xl:content-end',
+    center: 'xl:content-center',
+    between: 'xl:content-between',
+    around: 'xl:content-around',
+    stretch: 'xl:content-stretch',
+  },
+}
