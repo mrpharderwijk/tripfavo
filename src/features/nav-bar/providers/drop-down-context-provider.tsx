@@ -40,7 +40,7 @@ export function DropDownContextProvider({ children }: PropsWithChildren): ReactE
       openDropDown(dropDownId)
     }
   }
-  console.log('DropDownContextProvider: ', state.currentOpenDropDown)
+
   return (
     <DropDownContext
       value={{

@@ -14,8 +14,9 @@ import { Button } from '@/components/molecules/buttons/button'
 import { InputPassword } from '@/components/molecules/input-password/input-password'
 import { useLoginForm } from '@/features/auth/login/use-login-form'
 import { getRoutePathByRouteName } from '@/utils/get-route'
+
 export function LoginForm(): ReactElement {
-  const { control, onSubmit, handleSubmit, errors, isLoading, error } = useLoginForm()
+  const { control, submit, errors, isLoading, error } = useLoginForm()
   const tLoginForm = useTranslations('auth.loginForm')
   const tCommon = useTranslations('common')
 
@@ -54,7 +55,7 @@ export function LoginForm(): ReactElement {
           <div className="text-sm text-red-500 mb-2">{errors.password?.message?.toString()}</div>
         )}
 
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form noValidate onSubmit={submit}>
           <FlexBox flex-direction="col" gap={4}>
             <FlexBox flex-direction="col" gap={3}>
               <Controller
@@ -97,7 +98,14 @@ export function LoginForm(): ReactElement {
               />
             </FlexBox>
 
-            <Button variant="secondary" size="xl" type="submit" disabled={isLoading} fullWidth>
+            <Button
+              variant="secondary"
+              size="xl"
+              type="submit"
+              onClick={() => submit()}
+              disabled={isLoading}
+              fullWidth
+            >
               {tLoginForm('submit')}
             </Button>
           </FlexBox>

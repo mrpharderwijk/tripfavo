@@ -19,7 +19,7 @@ export function UserMenuInternal(): ReactElement {
   const router = useRouter()
   const { currentUser } = useAppContext()
   const { currentOpenDropDown, closeDropDown, toggleDropDown } = useDropDownContext()
-  const tUserMenu = useTranslations('userMenu')
+  const tMainMenu = useTranslations('mainMenu')
   const pathname = usePathname()
 
   function handleUserMenuClick() {
@@ -49,7 +49,7 @@ export function UserMenuInternal(): ReactElement {
   return (
     <FlexBox flex-direction="row" align-items="center" gap={3}>
       <Button onClick={() => handleOnClick('host')} size="md" variant="quaternary-inverse" rounded>
-        {tUserMenu('host')}
+        {tMainMenu('host')}
       </Button>
 
       {currentUser && <Button avatar size="md" onClick={() => handleOnClick('account')} />}
@@ -80,10 +80,10 @@ export function UserMenuInternal(): ReactElement {
               onClick={() => {
                 handleOnClick('host')
               }}
-              label={tUserMenu('host')}
+              label={tMainMenu('host')}
             />
             <hr />
-            <UserMenuItem onClick={onClickMenuItemLogout} label={tUserMenu('logout')} />
+            <UserMenuItem onClick={onClickMenuItemLogout} label={tMainMenu('logout')} />
           </>
         ) : (
           <>
@@ -91,14 +91,14 @@ export function UserMenuInternal(): ReactElement {
               onClick={() => {
                 handleOnClick('login')
               }}
-              label={tUserMenu('login')}
+              label={tMainMenu('login')}
             />
             <UserMenuDivider />
             <UserMenuItem
               onClick={() => {
                 handleOnClick('signUp')
               }}
-              label={tUserMenu('signUp')}
+              label={tMainMenu('signUp')}
             />
           </>
         )}

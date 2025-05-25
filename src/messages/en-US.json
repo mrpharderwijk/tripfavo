@@ -1,12 +1,14 @@
 {
-  "userMenu": {
+  "mainMenu": {
     "host": "Host your property",
     "myFavorites": "My favorites",
-    "myReservations": "My reservations",
-    "myProperties": "My properties",
+    "myBookings": "My bookings",
+    "myListings": "My listings",
     "logout": "Logout",
     "login": "Login",
-    "signUp": "Sign up"
+    "signUp": "Sign up",
+    "language": "Change language",
+    "account": "Account"
   },
   "auth": {
     "loginForm": {

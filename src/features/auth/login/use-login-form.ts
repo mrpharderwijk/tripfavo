@@ -2,23 +2,15 @@
 
 import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
-import { useState } from 'react'
-import {
-  Control,
-  FieldErrors,
-  FieldValues,
-  useForm,
-  UseFormHandleSubmit,
-  UseFormReset,
-} from 'react-hook-form'
+import { BaseSyntheticEvent, useState } from 'react'
+import { Control, FieldErrors, FieldValues, useForm, UseFormReset } from 'react-hook-form'
 
 import { useAppContext } from '@/providers/app-context-provider/app-context-provider'
 
 type UseLoginFormReturnType = {
   isLoading: boolean
-  onSubmit: (data: FieldValues) => void
   control: Control<FieldValues>
-  handleSubmit: UseFormHandleSubmit<FieldValues>
+  submit: (e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>
   errors: FieldErrors<FieldValues>
   reset: UseFormReset<FieldValues>
   error: string | null
@@ -41,38 +33,41 @@ export function useLoginForm(): UseLoginFormReturnType {
       password: '',
     },
   })
+  console.log('formState: ', errors)
 
-  function onSubmit(data: FieldValues) {
+  async function onSubmit(data: FieldValues) {
+    console.log('formState: ', errors)
     setIsLoading(true)
     setError(null)
     enableAppLoading()
 
-    signIn('credentials', {
-      ...data,
-      redirect: false,
-    })
-      .then((callback) => {
-        setIsLoading(false)
-        console.log('callback: ', callback)
-        if (callback?.error) {
-          setError(callback.error)
-        }
+    try {
+      const callback = await signIn('credentials', {
+        ...data,
+        redirect: false,
+      })
 
-        if (callback?.ok && !callback?.error) {
-          router.refresh()
-          reset()
-        }
-      })
-      .finally(() => {
-        disableAppLoading()
-      })
+      if (callback?.error) {
+        setError(callback.error)
+      }
+
+      if (callback?.ok && !callback?.error) {
+        console.log('callback?.ok: ', callback?.ok)
+        router.refresh()
+        reset()
+      }
+      disableAppLoading()
+    } catch (error) {
+      console.log('error: ', error)
+      setError(error as string)
+      disableAppLoading()
+    }
   }
 
   return {
     isLoading,
-    onSubmit,
+    submit: handleSubmit(onSubmit),
     control,
-    handleSubmit,
     errors,
     reset,
     error,
