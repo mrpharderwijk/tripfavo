@@ -7,6 +7,7 @@ export const displayVariants = {
     'inline-flex': 'inline-flex',
     grid: 'grid',
     'inline-grid': 'inline-grid',
+    none: 'hidden',
   },
   'display-sm': {
     block: 'sm:block',
@@ -16,6 +17,7 @@ export const displayVariants = {
     'inline-flex': 'sm:inline-flex',
     grid: 'sm:grid',
     'inline-grid': 'sm:inline-grid',
+    none: 'sm:hidden',
   },
   'display-md': {
     block: 'md:block',
@@ -25,6 +27,7 @@ export const displayVariants = {
     'inline-flex': 'md:inline-flex',
     grid: 'md:grid',
     'inline-grid': 'md:inline-grid',
+    none: 'md:hidden',
   },
   'display-lg': {
     block: 'lg:block',
@@ -34,6 +37,7 @@ export const displayVariants = {
     'inline-flex': 'lg:inline-flex',
     grid: 'lg:grid',
     'inline-grid': 'lg:inline-grid',
+    none: 'lg:hidden',
   },
   'display-xl': {
     block: 'xl:block',
@@ -43,5 +47,6 @@ export const displayVariants = {
     'inline-flex': 'xl:inline-flex',
     grid: 'xl:grid',
     'inline-grid': 'xl:inline-grid',
+    none: 'xl:hidden',
   },
 }

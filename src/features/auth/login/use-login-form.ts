@@ -1,3 +1,5 @@
+'use client'
+
 import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import { useState } from 'react'
@@ -9,6 +11,8 @@ import {
   UseFormHandleSubmit,
   UseFormReset,
 } from 'react-hook-form'
+
+import { useAppContext } from '@/providers/app-context-provider/app-context-provider'
 
 type UseLoginFormReturnType = {
   isLoading: boolean
@@ -22,6 +26,7 @@ type UseLoginFormReturnType = {
 
 export function useLoginForm(): UseLoginFormReturnType {
   const router = useRouter()
+  const { enableAppLoading, disableAppLoading } = useAppContext()
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -40,22 +45,27 @@ export function useLoginForm(): UseLoginFormReturnType {
   function onSubmit(data: FieldValues) {
     setIsLoading(true)
     setError(null)
+    enableAppLoading()
 
     signIn('credentials', {
       ...data,
       redirect: false,
-    }).then((callback) => {
-      setIsLoading(false)
-
-      if (callback?.error) {
-        setError(callback.error)
-      }
-
-      if (callback?.ok && !callback?.error) {
-        router.refresh()
-        reset()
-      }
     })
+      .then((callback) => {
+        setIsLoading(false)
+        console.log('callback: ', callback)
+        if (callback?.error) {
+          setError(callback.error)
+        }
+
+        if (callback?.ok && !callback?.error) {
+          router.refresh()
+          reset()
+        }
+      })
+      .finally(() => {
+        disableAppLoading()
+      })
   }
 
   return {

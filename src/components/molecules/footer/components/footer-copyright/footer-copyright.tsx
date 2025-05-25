@@ -58,7 +58,7 @@ export function FooterCopyright(): ReactElement {
           justify-content="center"
           gap="0.5"
         >
-          <Body tag="label" size="sm">
+          <Body tag="label" size="base-sm">
             &copy; {currentYear} Whatever, All Rights Reserved
           </Body>
 

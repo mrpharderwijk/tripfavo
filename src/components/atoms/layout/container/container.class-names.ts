@@ -11,11 +11,11 @@ export const containerClassNames = cva('mx-auto', {
     },
     fullWidth: {
       true: 'w-full',
-      false: 'max-w[2520px] w-full',
+      false: 'max-w-[2520px] w-full',
     },
     narrow: {
-      sm: 'max-w-[568px]',
-      md: 'max-w-[623px]',
+      sm: 'max-w-[568px] px-4',
+      md: 'max-w-[623px] px-4',
     },
   },
   defaultVariants: {

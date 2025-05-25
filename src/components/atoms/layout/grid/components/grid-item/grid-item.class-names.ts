@@ -12,9 +12,13 @@ import {
   flexDirectionVariants,
   flexVariants,
   flexWrapVariants,
+  fullHeightVariants,
+  fullWidthVariants,
   gapVariants,
+  heightVariants,
   justifyContentVariants,
   orderVariants,
+  widthVariants,
 } from '@/utils/variants'
 import { colEndVariants } from '@/utils/variants/grid/col-end'
 import { colSpanVariants } from '@/utils/variants/grid/col-span'
@@ -59,5 +63,9 @@ export const gridItemClassNames = cva('', {
     ...borderVariants,
     ...borderStyleVariants,
     ...borderColorVariants,
+    ...heightVariants,
+    ...widthVariants,
+    ...fullHeightVariants,
+    ...fullWidthVariants,
   },
 })

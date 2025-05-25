@@ -4,7 +4,6 @@
 
 import { FooterCopyright } from './components/footer-copyright/footer-copyright'
 
-import { Container } from '@/components/atoms/layout/container/container'
 import { FooterDisclaimer } from '@/components/molecules/footer/components/footer-disclaimer/footer-disclaimer'
 import { FooterListItem } from '@/components/molecules/footer/components/footer-list/components/footer-list-item/footer-list-item'
 import { FooterList } from '@/components/molecules/footer/components/footer-list/footer-list'
@@ -14,7 +13,7 @@ export const Footer = () => {
 
   return (
     <footer className="border-t border-t-gray-light bg-gray-lightest pt-8 md:pt-10 xl:pt-12">
-      <Container className="flex flex-col gap-y-6">
+      <div className="flex flex-col gap-y-6">
         <div className="grid gap-y-6 grid-cols-1 xl:grid-cols-3">
           <FooterList title="Support">
             <FooterListItem>Help Center</FooterListItem>
@@ -45,14 +44,13 @@ export const Footer = () => {
         </div>
 
         <FooterDisclaimer title="Disclaimer">
-          The Airbnb Newsroom is aimed at journalists. All Homes and Experiences
-          referenced on the Airbnb Newsroom are intended purely to inspire and
-          illustrate. Airbnb does not recommend or endorse specific Home or
-          Experience listings on the Airbnb platform.
+          The Casabnb Newsroom is aimed at journalists. All Homes and Experiences referenced on the
+          Casabnb Newsroom are intended purely to inspire and illustrate. Casabnb does not recommend
+          or endorse specific Home or Experience listings on the Casabnb platform.
         </FooterDisclaimer>
 
         <FooterCopyright />
-      </Container>
+      </div>
     </footer>
   )
 }

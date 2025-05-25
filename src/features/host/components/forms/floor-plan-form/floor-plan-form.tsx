@@ -1,12 +1,12 @@
 'use client'
 
+import axios from 'axios'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { Box } from '@/components/atoms/layout/box/box'
-import { Container } from '@/components/atoms/layout/container/container'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
 import { Body } from '@/components/atoms/typography/body/body'
@@ -24,16 +24,17 @@ export const FloorPlanFormSchema = z.object({
 })
 
 export function FloorPlanForm() {
-  const { steps, currentStep, updateStep, onNextStep, storageValue } = useHostContext()
+  const { steps, currentStep, updateStep, onNextStep, setIsLoading, listingId, listing } =
+    useHostContext()
   const form = useForm<z.infer<typeof FloorPlanFormSchema>>({
     resolver: zodResolver(FloorPlanFormSchema),
     mode: 'onChange',
     defaultValues: {
-      guestCount: 4,
-      roomCount: 1,
-      bedroomCount: 1,
-      bedCount: 1,
-      bathroomCount: 1,
+      guestCount: listing?.floorPlan?.guestCount ?? 4,
+      roomCount: listing?.floorPlan?.roomCount ?? 1,
+      bedroomCount: listing?.floorPlan?.bedroomCount ?? 1,
+      bedCount: listing?.floorPlan?.bedCount ?? 1,
+      bathroomCount: listing?.floorPlan?.bathroomCount ?? 1,
     },
   })
   const {
@@ -42,162 +43,158 @@ export function FloorPlanForm() {
   } = form
   const stepData = steps[currentStep as HOST_STEP]
 
+  async function onSubmit(data: z.infer<typeof FloorPlanFormSchema>): Promise<boolean> {
+    setIsLoading(true)
+
+    try {
+      await axios.post(`/api/host/listings/${listingId}/floor-plan`, data)
+      return true
+    } catch (error) {
+      console.error(error)
+      return false
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   /**
-   * This effect is used to:
-   * 1. !IMPORTANT! set the default value after component mount, otherwise
-   *    this will lead to a hydration error
-   * 2. Update the step form to the context
+   * This effect is used to Update the step form to the context
    */
   useEffect(() => {
-    // 1. Set the default value after component mount
-    const currentStepData = storageValue?.[currentStep as HOST_STEP]
-    if (currentStepData) {
-      const formKeys = Object.keys(currentStepData) as Array<keyof typeof FloorPlanFormSchema.shape>
-      formKeys.forEach((key) => {
-        if (key in currentStepData) {
-          form.setValue(key, currentStepData[key as keyof typeof currentStepData])
-        }
-      })
-    }
-
-    // 2. update the step form to the context
-    updateStep(HOST_STEP.FloorPlan, form as any)
-
+    updateStep(HOST_STEP.FloorPlan, form as any, onSubmit)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
-    <Container narrow="md" padding={false}>
-      <Box display="flex" flex-direction="col" gap={11}>
-        <HeadingGroup title={stepData.title} subtitle={stepData.subtitle} />
+    <Box display="flex" flex-direction="col" gap={11}>
+      <HeadingGroup title={stepData.title} subtitle={stepData.subtitle} />
 
-        <Form {...form}>
-          <form noValidate onSubmit={onNextStep}>
-            <Box padding-y={4} border-b={1} border-color="secondary-disabled">
-              <FormField
-                control={control}
-                name="guestCount"
-                render={({ field }) => (
-                  <FlexBox flex-direction="row" gap={2}>
-                    <FlexBoxItem flex="auto">
-                      <Body size="base-xl" font-weight="medium">
-                        Guests
-                      </Body>
-                    </FlexBoxItem>
-                    <FlexBoxItem flex="initial">
-                      <InputNumber
-                        id="guestCount"
-                        value={field.value}
-                        onChange={field.onChange}
-                        editable={false}
-                        min={FloorPlanFormSchema.shape?.guestCount?.minValue ?? 1}
-                        max={FloorPlanFormSchema.shape?.guestCount?.maxValue ?? undefined}
-                      />
-                    </FlexBoxItem>
-                  </FlexBox>
-                )}
-              />
-            </Box>
+      <Form {...form}>
+        <form noValidate onSubmit={onNextStep}>
+          <Box padding-y={4} border-b={1} border-color="secondary-disabled">
+            <FormField
+              control={control}
+              name="guestCount"
+              render={({ field }) => (
+                <FlexBox flex-direction="row" gap={2}>
+                  <FlexBoxItem flex="auto">
+                    <Body size="base-xl" font-weight="medium">
+                      Guests
+                    </Body>
+                  </FlexBoxItem>
+                  <FlexBoxItem flex="initial">
+                    <InputNumber
+                      id="guestCount"
+                      value={field.value}
+                      onChange={field.onChange}
+                      editable={false}
+                      min={FloorPlanFormSchema.shape?.guestCount?.minValue ?? 1}
+                      max={FloorPlanFormSchema.shape?.guestCount?.maxValue ?? undefined}
+                    />
+                  </FlexBoxItem>
+                </FlexBox>
+              )}
+            />
+          </Box>
 
-            <Box padding-y={4} border-b={1} border-color="secondary-disabled">
-              <FormField
-                control={control}
-                name="roomCount"
-                render={({ field }) => (
-                  <FlexBox flex-direction="row" gap={2}>
-                    <FlexBoxItem flex="auto">
-                      <Body size="base-xl">Rooms (includes living room)</Body>
-                    </FlexBoxItem>
-                    <FlexBoxItem flex="initial">
-                      <InputNumber
-                        id="roomCount"
-                        value={field.value}
-                        onChange={field.onChange}
-                        editable={false}
-                        min={FloorPlanFormSchema.shape?.roomCount?.minValue ?? 1}
-                        max={FloorPlanFormSchema.shape?.roomCount?.maxValue ?? undefined}
-                      />
-                    </FlexBoxItem>
-                  </FlexBox>
-                )}
-              />
-            </Box>
+          <Box padding-y={4} border-b={1} border-color="secondary-disabled">
+            <FormField
+              control={control}
+              name="roomCount"
+              render={({ field }) => (
+                <FlexBox flex-direction="row" gap={2}>
+                  <FlexBoxItem flex="auto">
+                    <Body size="base-xl">Rooms (includes living room)</Body>
+                  </FlexBoxItem>
+                  <FlexBoxItem flex="initial">
+                    <InputNumber
+                      id="roomCount"
+                      value={field.value}
+                      onChange={field.onChange}
+                      editable={false}
+                      min={FloorPlanFormSchema.shape?.roomCount?.minValue ?? 1}
+                      max={FloorPlanFormSchema.shape?.roomCount?.maxValue ?? undefined}
+                    />
+                  </FlexBoxItem>
+                </FlexBox>
+              )}
+            />
+          </Box>
 
-            <Box padding-y={4} border-b={1} border-color="secondary-disabled">
-              <FormField
-                control={control}
-                name="bedroomCount"
-                render={({ field }) => (
-                  <FlexBox flex-direction="row" gap={2}>
-                    <FlexBoxItem flex="auto">
-                      <Body size="base-xl">Bedrooms</Body>
-                    </FlexBoxItem>
-                    <FlexBoxItem flex="initial">
-                      <InputNumber
-                        id="bedroomCount"
-                        value={field.value}
-                        onChange={field.onChange}
-                        editable={false}
-                        min={FloorPlanFormSchema.shape?.bedroomCount?.minValue ?? 0}
-                        max={FloorPlanFormSchema.shape?.bedroomCount?.maxValue ?? undefined}
-                      />
-                    </FlexBoxItem>
-                  </FlexBox>
-                )}
-              />
-            </Box>
+          <Box padding-y={4} border-b={1} border-color="secondary-disabled">
+            <FormField
+              control={control}
+              name="bedroomCount"
+              render={({ field }) => (
+                <FlexBox flex-direction="row" gap={2}>
+                  <FlexBoxItem flex="auto">
+                    <Body size="base-xl">Bedrooms</Body>
+                  </FlexBoxItem>
+                  <FlexBoxItem flex="initial">
+                    <InputNumber
+                      id="bedroomCount"
+                      value={field.value}
+                      onChange={field.onChange}
+                      editable={false}
+                      min={FloorPlanFormSchema.shape?.bedroomCount?.minValue ?? 0}
+                      max={FloorPlanFormSchema.shape?.bedroomCount?.maxValue ?? undefined}
+                    />
+                  </FlexBoxItem>
+                </FlexBox>
+              )}
+            />
+          </Box>
 
-            <Box padding-y={4} border-b={1} border-color="secondary-disabled">
-              <FormField
-                control={control}
-                name="bedCount"
-                render={({ field }) => (
-                  <FlexBox flex-direction="row" gap={2}>
-                    <FlexBoxItem flex="auto">
-                      <Body size="base-xl">Beds</Body>
-                    </FlexBoxItem>
-                    <FlexBoxItem flex="initial">
-                      <InputNumber
-                        id="bedCount"
-                        value={field.value}
-                        onChange={field.onChange}
-                        min={FloorPlanFormSchema.shape?.bedCount?.minValue ?? 1}
-                        max={FloorPlanFormSchema.shape?.bedCount?.maxValue ?? undefined}
-                        editable={false}
-                      />
-                    </FlexBoxItem>
-                  </FlexBox>
-                )}
-              />
-            </Box>
+          <Box padding-y={4} border-b={1} border-color="secondary-disabled">
+            <FormField
+              control={control}
+              name="bedCount"
+              render={({ field }) => (
+                <FlexBox flex-direction="row" gap={2}>
+                  <FlexBoxItem flex="auto">
+                    <Body size="base-xl">Beds</Body>
+                  </FlexBoxItem>
+                  <FlexBoxItem flex="initial">
+                    <InputNumber
+                      id="bedCount"
+                      value={field.value}
+                      onChange={field.onChange}
+                      min={FloorPlanFormSchema.shape?.bedCount?.minValue ?? 1}
+                      max={FloorPlanFormSchema.shape?.bedCount?.maxValue ?? undefined}
+                      editable={false}
+                    />
+                  </FlexBoxItem>
+                </FlexBox>
+              )}
+            />
+          </Box>
 
-            <Box padding-y={4} border-b={1} border-color="secondary-disabled">
-              <FormField
-                control={control}
-                name="bathroomCount"
-                render={({ field }) => (
-                  <FlexBox flex-direction="row" gap={2}>
-                    <FlexBoxItem flex="auto">
-                      <Body size="base-xl">Bathrooms</Body>
-                    </FlexBoxItem>
-                    <FlexBoxItem flex="initial">
-                      <InputNumber
-                        id="bathroomCount"
-                        value={field.value}
-                        onChange={field.onChange}
-                        min={FloorPlanFormSchema.shape?.bathroomCount?.minValue ?? 1}
-                        max={FloorPlanFormSchema.shape?.bathroomCount?.maxValue ?? undefined}
-                        step={field.value < 1 && field.value > 0 ? 0.5 : 1}
-                        editable={false}
-                      />
-                    </FlexBoxItem>
-                  </FlexBox>
-                )}
-              />
-            </Box>
-          </form>
-        </Form>
-      </Box>
-    </Container>
+          <Box padding-y={4} border-b={1} border-color="secondary-disabled">
+            <FormField
+              control={control}
+              name="bathroomCount"
+              render={({ field }) => (
+                <FlexBox flex-direction="row" gap={2}>
+                  <FlexBoxItem flex="auto">
+                    <Body size="base-xl">Bathrooms</Body>
+                  </FlexBoxItem>
+                  <FlexBoxItem flex="initial">
+                    <InputNumber
+                      id="bathroomCount"
+                      value={field.value}
+                      onChange={field.onChange}
+                      min={FloorPlanFormSchema.shape?.bathroomCount?.minValue ?? 1}
+                      max={FloorPlanFormSchema.shape?.bathroomCount?.maxValue ?? undefined}
+                      step={field.value < 1 && field.value > 0 ? 0.5 : 1}
+                      editable={false}
+                    />
+                  </FlexBoxItem>
+                </FlexBox>
+              )}
+            />
+          </Box>
+        </form>
+      </Form>
+    </Box>
   )
 }

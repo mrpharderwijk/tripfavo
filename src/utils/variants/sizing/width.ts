@@ -288,3 +288,10 @@ export const widthVariants = {
     fit: 'lg:w-fit',
   },
 }
+
+export const fullWidthVariants = {
+  fullWidth: {
+    true: 'w-full',
+    false: null,
+  },
+}

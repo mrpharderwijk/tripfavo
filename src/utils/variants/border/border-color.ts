@@ -11,6 +11,8 @@ export const borderColorVariants = {
     'tertiary-selected': 'border-border-tertiary-selected',
     'tertiary-error': 'border-border-tertiary-error',
     quarternary: 'border-border-quarternary',
+    transparent: 'border-transparent',
+    deco: 'border-deco',
   },
   'border-color-sm': {
     primary: 'sm:border-border-primary',
@@ -24,6 +26,8 @@ export const borderColorVariants = {
     'tertiary-selected': 'sm:border-border-tertiary-selected',
     'tertiary-error': 'sm:border-border-tertiary-error',
     quarternary: 'sm:border-border-quarternary',
+    transparent: 'sm:border-transparent',
+    deco: 'sm:border-deco',
   },
   'border-color-md': {
     primary: 'md:border-border-primary',
@@ -37,6 +41,8 @@ export const borderColorVariants = {
     'tertiary-selected': 'md:border-border-tertiary-selected',
     'tertiary-error': 'md:border-border-tertiary-error',
     quarternary: 'md:border-border-quarternary',
+    transparent: 'md:border-transparent',
+    deco: 'md:border-deco',
   },
   'border-color-lg': {
     primary: 'lg:border-border-primary',
@@ -50,6 +56,8 @@ export const borderColorVariants = {
     'tertiary-selected': 'lg:border-border-tertiary-selected',
     'tertiary-error': 'lg:border-border-tertiary-error',
     quarternary: 'lg:border-border-quarternary',
+    transparent: 'lg:border-transparent',
+    deco: 'lg:border-deco',
   },
   'border-color-xl': {
     primary: 'xl:border-border-primary',
@@ -63,5 +71,7 @@ export const borderColorVariants = {
     'tertiary-selected': 'xl:border-border-tertiary-selected',
     'tertiary-error': 'xl:border-border-tertiary-error',
     quarternary: 'xl:border-border-quarternary',
+    transparent: 'xl:border-transparent',
+    deco: 'xl:border-deco',
   },
 }

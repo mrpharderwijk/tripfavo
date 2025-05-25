@@ -36,13 +36,13 @@ export type HeadingProps = PropsWithChildren<
 
 const headingTextPropsMap = {
   'h1-semibold': {
-    'font-size': 'text-titles-2xl-semibold',
+    'font-size': 'titles-2xl-semibold',
   },
   'h2-base': {
     'font-size': 'base-xlt',
   },
   'h2-semibold': {
-    'font-size': 'text-titles-xl-semibold',
+    'font-size': 'titles-xl-semibold',
   },
   h3: {
     'font-size': 'title-lg',
@@ -51,10 +51,10 @@ const headingTextPropsMap = {
     'font-size': 'base-lgt',
   },
   'h3-semibold': {
-    'font-size': 'text-titles-lg-semibold',
+    'font-size': 'titles-lg-semibold',
   },
   'h3-medium': {
-    'font-size': 'text-titles-lg-medium',
+    'font-size': 'titles-lg-medium',
   },
   h4: {
     'font-size': 'title-md',
@@ -63,25 +63,25 @@ const headingTextPropsMap = {
     'font-size': 'base-mdt',
   },
   'h4-semibold': {
-    'font-size': 'text-titles-md-semibold',
+    'font-size': 'titles-md-semibold',
   },
   'h4-medium': {
-    'font-size': 'text-titles-md-medium',
+    'font-size': 'titles-md-medium',
   },
   h5: {
     'font-size': 'title-sm',
   },
   'h5-semibold': {
-    'font-size': 'text-titles-sm-semibold',
+    'font-size': 'titles-sm-semibold',
   },
   'h5-medium': {
-    'font-size': 'text-titles-sm-medium',
+    'font-size': 'titles-sm-medium',
   },
   h6: {
     'font-size': 'title-xs',
   },
   'h6-semibold': {
-    'font-size': 'text-titles-xs-semibold',
+    'font-size': 'titles-xs-semibold',
   },
 }
 

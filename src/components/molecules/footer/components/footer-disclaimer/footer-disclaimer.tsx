@@ -8,15 +8,11 @@ type FooterDisclaimerProps = PropsWithChildren<{
   title?: string
 }>
 
-export function FooterDisclaimer({
-  children,
-  title,
-}: FooterDisclaimerProps): ReactElement {
+export function FooterDisclaimer({ children, title }: FooterDisclaimerProps): ReactElement {
   return (
     <Box
-      border-b="px"
-      border-b-md="px"
-      border-color="gray-light"
+      border-b={1}
+      border-color="secondary"
       display="flex"
       flex-direction="col"
       padding-b={6}
@@ -28,7 +24,7 @@ export function FooterDisclaimer({
             {title}
           </Heading>
         )}
-        <Body size="sm">{children}</Body>
+        <Body size="base-sm">{children}</Body>
       </Box>
     </Box>
   )

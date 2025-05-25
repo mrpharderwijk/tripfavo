@@ -1,5 +1,7 @@
 import bcrypt from 'bcrypt'
 import NextAuth from 'next-auth'
+import { Session } from 'next-auth'
+import { JWT } from 'next-auth/jwt'
 import Credentials from 'next-auth/providers/credentials'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 
@@ -39,6 +41,21 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
+  callbacks: {
+    jwt({ token, user }) {
+      if (user) {
+        // User is available during sign-in
+        token.id = user.id
+      }
+      return token
+    },
+    session({ session, token }: { session: Session; token: JWT }) {
+      if (token.id && session.user) {
+        session.user.id = token.id as string
+      }
+      return session
+    },
+  },
   pages: {
     signIn: '/',
   },

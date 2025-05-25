@@ -1,18 +1,38 @@
 'use client'
-import { createContext, PropsWithChildren, useContext } from 'react'
+import { createContext, PropsWithChildren, useContext, useState } from 'react'
 
+import { RouterLoaderProvider } from '@/providers/router-loader-provider/router-loader-provider'
 import { SafeUser } from '@/types'
 
 type AppContextState = {
   currentUser: SafeUser | null
+  enableAppLoading: (message?: string) => void
+  disableAppLoading: () => void
 }
 
-type AppContextProviderProps = PropsWithChildren<AppContextState>
+type AppContextProviderProps = PropsWithChildren<Pick<AppContextState, 'currentUser'>>
 
 const AppContext = createContext<AppContextState | null>(null)
 
 export function AppContextProvider({ children, currentUser }: AppContextProviderProps) {
-  return <AppContext.Provider value={{ currentUser }}>{children}</AppContext.Provider>
+  const [loading, setLoading] = useState<boolean>(false)
+  const [loadingMessage, setLoadingMessage] = useState<string | null>('Creating your listing')
+
+  function enableAppLoading(message?: string) {
+    setLoading(true)
+    setLoadingMessage(message ?? null)
+  }
+
+  function disableAppLoading() {
+    setLoading(false)
+    setLoadingMessage(null)
+  }
+
+  return (
+    <AppContext.Provider value={{ currentUser, enableAppLoading, disableAppLoading }}>
+      <RouterLoaderProvider isLoading={loading}>{children}</RouterLoaderProvider>
+    </AppContext.Provider>
+  )
 }
 
 export function useAppContext(): AppContextState {

@@ -15,7 +15,7 @@ datasource db {
 
 model User {
   id             String    @id @default(auto()) @map("_id") @db.ObjectId
-  name           String?
+  name           Name?
   email          String?   @unique
   emailVerified  DateTime?
   image          String?
@@ -27,6 +27,7 @@ model User {
   accounts     Account[]
   listings     Listing[]
   reservations Reservation[]
+  ListingImage ListingImage[]
 }
 
 model Account {
@@ -49,21 +50,79 @@ model Account {
 }
 
 model Listing {
-  id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  title         String
-  description   String
-  imageSrc      String
-  createdAt     DateTime @default(now())
-  category      String
-  roomCount     Int
-  bathroomCount Int
-  guestCount    Int
-  locationValue String
-  userId        String   @db.ObjectId
-  price         Int
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  title       String?
+  description String?
+  price       Int?
+  structure   String?
+  privacyType String?
+  status      ListingStatus @default(DRAFT)
+  createdAt   DateTime      @default(now())
 
-  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String            @db.ObjectId
+  user         User              @relation(fields: [userId], references: [id], onDelete: Cascade)
   reservations Reservation[]
+  location     ListingLocation?
+  floorPlan    ListingFloorPlan?
+  images       ListingImage[]
+}
+
+model ListingLocation {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  country        String
+  province       String
+  city           String
+  streetName     String
+  houseNumber    String
+  postalCode     String
+  latitude       Float
+  longitude      Float
+  aptInfo        String?
+  additionalInfo String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  listingId String  @unique @db.ObjectId
+  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+}
+
+model ListingFloorPlan {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  guestCount    Int?
+  roomCount     Int?
+  bathroomCount Int?
+  bedroomCount  Int?
+  bedCount      Int?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  listingId String  @unique @db.ObjectId
+  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+}
+
+model ListingImage {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  fileName  String
+  size      Int
+  key       String
+  fileHash  String   @unique
+  url       String
+  fileType  String
+  isMain    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  listingId String  @db.ObjectId
+  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String? @db.ObjectId
+}
+
+enum ListingStatus {
+  DRAFT
+  IN_REVIEW
+  PUBLISHED
 }
 
 model Reservation {
@@ -77,4 +136,14 @@ model Reservation {
 
   User    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   Listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+}
+
+model Name {
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  firstName  String
+  middleName String?
+  lastName   String
+  userId     String  @unique @db.ObjectId
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

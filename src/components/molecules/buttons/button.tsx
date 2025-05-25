@@ -1,51 +1,98 @@
-import { MouseEvent, PropsWithChildren, ReactElement, Ref } from 'react'
+'use client'
 
-import { ButtonContent, ButtonContentProps } from './components/button-content/button-content'
+import { VariantProps } from 'class-variance-authority'
+import { HtmlHTMLAttributes, MouseEvent, PropsWithChildren, ReactElement, Ref } from 'react'
+import { IconType } from 'react-icons'
 
+import { ButtonContent } from './components/button-content/button-content'
+
+import { buttonClassNames } from '@/components/molecules/buttons/button.class-names'
+import { PropsWithTestId } from '@/types'
 import { cn } from '@/utils/class-names'
 
-type ButtonProps = PropsWithChildren<
-  {
-    disabled?: boolean
-    fullWidth?: boolean
-    forwardRef?: Ref<HTMLButtonElement>
-    onClick?: (e: MouseEvent<HTMLButtonElement>) => void
-    type?: 'submit' | 'button'
-  } & ButtonContentProps
+export type ButtonProps = PropsWithChildren<
+  PropsWithTestId<
+    {
+      fullWidth?: boolean
+      icon?: IconType
+      ref?: Ref<HTMLButtonElement>
+      onClick?: (e: MouseEvent<HTMLButtonElement>) => void
+      type?: 'submit' | 'button'
+    } & Omit<VariantProps<typeof buttonClassNames>, 'iconOnly'> &
+      Omit<HtmlHTMLAttributes<HTMLButtonElement>, 'className' | 'size'>
+  >
 >
 
 export function Button({
+  avatar = false,
   children,
+  'data-testid': dataTestId,
   disabled = false,
-  forwardRef,
+  ref,
   fullWidth = false,
   icon: Icon,
-  isLoading = false,
+  loading = false,
   onClick = (): void => {
     return
   },
   type = 'button',
+  rounded = false,
   size = 'md',
+  variant = 'primary',
   ...rest
 }: ButtonProps): ReactElement {
-  const iconOnly = Boolean(!children && Icon)
-  const buttonClassNames = cn({
-    'w-full': fullWidth,
-    'rounded-full': rest.rounded || iconOnly,
-    rounded: !rest.rounded && ['xs', 'sm'].includes(size),
-    'rounded-md': !rest.rounded && ['md', 'xl', 'lg'].includes(size),
-    'cursor-not-allowed': disabled,
-  })
+  const iconOnly = Boolean(!children && (Icon || avatar))
+  const isRounded = rounded || iconOnly || avatar
+  const buttonClassName = cn(
+    buttonClassNames({
+      avatar,
+      variant,
+      fullWidth,
+      rounded: isRounded,
+      disabled,
+      loading,
+      size,
+      iconOnly,
+    }),
+  )
+
+  if (variant === 'primary-link' && iconOnly) {
+    throw new Error('primary-link button is not supported with icon only!')
+  }
+
+  if (avatar && variant !== 'primary') {
+    throw new Error('avatar is not supported with variants other than primary!')
+  }
+
+  function handleOnClick(e: MouseEvent<HTMLButtonElement>): void {
+    e.preventDefault()
+    e.stopPropagation()
+
+    if (disabled || loading) {
+      return
+    }
+
+    onClick(e)
+  }
 
   return (
     <button
-      className={buttonClassNames}
+      className={buttonClassName}
       type={type}
-      onClick={onClick}
-      disabled={disabled || isLoading}
-      ref={forwardRef}
+      onClick={handleOnClick}
+      disabled={(disabled || loading) as boolean}
+      ref={ref}
+      data-testid={dataTestId}
     >
-      <ButtonContent icon={Icon} isLoading={isLoading} disabled={disabled} size={size} {...rest}>
+      <ButtonContent
+        avatar={avatar}
+        icon={Icon}
+        loading={loading as boolean}
+        disabled={disabled as boolean}
+        variant={variant}
+        size={size}
+        {...rest}
+      >
         {children}
       </ButtonContent>
     </button>

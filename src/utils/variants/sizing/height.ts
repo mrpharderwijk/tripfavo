@@ -288,3 +288,10 @@ export const heightVariants = {
     fit: 'lg:h-fit',
   },
 }
+
+export const fullHeightVariants = {
+  fullHeight: {
+    true: 'h-full',
+    false: null,
+  },
+}

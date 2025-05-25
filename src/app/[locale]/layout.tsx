@@ -3,6 +3,7 @@ import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import { PropsWithChildren } from 'react'
 
 import { routing } from '@/i18n/routing'
+import { RouterLoaderProvider } from '@/providers/router-loader-provider/router-loader-provider'
 
 type LocaleLayoutProps = PropsWithChildren<{
   params: Promise<{ locale: string }>
@@ -16,5 +17,9 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
     notFound()
   }
 
-  return <NextIntlClientProvider>{children}</NextIntlClientProvider>
+  return (
+    <NextIntlClientProvider>
+      <RouterLoaderProvider isLoading={false}>{children}</RouterLoaderProvider>
+    </NextIntlClientProvider>
+  )
 }

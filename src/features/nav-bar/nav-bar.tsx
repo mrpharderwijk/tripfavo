@@ -1,22 +1,35 @@
 'use client'
 
+import { VariantProps } from 'class-variance-authority'
 import { ReactElement } from 'react'
 
 import { Box } from '@/components/atoms/layout/box/box'
 import { Container } from '@/components/atoms/layout/container/container'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { Branding } from '@/components/molecules/branding/branding'
+import { Button } from '@/components/molecules/buttons/button'
+import { MainMenu } from '@/features/nav-bar/components/main-menu/main-menu'
 import { Search } from '@/features/nav-bar/components/search/search'
-import { UserMenu } from '@/features/nav-bar/components/user-menu/user-menu'
+import { navBarClassNames } from '@/features/nav-bar/nav-bar.class-names'
 
-type NavBarProps = {
+type NavBarProps = VariantProps<typeof navBarClassNames> & {
   minimal?: boolean
-  customAction?: ReactElement | null
+  customActionLabel?: string | null
+  customActionOnClick?: () => void | null
+  sideMenu?: ReactElement
 }
 
-export function NavBar({ minimal = false, customAction = null }: NavBarProps): ReactElement {
+export function NavBar({
+  fixed = false,
+  minimal = false,
+  sideMenu,
+  customActionLabel = null,
+  customActionOnClick,
+}: NavBarProps): ReactElement {
+  const navBarClassName = navBarClassNames({ fixed })
+
   return (
-    <div className="fixed w-full bg-grey-0 z-10 shadow-sm top-0 left-0 right-0">
+    <div className={navBarClassName}>
       <Box border-color="primary-disabled" height={20} height-md={24}>
         <Container>
           <FlexBox
@@ -28,8 +41,13 @@ export function NavBar({ minimal = false, customAction = null }: NavBarProps): R
           >
             <Branding />
             {!minimal && <Search />}
-            {!minimal && <UserMenu />}
-            {!!customAction && customAction}
+            {/* <UserMenu /> */}
+            {!minimal && <MainMenu sideMenu={sideMenu} />}
+            {!!minimal && !!customActionLabel && !!customActionOnClick && (
+              <Button variant="outline" size="md" rounded onClick={customActionOnClick}>
+                {customActionLabel}
+              </Button>
+            )}
           </FlexBox>
         </Container>
       </Box>

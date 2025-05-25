@@ -3,5 +3,5 @@ import { Input, InputProps } from '@/components/atoms/input/input'
 type InputEmailProps = InputProps
 
 export function InputEmail({ ...props }: InputEmailProps) {
-  return <Input {...props} type="email" />
+  return <Input {...props} type="email" autoComplete="email" />
 }

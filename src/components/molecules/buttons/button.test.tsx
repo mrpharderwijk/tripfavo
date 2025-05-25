@@ -4,10 +4,10 @@ import userEvent from '@testing-library/user-event'
 import { Button } from './button'
 import { ButtonContent } from './components'
 
-jest.mock('./components', () => ({
-  ButtonContent: jest.fn(({ children }) => <div>{children}</div>),
+vi.mock('./components', () => ({
+  ButtonContent: vi.fn(({ children }) => <div>{children}</div>),
 }))
-const ButtonContentMock = jest.mocked(ButtonContent)
+const ButtonContentMock = vi.mocked(ButtonContent)
 
 describe('Button', () => {
   it('renders the button with all properties', () => {

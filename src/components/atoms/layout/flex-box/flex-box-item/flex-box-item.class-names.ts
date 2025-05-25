@@ -1,5 +1,6 @@
 import { cva } from 'class-variance-authority'
 
+import { displayVariants } from '@/utils/variants'
 import { alignContentVariants } from '@/utils/variants/flex-box/align-content'
 import { alignItemsVariants } from '@/utils/variants/flex-box/align-items'
 import { alignSelfVariants } from '@/utils/variants/flex-box/align-self'
@@ -13,10 +14,16 @@ import { orderVariants } from '@/utils/variants/flex-box/order'
 import { marginVariants } from '@/utils/variants/margin/margin'
 import { paddingVariants } from '@/utils/variants/padding/padding'
 import { positionVariants } from '@/utils/variants/position/position'
-import { widthVariants } from '@/utils/variants/sizing/width'
+import { fullHeightVariants, heightVariants } from '@/utils/variants/sizing/height'
+import { maxHeightVariants } from '@/utils/variants/sizing/max-height'
+import { maxWidthVariants } from '@/utils/variants/sizing/max-width'
+import { minHeightVariants } from '@/utils/variants/sizing/min-height'
+import { minWidthVariants } from '@/utils/variants/sizing/min-width'
+import { fullWidthVariants, widthVariants } from '@/utils/variants/sizing/width'
 
 export const flexBoxItemClassNames = cva('', {
   variants: {
+    ...displayVariants,
     ...flexWrapVariants,
     ...flexDirectionVariants,
     ...gapVariants,
@@ -34,5 +41,12 @@ export const flexBoxItemClassNames = cva('', {
     ...flexBasisVariants,
 
     ...widthVariants,
+    ...heightVariants,
+    ...fullHeightVariants,
+    ...fullWidthVariants,
+    ...minHeightVariants,
+    ...minWidthVariants,
+    ...maxHeightVariants,
+    ...maxWidthVariants,
   },
 })

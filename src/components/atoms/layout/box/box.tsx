@@ -13,7 +13,7 @@ export type BoxProps = VariantProps<typeof boxClassnames> &
       | {
           tag?: 'ul' | 'li'
         }
-    > & { ref?: RefObject<any>; id?: string }
+    > & { ref?: RefObject<any>; id?: string; tabIndex?: number }
   >
 
 export function Box({
@@ -22,13 +22,14 @@ export function Box({
   children,
   'data-testid': testId,
   ref,
+  tabIndex,
   ...boxProps
 }: BoxProps): ReactElement {
   const Tag = tag
   const boxClassName = cn(boxClassnames({ ...boxProps }), ...['scrollbar-hidden'])
 
   return (
-    <Tag id={id} data-testid={testId} className={boxClassName} ref={ref}>
+    <Tag id={id} data-testid={testId} className={boxClassName} ref={ref} tabIndex={tabIndex}>
       {children}
     </Tag>
   )

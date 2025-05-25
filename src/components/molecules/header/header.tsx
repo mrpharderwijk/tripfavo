@@ -1,12 +1,10 @@
 'use client'
 
-import { useTranslation } from 'react-i18next'
-
 import { Container } from '@/components/atoms/layout/container/container'
 import { Branding } from '@/components/molecules/branding/branding'
 
 export const Header = () => {
-  const { t } = useTranslation()
+  // const { t } = useTranslations()
 
   return (
     <header className="w-full border-b border-gray-light h-20 flex items-center">

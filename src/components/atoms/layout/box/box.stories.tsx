@@ -16,7 +16,7 @@ type Story = StoryObj<typeof Box>
 
 export const Margin: Story = {
   render: () => (
-    <MarginBox position="relative" float="left" bg-color="yellow-100">
+    <MarginBox position="relative" float="left" bg-color="secondary-core">
       <Box tag="aside" margin={4} position="relative">
         <BorderBox z-index={30} />
         <Rectangle position="absolute" spread z-index={10} />

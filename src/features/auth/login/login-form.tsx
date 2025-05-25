@@ -1,9 +1,8 @@
 'use client'
 
 import NextLink from 'next/link'
-import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { ReactElement } from 'react'
+import { ReactElement, useState } from 'react'
 import { Controller } from 'react-hook-form'
 
 import { Input } from '@/components/atoms/input/input'
@@ -12,17 +11,15 @@ import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { Body } from '@/components/atoms/typography/body/body'
 import { Heading } from '@/components/atoms/typography/heading/heading'
 import { Button } from '@/components/molecules/buttons/button'
-import { routes } from '@/constants/routes'
+import { InputPassword } from '@/components/molecules/input-password/input-password'
 import { useLoginForm } from '@/features/auth/login/use-login-form'
-
+import { getRoutePathByRouteName } from '@/utils/get-route'
 export function LoginForm(): ReactElement {
   const { control, onSubmit, handleSubmit, errors, isLoading, error } = useLoginForm()
-  const router = useRouter()
   const tLoginForm = useTranslations('auth.loginForm')
   const tCommon = useTranslations('common')
-  function onClickRegister(): void {
-    router.push('/register')
-  }
+
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false)
 
   return (
     <Box
@@ -30,7 +27,7 @@ export function LoginForm(): ReactElement {
       flex-direction="col"
       gap={2}
       border={1}
-      border-color="secondary"
+      border-color="quarternary"
       border-radius="xl"
     >
       <Box
@@ -53,7 +50,9 @@ export function LoginForm(): ReactElement {
           {tLoginForm('title')}
         </Heading>
 
-        {error && <div className="text-sm text-red-500 mb-2">{error}</div>}
+        {errors && (
+          <div className="text-sm text-red-500 mb-2">{errors.password?.message?.toString()}</div>
+        )}
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <FlexBox flex-direction="col" gap={4}>
@@ -83,13 +82,16 @@ export function LoginForm(): ReactElement {
                   required: tCommon('forms.required', { field: tCommon('forms.password.label') }),
                 }}
                 render={({ field }) => (
-                  <Input
+                  <InputPassword
+                    {...field}
                     id="password"
-                    label="Password"
-                    placeholder="Password"
+                    label={tCommon('forms.password.label')}
+                    placeholder={tCommon('forms.password.placeholder')}
+                    toggleVisibility
+                    passwordVisible={passwordVisible}
+                    onChangePasswordVisibility={() => setPasswordVisible(!passwordVisible)}
                     disabled={isLoading}
                     error={errors.password?.message?.toString()}
-                    {...field}
                   />
                 )}
               />
@@ -106,7 +108,7 @@ export function LoginForm(): ReactElement {
             {tLoginForm('register.text')}
           </Body>
 
-          <NextLink href={routes.signUp.path} passHref>
+          <NextLink href={getRoutePathByRouteName('signUp')} passHref>
             <Body
               tag="span"
               font-size="base-md"

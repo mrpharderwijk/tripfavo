@@ -1,10 +1,7 @@
 import { Meta, StoryFn } from '@storybook/react'
 
 import { Box } from '@/components/atoms/layout/box/box'
-import {
-  FlexBox,
-  FlexBoxProps,
-} from '@/components/atoms/layout/flex-box/flex-box'
+import { FlexBox, FlexBoxProps } from '@/components/atoms/layout/flex-box/flex-box'
 import { BorderBox } from '@/storybook/components/border-box'
 import { MarginBox } from '@/storybook/components/margin-box'
 import { Rectangle } from '@/storybook/components/rectangle'
@@ -48,14 +45,7 @@ FlexBoxRow.args = {
       <FlexBox.Item flex="initial" position="relative">
         <Rectangle>
           <Box padding={4}>
-            <BorderBox
-              position="absolute"
-              top={0}
-              right={0}
-              bottom={0}
-              left={0}
-              z-index={10}
-            />
+            <BorderBox position="absolute" top={0} right={0} bottom={0} left={0} z-index={10} />
 
             <span className="relative z-10">Hello</span>
           </Box>
@@ -64,14 +54,7 @@ FlexBoxRow.args = {
       <FlexBox.Item flex="auto">
         <Rectangle>
           <Box padding={4}>
-            <BorderBox
-              position="absolute"
-              top={0}
-              right={0}
-              bottom={0}
-              left={0}
-              z-index={10}
-            />
+            <BorderBox position="absolute" top={0} right={0} bottom={0} left={0} z-index={10} />
             <span className="relative z-10">World!</span>
           </Box>
         </Rectangle>
@@ -108,14 +91,7 @@ FlexBoxColumn.args = {
       <FlexBox.Item flex="initial" position="relative">
         <Rectangle>
           <Box padding={4}>
-            <BorderBox
-              position="absolute"
-              top={0}
-              right={0}
-              bottom={0}
-              left={0}
-              z-index={10}
-            />
+            <BorderBox position="absolute" top={0} right={0} bottom={0} left={0} z-index={10} />
 
             <span className="relative z-10">Hello</span>
           </Box>
@@ -124,14 +100,7 @@ FlexBoxColumn.args = {
       <FlexBox.Item flex="auto">
         <Rectangle>
           <Box padding={4}>
-            <BorderBox
-              position="absolute"
-              top={0}
-              right={0}
-              bottom={0}
-              left={0}
-              z-index={10}
-            />
+            <BorderBox position="absolute" top={0} right={0} bottom={0} left={0} z-index={10} />
             <span className="relative z-10">World!</span>
           </Box>
         </Rectangle>

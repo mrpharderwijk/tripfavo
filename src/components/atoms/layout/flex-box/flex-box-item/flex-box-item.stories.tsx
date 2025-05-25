@@ -11,20 +11,15 @@ import { MarginBox } from '@/storybook/components/margin-box'
 import { Rectangle } from '@/storybook/components/rectangle'
 import { flexBasisVariants } from '@/utils/variants/flex-box/flex-basis'
 
-const flexBasisArgTypes = Object.keys(flexBasisVariants).reduce(
-  (accVariant, currVariant) => {
-    return {
-      ...accVariant,
-      [currVariant]: {
-        control: 'select',
-        options: Object.keys(
-          flexBasisVariants[currVariant as keyof typeof flexBasisVariants],
-        ),
-      },
-    }
-  },
-  {},
-)
+const flexBasisArgTypes = Object.keys(flexBasisVariants).reduce((accVariant, currVariant) => {
+  return {
+    ...accVariant,
+    [currVariant]: {
+      control: 'select',
+      options: Object.keys(flexBasisVariants[currVariant as keyof typeof flexBasisVariants]),
+    },
+  }
+}, {})
 
 export default {
   title: 'Components/Atoms/Layout/FlexBoxItem',
@@ -41,14 +36,7 @@ const TemplateRow: StoryFn = (args: FlexBoxItemProps) => (
       <FlexBox.Item {...args}>
         <Rectangle>
           <Box padding={4}>
-            <BorderBox
-              position="absolute"
-              top={0}
-              right={0}
-              bottom={0}
-              left={0}
-              z-index={10}
-            />
+            <BorderBox position="absolute" top={0} right={0} bottom={0} left={0} z-index={10} />
             <Box position="relative" z-index={30}>
               <FlexBox justify-content="around" gap={4}>
                 <FlexBox.Item>FlexBox.Item</FlexBox.Item>
@@ -66,14 +54,7 @@ const TemplateRow: StoryFn = (args: FlexBoxItemProps) => (
       <FlexBox.Item {...args}>
         <Rectangle>
           <Box padding={4}>
-            <BorderBox
-              position="absolute"
-              top={0}
-              right={0}
-              bottom={0}
-              left={0}
-              z-index={10}
-            />
+            <BorderBox position="absolute" top={0} right={0} bottom={0} left={0} z-index={10} />
             <Box position="relative" z-index={30}>
               <FlexBox flex-direction="col" justify-content="around" gap={4}>
                 <FlexBox.Item>FlexBox.Item</FlexBox.Item>

@@ -1,22 +1,29 @@
 import type { NextConfig } from 'next'
 import createNextIntlPlugin from 'next-intl/plugin'
+import withBundleAnalyzer from '@next/bundle-analyzer'
 
 const nextConfig: NextConfig = {
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      // Don't attempt to load native modules on the client side
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        fs: false,
-        net: false,
-        tls: false,
-        child_process: false,
-        'node-pre-gyp': false,
-      }
-    }
-    return config
+  reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+        port: '',
+        search: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 's1djf6p9fa.ufs.sh',
+        port: '',
+        search: '',
+      },
+    ],
   },
 }
 
 const withNextIntl = createNextIntlPlugin()
-export default withNextIntl(nextConfig)
+
+export default withNextIntl(
+  withBundleAnalyzer({ enabled: process.env.ANALYZE === 'true' })(nextConfig),
+)

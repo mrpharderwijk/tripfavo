@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "uploadthing/tw/v4";
+@source "../../node_modules/@uploadthing/react/dist";
 
 @theme {
   /* BORDER RADIUS ----------------------------------------------------- */
@@ -42,7 +44,7 @@
   --color-grey-300: var(--color-bebe);
   --color-grey-400: var(--color-deco);
   --color-grey-500: #C1C1C1;
-  --color-gray-550: var(--color-bobo);
+  --color-grey-550: var(--color-bobo);
   --color-grey-600: #8C8C8C;
   --color-grey-700: var(--color-foggy);
   --color-grey-800: #515151;
@@ -174,13 +176,13 @@
   --color-bg-secondary-core-hover: radial-gradient(circle at center,var(--color-blue-600) 0%,var(--color-blue-650) 27.5%,var(--color-blue-640) 40%,var(--color-blue-645) 57.5%,#BD1E59 75%,#BD1E59 100%);
   --color-bg-secondary-plus-hover: radial-gradient(circle at center,var(--color-blue-645) 0%,#BD1E59 30%,var(--color-magenta-850) 55%,#861453 72.5%,#6C0D63 90%,#6C0D63 100%);
   --color-bg-secondary-luxe-hover: radial-gradient(circle at center,#6C0D63 0%,#59086E 30%,var(--color-purple-950) 55%,#440589 72.5%,#3B07BB 90%,#3B07BB 100%);
-  --color-bg-tertiary: var(--color-gray-550);
+  --color-bg-tertiary: var(--color-grey-550);
   --color-bg-tertiary-hover: var(--color-grey-700);
   --color-bg-tertiary-selected: var(--color-faint);
-  --color-bg-tertiary-disabled: var(----color-grey-300);
+  --color-bg-tertiary-disabled: var(--color-grey-300);
   --color-bg-tertiary-core: var(--color-product-rausch);
   --color-bg-quaternary: var(--color-grey-200);
-  --color-bg-quaternary-hover: var(----color-grey-300);
+  --color-bg-quaternary-hover: var(--color-grey-300);
 
   --color-text-primary: var(--color-grey-1000);
   --color-text-primary-disabled: var(--color-grey-400);
@@ -217,7 +219,7 @@
   --color-border-primary-hover: var(--color-grey-1100);
   --color-border-primary-disabled: var(--color-grey-400);
   --color-border-primary-inverse: var(--color-grey-0);
-  --color-border-secondary: var(--color-gray-550);
+  --color-border-secondary: var(--color-grey-550);
   --color-border-secondary-hover: var(--color-grey-1000);
   --color-border-secondary-selected: var(--color-grey-1000);
   --color-border-secondary-disabled: var(--color-grey-300);
@@ -352,7 +354,7 @@
   --leading-3xl: 1.2727272727;
   --leading-4xl: var(--text-alt--line-height);
 
-  --font-sans: var(--font-main-font), ui-sans-serif, system-ui, sans-serif,
+  --font-sans: var(--font-primary), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
   --breakpoint-xs: 20rem;
@@ -385,6 +387,15 @@
       transform: scale(0.8);
     }
   }
+
+  --animate-dot: ellipsis-dot steps(1,end) 1s infinite;
+  @keyframes ellipsis-dot {
+    0%   { content: ''; }
+    25%  { content: '.'; }
+    50%  { content: '..'; }
+    75%  { content: '...'; }
+    100% { content: ''; }
+  }
 }
 
 html,
@@ -395,14 +406,9 @@ body,
   -webkit-font-smoothing: antialiased;
   height: 100%;
   
-  :focus,
   :focus-visible {
     outline: 2px solid var(--color-black);
     outline-offset: 2px;
-  }
-
-  button {
-    cursor: pointer;
   }
 }
 

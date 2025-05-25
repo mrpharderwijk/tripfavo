@@ -6,9 +6,7 @@ import { TID_BUTTON_LOADER as TID_BUTTON_LOADER_OLD } from './button-content'
 describe('ButtonContent', () => {
   it('renders the component', () => {
     // Arrange & Act
-    const { container } = render(
-      <ButtonContent>Just a button content</ButtonContent>,
-    )
+    const { container } = render(<ButtonContent>Just a button content</ButtonContent>)
 
     // Assert
     expect(container).toBeInTheDocument()
@@ -27,9 +25,7 @@ describe('ButtonContent', () => {
   ])('$case', ({ isLoading }) => {
     // Arrange & Act
     const { queryByTestId } = render(
-      <ButtonContent isLoading={isLoading}>
-        Just a button content
-      </ButtonContent>,
+      <ButtonContent isLoading={isLoading}>Just a button content</ButtonContent>,
     )
 
     // Assert

@@ -25,7 +25,47 @@
       "login": {
         "text": "Already have an account?",
         "label": "Log in"
+      },
+      "success": {
+        "heading": "Welcome to the club!",
+        "description": "Your account has been created successfully.",
+        "link": "Please <link>log in</link> to continue."
       }
+    }
+  },
+  "personal-info": {
+    "heading": "Personal information",
+    "legal-name": {
+      "label": "Legal name",
+      "formIntro": "Please fill in your legal name. This is the same name as stated in your passport or ID card."
+    }
+  },
+  "account": {
+    "heading": "Account settings",
+    "sidebar": {
+      "personalInfo": "Personal information",
+      "paymentMethods": "Payment methods",
+      "security": "Security",
+      "notifications": "Notifications",
+      "language": "Language"
+    }
+  },
+  "host": {
+    "heading": "Host your property",
+    "sidebar": {
+      "myListings": "My listings",
+      "myReservations": "My reservations",
+      "myGuests": "My guests",
+      "myReviews": "My reviews",
+      "mySettings": "My settings"
+    },
+    "listing": {
+      "status": {
+        "draft": "Draft",
+        "inReview": "In Review",
+        "published": "Published"
+      },
+      "yourListing": "Your property in"
     }
   },
   "common": {
@@ -48,13 +88,29 @@
       },
       "password": {
         "label": "Password",
-        "placeholder": "********"
+        "placeholder": "********",
+        "error": {
+          "required": "Password is required",
+          "minlength": "Password must be at least 8 characters long",
+          "uppercase": "Password must contain at least one uppercase letter",
+          "lowercase": "Password must contain at least one lowercase letter",
+          "digit": "Password must contain at least one number"
+        }
       },
       "passwordConfirm": {
         "label": "Confirm password",
         "placeholder": "********"
       },
-      "required": "Please fill in your {field}"
-    }
+      "required": "Please fill in your {field}",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "save": "Save",
+      "saveAndContinue": "Save and continue",
+      "saveAndExit": "Save & exit"
+    },
+    "back": "Back",
+    "next": "Next",
+    "upload": "Upload",
+    "uploadClick": "Click to upload"
   }
 }

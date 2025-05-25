@@ -1,109 +1,108 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { AlignJustify, Globe } from 'lucide-react'
+import { usePathname, useRouter } from 'next/navigation'
 import { signOut } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
-import { ReactElement, RefObject, useRef } from 'react'
-import { AiOutlineMenu } from 'react-icons/ai'
-import { useOnClickOutside } from 'usehooks-ts'
+import { ReactElement } from 'react'
 
-import { Avatar } from '@/components/atoms/avatar/avatar'
-import { routes } from '@/constants/routes'
-import { RegisterModal } from '@/features/nav-bar/components/register-modal/register-modal'
-import { RentModal } from '@/features/nav-bar/components/rent-modal/rent-modal'
+import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
+import { Button } from '@/components/molecules/buttons/button'
+import { DropDownMenu } from '@/components/organisms/drop-down-menu/drop-down-menu'
+import { UserMenuDivider } from '@/features/nav-bar/components/user-menu/user-menu-divider'
 import { UserMenuItem } from '@/features/nav-bar/components/user-menu/user-menu-item'
-import { useDialogContext } from '@/features/nav-bar/providers/dialog-context-provider'
+import { useDropDownContext } from '@/features/nav-bar/providers/drop-down-context-provider'
 import { useAppContext } from '@/providers/app-context-provider/app-context-provider'
+import { getRoutePathByRouteName } from '@/utils/get-route'
 
 export function UserMenuInternal(): ReactElement {
   const router = useRouter()
   const { currentUser } = useAppContext()
-  const wrapperRef = useRef<HTMLDivElement>(null)
-  const { isUserMenuOpen, setIsUserMenuOpen, openDialog } = useDialogContext()
+  const { currentOpenDropDown, closeDropDown, toggleDropDown } = useDropDownContext()
   const tUserMenu = useTranslations('userMenu')
-
-  useOnClickOutside(wrapperRef as RefObject<HTMLElement>, () => {
-    setIsUserMenuOpen(false)
-  })
+  const pathname = usePathname()
 
   function handleUserMenuClick() {
-    setIsUserMenuOpen(true)
+    toggleDropDown('user-menu')
   }
 
-  function onClickMenuItem(dialogId: string) {
-    setIsUserMenuOpen(false)
-    openDialog(dialogId)
+  function handleOnClickLanguage() {
+    closeDropDown('user-menu')
   }
 
   function onClickMenuItemLogout() {
-    setIsUserMenuOpen(false)
+    closeDropDown('user-menu')
     signOut()
   }
 
-  function onClickRent() {
-    setIsUserMenuOpen(false)
-    if (!currentUser) {
-      router.push('/login')
+  function handleOnClick(routeName: string) {
+    const routePath = getRoutePathByRouteName(routeName)
+    closeDropDown('user-menu')
+
+    if (pathname.includes(routePath)) {
       return
     }
 
-    openDialog('rent')
+    router.push(routePath)
   }
 
   return (
-    <div ref={wrapperRef} className="relative">
-      <div className="flex flex-row items-center gap-3">
-        <div
-          onClick={onClickRent}
-          className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
-        >
-          {tUserMenu('host')}
-        </div>
-        <div
-          onClick={handleUserMenuClick}
-          className="p-4 md:py-1 md:px-2 border border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition"
-        >
-          <AiOutlineMenu />
-          <div className="hidden md:block">
-            <Avatar />
-          </div>
-        </div>
-      </div>
+    <FlexBox flex-direction="row" align-items="center" gap={3}>
+      <Button onClick={() => handleOnClick('host')} size="md" variant="quaternary-inverse" rounded>
+        {tUserMenu('host')}
+      </Button>
 
-      {isUserMenuOpen && (
-        <div className="absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm">
-          <div className="flex flex-col cursor-pointer">
-            {currentUser ? (
-              <>
-                <UserMenuItem onClick={() => {}} label="My trips" />
-                <UserMenuItem onClick={() => {}} label="My favorites" />
-                <UserMenuItem onClick={() => {}} label="My reservations" />
-                <UserMenuItem onClick={() => {}} label="My properties" />
-                <UserMenuItem
-                  onClick={() => router.push(routes.host.path)}
-                  label={tUserMenu('host')}
-                />
-                <hr />
-                <UserMenuItem onClick={onClickMenuItemLogout} label={tUserMenu('logout')} />
-              </>
-            ) : (
-              <>
-                <UserMenuItem
-                  onClick={() => router.push(routes.login.path)}
-                  label={tUserMenu('login')}
-                />
-                <UserMenuItem
-                  onClick={() => router.push(routes.signUp.path)}
-                  label={tUserMenu('signUp')}
-                />
-              </>
-            )}
-          </div>
-        </div>
+      {currentUser && <Button avatar size="md" onClick={() => handleOnClick('account')} />}
+
+      {!currentUser && (
+        <Button size="md" icon={Globe} variant="quaternary" onClick={handleOnClickLanguage} />
       )}
 
-      <RegisterModal />
-      <RentModal />
-    </div>
+      <DropDownMenu
+        trigger={
+          <Button
+            size="md"
+            icon={AlignJustify}
+            variant="quaternary"
+            onClick={handleUserMenuClick}
+          />
+        }
+        isOpen={currentOpenDropDown === 'user-menu'}
+        id="user-menu"
+      >
+        {currentUser ? (
+          <>
+            <UserMenuItem onClick={() => {}} label="My trips" />
+            <UserMenuItem onClick={() => {}} label="My favorites" />
+            <UserMenuItem onClick={() => {}} label="My reservations" />
+            <UserMenuItem onClick={() => {}} label="My properties" />
+            <UserMenuItem
+              onClick={() => {
+                handleOnClick('host')
+              }}
+              label={tUserMenu('host')}
+            />
+            <hr />
+            <UserMenuItem onClick={onClickMenuItemLogout} label={tUserMenu('logout')} />
+          </>
+        ) : (
+          <>
+            <UserMenuItem
+              onClick={() => {
+                handleOnClick('login')
+              }}
+              label={tUserMenu('login')}
+            />
+            <UserMenuDivider />
+            <UserMenuItem
+              onClick={() => {
+                handleOnClick('signUp')
+              }}
+              label={tUserMenu('signUp')}
+            />
+          </>
+        )}
+      </DropDownMenu>
+    </FlexBox>
   )
 }

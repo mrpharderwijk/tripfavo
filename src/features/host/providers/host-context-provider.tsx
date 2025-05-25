@@ -4,22 +4,26 @@ import { useSessionStorage } from 'usehooks-ts'
 import {
   ComponentType,
   createContext,
+  Dispatch,
   PropsWithChildren,
   ReactElement,
+  SetStateAction,
   useContext,
   useMemo,
   useState,
 } from 'react'
 import { z } from 'zod'
 
-import StructureForm, { StructureFormSchema } from '@/app/[locale]/(private)/host/components/forms/structure-form/sturcture-form'
+import StructureForm, { StructureFormSchema } from '@/features/host/components/forms/structure-form/sturcture-form'
 import { UseFormReturn } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
-import PrivacyTypeForm, { PrivacyTypeFormSchema } from '@/app/[locale]/(private)/host/components/forms/privacy-type-form/privacy-type-form'
-import { LocationForm } from '@/app/[locale]/(private)/host/components/forms/location-form/location-form'
-import { FloorPlanForm } from '@/app/[locale]/(private)/host/components/forms/floor-plan-form/floor-plan-form'
+import PrivacyTypeForm, { PrivacyTypeFormSchema } from '@/features/host/components/forms/privacy-type-form/privacy-type-form'
+import { LocationForm, LocationFormSchema } from '@/features/host/components/forms/location-form/location-form'
+import { FloorPlanForm, FloorPlanFormSchema } from '@/features/host/components/forms/floor-plan-form/floor-plan-form'
+import { ImagesForm, ImagesFormSchema } from '@/features/host/components/forms/images-form/images-form'
+import { ListingFull } from '@/actions/get-listing-by-logged-in-user'
 
-type StepForm = z.infer<typeof StructureFormSchema> | z.infer<typeof PrivacyTypeFormSchema>
+type StepForm = z.infer<typeof StructureFormSchema> | z.infer<typeof PrivacyTypeFormSchema> | z.infer<typeof LocationFormSchema> | z.infer<typeof FloorPlanFormSchema> | z.infer<typeof ImagesFormSchema>
 type StepType = {
   url: string
   order: number
@@ -27,6 +31,7 @@ type StepType = {
   subtitle?: string
   form?: UseFormReturn<StepForm>
   component?: ComponentType
+  onSubmitCallback?: (data: z.infer<any>) => Promise<boolean>
 }
 export const enum HOST_STEP {
   Structure = 'structure',
@@ -70,6 +75,7 @@ export const stepMap = {
     url: '/images',
     title: 'Add images',
     subtitle: 'Add images to your property to help guests find it.',
+    component: ImagesForm,
   },
   [HOST_STEP.Description]: {
     order: 5,
@@ -86,7 +92,7 @@ export const stepMap = {
 }
 
 type StorageValue = {
-  [key in HOST_STEP]?: z.infer<typeof StructureFormSchema> | z.infer<typeof PrivacyTypeFormSchema>
+  [key in HOST_STEP]?: StepForm
 } | null
 
 type HostContextState = {
@@ -95,31 +101,36 @@ type HostContextState = {
   }
   currentStep: string | null
   currentStepNumber: number
+  isLoading: boolean
+  listing: ListingFull | null
+  listingId: string | null
   onPreviousStep: () => void
   onNextStep: () => void
   updateStep: (
     step: HOST_STEP,
     stepData: UseFormReturn<StepForm>,
+    onSubmitCallback: (data: z.infer<any>) => Promise<boolean>
   ) => void
-  storageValue: StorageValue
-  setStorageValue: (value: StorageValue) => void
-  removeStorageValue: () => void
+  setIsLoading: Dispatch<SetStateAction<boolean>>
 }
 
 type HostContextProviderProps = PropsWithChildren<{
   currentStep: string
+  listingId: string
+  listing: ListingFull
 }>
 
 const initialData: HostContextState = {
   steps: stepMap,
   currentStep: null,
   currentStepNumber: 0,
+  isLoading: false,
+  listing: null,
+  listingId: null,
   onPreviousStep: () => {},
   onNextStep: () => {},
   updateStep: () => {},
-  storageValue: null,
-  setStorageValue: () => {},
-  removeStorageValue: () => {},
+  setIsLoading: () => {},
 }
 
 const HostContext = createContext<HostContextState | null>(initialData)
@@ -127,10 +138,12 @@ const HostContext = createContext<HostContextState | null>(initialData)
 export function HostContextProvider({
   children,
   currentStep,
+  listingId,
+  listing,
 }: HostContextProviderProps): ReactElement {
-  const [value, setValue, removeValue] = useSessionStorage<StorageValue>('host-funnel', null);
-  const router = useRouter()
   const [steps, setSteps] = useState<HostContextState['steps']>(stepMap)
+  const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
   const currentStepNumber = stepMap[currentStep as HOST_STEP]?.order ?? 0
 
   function onPreviousStep(): void {
@@ -139,7 +152,7 @@ export function HostContextProvider({
       const previousStepKey = Object.keys(steps).find(key => steps[key as HOST_STEP].order === previousStepNumber) ?? null;
 
       if (previousStepKey) {
-        router.push(`/host/${stepMap[previousStepKey as HOST_STEP].url}`)
+        router.push(`/host/${listingId}/${stepMap[previousStepKey as HOST_STEP].url}`)
       }
     }
   }
@@ -150,20 +163,17 @@ export function HostContextProvider({
       const nextStepKey = Object.keys(steps).find(key => steps[key as HOST_STEP].order === nextStepNumber) ?? null;
       const currentStepObject = steps[currentStep as HOST_STEP]
 
-      console.log('currentStepObject: ', currentStepObject)
       if (!currentStepObject) {
         return
       }
 
       if (currentStepObject.form) {
-        console.log('currentStepObject.form: ', currentStepObject.form.getValues())
-        setValue({
-          ...(value ?? {}),
-          [currentStep as HOST_STEP]: currentStepObject.form.getValues()
-        })
         const formSend = await currentStepObject.form.trigger()
-        if (formSend && currentStepObject.form.formState.isValid) {
-          router.push(`/host/${stepMap[nextStepKey as HOST_STEP].url}`)
+        if (formSend && currentStepObject.form.formState.isValid && currentStepObject.onSubmitCallback) {
+          const formSubmit = await currentStepObject.onSubmitCallback(currentStepObject.form.getValues())
+          if (formSubmit) {
+            router.push(`/host/${listingId}/${stepMap[nextStepKey as HOST_STEP].url}`)
+          }
         }
       }
     }
@@ -172,13 +182,17 @@ export function HostContextProvider({
   function updateStep(
     step: HOST_STEP,
     stepData: UseFormReturn<StepForm>,
+    onSubmitCallback: (data: z.infer<any>) => Promise<boolean>
   ): void {
     setSteps((prevSteps) => {
       const newSteps = { ...prevSteps }
+
       newSteps[step] = {
         ...newSteps[step],
         form: stepData,
+        onSubmitCallback,
       }
+
       return newSteps
     })
   }
@@ -189,12 +203,13 @@ export function HostContextProvider({
         steps, 
         currentStep, 
         currentStepNumber, 
+        isLoading,
+        listing,
+        listingId,
         onPreviousStep, 
         onNextStep, 
         updateStep, 
-        storageValue: value,
-        setStorageValue: setValue,
-        removeStorageValue: removeValue
+        setIsLoading
       }}
     >
       {children}

@@ -3,7 +3,7 @@ import { ReactElement } from 'react'
 export function LogoIcon(): ReactElement {
   return (
     <svg
-      className="w-[32px] h-[32px] text-blue-600"
+      className="w-[32px] h-[32px] text-mykonos"
       width="752"
       height="800"
       viewBox="0 0 752 800"
