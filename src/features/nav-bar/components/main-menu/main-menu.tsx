@@ -33,7 +33,6 @@ export function MainMenu({ sideMenu }: MainMenuProps): ReactElement {
     }
 
     const pathName = getRoutePathByRouteName(routeName)
-
     if (!pathName) {
       return
     }
@@ -157,7 +156,7 @@ export function MainMenu({ sideMenu }: MainMenuProps): ReactElement {
                     icon={LogIn}
                     size="lg"
                     variant="sidebar-menu-item-active"
-                    onClick={handleOnClickLogout}
+                    onClick={() => handleOnClickSidebarItem('login')}
                   >
                     {tMainMenu('login')}
                   </Button>
