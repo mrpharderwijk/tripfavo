@@ -2,17 +2,32 @@
 
 import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
-import { BaseSyntheticEvent, useState } from 'react'
-import { Control, FieldErrors, FieldValues, useForm, UseFormReset } from 'react-hook-form'
+import { useState } from 'react'
+import {
+  Control,
+  FieldErrors,
+  FieldValues,
+  useForm,
+  UseFormHandleSubmit,
+  UseFormReset,
+} from 'react-hook-form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 import { useAppContext } from '@/providers/app-context-provider/app-context-provider'
 
+export const LoginFormSchema = z.object({
+  email: z.string().email({ message: 'Invalid email address' }),
+  password: z.string().min(1, { message: 'Password is required' }),
+})
+
 type UseLoginFormReturnType = {
   isLoading: boolean
-  control: Control<FieldValues>
-  submit: (e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>
-  errors: FieldErrors<FieldValues>
-  reset: UseFormReset<FieldValues>
+  control: Control<z.infer<typeof LoginFormSchema>>
+  onSubmit: (data: FieldValues) => void
+  handleSubmit: UseFormHandleSubmit<z.infer<typeof LoginFormSchema>>
+  errors: FieldErrors<z.infer<typeof LoginFormSchema>>
+  reset: UseFormReset<z.infer<typeof LoginFormSchema>>
   error: string | null
 }
 
@@ -26,20 +41,24 @@ export function useLoginForm(): UseLoginFormReturnType {
     control,
     handleSubmit,
     reset,
-    formState: { errors },
-  } = useForm<FieldValues>({
+    formState: { errors, isValid },
+  } = useForm<z.infer<typeof LoginFormSchema>>({
+    mode: 'onChange',
+    resolver: zodResolver(LoginFormSchema),
     defaultValues: {
       email: '',
       password: '',
     },
   })
-  console.log('formState: ', errors)
 
   async function onSubmit(data: FieldValues) {
-    console.log('formState: ', errors)
+    if (!isValid) {
+      return
+    }
+
     setIsLoading(true)
-    setError(null)
     enableAppLoading()
+    setError(null)
 
     try {
       const callback = await signIn('credentials', {
@@ -52,22 +71,23 @@ export function useLoginForm(): UseLoginFormReturnType {
       }
 
       if (callback?.ok && !callback?.error) {
-        console.log('callback?.ok: ', callback?.ok)
         router.refresh()
         reset()
       }
       disableAppLoading()
     } catch (error) {
-      console.log('error: ', error)
       setError(error as string)
+    } finally {
+      setIsLoading(false)
       disableAppLoading()
     }
   }
 
   return {
     isLoading,
-    submit: handleSubmit(onSubmit),
+    onSubmit,
     control,
+    handleSubmit,
     errors,
     reset,
     error,

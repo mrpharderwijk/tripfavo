@@ -65,10 +65,18 @@ export function Button({
   }
 
   function handleOnClick(e: MouseEvent<HTMLButtonElement>): void {
-    e.preventDefault()
-    e.stopPropagation()
+    if (type === 'submit') {
+      if (disabled || loading) {
+        e.preventDefault()
+        return
+      }
+      onClick?.(e)
+      return
+    }
 
     if (disabled || loading) {
+      e.preventDefault()
+      e.stopPropagation()
       return
     }
 

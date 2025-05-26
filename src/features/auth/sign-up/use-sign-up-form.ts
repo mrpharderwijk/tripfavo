@@ -91,6 +91,7 @@ export function useSignUpForm(): UseSignUpFormReturnType {
     setIsLoading(true)
     enableAppLoading()
     setError(null)
+
     try {
       await axios.post('/api/auth/register', { ...data, email: data.email.toLowerCase() })
     } catch (error: any) {

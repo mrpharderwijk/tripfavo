@@ -60,7 +60,7 @@ export function SignUpForm(): ReactElement {
 
             {error && <div className="text-sm text-red-500 mb-2">{error}</div>}
 
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form noValidate onSubmit={handleSubmit(onSubmit)}>
               <FlexBox flex-direction="col" gap={4}>
                 <FlexBox flex-direction="col" gap={3}>
                   <Controller
@@ -71,12 +71,12 @@ export function SignUpForm(): ReactElement {
                     }}
                     render={({ field }) => (
                       <Input
+                        {...field}
                         id="email"
                         label={tCommon('forms.email.label')}
                         placeholder={tCommon('forms.email.placeholder')}
                         disabled={isLoading}
                         error={errors.email?.message?.toString()}
-                        {...field}
                       />
                     )}
                   />
@@ -93,12 +93,12 @@ export function SignUpForm(): ReactElement {
                         }}
                         render={({ field }) => (
                           <Input
+                            {...field}
                             id="firstName"
                             label={tCommon('forms.firstName.label')}
                             placeholder={tCommon('forms.firstName.placeholder')}
                             disabled={isLoading}
                             error={errors.firstName?.message?.toString()}
-                            {...field}
                           />
                         )}
                       />
@@ -110,12 +110,12 @@ export function SignUpForm(): ReactElement {
                         control={control}
                         render={({ field }) => (
                           <Input
+                            {...field}
                             id="middleName"
                             label={tCommon('forms.middleName.label')}
                             placeholder={tCommon('forms.middleName.placeholder')}
                             disabled={isLoading}
                             error={errors.middleName?.message?.toString()}
-                            {...field}
                           />
                         )}
                       />
@@ -132,12 +132,12 @@ export function SignUpForm(): ReactElement {
                     }}
                     render={({ field }) => (
                       <Input
+                        {...field}
                         id="lastName"
                         label={tCommon('forms.lastName.label')}
                         placeholder={tCommon('forms.lastName.placeholder')}
                         disabled={isLoading}
                         error={errors.lastName?.message?.toString()}
-                        {...field}
                       />
                     )}
                   />
