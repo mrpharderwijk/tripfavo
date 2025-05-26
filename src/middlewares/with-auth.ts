@@ -47,7 +47,7 @@ export const withAuth: MiddlewareFactory = (next: NextMiddleware) => {
     // Check for auth token in cookies instead of using auth() directly
     const tokenKey = process.env.ENVIRONMENT?.startsWith('PRD')
       ? '__Secure-next-auth.session-token'
-      : 'next-auth.session-token'
+      : 'authjs.session-token'
     const token = request.cookies.get(tokenKey)?.value
 
     /**
