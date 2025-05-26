@@ -8,6 +8,7 @@ import { ReactElement, RefObject, useRef, useState } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
 
 import { Button } from '@/components/molecules/buttons/button'
+import { useDisableBodyScrolling } from '@/hooks/use-disable-body-scrolling/use-disable-body-scrolling'
 import { useAppContext } from '@/providers/app-context-provider/app-context-provider'
 import { getRoutePathByRouteName, isCurrentRoute } from '@/utils/get-route'
 
@@ -22,6 +23,7 @@ export function MainMenu({ sideMenu }: MainMenuProps): ReactElement {
   const router = useRouter()
   const subMenuRef = useRef<HTMLDivElement | null>(null)
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  useDisableBodyScrolling({ disabled: isOpen })
 
   function handleMainMenuClick(): void {
     setIsOpen(!isOpen)

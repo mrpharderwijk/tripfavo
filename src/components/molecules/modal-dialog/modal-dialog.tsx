@@ -1,6 +1,6 @@
 'use client'
 
-import { PropsWithChildren, ReactElement, RefObject, useEffect, useRef } from 'react'
+import { PropsWithChildren, ReactElement, RefObject, useRef } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
 
 import { ModalCloseButton } from './components/modal-close-button/modal-close-button'
@@ -9,6 +9,7 @@ import { ModalHeader } from './components/modal-header/modal-header'
 import { ModalImage } from './components/modal-image/modal-image'
 
 import { Portal } from '@/components/atoms/portal/portal'
+import { useDisableBodyScrolling } from '@/hooks/use-disable-body-scrolling/use-disable-body-scrolling'
 import { useEscapeKey } from '@/hooks/use-escape-key/use-escape-key'
 import { useFocusTrap } from '@/hooks/use-focus-trap/use-focus-trap'
 
@@ -36,15 +37,6 @@ export function ModalDialog({
 }: ModalDialogProps): ReactElement | null {
   const modalDialogRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    // On destroy remove overflow hidden
-    document.body.style.overflow = isVisible ? 'hidden' : 'auto'
-
-    return () => {
-      document.body.style.overflow = 'auto'
-    }
-  }, [isVisible])
-
   function closeDialog(): void {
     if (modalDialogRef.current) {
       onClose()
@@ -58,6 +50,7 @@ export function ModalDialog({
     closeDialog()
   }
 
+  useDisableBodyScrolling({ disabled: isVisible })
   useEscapeKey(closeDialog, closeOnEscape)
   useOnClickOutside(modalDialogRef as RefObject<HTMLElement>, closeDialogOnOutsideClick)
 
