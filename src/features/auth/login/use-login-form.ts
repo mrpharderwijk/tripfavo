@@ -43,7 +43,6 @@ export function useLoginForm(): UseLoginFormReturnType {
     reset,
     formState: { errors, isValid },
   } = useForm<z.infer<typeof LoginFormSchema>>({
-    mode: 'onChange',
     resolver: zodResolver(LoginFormSchema),
     defaultValues: {
       email: '',

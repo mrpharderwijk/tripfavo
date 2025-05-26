@@ -160,7 +160,6 @@ export function SignUpForm(): ReactElement {
                         placeholder={tCommon('forms.password.placeholder')}
                         disabled={isLoading}
                         error={errors.password?.message?.toString()}
-                        disableError
                         passwordVisible={passwordVisible}
                         onChangePasswordVisibility={onChangePasswordVisibility}
                         toggleVisibility
@@ -176,9 +175,11 @@ export function SignUpForm(): ReactElement {
                         field: tCommon('forms.password.label'),
                       }),
                     }}
-                    render={({ field }) => (
+                    render={({ field, fieldState }) => (
                       <InputPassword
                         {...field}
+                        touched={fieldState.isTouched}
+                        dirty={fieldState.isDirty}
                         id="passwordConfirm"
                         label={tCommon('forms.passwordConfirm.label')}
                         placeholder={tCommon('forms.passwordConfirm.placeholder')}

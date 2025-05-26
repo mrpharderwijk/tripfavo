@@ -36,13 +36,13 @@ export const SignUpFormSchema = z
     middleName: z.string().optional(),
     lastName: z.string().min(1, { message: 'Last name is required' }),
     password: passwordSchema,
-    passwordConfirm: z.string().min(1, { message: 'Confirm password is required' }),
+    passwordConfirm: passwordSchema,
   })
   .superRefine((val, ctx) => {
-    if (val.password !== val.passwordConfirm) {
+    if (val.passwordConfirm !== val.password) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: 'Password is not the same as confirm password',
+        message: 'Password confirmation is not the same as password',
         path: ['passwordConfirm'],
       })
     }
@@ -72,6 +72,7 @@ export function useSignUpForm(): UseSignUpFormReturnType {
     formState: { errors, isValid },
   } = useForm<z.infer<typeof SignUpFormSchema>>({
     mode: 'onChange',
+    reValidateMode: 'onChange',
     resolver: zodResolver(SignUpFormSchema),
     defaultValues: {
       email: '',
@@ -94,12 +95,14 @@ export function useSignUpForm(): UseSignUpFormReturnType {
 
     try {
       await axios.post('/api/auth/register', { ...data, email: data.email.toLowerCase() })
+      setRegisterSuccess(true)
     } catch (error: any) {
       setError(error.response?.data?.error || 'Something went wrong')
+      setRegisterSuccess(false)
+      disableAppLoading()
     } finally {
       setIsLoading(false)
       disableAppLoading()
-      setRegisterSuccess(true)
     }
   }
 
