@@ -9,8 +9,8 @@ import { primaryFont } from '@/lib/fonts/main'
 import { AppContextProvider } from '@/providers/app-context-provider/app-context-provider'
 
 export const metadata: Metadata = {
-  title: 'Riviera BnB',
-  description: 'Riviera BnB - Your gateway to the French Riviera',
+  title: 'Casabnb',
+  description: 'Casabnb - Your gateway to the French Riviera',
 }
 
 export default async function RootLayout({ children }: Readonly<PropsWithChildren>) {

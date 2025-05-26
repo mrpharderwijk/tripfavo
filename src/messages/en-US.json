@@ -18,6 +18,9 @@
       "register": {
         "text": "Don't have an account?",
         "label": "Sign up"
+      },
+      "error": {
+        "invalidCredentials": "Invalid credentials"
       }
     },
     "signUpForm": {
@@ -108,7 +111,10 @@
       "edit": "Edit",
       "save": "Save",
       "saveAndContinue": "Save and continue",
-      "saveAndExit": "Save & exit"
+      "saveAndExit": "Save & exit",
+      "error": {
+        "unknown": "An unknown error occurred. Please contact customer support."
+      }
     },
     "back": "Back",
     "next": "Next",

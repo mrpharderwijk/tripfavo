@@ -11,6 +11,7 @@ import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { Body } from '@/components/atoms/typography/body/body'
 import { Heading } from '@/components/atoms/typography/heading/heading'
 import { Button } from '@/components/molecules/buttons/button'
+import { FormNotification } from '@/components/molecules/form-notification/form-notification'
 import { InputPassword } from '@/components/molecules/input-password/input-password'
 import { useLoginForm } from '@/features/auth/login/use-login-form'
 import { getRoutePathByRouteName } from '@/utils/get-route'
@@ -52,10 +53,19 @@ export function LoginForm(): ReactElement {
         </Heading>
 
         {!!errors && !!Object.keys(errors).length && (
-          <>
-            <div className="text-sm text-red-500 mb-2">{errors.email?.message?.toString()}</div>
-            <div className="text-sm text-red-500 mb-2">{errors.password?.message?.toString()}</div>
-          </>
+          <FormNotification variant="danger">
+            {errors.email?.message?.toString()}
+            <br />
+            {errors.password?.message?.toString()}
+          </FormNotification>
+        )}
+
+        {error && (
+          <FormNotification variant="danger">
+            {error === 'INVALID_CREDENTIALS'
+              ? tLoginForm('error.invalidCredentials')
+              : tCommon('forms.error.unknown')}
+          </FormNotification>
         )}
 
         <form noValidate onSubmit={handleSubmit(onSubmit)}>

@@ -13,6 +13,10 @@ export const borderColorVariants = {
     quarternary: 'border-border-quarternary',
     transparent: 'border-transparent',
     deco: 'border-deco',
+    success: 'border-green-700',
+    warning: 'border-orange-700',
+    info: 'border-info-700',
+    danger: 'border-red-700',
   },
   'border-color-sm': {
     primary: 'sm:border-border-primary',
@@ -28,6 +32,10 @@ export const borderColorVariants = {
     quarternary: 'sm:border-border-quarternary',
     transparent: 'sm:border-transparent',
     deco: 'sm:border-deco',
+    success: 'sm:border-green-700',
+    warning: 'sm:border-orange-700',
+    info: 'sm:border-info-700',
+    danger: 'sm:border-red-700',
   },
   'border-color-md': {
     primary: 'md:border-border-primary',
@@ -43,6 +51,10 @@ export const borderColorVariants = {
     quarternary: 'md:border-border-quarternary',
     transparent: 'md:border-transparent',
     deco: 'md:border-deco',
+    success: 'md:border-green-700',
+    warning: 'md:border-orange-700',
+    info: 'md:border-info-700',
+    danger: 'md:border-red-700',
   },
   'border-color-lg': {
     primary: 'lg:border-border-primary',
@@ -58,6 +70,10 @@ export const borderColorVariants = {
     quarternary: 'lg:border-border-quarternary',
     transparent: 'lg:border-transparent',
     deco: 'lg:border-deco',
+    success: 'lg:border-green-700',
+    warning: 'lg:border-orange-700',
+    info: 'lg:border-info-700',
+    danger: 'lg:border-red-700',
   },
   'border-color-xl': {
     primary: 'xl:border-border-primary',
@@ -73,5 +89,9 @@ export const borderColorVariants = {
     quarternary: 'xl:border-border-quarternary',
     transparent: 'xl:border-transparent',
     deco: 'xl:border-deco',
+    success: 'xl:border-green-700',
+    warning: 'xl:border-orange-700',
+    info: 'xl:border-info-700',
+    danger: 'xl:border-red-700',
   },
 }

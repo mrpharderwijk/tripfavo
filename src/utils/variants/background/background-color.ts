@@ -41,5 +41,10 @@ export const backgroundColorVariants = {
     black: 'bg-black',
     transparent: 'bg-transparent',
     deco: 'bg-deco',
+
+    warning: 'bg-orange-200',
+    danger: 'bg-red-200',
+    success: 'bg-green-200',
+    info: 'bg-blue-200',
   },
 }

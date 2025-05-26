@@ -1,11 +1,19 @@
 import bcrypt from 'bcrypt'
-import NextAuth from 'next-auth'
+import NextAuth, { CredentialsSignin } from 'next-auth'
 import { Session } from 'next-auth'
 import { JWT } from 'next-auth/jwt'
 import Credentials from 'next-auth/providers/credentials'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 
 import { prisma } from '@/lib/prisma/db'
+
+class InvalidSignInError extends CredentialsSignin {
+  code = 'INVALID_CREDENTIALS'
+}
+
+class AccountInactiveError extends CredentialsSignin {
+  code = 'INVALID_CREDENTIALS'
+}
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -20,7 +28,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const { email, password } = credentials || {}
 
         if (!credentials || !email || !password) {
-          throw new Error('Invalid credentials')
+          throw new InvalidSignInError()
         }
 
         const user = await prisma.user.findUnique({
@@ -28,13 +36,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         })
 
         if (!user || !user.hashedPassword) {
-          throw new Error('Invalid credentials')
+          throw new InvalidSignInError()
         }
 
         const isPasswordValid = await bcrypt.compare(password as string, user.hashedPassword)
 
         if (!isPasswordValid) {
-          throw new Error('Invalid credentials')
+          console.log('Invalid password')
+          throw new InvalidSignInError()
         }
 
         return user

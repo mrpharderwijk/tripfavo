@@ -42,6 +42,7 @@ export function useLoginForm(): UseLoginFormReturnType {
     handleSubmit,
     reset,
     formState: { errors, isValid },
+    setValue,
   } = useForm<z.infer<typeof LoginFormSchema>>({
     resolver: zodResolver(LoginFormSchema),
     defaultValues: {
@@ -66,16 +67,21 @@ export function useLoginForm(): UseLoginFormReturnType {
       })
 
       if (callback?.error) {
-        setError(callback.error)
+        console.log('callback.error: ', callback.code)
+        if (callback?.code) {
+          setError(callback.code)
+        }
+        setValue('password', '')
       }
 
       if (callback?.ok && !callback?.error) {
         router.refresh()
         reset()
       }
+
       disableAppLoading()
-    } catch (error) {
-      setError(error as string)
+    } catch (error: unknown) {
+      setError('UNEXPECTED_ERROR')
     } finally {
       setIsLoading(false)
       disableAppLoading()
