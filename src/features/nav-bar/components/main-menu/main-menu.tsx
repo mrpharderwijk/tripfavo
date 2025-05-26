@@ -58,7 +58,7 @@ export function MainMenu({ sideMenu }: MainMenuProps): ReactElement {
     <>
       <Button size="md" icon={AlignJustify} variant="quaternary" onClick={handleMainMenuClick} />
       {isOpen && (
-        <div className="fixed top-0 right-0 bottom-0 left-0 w-screen h-screen bg-grey-1000/40 z-50 p-4 flex flex-row items-end justify-end">
+        <div className="fixed top-0 right-0 bottom-0 left-0 w-screen h-svh bg-grey-1000/40 z-50 p-4 flex flex-row items-end justify-end">
           <div
             ref={subMenuRef}
             className="relative flex flex-col w-full md:w-96 h-full bg-bg-primary rounded-2xl pb-4 gap-4"
