@@ -16,14 +16,21 @@ export default function DashboardLayout({ children }: Readonly<PropsWithChildren
   return (
     <FlexBox flex-direction="col" fullHeight>
       <FlexBoxItem flex="initial">
-        <NavBar />
+        <NavBar sideMenu={<AccountSidebar />} />
       </FlexBoxItem>
 
       <FlexBoxItem flex="auto" min-height="full">
         <Grid grid-cols={12} height="full">
-          <GridItem tag="aside" col-span={4} height="full">
+          <GridItem display="none" display-md="block" tag="aside" col-span={4} height="full">
             <Box border-r={1} border-color="deco" fullHeight>
-              <FlexBox flex-direction="col" padding-x={18} padding-y={10} gap={6}>
+              <FlexBox
+                flex-direction="col"
+                padding-x-md={6}
+                padding-y-md={5}
+                padding-x-lg={18}
+                padding-y-lg={10}
+                gap={6}
+              >
                 <Heading tag="h2" like="h4" color="primary" font-weight="bold">
                   {tAccount('heading')}
                 </Heading>
@@ -32,8 +39,18 @@ export default function DashboardLayout({ children }: Readonly<PropsWithChildren
               </FlexBox>
             </Box>
           </GridItem>
-          <GridItem tag="main" col-span={8} height="full">
-            {children}
+
+          <GridItem tag="main" col-span={12} col-span-md={8} height="full">
+            <FlexBox
+              flex-direction="col"
+              padding-x={4}
+              padding-y={6}
+              padding-x-md={20}
+              padding-y-md={10}
+              gap={6}
+            >
+              {children}
+            </FlexBox>
           </GridItem>
         </Grid>
       </FlexBoxItem>

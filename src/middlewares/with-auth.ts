@@ -45,9 +45,10 @@ export const withAuth: MiddlewareFactory = (next: NextMiddleware) => {
     const locale = await getLocale()
 
     // Check for auth token in cookies instead of using auth() directly
-    const token = process.env.ENVIRONMENT?.startsWith('PRD')
+    const tokenKey = process.env.ENVIRONMENT?.startsWith('PRD')
       ? '__Secure-next-auth.session-token'
       : 'next-auth.session-token'
+    const token = request.cookies.get(tokenKey)?.value
 
     /**
      * Not logged in & Dashboard page -> Redirect to login

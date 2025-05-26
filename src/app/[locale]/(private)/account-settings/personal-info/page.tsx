@@ -10,16 +10,16 @@ export default function PersonalInfoPage(): ReactElement {
   const tPersonalInfo = useTranslations('personal-info')
 
   return (
-    <FlexBox flex-direction="col" padding-x={40} padding-y={10}>
+    <>
       <Heading tag="h2" like="h4" color="primary" font-weight="bold">
         {tPersonalInfo('heading')}
       </Heading>
 
-      <FlexBox flex-direction="col">
+      <FlexBox flex-direction="col" gap={6}>
         <PersonalInfoContextProvider>
           <PersonalInfo />
         </PersonalInfoContextProvider>
       </FlexBox>
-    </FlexBox>
+    </>
   )
 }
