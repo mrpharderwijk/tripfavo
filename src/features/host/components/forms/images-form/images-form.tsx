@@ -1,6 +1,7 @@
 'use client'
 
 import axios from 'axios'
+import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -48,7 +49,9 @@ export const ImagesFormSchema = z.object({
 })
 
 export function ImagesForm() {
+  const router = useRouter()
   const { steps, currentStep, updateStep, onNextStep, listing, listingId } = useHostContext()
+
   const form = useForm<z.infer<typeof ImagesFormSchema>>({
     resolver: zodResolver(ImagesFormSchema),
     mode: 'onChange',
@@ -133,12 +136,13 @@ export function ImagesForm() {
                     isMain: false,
                     alt: '',
                   }))
+
                   try {
                     await axios.post(`/api/host/listings/${listingId}/images`, {
-                      files: res,
+                      files,
                     })
 
-                    alert('Upload Completed')
+                    router.refresh()
                   } catch (error: any) {
                     alert(`ERROR prisma! ${error.message}`)
                     console.error(error)
@@ -152,10 +156,6 @@ export function ImagesForm() {
                 onBeforeUploadBegin={(files) => {
                   // Preprocess files before uploading (e.g. rename them)
                   return files.map((f) => new File([f], `${listingId}-${f.name}`, { type: f.type }))
-                }}
-                onUploadBegin={(name) => {
-                  // Do something once upload begins
-                  console.log('Uploading: ', name)
                 }}
               />
             )}

@@ -111,7 +111,7 @@ model ListingFloorPlan {
 
 model ListingImage {
   id       String  @id @default(auto()) @map("_id") @db.ObjectId
-  fileHash String  @unique
+  fileHash String
   fileKey  String  @unique
   fileName String
   fileType String
