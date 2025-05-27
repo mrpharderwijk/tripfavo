@@ -21,7 +21,7 @@ model User {
   image          String?
   hashedPassword String?
   favoriteIds    String[]   @db.ObjectId
-  role           UserRole[] @default([USER, HOST])
+  role           UserRole[] @default([GUEST, HOST])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -33,7 +33,7 @@ model User {
 }
 
 enum UserRole {
-  USER
+  GUEST
   HOST
   ADMIN
 }

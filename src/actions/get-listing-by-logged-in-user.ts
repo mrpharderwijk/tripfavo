@@ -3,10 +3,16 @@ import { Listing, ListingFloorPlan, ListingImage, ListingLocation } from '@prism
 import { getSession } from '@/actions/get-current-user'
 import { prisma } from '@/lib/prisma/db'
 
-export type ListingFull = Omit<Listing, 'userId'> & {
+export type ListingFull = Omit<Listing, 'userId' | 'status'> & {
   location: Omit<ListingLocation, 'listingId'>
   floorPlan: Omit<ListingFloorPlan, 'listingId'>
-  images: Omit<ListingImage, 'listingId'>[]
+  images: (Omit<ListingImage, 'listingId'> & {
+    listingRoom?: {
+      room: {
+        value: string
+      } | null
+    } | null
+  })[]
 }
 
 export async function getListingByLoggedInUser(listingId: string): Promise<ListingFull | null> {
@@ -34,6 +40,7 @@ export async function getListingByLoggedInUser(listingId: string): Promise<Listi
             listingId,
           },
           select: {
+            id: true,
             country: true,
             city: true,
             streetName: true,
@@ -44,6 +51,8 @@ export async function getListingByLoggedInUser(listingId: string): Promise<Listi
             aptInfo: true,
             additionalInfo: true,
             province: true,
+            createdAt: true,
+            updatedAt: true,
           },
         },
         price: true,
@@ -54,10 +63,14 @@ export async function getListingByLoggedInUser(listingId: string): Promise<Listi
             listingId,
           },
           select: {
+            id: true,
             guestCount: true,
             roomCount: true,
             bathroomCount: true,
+            bedroomCount: true,
             bedCount: true,
+            createdAt: true,
+            updatedAt: true,
           },
         },
         images: {
@@ -73,6 +86,10 @@ export async function getListingByLoggedInUser(listingId: string): Promise<Listi
             isMain: true,
             size: true,
             url: true,
+            createdAt: true,
+            updatedAt: true,
+            userId: true,
+            listingRoomId: true,
             listingRoom: {
               select: {
                 room: true,

@@ -1,4 +1,4 @@
-import { User } from '@prisma/client'
+import { User, UserRole } from '@prisma/client'
 
 export type ElementTag = {
   tag?:
@@ -30,4 +30,5 @@ export type SafeUser = Omit<User, 'createdAt' | 'updatedAt' | 'emailVerified'> &
     lastName: string
     middleName: string | null
   } | null
+  role: UserRole[]
 }

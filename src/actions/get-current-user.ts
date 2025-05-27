@@ -1,3 +1,5 @@
+import { UserRole } from '@prisma/client'
+
 import { auth } from '@/lib/auth/auth'
 import { prisma } from '@/lib/prisma/db'
 import { SafeUser } from '@/types'
@@ -32,6 +34,7 @@ export async function getCurrentUser(): Promise<SafeUser | null> {
         },
         email: true,
         emailVerified: true,
+        role: true,
         createdAt: true,
         updatedAt: true,
       },
@@ -46,6 +49,7 @@ export async function getCurrentUser(): Promise<SafeUser | null> {
       createdAt: currentUser.createdAt.toISOString(),
       updatedAt: currentUser.updatedAt.toISOString(),
       emailVerified: currentUser.emailVerified?.toISOString() ?? null,
+      role: currentUser.role ?? [UserRole.GUEST, UserRole.HOST],
     }
   } catch (error: any) {
     return null
