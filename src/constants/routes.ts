@@ -27,6 +27,10 @@ export const routes: RoutesObject = {
         protected: true,
         default: true,
       },
+      myReservations: {
+        path: '/reservations',
+        protected: true,
+      },
       structure: {
         path: '/:listingId/structure',
         protected: true,
@@ -45,6 +49,25 @@ export const routes: RoutesObject = {
       },
     },
   },
+  guest: {
+    path: '/guest',
+    protected: true,
+    children: {
+      overview: {
+        path: '/overview',
+        protected: true,
+        default: true,
+      },
+      myFavorites: {
+        path: '/favorites',
+        protected: true,
+      },
+      myTrips: {
+        path: '/trips',
+        protected: true,
+      },
+    },
+  },
   account: {
     path: '/account-settings',
     protected: true,
@@ -55,10 +78,6 @@ export const routes: RoutesObject = {
         default: true,
       },
     },
-  },
-  dashboard: {
-    path: '/dashboard',
-    protected: true,
   },
   auth: {
     path: '/auth',

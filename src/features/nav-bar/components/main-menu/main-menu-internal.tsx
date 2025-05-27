@@ -54,7 +54,7 @@ export function MainMenuInternal(): ReactElement {
                 rounded
                 onClick={() => {
                   setUserMode(UserMode.GUEST)
-                  handleOnClickSidebarItem('dashboard')
+                  handleOnClickSidebarItem('guest')
                 }}
               >
                 {tMainMenuHost('switchToGuest')}

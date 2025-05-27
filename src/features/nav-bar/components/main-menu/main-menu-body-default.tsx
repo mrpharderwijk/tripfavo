@@ -24,11 +24,9 @@ export function MainMenuBodyDefault(): ReactElement {
           icon={LayoutDashboard}
           size="lg"
           variant={
-            !isCurrentRoute(pathname, 'dashboard')
-              ? 'sidebar-menu-item'
-              : 'sidebar-menu-item-active'
+            !isCurrentRoute(pathname, 'guest') ? 'sidebar-menu-item' : 'sidebar-menu-item-active'
           }
-          onClick={() => handleOnClickSidebarItem('dashboard')}
+          onClick={() => handleOnClickSidebarItem('guest')}
         >
           {tMainMenuGuest('dashboard')}
         </Button>
@@ -52,13 +50,11 @@ export function MainMenuBodyDefault(): ReactElement {
           icon={Ticket}
           size="lg"
           variant={
-            !isCurrentRoute(pathname, 'myBookings')
-              ? 'sidebar-menu-item'
-              : 'sidebar-menu-item-active'
+            !isCurrentRoute(pathname, 'myTrips') ? 'sidebar-menu-item' : 'sidebar-menu-item-active'
           }
-          onClick={() => handleOnClickSidebarItem('myBookings')}
+          onClick={() => handleOnClickSidebarItem('myTrips')}
         >
-          {tMainMenuGuest('myBookings')}
+          {tMainMenuGuest('myTrips')}
         </Button>
       )}
       <Button

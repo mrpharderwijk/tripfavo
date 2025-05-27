@@ -7,11 +7,6 @@ import { MiddlewareFactory } from '@/middlewares/types'
 import { getRouteObjectByRouteName } from '@/utils/get-route'
 import { getRouteNameByRoutePath } from '@/utils/get-route'
 
-function containsDashboard(value: string) {
-  const regex = /^(\/[a-zA-Z]{2})?\/dashboard(\/.*)?$/
-  return regex.test(value)
-}
-
 function containsAuth(value: string) {
   const regex = /^(\/[a-zA-Z]{2})?\/auth(\/.*)?$/
   return regex.test(value)
@@ -24,6 +19,11 @@ function containsAccountSettingsOnly(value: string) {
 
 function containsHostOnly(value: string) {
   const regex = /^(\/[a-zA-Z]{2})?\/host$/
+  return regex.test(value)
+}
+
+function containsGuestOnly(value: string) {
+  const regex = /^(\/[a-zA-Z]{2})?\/guest$/
   return regex.test(value)
 }
 
@@ -72,8 +72,8 @@ export const withAuth: MiddlewareFactory = (next: NextMiddleware) => {
         const callbackUrl = nextUrl.searchParams.get('callbackUrl')
         const url =
           locale !== defaultLocale
-            ? `/${locale}${callbackUrl ? callbackUrl : routes.dashboard.path}`
-            : `${callbackUrl ? callbackUrl : routes.dashboard.path}`
+            ? `/${locale}${callbackUrl ? callbackUrl : routes.guest.path}`
+            : `${callbackUrl ? callbackUrl : routes.guest.path}`
         return NextResponse.redirect(new URL(url, request.url))
       }
 
@@ -102,6 +102,17 @@ export const withAuth: MiddlewareFactory = (next: NextMiddleware) => {
           locale !== defaultLocale
             ? `/${locale}${routes.host.path}${defaultRoute?.path}`
             : `${routes.host.path}${defaultRoute?.path}`
+        return NextResponse.redirect(new URL(url, request.url))
+      }
+
+      if (containsGuestOnly(nextUrl.pathname)) {
+        const defaultRoute = routes.guest?.children
+          ? Object.values(routes.guest.children).find((child) => !!child.default)
+          : undefined
+        const url =
+          locale !== defaultLocale
+            ? `/${locale}${routes.guest.path}${defaultRoute?.path}`
+            : `${routes.guest.path}${defaultRoute?.path}`
         return NextResponse.redirect(new URL(url, request.url))
       }
     }

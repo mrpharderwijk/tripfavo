@@ -10,10 +10,10 @@ import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/fl
 import { Button } from '@/components/molecules/buttons/button'
 import { getRoutePathByRouteName, isCurrentRoute } from '@/utils/get-route'
 
-export function HostSidebar(): ReactElement {
+export function GuestSidebar(): ReactElement {
   const router = useRouter()
   const pathname = usePathname()
-  const tMainMenuHost = useTranslations('mainMenu.host')
+  const tMainMenuGuest = useTranslations('mainMenu.guest')
 
   function handleOnClickSidebarItem(routeName?: string): void {
     if (!routeName) {
@@ -36,13 +36,13 @@ export function HostSidebar(): ReactElement {
             icon={House}
             size="lg"
             variant={
-              !isCurrentRoute(pathname, 'myListings')
+              !isCurrentRoute(pathname, 'myFavorites')
                 ? 'sidebar-menu-item'
                 : 'sidebar-menu-item-active'
             }
-            onClick={() => handleOnClickSidebarItem('myListings')}
+            onClick={() => handleOnClickSidebarItem('myFavorites')}
           >
-            {tMainMenuHost('myListings')}
+            {tMainMenuGuest('myFavorites')}
           </Button>
         </FlexBoxItem>
 
@@ -51,13 +51,13 @@ export function HostSidebar(): ReactElement {
             icon={CalendarDays}
             size="lg"
             variant={
-              !isCurrentRoute(pathname, 'myReservations')
+              !isCurrentRoute(pathname, 'myTrips')
                 ? 'sidebar-menu-item'
                 : 'sidebar-menu-item-active'
             }
-            onClick={() => handleOnClickSidebarItem('myReservations')}
+            onClick={() => handleOnClickSidebarItem('myTrips')}
           >
-            {tMainMenuHost('myReservations')}
+            {tMainMenuGuest('myTrips')}
           </Button>
         </FlexBoxItem>
 

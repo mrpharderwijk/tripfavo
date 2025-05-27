@@ -11,7 +11,7 @@
     "guest": {
       "dashboard": "Dashboard",
       "myFavorites": "My favorites",
-      "myBookings": "My bookings",
+      "myTrips": "My trips",
       "switchToHost": "Switch to host"
     },
     "logout": "Logout",
@@ -84,6 +84,9 @@
         }
       }
     }
+  },
+  "guest": {
+    "heading": "Plan your next trip"
   },
   "common": {
     "forms": {
