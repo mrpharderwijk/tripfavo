@@ -174,7 +174,6 @@ export function ImagesForm({ listing }: ComponentStepProps) {
           {!!fields?.length && fields.length < MAX_IMAGES_LENGTH && (
             <UploadDropzone
               endpoint="imageUploader"
-              maxFiles={MAX_IMAGES_LENGTH - fields.length}
               onClientUploadComplete={async (res) => {
                 // Do something with the response
                 const files = res.map((file) => ({
