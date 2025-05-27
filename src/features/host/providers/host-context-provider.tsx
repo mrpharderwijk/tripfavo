@@ -1,6 +1,5 @@
 'use client'
 
-import { useSessionStorage } from 'usehooks-ts'
 import {
   ComponentType,
   createContext,
@@ -20,8 +19,9 @@ import { PrivacyTypeForm, PrivacyTypeFormSchema } from '@/features/host/componen
 import { LocationForm, LocationFormSchema } from '@/features/host/components/forms/location-form/location-form'
 import { FloorPlanForm, FloorPlanFormSchema } from '@/features/host/components/forms/floor-plan-form/floor-plan-form'
 import { ImagesForm, ImagesFormSchema } from '@/features/host/components/forms/images-form/images-form'
-import { DescriptionForm, DescriptionFormSchema } from '@/features/host/components/forms/description-form/description-form'
+import { DescriptionForm } from '@/features/host/components/forms/description-form/description-form'
 import { ListingFull } from '@/actions/get-listing-by-logged-in-user'
+import { ComponentStepProps } from '@/features/host/types/component-step-props'
 
 type StepForm = z.infer<typeof StructureFormSchema> | z.infer<typeof PrivacyTypeFormSchema> | z.infer<typeof LocationFormSchema> | z.infer<typeof FloorPlanFormSchema> | z.infer<typeof ImagesFormSchema>
 type StepType = {
@@ -30,7 +30,7 @@ type StepType = {
   title: string
   subtitle?: string
   form?: UseFormReturn<StepForm>
-  component?: ComponentType
+  component?: ComponentType<ComponentStepProps>
   onSubmitCallback?: (data: z.infer<any>) => Promise<boolean>
 }
 export const enum HOST_STEP {
@@ -92,10 +92,6 @@ export const stepMap = {
   },
 }
 
-type StorageValue = {
-  [key in HOST_STEP]?: StepForm
-} | null
-
 type HostContextState = {
   steps: { 
     [key in HOST_STEP]: StepType
@@ -103,7 +99,6 @@ type HostContextState = {
   currentStep: string | null
   currentStepNumber: number
   isLoading: boolean
-  listing: ListingFull | null
   listingId: string | null
   onPreviousStep: () => void
   onNextStep: () => void
@@ -118,7 +113,6 @@ type HostContextState = {
 type HostContextProviderProps = PropsWithChildren<{
   currentStep: string
   listingId: string
-  listing: ListingFull
 }>
 
 const initialData: HostContextState = {
@@ -126,7 +120,6 @@ const initialData: HostContextState = {
   currentStep: null,
   currentStepNumber: 0,
   isLoading: false,
-  listing: null,
   listingId: null,
   onPreviousStep: () => {},
   onNextStep: () => {},
@@ -140,10 +133,9 @@ export function HostContextProvider({
   children,
   currentStep,
   listingId,
-  listing,
 }: HostContextProviderProps): ReactElement {
   const [steps, setSteps] = useState<HostContextState['steps']>(stepMap)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoadingStep, setIsLoadingStep] = useState(false)
   const router = useRouter()
   const currentStepNumber = stepMap[currentStep as HOST_STEP]?.order ?? 0
 
@@ -205,13 +197,12 @@ export function HostContextProvider({
         steps, 
         currentStep, 
         currentStepNumber, 
-        isLoading,
-        listing,
+        isLoading: isLoadingStep,
         listingId,
         onPreviousStep, 
         onNextStep, 
         updateStep, 
-        setIsLoading
+        setIsLoading: setIsLoadingStep,
       }}
     >
       {children}

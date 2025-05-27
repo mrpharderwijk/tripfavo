@@ -6,7 +6,7 @@ import { prisma } from '@/lib/prisma/db'
 export type ListingFull = Omit<Listing, 'userId' | 'status'> & {
   location: Omit<ListingLocation, 'listingId'>
   floorPlan: Omit<ListingFloorPlan, 'listingId'>
-  images: (Omit<ListingImage, 'listingId'> & {
+  images: (Omit<ListingImage, 'listingId' | 'userId'> & {
     listingRoom?: {
       room: {
         value: string

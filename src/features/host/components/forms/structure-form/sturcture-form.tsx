@@ -17,6 +17,7 @@ import { RadioGroupItem } from '@/components/ui/radio-group'
 import { RadioGroup } from '@/components/ui/radio-group'
 import { categories } from '@/constants/categories'
 import { HOST_STEP, useHostContext } from '@/features/host/providers/host-context-provider'
+import { ComponentStepProps } from '@/features/host/types/component-step-props'
 import { cn } from '@/utils/class-names'
 
 export const StructureFormSchema = z.object({
@@ -25,8 +26,8 @@ export const StructureFormSchema = z.object({
   }),
 })
 
-export function StructureForm() {
-  const { steps, currentStep, updateStep, setIsLoading, listingId, listing } = useHostContext()
+export function StructureForm({ listing }: ComponentStepProps) {
+  const { steps, currentStep, updateStep, setIsLoading, listingId } = useHostContext()
   const form = useForm<z.infer<typeof StructureFormSchema>>({
     resolver: zodResolver(StructureFormSchema),
     mode: 'onChange',

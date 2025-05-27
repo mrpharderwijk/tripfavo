@@ -28,6 +28,9 @@ export async function getListingsByLoggedInUser(): Promise<ListingFull[] | null>
         status: true,
         location: {
           select: {
+            id: true,
+            createdAt: true,
+            updatedAt: true,
             country: true,
             city: true,
             streetName: true,
@@ -45,14 +48,21 @@ export async function getListingsByLoggedInUser(): Promise<ListingFull[] | null>
         privacyType: true,
         floorPlan: {
           select: {
+            id: true,
+            createdAt: true,
+            updatedAt: true,
             guestCount: true,
             roomCount: true,
             bathroomCount: true,
+            bedroomCount: true,
             bedCount: true,
           },
         },
         images: {
           select: {
+            id: true,
+            createdAt: true,
+            updatedAt: true,
             fileHash: true,
             fileKey: true,
             fileName: true,
@@ -60,6 +70,12 @@ export async function getListingsByLoggedInUser(): Promise<ListingFull[] | null>
             size: true,
             url: true,
             isMain: true,
+            listingRoomId: true,
+            listingRoom: {
+              select: {
+                room: true,
+              },
+            },
           },
         },
         createdAt: true,

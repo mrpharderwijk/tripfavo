@@ -12,12 +12,13 @@ import { FormNotification } from '@/components/molecules/form-notification/form-
 import { HeadingGroup } from '@/components/molecules/heading/heading'
 import { Form, FormField } from '@/components/ui/form'
 import { HOST_STEP, useHostContext } from '@/features/host/providers/host-context-provider'
+import { ComponentStepProps } from '@/features/host/types/component-step-props'
 export const DescriptionFormSchema = z.object({
   description: z.string().min(30).max(500),
 })
 
-export function DescriptionForm(): ReactElement {
-  const { steps, currentStep, updateStep, setIsLoading, listingId, listing } = useHostContext()
+export function DescriptionForm({ listing }: ComponentStepProps): ReactElement {
+  const { steps, currentStep, updateStep, setIsLoading, listingId } = useHostContext()
   const form = useForm<z.infer<typeof DescriptionFormSchema>>({
     resolver: zodResolver(DescriptionFormSchema),
     defaultValues: {

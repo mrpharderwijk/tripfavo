@@ -13,7 +13,6 @@ export default async function HostListingStepLayout({
   params,
 }: HostListingStepLayoutProps) {
   const { listingId, stepId } = await params
-
   const listing = await getListingByLoggedInUser(listingId)
 
   if (!listing) {
@@ -21,7 +20,7 @@ export default async function HostListingStepLayout({
   }
 
   return (
-    <HostContextProvider currentStep={stepId} listingId={listingId} listing={listing}>
+    <HostContextProvider currentStep={stepId} listingId={listingId}>
       {children}
     </HostContextProvider>
   )

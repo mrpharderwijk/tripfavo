@@ -14,6 +14,7 @@ import { HeadingGroup } from '@/components/molecules/heading/heading'
 import { InputNumber } from '@/components/molecules/input-number/input-number'
 import { Form, FormField } from '@/components/ui/form'
 import { HOST_STEP, useHostContext } from '@/features/host/providers/host-context-provider'
+import { ComponentStepProps } from '@/features/host/types/component-step-props'
 
 export const FloorPlanFormSchema = z.object({
   guestCount: z.number().min(1),
@@ -23,9 +24,8 @@ export const FloorPlanFormSchema = z.object({
   bathroomCount: z.number().min(0.5),
 })
 
-export function FloorPlanForm() {
-  const { steps, currentStep, updateStep, onNextStep, setIsLoading, listingId, listing } =
-    useHostContext()
+export function FloorPlanForm({ listing }: ComponentStepProps) {
+  const { steps, currentStep, updateStep, onNextStep, setIsLoading, listingId } = useHostContext()
   const form = useForm<z.infer<typeof FloorPlanFormSchema>>({
     resolver: zodResolver(FloorPlanFormSchema),
     mode: 'onChange',

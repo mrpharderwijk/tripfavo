@@ -18,6 +18,7 @@ import { Button } from '@/components/molecules/buttons/button'
 import { HeadingGroup } from '@/components/molecules/heading/heading'
 import { Form } from '@/components/ui/form'
 import { HOST_STEP, useHostContext } from '@/features/host/providers/host-context-provider'
+import { ComponentStepProps } from '@/features/host/types/component-step-props'
 
 type LocationFormType = {
   streetName: string
@@ -49,9 +50,8 @@ export const LocationFormSchema = z.object({
   }),
 })
 
-export function LocationForm() {
-  const { steps, currentStep, updateStep, onNextStep, setIsLoading, listingId, listing } =
-    useHostContext()
+export function LocationForm({ listing }: ComponentStepProps) {
+  const { steps, currentStep, updateStep, onNextStep, setIsLoading, listingId } = useHostContext()
   const [inputValue, setInputValue] = useState('')
   const [selectedAddress, setSelectedAddress] = useState<AddressResult | null>(null)
   const form = useForm<LocationFormType>({

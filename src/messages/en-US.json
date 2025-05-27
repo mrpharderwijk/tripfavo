@@ -76,6 +76,8 @@
       },
       "yourListing": "Your property in",
       "images": {
+        "title": "Add images",
+        "subtitle": "Add at least 5 images to your property to help guests find it.",
         "roomDialog": {
           "header": "Assign room",
           "buttonLabel": "Assign room",

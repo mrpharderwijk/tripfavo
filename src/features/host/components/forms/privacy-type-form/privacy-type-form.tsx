@@ -17,6 +17,7 @@ import { RadioGroupItem } from '@/components/ui/radio-group'
 import { RadioGroup } from '@/components/ui/radio-group'
 import { privacyTypes } from '@/constants/privacy-types'
 import { HOST_STEP, useHostContext } from '@/features/host/providers/host-context-provider'
+import { ComponentStepProps } from '@/features/host/types/component-step-props'
 import { cn } from '@/utils/class-names'
 
 export const PrivacyTypeFormSchema = z.object({
@@ -25,17 +26,9 @@ export const PrivacyTypeFormSchema = z.object({
   }),
 })
 
-export function PrivacyTypeForm() {
-  const {
-    steps,
-    currentStep,
-    updateStep,
-    onNextStep,
-    setIsLoading,
-    listingId,
-    listing,
-    isLoading,
-  } = useHostContext()
+export function PrivacyTypeForm({ listing }: ComponentStepProps) {
+  const { steps, currentStep, updateStep, onNextStep, setIsLoading, listingId, isLoading } =
+    useHostContext()
   const form = useForm<z.infer<typeof PrivacyTypeFormSchema>>({
     resolver: zodResolver(PrivacyTypeFormSchema),
     mode: 'onChange',

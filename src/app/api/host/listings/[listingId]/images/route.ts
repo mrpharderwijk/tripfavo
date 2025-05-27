@@ -100,7 +100,7 @@ export async function POST(request: NextRequest, { params }: ImagesParams) {
       ),
     )
 
-    return NextResponse.json({ message: 'Images uploaded successfully' })
+    return NextResponse.json(images, { status: 200 })
   } catch (error: any) {
     console.error(error)
     return NextResponse.json({ message: 'Failed to upload images' }, { status: 500 })
