@@ -18,7 +18,7 @@ export default async function RootLayout({ children }: Readonly<PropsWithChildre
 
   return (
     <html lang="en">
-      <body className={`${primaryFont.variable} antialiased`}>
+      <body className={`${primaryFont.variable} antialiased`} suppressHydrationWarning>
         <AppContextProvider currentUser={currentUser}>
           <DropDownContextProvider>
             <DialogContextProvider>{children}</DialogContextProvider>

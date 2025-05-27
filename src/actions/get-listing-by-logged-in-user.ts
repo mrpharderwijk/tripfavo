@@ -14,7 +14,7 @@ export async function getListingByLoggedInUser(listingId: string): Promise<Listi
   if (!session?.user?.id) {
     return null
   }
-  console.log('server ------> ', listingId)
+
   if (!listingId) {
     return null
   }
@@ -65,13 +65,19 @@ export async function getListingByLoggedInUser(listingId: string): Promise<Listi
             listingId,
           },
           select: {
+            id: true,
+            fileKey: true,
             fileName: true,
-            url: true,
             fileHash: true,
             fileType: true,
-            size: true,
-            key: true,
             isMain: true,
+            size: true,
+            url: true,
+            listingRoom: {
+              select: {
+                room: true,
+              },
+            },
           },
         },
         createdAt: true,

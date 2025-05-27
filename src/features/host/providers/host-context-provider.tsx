@@ -9,18 +9,18 @@ import {
   ReactElement,
   SetStateAction,
   useContext,
-  useMemo,
   useState,
 } from 'react'
 import { z } from 'zod'
 
-import StructureForm, { StructureFormSchema } from '@/features/host/components/forms/structure-form/sturcture-form'
+import { StructureForm, StructureFormSchema } from '@/features/host/components/forms/structure-form/sturcture-form'
 import { UseFormReturn } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
-import PrivacyTypeForm, { PrivacyTypeFormSchema } from '@/features/host/components/forms/privacy-type-form/privacy-type-form'
+import { PrivacyTypeForm, PrivacyTypeFormSchema } from '@/features/host/components/forms/privacy-type-form/privacy-type-form'
 import { LocationForm, LocationFormSchema } from '@/features/host/components/forms/location-form/location-form'
 import { FloorPlanForm, FloorPlanFormSchema } from '@/features/host/components/forms/floor-plan-form/floor-plan-form'
 import { ImagesForm, ImagesFormSchema } from '@/features/host/components/forms/images-form/images-form'
+import { DescriptionForm, DescriptionFormSchema } from '@/features/host/components/forms/description-form/description-form'
 import { ListingFull } from '@/actions/get-listing-by-logged-in-user'
 
 type StepForm = z.infer<typeof StructureFormSchema> | z.infer<typeof PrivacyTypeFormSchema> | z.infer<typeof LocationFormSchema> | z.infer<typeof FloorPlanFormSchema> | z.infer<typeof ImagesFormSchema>
@@ -82,6 +82,7 @@ export const stepMap = {
     url: '/description',
     title: 'Describe your place',
     subtitle: 'Add a description of your property to help guests find it.',
+    component: DescriptionForm,
   },
   [HOST_STEP.Price]: {
     order: 6,
@@ -169,6 +170,7 @@ export function HostContextProvider({
 
       if (currentStepObject.form) {
         const formSend = await currentStepObject.form.trigger()
+    
         if (formSend && currentStepObject.form.formState.isValid && currentStepObject.onSubmitCallback) {
           const formSubmit = await currentStepObject.onSubmitCallback(currentStepObject.form.getValues())
           if (formSubmit) {

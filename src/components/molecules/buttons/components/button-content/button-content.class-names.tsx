@@ -50,6 +50,11 @@ export const buttonContentClassNames = cva(
         true: '',
         false: '',
       },
+
+      withIcon: {
+        true: 'gap-2',
+        false: 'gap-0',
+      },
     },
     compoundVariants: [
       // DISABLED

@@ -17,9 +17,9 @@ export type ModalDialogProps = PropsWithChildren<{
   closeOnEscape?: boolean
   closeOnOutsideClick?: boolean
   isVisible?: boolean
-  modalFooter?: ReactElement
-  modalHeader?: ReactElement
-  modalImage?: ReactElement
+  footer?: ReactElement
+  header?: ReactElement
+  image?: ReactElement
   onClose: () => void
   showHeaderCloseButton?: boolean
 }>
@@ -29,9 +29,9 @@ export function ModalDialog({
   closeOnEscape = true,
   closeOnOutsideClick = true,
   isVisible = false,
-  modalFooter,
-  modalHeader,
-  modalImage,
+  footer,
+  header,
+  image,
   onClose,
   showHeaderCloseButton = true,
 }: ModalDialogProps): ReactElement | null {
@@ -68,7 +68,8 @@ export function ModalDialog({
             items-end
             justify-center
             sm:items-center
-            p-10
+            p-0
+            md:p-10
             z-50
             outline-none
           "
@@ -82,7 +83,7 @@ export function ModalDialog({
               mx-auto
               p-0
               relative
-              rounded-3xl
+              md:rounded-3xl
               w-full
               sm:w-5/6
               md:w-4/6
@@ -91,19 +92,19 @@ export function ModalDialog({
             `}
             ref={modalDialogRef}
           >
-            {modalImage && <ModalImage>{modalImage}</ModalImage>}
+            {image && <ModalImage>{image}</ModalImage>}
 
             <div className="flex flex-shrink flex-grow basis-2/3 flex-col overflow-auto">
-              {!!modalHeader && (
+              {!!header && (
                 <ModalHeader>
                   {showHeaderCloseButton && <ModalCloseButton closeDialog={closeDialog} />}
-                  <div className="flex-1 text-center">{modalHeader}</div>
+                  <div className="flex-1 text-center">{header}</div>
                 </ModalHeader>
               )}
 
               <div className="p-6 overflow-scroll flex-auto">{children}</div>
 
-              {!!modalFooter && <ModalFooter>{modalFooter}</ModalFooter>}
+              {!!footer && <ModalFooter>{footer}</ModalFooter>}
             </div>
           </div>
         </div>

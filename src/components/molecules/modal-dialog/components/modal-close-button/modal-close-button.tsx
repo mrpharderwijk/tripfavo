@@ -11,10 +11,8 @@ export type ModalCloseButtonProps = {
 
 export function ModalCloseButton({ closeDialog }: ModalCloseButtonProps): ReactElement {
   return (
-    <div className="left-6 top-4 absolute flex items-center justify-center">
-      <Button variant="quaternary-inverse" size="xs" onClick={closeDialog}>
-        <IoMdClose size={20} />
-      </Button>
+    <div className="left-4 top-3 absolute flex items-center justify-center">
+      <Button icon={IoMdClose} variant="quaternary" size="xs" onClick={closeDialog}></Button>
     </div>
   )
 }

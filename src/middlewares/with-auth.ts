@@ -95,7 +95,6 @@ export const withAuth: MiddlewareFactory = (next: NextMiddleware) => {
        * Logged in & Host
        */
       if (containsHostOnly(nextUrl.pathname)) {
-        console.log('containsHostOnly', nextUrl.pathname)
         const defaultRoute = routes.host?.children
           ? Object.values(routes.host.children).find((child) => !!child.default)
           : undefined

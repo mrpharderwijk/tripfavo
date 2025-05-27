@@ -1,14 +1,25 @@
 {
   "mainMenu": {
-    "host": "Host your property",
-    "myFavorites": "My favorites",
-    "myBookings": "My bookings",
-    "myListings": "My listings",
+    "host": {
+      "myListings": "My listings",
+      "myReservations": "My reservations",
+      "myGuests": "My guests",
+      "myReviews": "My reviews",
+      "mySettings": "My settings",
+      "switchToGuest": "Switch to guest"
+    },
+    "guest": {
+      "dashboard": "Dashboard",
+      "myFavorites": "My favorites",
+      "myBookings": "My bookings",
+      "switchToHost": "Switch to host"
+    },
     "logout": "Logout",
     "login": "Login",
     "signUp": "Sign up",
     "language": "Change language",
-    "account": "Account"
+    "account": "Account",
+    "hostJoin": "Become a host"
   },
   "auth": {
     "loginForm": {
@@ -57,20 +68,21 @@
   },
   "host": {
     "heading": "Host your property",
-    "sidebar": {
-      "myListings": "My listings",
-      "myReservations": "My reservations",
-      "myGuests": "My guests",
-      "myReviews": "My reviews",
-      "mySettings": "My settings"
-    },
     "listing": {
       "status": {
         "draft": "Draft",
         "inReview": "In Review",
         "published": "Published"
       },
-      "yourListing": "Your property in"
+      "yourListing": "Your property in",
+      "images": {
+        "roomDialog": {
+          "header": "Assign room",
+          "buttonLabel": "Assign room",
+          "heading": "What type of room is this?",
+          "subtitle": "By assigning a room type your guests can get a better view of your property."
+        }
+      }
     }
   },
   "common": {

@@ -25,7 +25,7 @@ export const PrivacyTypeFormSchema = z.object({
   }),
 })
 
-export default function PrivacyTypeForm() {
+export function PrivacyTypeForm() {
   const {
     steps,
     currentStep,

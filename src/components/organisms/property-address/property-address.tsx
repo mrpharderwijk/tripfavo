@@ -3,7 +3,7 @@
 import { XIcon } from 'lucide-react'
 import { useState } from 'react'
 
-import { Input } from '@/components/atoms/input/input'
+import { Input } from '@/components/atoms/forms/input/input'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
 import {

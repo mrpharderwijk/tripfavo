@@ -2,19 +2,20 @@
 
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 import { ListingFull } from '@/actions/get-listings-by-logged-in-user'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { Button } from '@/components/molecules/buttons/button'
 import { ListingItem } from '@/features/host/components/listing-item/listing-item'
-import { useAppContext } from '@/providers/app-context-provider/app-context-provider'
+import { useAppContext, UserMode } from '@/providers/app-context-provider/app-context-provider'
 
 type HostOverviewProps = {
   listings?: ListingFull[] | null
 }
 
 export function HostOverview({ listings }: HostOverviewProps) {
-  const { enableAppLoading, disableAppLoading } = useAppContext()
+  const { enableAppLoading, disableAppLoading, setUserMode, userMode } = useAppContext()
   const router = useRouter()
 
   async function handleOnClickAddListing() {
@@ -28,6 +29,16 @@ export function HostOverview({ listings }: HostOverviewProps) {
       disableAppLoading()
     }
   }
+
+  useEffect(() => {
+    if (userMode === UserMode.HOST) {
+      return
+    }
+
+    setUserMode(UserMode.HOST)
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <>

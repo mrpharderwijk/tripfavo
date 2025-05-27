@@ -6,13 +6,13 @@ import { Heading } from '@/components/atoms/typography/heading/heading'
 import { HostOverview } from '@/features/host/overview/overview'
 
 export default async function HostOverviewPage() {
-  const tHost = await getTranslations('host')
+  const tMainMenuHost = await getTranslations('mainMenu.host')
   const listings = await getListingsByLoggedInUser()
 
   return (
     <>
       <Heading tag="h2" like="h4" color="primary" font-weight="bold">
-        {tHost('sidebar.myListings')}
+        {tMainMenuHost('myListings')}
       </Heading>
 
       <FlexBox flex-direction="col" gap={6}>

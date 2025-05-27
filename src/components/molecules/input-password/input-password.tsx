@@ -1,6 +1,6 @@
 import { ReactElement, useRef } from 'react'
 
-import { Input, InputProps } from '@/components/atoms/input/input'
+import { Input, InputProps } from '@/components/atoms/forms/input/input'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { Button } from '@/components/molecules/buttons/button'
 import { InputPasswordFeedback } from '@/components/molecules/input-password/input-password-feedback'

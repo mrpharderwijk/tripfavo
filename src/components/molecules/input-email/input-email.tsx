@@ -1,4 +1,4 @@
-import { Input, InputProps } from '@/components/atoms/input/input'
+import { Input, InputProps } from '@/components/atoms/forms/input/input'
 
 type InputEmailProps = InputProps
 

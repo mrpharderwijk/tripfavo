@@ -16,13 +16,17 @@ type NavBarProps = VariantProps<typeof navBarClassNames> & {
   minimal?: boolean
   customActionLabel?: string | null
   customActionOnClick?: () => void | null
-  sideMenu?: ReactElement
+  header?: ReactElement
+  body?: ReactElement
+  footer?: ReactElement
 }
 
 export function NavBar({
   fixed = false,
   minimal = false,
-  sideMenu,
+  header,
+  body,
+  footer,
   customActionLabel = null,
   customActionOnClick,
 }: NavBarProps): ReactElement {
@@ -41,8 +45,7 @@ export function NavBar({
           >
             <Branding />
             {!minimal && <Search />}
-            {/* <UserMenu /> */}
-            {!minimal && <MainMenu sideMenu={sideMenu} />}
+            {!minimal && <MainMenu header={header} body={body} footer={footer} />}
             {!!minimal && !!customActionLabel && !!customActionOnClick && (
               <Button variant="outline" size="md" rounded onClick={customActionOnClick}>
                 {customActionLabel}

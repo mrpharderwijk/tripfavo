@@ -7,8 +7,8 @@ import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/fl
 import { GridItem } from '@/components/atoms/layout/grid/components/grid-item/grid-item'
 import { Grid } from '@/components/atoms/layout/grid/grid'
 import { Heading } from '@/components/atoms/typography/heading/heading'
+import { HostMainMenu } from '@/features/host/components/host-main-menu/host-main-menu'
 import { HostSidebar } from '@/features/host/components/host-sidebar/host-sidebar'
-import { NavBar } from '@/features/nav-bar/nav-bar'
 
 export default function RentLayout({ children }: Readonly<PropsWithChildren>) {
   const tHost = useTranslations('host')
@@ -16,7 +16,7 @@ export default function RentLayout({ children }: Readonly<PropsWithChildren>) {
   return (
     <FlexBox flex-direction="col" fullHeight>
       <FlexBoxItem flex="initial">
-        <NavBar />
+        <HostMainMenu />
       </FlexBoxItem>
 
       <FlexBoxItem flex="auto" min-height="full">

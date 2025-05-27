@@ -14,7 +14,7 @@ import { isCurrentRoute } from '@/utils/get-route'
 export function HostSidebar(): ReactElement {
   const router = useRouter()
   const pathname = usePathname()
-  const tHost = useTranslations('host')
+  const tMainMenuHost = useTranslations('mainMenu.host')
 
   function handleOnClickSidebarItem(path?: string): void {
     if (!path) {
@@ -42,7 +42,7 @@ export function HostSidebar(): ReactElement {
             }
             onClick={() => handleOnClickSidebarItem(routes.host?.children?.myListings?.path)}
           >
-            {tHost('sidebar.myListings')}
+            {tMainMenuHost('myListings')}
           </Button>
         </FlexBoxItem>
 

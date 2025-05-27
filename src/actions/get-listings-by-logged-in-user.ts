@@ -53,11 +53,13 @@ export async function getListingsByLoggedInUser(): Promise<ListingFull[] | null>
         },
         images: {
           select: {
-            url: true,
-            fileName: true,
             fileHash: true,
+            fileKey: true,
+            fileName: true,
             fileType: true,
             size: true,
+            url: true,
+            isMain: true,
           },
         },
         createdAt: true,

@@ -16,7 +16,7 @@ export default function DashboardLayout({ children }: Readonly<PropsWithChildren
   return (
     <FlexBox flex-direction="col" fullHeight>
       <FlexBoxItem flex="initial">
-        <NavBar sideMenu={<AccountSidebar />} />
+        <NavBar />
       </FlexBoxItem>
 
       <FlexBoxItem flex="auto" min-height="full">

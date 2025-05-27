@@ -25,7 +25,7 @@ export const StructureFormSchema = z.object({
   }),
 })
 
-export default function StructureForm() {
+export function StructureForm() {
   const { steps, currentStep, updateStep, setIsLoading, listingId, listing } = useHostContext()
   const form = useForm<z.infer<typeof StructureFormSchema>>({
     resolver: zodResolver(StructureFormSchema),

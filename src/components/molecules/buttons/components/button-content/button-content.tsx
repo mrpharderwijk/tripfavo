@@ -1,3 +1,4 @@
+'use client'
 import { VariantProps } from 'class-variance-authority'
 import { MouseEvent, PropsWithChildren, ReactElement } from 'react'
 import { IconType } from 'react-icons'
@@ -35,6 +36,7 @@ export function ButtonContent({
   const wrapperClassNames = buttonContentClassNames({
     variant,
     disabled,
+    withIcon: !!Icon,
   })
   const labelClassNames = buttonContentLabelClassNames({ variant, loading })
   const iconClassNames = buttonContentIconClassNames({ size, variant, loading })

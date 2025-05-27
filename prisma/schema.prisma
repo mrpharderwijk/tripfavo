@@ -14,20 +14,28 @@ datasource db {
 }
 
 model User {
-  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  id             String     @id @default(auto()) @map("_id") @db.ObjectId
   name           Name?
-  email          String?   @unique
+  email          String?    @unique
   emailVerified  DateTime?
   image          String?
   hashedPassword String?
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-  favoriteIds    String[]  @db.ObjectId
+  favoriteIds    String[]   @db.ObjectId
+  role           UserRole[] @default([USER, HOST])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   accounts     Account[]
   listings     Listing[]
   reservations Reservation[]
   ListingImage ListingImage[]
+}
+
+enum UserRole {
+  USER
+  HOST
+  ADMIN
 }
 
 model Account {
@@ -65,6 +73,7 @@ model Listing {
   location     ListingLocation?
   floorPlan    ListingFloorPlan?
   images       ListingImage[]
+  ListingRoom  ListingRoom[]
 }
 
 model ListingLocation {
@@ -101,28 +110,82 @@ model ListingFloorPlan {
 }
 
 model ListingImage {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  fileName  String
-  size      Int
-  key       String
-  fileHash  String   @unique
-  url       String
-  fileType  String
-  isMain    Boolean  @default(false)
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  fileHash String  @unique
+  fileKey  String  @unique
+  fileName String
+  fileType String
+  isMain   Boolean @default(false)
+  size     Int
+  url      String
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  listingRoomId String?      @db.ObjectId
+  listingRoom   ListingRoom? @relation(fields: [listingRoomId], references: [id])
 
   listingId String  @db.ObjectId
   listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
 
-  User   User?   @relation(fields: [userId], references: [id])
   userId String? @db.ObjectId
+  User   User?   @relation(fields: [userId], references: [id])
+}
+
+model ListingRoom {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  roomValue RoomType?
+  room      Room?     @relation(fields: [roomValue], references: [value], onDelete: Cascade)
+
+  listingId String  @db.ObjectId
+  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  ListingImage ListingImage[]
 }
 
 enum ListingStatus {
   DRAFT
   IN_REVIEW
   PUBLISHED
+}
+
+model Room {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  value     RoomType @unique
+  locale    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ListingRoom ListingRoom[]
+}
+
+enum RoomType {
+  BATHROOM
+  BEDROOM
+  LIVING_ROOM
+  DINING_ROOM
+  KITCHEN
+  OFFICE
+  GARAGE
+  HALLWAY
+  FRONT_PORCH
+  BACK_PORCH
+  BALCONY
+  ATTIC
+  SHED
+  FRONT_YARD
+  BACK_YARD
+  PATIO
+  GARDEN
+  POOL
+  HOT_TUB
+  SAUNA
+  GYM
+  STUDIO
+  STUDIO_LOFT
+  OTHER
 }
 
 model Reservation {

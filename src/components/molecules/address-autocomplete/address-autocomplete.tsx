@@ -5,7 +5,7 @@ import type { ChangeEvent } from 'react'
 import { useEffect, useRef, useState } from 'react'
 
 import { DotLoader } from '@/components/atoms/dot-loader/dot-loader'
-import { Input } from '@/components/atoms/input/input'
+import { Input } from '@/components/atoms/forms/input/input'
 import { Text } from '@/components/atoms/typography/text/text'
 import {
   Command,

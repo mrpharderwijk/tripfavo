@@ -12,12 +12,8 @@ import { cn } from '@/utils/class-names'
 
 type StructureSelectProps = { control: Control<FieldValues> }
 
-export function StructureSelect({
-  control,
-}: StructureSelectProps): ReactElement {
-  const [selectedStructure, setSelectedStructure] = useState<string | null>(
-    'House',
-  )
+export function StructureSelect({ control }: StructureSelectProps): ReactElement {
+  const [selectedStructure, setSelectedStructure] = useState<string | null>('house')
 
   function handleOnValueChange(value: string): void {
     setSelectedStructure(value)
@@ -30,10 +26,10 @@ export function StructureSelect({
       render={({ field }) => (
         <RadioGroup onValueChange={field.onChange} defaultValue={field.value}>
           <Grid grid-cols={1} grid-cols-md={3} gap={4}>
-            {categories.map(({ label, icon: Icon }) => (
+            {categories.map(({ label, value, icon: Icon }) => (
               <GridItem col-span={1} key={label}>
                 <div className="w-full">
-                  <RadioGroupItem value={label} className="peer sr-only" />
+                  <RadioGroupItem value={value} className="peer sr-only" />
                   <Label
                     htmlFor={label}
                     className={cn(
@@ -41,36 +37,24 @@ export function StructureSelect({
                       {
                         'border-tertiary-selected outline-1 bg-bg-tertiary-selected':
                           field.value === selectedStructure,
-                        'border-border-tertiary':
-                          field.value !== selectedStructure,
+                        'border-border-tertiary': field.value !== selectedStructure,
                       },
                     )}
                   >
                     <div className="w-12 h-12 flex justify-start">
                       <Icon
                         className={cn('transition-all duration-300', {
-                          'animate-icon-size':
-                            field.value === selectedStructure,
+                          'animate-icon-size': field.value === selectedStructure,
                           'size-[30px]': field.value !== selectedStructure,
                         })}
                         size={30}
                       />
                     </div>
-                    <Body
-                      size="base-lg"
-                      font-weight="semibold"
-                      text-align="left"
-                    >
-                      {label} {field.value}
+                    <Body size="base-lg" font-weight="semibold" text-align="left">
+                      {label}
                     </Body>
                   </Label>
                 </div>
-                {/* <RadioGroupTile
-                  icon={categoryItem.icon}
-                  label={categoryItem.label}
-                  selected={selectedStructure === categoryItem.label}
-                  onClick={() => setSelectedStructure(categoryItem.label)}
-                /> */}
               </GridItem>
             ))}
           </Grid>

@@ -1,24 +1,21 @@
 import { AlertCircle } from 'lucide-react'
-import { ChangeEvent, InputHTMLAttributes, ReactElement, useState } from 'react'
+import { ChangeEvent, ReactElement, TextareaHTMLAttributes, useState } from 'react'
 
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
 import { WithRef } from '@/types/with-ref'
 import { cn } from '@/utils/class-names'
 
-export type InputProps = InputHTMLAttributes<HTMLInputElement> &
-  WithRef<HTMLInputElement> & {
+type TextAreaProps = TextareaHTMLAttributes<HTMLTextAreaElement> &
+  WithRef<HTMLTextAreaElement> & {
     id: string
     label: string
-    formatPrice?: boolean
     error?: string
-    customAction?: ReactElement | boolean
+    charCount?: boolean
     disableError?: boolean
-    autocomplete?: string
-    passwordrules?: string
   }
 
-export function Input({
+export function TextArea({
   label,
   placeholder,
   ref,
@@ -27,22 +24,21 @@ export function Input({
   onChange,
   id,
   disabled,
-  customAction = false,
   disableError = false,
+  charCount = false,
   ...props
-}: InputProps): ReactElement {
-  const [isFocused, setIsFocused] = useState(false)
+}: TextAreaProps): ReactElement {
+  const [isFocused, setIsFocused] = useState<boolean>(false)
   const errorId = `${id}-error`
   const isFloating = isFocused || !!value || !!error
   const hasError = !!error
-  const inputClassName = cn(
-    'w-full h-14 pt-5 px-4 pb-1 border border-border-quarternary rounded-lg transition-all duration-200 text-base-lg font-medium text-text-primary outline-offset-2 outline-black',
+  const textAreaClassName = cn(
+    'w-full min-h-14 pt-5 px-4 pb-1 border border-border-quarternary rounded-lg transition-all duration-200 text-base-lg font-medium text-text-primary outline-offset-2 outline-black',
     {
       'border-border-secondary-error outline-1 !outline-border-secondary-error':
         hasError && isFocused,
       'border-border-secondary-error bg-bg-primary-error outline-black': hasError && !isFocused,
       'bg-bg-primary-disabled cursor-not-allowed': !!disabled,
-      'border-r-0 rounded-r-none': !!customAction,
     },
   )
   const labelClassName = cn(
@@ -50,7 +46,7 @@ export function Input({
     {
       'text-xs top-2 left-4 text-text-secondary': isFloating,
       'text-text-primary-error font-bold': hasError,
-      'text-base-lg top-1/2 -translate-y-1/2 left-4 text-text-secondary': !isFloating,
+      'text-base-lg top-6 -translate-y-1/2 left-4 text-text-secondary': !isFloating,
     },
   )
 
@@ -62,7 +58,7 @@ export function Input({
     setIsFocused(false)
   }
 
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+  function handleChange(e: ChangeEvent<HTMLTextAreaElement>): void {
     onChange?.(e)
   }
 
@@ -74,7 +70,7 @@ export function Input({
             {label}
           </label>
 
-          <input
+          <textarea
             {...props}
             id={id}
             ref={ref}
@@ -82,14 +78,21 @@ export function Input({
             placeholder={isFloating ? placeholder : ''}
             aria-invalid={hasError}
             aria-describedby={hasError ? errorId : undefined}
-            className={inputClassName}
+            className={textAreaClassName}
             onFocus={handleFocus}
             onBlur={handleBlur}
             onChange={handleChange}
           />
         </FlexBoxItem>
-        {!!customAction && <FlexBoxItem flex="initial">{customAction}</FlexBoxItem>}
       </FlexBox>
+
+      {!!charCount && (
+        <FlexBox flex-direction="row" align-items="center" justify-content="end">
+          <div className="text-xs text-text-secondary">
+            {value?.toString().length} / {props.maxLength}
+          </div>
+        </FlexBox>
+      )}
 
       {error && !disableError && (
         <FlexBox flex-direction="row" align-items="center" justify-content="start" gap={1}>

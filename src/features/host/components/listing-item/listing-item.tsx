@@ -25,6 +25,8 @@ export function ListingItem({
 }: ListingItemProps): ReactElement {
   const router = useRouter()
 
+  const featuredImage = images?.find((image) => image.isMain) ?? images?.[0] ?? null
+
   function handleOnClickListing(listingId: string) {
     router.push(`/host/${listingId}/structure`)
   }
@@ -41,13 +43,15 @@ export function ListingItem({
           <FlexBox flex-direction="row" gap={4} padding={4}>
             <FlexBoxItem flex="initial">
               <Box width={16} height={16} border-radius="xl" bg-color="deco" overflow="hidden">
-                <Image
-                  src={images?.[0]?.url}
-                  alt={images?.[0]?.fileName}
-                  width={64}
-                  height={64}
-                  className="object-cover aspect-square"
-                />
+                {!!images?.length && !!featuredImage && (
+                  <Image
+                    src={featuredImage?.url}
+                    alt={featuredImage?.fileName}
+                    width={64}
+                    height={64}
+                    className="object-cover aspect-square"
+                  />
+                )}
               </Box>
             </FlexBoxItem>
             <FlexBox flex-direction="col" gap={2} align-items="start" justify-content="center">
