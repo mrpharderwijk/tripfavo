@@ -4,9 +4,11 @@ import axios from 'axios'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
+import { UploadedFileData } from 'uploadthing/types'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
+import { ListingFull } from '@/actions/get-listing-by-logged-in-user'
 import { Box } from '@/components/atoms/layout/box/box'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { Body } from '@/components/atoms/typography/body/body'
@@ -16,7 +18,6 @@ import { ListingFormImage } from '@/components/organisms/listing-form-image/list
 import { Form } from '@/components/ui/form'
 import { HOST_STEP, useHostContext } from '@/features/host/providers/host-context-provider'
 import { ComponentStepProps } from '@/features/host/types/component-step-props'
-import { useAppContext } from '@/providers/app-context-provider/app-context-provider'
 import { UploadDropzone } from '@/utils/uploadthing'
 
 const EMPTY_FIELD_MESSAGE = 'Field cannot be empty'
@@ -52,16 +53,17 @@ export const ImagesFormSchema = z.object({
 
 export function ImagesForm({ listing }: ComponentStepProps) {
   const tListingImages = useTranslations('host.listing.images')
-  const { enableAppLoading, disableAppLoading } = useAppContext()
   const [prismaError, setPrismaError] = useState<string | null>(null)
   const [utError, setUtError] = useState<string | null>(null)
-  const { steps, currentStep, updateStep, onNextStep, listingId } = useHostContext()
+  const { updateStep, onNextStep, listingId } = useHostContext()
+  const [images, setImages] = useState<ListingFull['images']>(listing?.images || [])
+
   const form = useForm<z.infer<typeof ImagesFormSchema>>({
     resolver: zodResolver(ImagesFormSchema),
     mode: 'onChange',
     defaultValues: {
-      images: listing?.images?.length
-        ? listing.images.map((image) => ({
+      images: images?.length
+        ? images.map((image) => ({
             ...image,
             roomType: image?.listingRoom?.room?.value,
           }))
@@ -70,14 +72,13 @@ export function ImagesForm({ listing }: ComponentStepProps) {
   })
   const {
     control,
-    formState: { errors, isValid },
+    formState: { errors },
     setValue,
   } = form
-  const { fields, append, remove } = useFieldArray({
+  const { fields, remove } = useFieldArray({
     control,
     name: 'images',
   })
-  const stepData = steps[currentStep as HOST_STEP]
 
   async function onSubmit(data: z.infer<typeof ImagesFormSchema>): Promise<boolean> {
     try {
@@ -91,6 +92,53 @@ export function ImagesForm({ listing }: ComponentStepProps) {
     }
   }
 
+  async function handleOnClientUploadComplete(res: UploadedFileData[]) {
+    // Do something with the response
+    const files = res.map((file) => ({
+      ...file,
+      url: file.ufsUrl,
+      fileHash: file.fileHash,
+      fileKey: file.key,
+      fileName: file.name,
+      fileType: file.type,
+      size: file.size,
+      isMain: false,
+      alt: '',
+    }))
+
+    try {
+      const response = await axios.post(`/api/host/listings/${listingId}/images`, {
+        files,
+      })
+      const newImages = [...images, ...response.data]
+      setImages(newImages)
+      setValue('images', newImages)
+    } catch (error: any) {
+      setPrismaError(error.message)
+      return
+    }
+  }
+
+  function handleOnUploadError(error: Error) {
+    // Do something with the error.
+    setUtError(error.message)
+  }
+
+  function handleOnBeforeUploadBegin(files: File[]) {
+    // Preprocess files before uploading (e.g. rename them)
+    return files.map((f) => new File([f], `${listingId}-${f.name}`, { type: f.type }))
+  }
+
+  async function handleOnChange(): Promise<void> {
+    try {
+      const { data } = await axios.get(`/api/host/listings/${listingId}/images`)
+      setImages(data)
+      setValue('images', data)
+    } catch (error: unknown) {
+      console.error(error)
+    }
+  }
+
   /**
    * This effect is used to update the step form to the context
    */
@@ -98,6 +146,10 @@ export function ImagesForm({ listing }: ComponentStepProps) {
     updateStep(HOST_STEP.Images, form as any, onSubmit)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  const sortedImagesByCreatedAt = images.sort((a, b) => {
+    return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+  })
 
   return (
     <Box display="flex" flex-direction="col" gap={11}>
@@ -114,103 +166,32 @@ export function ImagesForm({ listing }: ComponentStepProps) {
 
       <Form {...form}>
         <form noValidate onSubmit={onNextStep}>
-          {!fields?.length && (
-            <UploadDropzone
-              endpoint="imageUploader"
-              onClientUploadComplete={async (res) => {
-                // Do something with the response
-                const files = res.map((file) => ({
-                  ...file,
-                  url: file.ufsUrl,
-                  fileHash: file.fileHash,
-                  fileKey: file.key,
-                  fileName: file.name,
-                  fileType: file.type,
-                  size: file.size,
-                  isMain: false,
-                  alt: '',
-                }))
-
-                try {
-                  const response = await axios.post(`/api/host/listings/${listingId}/images`, {
-                    files,
-                  })
-                  setValue('images', response.data)
-                  disableAppLoading()
-                } catch (error: any) {
-                  setPrismaError(error.message)
-                  disableAppLoading()
-                  return
-                }
-              }}
-              onUploadError={(error: Error) => {
-                // Do something with the error.
-                setUtError(error.message)
-              }}
-              onBeforeUploadBegin={(files) => {
-                // Preprocess files before uploading (e.g. rename them)
-                return files.map((f) => new File([f], `${listingId}-${f.name}`, { type: f.type }))
-              }}
-              onUploadBegin={() => {
-                enableAppLoading()
-              }}
-            />
-          )}
-
           <FlexBox flex-direction="col" gap={6}>
-            {fields?.map((field, index) => (
+            {sortedImagesByCreatedAt?.map((field, index) => (
               <Box
-                key={field.fileHash}
+                key={`${field.fileHash}-${field.fileKey}-${index}`}
                 padding-b={6}
                 border-b={index === 0 ? 0 : 1}
                 border-color="secondary-disabled"
                 position="relative"
               >
-                <ListingFormImage {...field} index={index} control={control} remove={remove} />
+                <ListingFormImage
+                  {...field}
+                  index={index}
+                  control={control}
+                  remove={remove}
+                  onChange={handleOnChange}
+                />
               </Box>
             ))}
           </FlexBox>
 
-          {!!fields?.length && fields.length < MAX_IMAGES_LENGTH && (
+          {(!fields?.length || fields.length < MAX_IMAGES_LENGTH) && (
             <UploadDropzone
               endpoint="imageUploader"
-              onClientUploadComplete={async (res) => {
-                // Do something with the response
-                const files = res.map((file) => ({
-                  ...file,
-                  url: file.ufsUrl,
-                  fileHash: file.fileHash,
-                  fileKey: file.key,
-                  fileName: file.name,
-                  fileType: file.type,
-                  size: file.size,
-                  isMain: false,
-                  alt: '',
-                }))
-
-                try {
-                  const response = await axios.post(`/api/host/listings/${listingId}/images`, {
-                    files,
-                  })
-                  setValue('images', response.data)
-                  disableAppLoading()
-                } catch (error: any) {
-                  setPrismaError(error.message)
-                  disableAppLoading()
-                  return
-                }
-              }}
-              onUploadError={(error: Error) => {
-                // Do something with the error.
-                setUtError(error.message)
-              }}
-              onBeforeUploadBegin={(files) => {
-                // Preprocess files before uploading (e.g. rename them)
-                return files.map((f) => new File([f], `${listingId}-${f.name}`, { type: f.type }))
-              }}
-              onUploadBegin={() => {
-                enableAppLoading()
-              }}
+              onClientUploadComplete={handleOnClientUploadComplete}
+              onUploadError={handleOnUploadError}
+              onBeforeUploadBegin={handleOnBeforeUploadBegin}
             />
           )}
         </form>

@@ -22,6 +22,7 @@ type ListingFormImageProps = {
   index: number
   control: Control<z.infer<typeof ImagesFormSchema>>
   remove: (index: number) => void
+  onChange?: () => void
 } & z.infer<typeof ImagesFormSchema>['images'][number]
 
 export function ListingFormImage({
@@ -33,6 +34,7 @@ export function ListingFormImage({
   fileHash,
   isMain,
   remove,
+  onChange,
 }: ListingFormImageProps): ReactElement {
   const { listingId } = useHostContext()
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -46,6 +48,7 @@ export function ListingFormImage({
     try {
       await axios.delete(`/api/host/listings/${listingId}/images/${fileKey}`)
       remove(index)
+      onChange?.()
     } catch (error: unknown) {
       console.error(error)
     } finally {
@@ -53,12 +56,13 @@ export function ListingFormImage({
     }
   }
 
-  async function handleOnClickMakeMain(index: number): Promise<void> {
+  async function handleOnClickMakeMain(): Promise<void> {
     setIsLoading(true)
     try {
       await axios.patch(`/api/host/listings/${listingId}/images/${fileKey}`, {
         isMain: true,
       })
+      onChange?.()
     } catch (error: unknown) {
       console.error(error)
     } finally {
@@ -86,7 +90,7 @@ export function ListingFormImage({
                 icon={Fullscreen}
                 variant="quaternary"
                 size="md"
-                onClick={() => handleOnClickMakeMain(index)}
+                onClick={handleOnClickMakeMain}
               >
                 Make main image
               </Button>

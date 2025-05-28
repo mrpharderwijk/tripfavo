@@ -52,14 +52,6 @@ export function LoginForm(): ReactElement {
           {tLoginForm('title')}
         </Heading>
 
-        {!!errors && !!Object.keys(errors).length && (
-          <FormNotification variant="danger">
-            {errors.email?.message?.toString()}
-            <br />
-            {errors.password?.message?.toString()}
-          </FormNotification>
-        )}
-
         {error && (
           <FormNotification variant="danger">
             {error === 'INVALID_CREDENTIALS'

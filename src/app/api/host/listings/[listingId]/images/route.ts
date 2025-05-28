@@ -7,6 +7,51 @@ import { prisma } from '@/lib/prisma/db'
 
 type ImagesParams = { params: Promise<{ listingId: string }> }
 
+export async function GET(request: NextRequest, { params }: ImagesParams) {
+  const session = await getSession()
+  if (!session?.user?.id) {
+    return new Response('Unauthorized', { status: 401 })
+  }
+
+  const { listingId } = await params
+  if (!listingId) {
+    return NextResponse.json({ message: 'Listing ID is required' }, { status: 400 })
+  }
+
+  try {
+    const images = await prisma.listingImage.findMany({
+      where: {
+        listingId,
+        userId: session.user.id,
+      },
+      select: {
+        id: true,
+        fileKey: true,
+        fileName: true,
+        fileHash: true,
+        fileType: true,
+        isMain: true,
+        size: true,
+        url: true,
+        createdAt: true,
+        updatedAt: true,
+        userId: true,
+        listingRoomId: true,
+        listingRoom: {
+          select: {
+            room: true,
+          },
+        },
+      },
+    })
+
+    return NextResponse.json(images, { status: 200 })
+  } catch (error) {
+    console.error(error)
+    return NextResponse.json({ message: 'Failed to get images' }, { status: 500 })
+  }
+}
+
 export async function POST(request: NextRequest, { params }: ImagesParams) {
   const session = await getSession()
   if (!session?.user?.id) {
@@ -23,10 +68,14 @@ export async function POST(request: NextRequest, { params }: ImagesParams) {
     return NextResponse.json({ message: 'No files provided' }, { status: 400 })
   }
 
-  console.log('files: ', files)
-
   try {
-    // First, create or update the images
+    const existingImages = await prisma.listingImage.findMany({
+      where: {
+        listingId,
+      },
+    })
+    const hasMainImage = existingImages.some((file) => file.isMain)
+
     const images = await Promise.all(
       files.map(
         async (file: ListingImage & UploadedFileData & { roomValue?: RoomType }, index: number) => {
@@ -39,9 +88,9 @@ export async function POST(request: NextRequest, { params }: ImagesParams) {
               fileKey: file.fileKey,
               fileName: file.fileName,
               fileType: file.fileType,
-              isMain: index === 0 ? true : false,
+              isMain: !hasMainImage && index === 0 ? true : false,
               size: file.size,
-              url: file.ufsUrl,
+              url: file.url || '',
               userId: session?.user?.id,
               listingId,
             },
@@ -50,8 +99,8 @@ export async function POST(request: NextRequest, { params }: ImagesParams) {
               fileName: file.fileName,
               fileType: file.fileType,
               size: file.size,
-              url: file.ufsUrl,
-              isMain: file.isMain ?? false,
+              url: file.url || '',
+              isMain: !hasMainImage && index === 0 ? true : (file.isMain ?? false),
               listingId,
             },
           })
