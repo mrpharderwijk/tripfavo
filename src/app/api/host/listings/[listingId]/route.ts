@@ -1,11 +1,10 @@
 import { NextResponse } from 'next/server'
 
 import { getSession } from '@/actions/get-current-user'
+import { ApiListingParams } from '@/features/host/types/api-listing-params'
 import { prisma } from '@/lib/prisma/db'
 
-type ListingIdParams = { params: Promise<{ listingId: string }> }
-
-export async function GET(request: Request, { params }: ListingIdParams) {
+export async function GET(request: Request, { params }: ApiListingParams) {
   const session = await getSession()
   if (!session?.user?.id) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -96,7 +95,7 @@ export async function GET(request: Request, { params }: ListingIdParams) {
   }
 }
 
-export async function DELETE(request: Request, { params }: ListingIdParams) {
+export async function DELETE(request: Request, { params }: ApiListingParams) {
   const session = await getSession()
   if (!session?.user?.id) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })

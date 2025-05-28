@@ -13,16 +13,16 @@ import { HeadingGroup } from '@/components/molecules/heading/heading'
 import { Form, FormField } from '@/components/ui/form'
 import { HOST_STEP, useHostContext } from '@/features/host/providers/host-context-provider'
 import { ComponentStepProps } from '@/features/host/types/component-step-props'
-export const DescriptionFormSchema = z.object({
-  description: z.string().min(30).max(500),
+export const TitleFormSchema = z.object({
+  title: z.string().min(30).max(500),
 })
 
-export function DescriptionForm({ listing }: ComponentStepProps): ReactElement {
+export function TitleForm({ listing }: ComponentStepProps): ReactElement {
   const { steps, currentStep, updateStep, setIsLoading, listingId } = useHostContext()
-  const form = useForm<z.infer<typeof DescriptionFormSchema>>({
-    resolver: zodResolver(DescriptionFormSchema),
+  const form = useForm<z.infer<typeof TitleFormSchema>>({
+    resolver: zodResolver(TitleFormSchema),
     defaultValues: {
-      description: listing?.description ?? '',
+      title: listing?.title ?? '',
     },
   })
   const {
@@ -31,11 +31,11 @@ export function DescriptionForm({ listing }: ComponentStepProps): ReactElement {
   } = form
   const stepData = steps[currentStep as HOST_STEP]
 
-  async function onSubmit(data: z.infer<typeof DescriptionFormSchema>): Promise<boolean> {
+  async function onSubmit(data: z.infer<typeof TitleFormSchema>): Promise<boolean> {
     setIsLoading(true)
 
     try {
-      await axios.post(`/api/host/listings/${listingId}/description`, data)
+      await axios.post(`/api/host/listings/${listingId}/title`, data)
       return true
     } catch (error) {
       console.error(error)
@@ -49,7 +49,7 @@ export function DescriptionForm({ listing }: ComponentStepProps): ReactElement {
    * This effect is used to update the step form to the context
    */
   useEffect(() => {
-    updateStep(HOST_STEP.Description, form as any, onSubmit)
+    updateStep(HOST_STEP.Title, form as any, onSubmit)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -59,18 +59,18 @@ export function DescriptionForm({ listing }: ComponentStepProps): ReactElement {
 
       <Form {...form}>
         <form noValidate>
-          {errors.description && (
-            <FormNotification variant="danger">{errors.description.message}</FormNotification>
+          {errors.title && (
+            <FormNotification variant="danger">{errors.title.message}</FormNotification>
           )}
           <FormField
             control={control}
-            name="description"
+            name="title"
             render={({ field }) => (
               <TextArea
                 {...field}
-                id="description"
-                label="Description"
-                error={errors.description?.message}
+                id="title"
+                label="Title"
+                error={errors.title?.message}
                 charCount
                 maxLength={500}
               />

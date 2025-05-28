@@ -165,7 +165,7 @@ export function ImagesForm({ listing }: ComponentStepProps) {
       {utError && <FormNotification variant="danger">{utError}</FormNotification>}
 
       <Form {...form}>
-        <form noValidate onSubmit={onNextStep}>
+        <form noValidate>
           <FlexBox flex-direction="col" gap={6}>
             {sortedImagesByCreatedAt?.map((field, index) => (
               <Box

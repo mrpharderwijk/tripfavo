@@ -1,12 +1,25 @@
-import { Listing, ListingFloorPlan, ListingImage, ListingLocation } from '@prisma/client'
+import {
+  Listing,
+  ListingAmenity,
+  ListingFloorPlan,
+  ListingImage,
+  ListingLocation,
+} from '@prisma/client'
 
 import { getSession } from '@/actions/get-current-user'
 import { prisma } from '@/lib/prisma/db'
 
-export type ListingFull = Omit<Listing, 'userId'> & {
+export type ListingFull = Omit<Listing, 'userId' | 'status'> & {
   location: Omit<ListingLocation, 'listingId'>
   floorPlan: Omit<ListingFloorPlan, 'listingId'>
-  images: Omit<ListingImage, 'listingId' | 'userId'>[]
+  images: (Omit<ListingImage, 'listingId' | 'userId'> & {
+    listingRoom?: {
+      room: {
+        value: string
+      } | null
+    } | null
+  })[]
+  amenities: Omit<ListingAmenity, 'listingId' | 'userId'>[]
 }
 
 export async function getListingsByLoggedInUser(): Promise<ListingFull[] | null> {
@@ -76,6 +89,12 @@ export async function getListingsByLoggedInUser(): Promise<ListingFull[] | null>
                 room: true,
               },
             },
+          },
+        },
+        amenities: {
+          select: {
+            id: true,
+            amenityValue: true,
           },
         },
         createdAt: true,

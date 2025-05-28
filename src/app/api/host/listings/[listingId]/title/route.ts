@@ -15,9 +15,9 @@ export async function POST(request: NextRequest, { params }: ApiListingParams) {
     return NextResponse.json({ message: 'Listing ID is required' }, { status: 400 })
   }
 
-  const { privacyType } = await request.json()
-  if (!privacyType) {
-    return NextResponse.json({ message: 'Privacy type is required' }, { status: 400 })
+  const { title } = await request.json()
+  if (!title) {
+    return NextResponse.json({ message: 'Title is required' }, { status: 400 })
   }
 
   try {
@@ -27,13 +27,13 @@ export async function POST(request: NextRequest, { params }: ApiListingParams) {
         id: listingId,
       },
       data: {
-        privacyType,
+        title,
       },
     })
 
     return NextResponse.json(listing)
   } catch (error) {
     console.error(error)
-    return NextResponse.json({ message: 'Failed to create structure' }, { status: 500 })
+    return NextResponse.json({ message: 'Failed to create title' }, { status: 500 })
   }
 }

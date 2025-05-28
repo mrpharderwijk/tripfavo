@@ -67,13 +67,21 @@ model Listing {
   status      ListingStatus @default(DRAFT)
   createdAt   DateTime      @default(now())
 
-  userId       String            @db.ObjectId
-  user         User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   reservations Reservation[]
   location     ListingLocation?
   floorPlan    ListingFloorPlan?
   images       ListingImage[]
-  ListingRoom  ListingRoom[]
+  rooms        ListingRoom[]
+  amenities    ListingAmenity[]
+}
+
+enum ListingStatus {
+  DRAFT
+  IN_REVIEW
+  PUBLISHED
 }
 
 model ListingLocation {
@@ -144,10 +152,13 @@ model ListingRoom {
   ListingImage ListingImage[]
 }
 
-enum ListingStatus {
-  DRAFT
-  IN_REVIEW
-  PUBLISHED
+model ListingAmenity {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  amenityValue AmenityType?
+  amenity      Amenity?     @relation(fields: [amenityValue], references: [value], onDelete: Cascade)
+  Listing      Listing?     @relation(fields: [listingId], references: [id])
+  listingId    String?      @db.ObjectId
 }
 
 model Room {
@@ -186,6 +197,48 @@ enum RoomType {
   STUDIO
   STUDIO_LOFT
   OTHER
+}
+
+model Amenity {
+  id             String           @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  value          AmenityType      @unique
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  ListingAmenity ListingAmenity[]
+}
+
+enum AmenityType {
+  WIFI
+  SWIMMING_POOL
+  HOT_TUB
+  TENNIS_COURT
+  GYM
+  AIR_CONDITIONING
+  HEATING
+  KITCHEN
+  WASHER
+  DRYER
+  TV
+  FREE_PARKING
+  SEA_VIEW
+  MOUNTAIN_VIEW
+  GARDEN
+  BBQ_GRILL
+  PLAYGROUND
+  BEACH_ACCESS
+  FIREPLACE
+  WORKSPACE
+  PET_FRIENDLY
+  SECURITY_SYSTEM
+  FIRST_AID_KIT
+  FIRE_EXTINGUISHER
+  SMOKE_ALARM
+  ELEVATOR
+  BALCONY
+  BREAKFAST_INCLUDED
+  DISHWASHER
+  BABY_EQUIPMENT
 }
 
 model Reservation {

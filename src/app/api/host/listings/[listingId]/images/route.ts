@@ -3,11 +3,10 @@ import { UploadedFileData } from 'uploadthing/types'
 import { ListingImage, RoomType } from '@prisma/client'
 
 import { getSession } from '@/actions/get-current-user'
+import { ApiListingParams } from '@/features/host/types/api-listing-params'
 import { prisma } from '@/lib/prisma/db'
 
-type ImagesParams = { params: Promise<{ listingId: string }> }
-
-export async function GET(request: NextRequest, { params }: ImagesParams) {
+export async function GET(request: NextRequest, { params }: ApiListingParams) {
   const session = await getSession()
   if (!session?.user?.id) {
     return new Response('Unauthorized', { status: 401 })
@@ -52,7 +51,7 @@ export async function GET(request: NextRequest, { params }: ImagesParams) {
   }
 }
 
-export async function POST(request: NextRequest, { params }: ImagesParams) {
+export async function POST(request: NextRequest, { params }: ApiListingParams) {
   const session = await getSession()
   if (!session?.user?.id) {
     return new Response('Unauthorized', { status: 401 })

@@ -8,7 +8,6 @@ import { HostOverview } from '@/features/host/overview/overview'
 export default async function HostOverviewPage() {
   const tMainMenuHost = await getTranslations('mainMenu.host')
   const listings = await getListingsByLoggedInUser()
-
   return (
     <>
       <Heading tag="h2" like="h4" color="primary" font-weight="bold">

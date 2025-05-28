@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 import { getSession } from '@/actions/get-current-user'
+import { ApiListingParams } from '@/features/host/types/api-listing-params'
 import { prisma } from '@/lib/prisma/db'
 
-type StructureParams = { params: Promise<{ listingId: string }> }
-
-export async function POST(request: NextRequest, { params }: StructureParams) {
+export async function POST(request: NextRequest, { params }: ApiListingParams) {
   const session = await getSession()
   if (!session?.user) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })

@@ -1,0 +1,182 @@
+import {
+  AlertTriangle,
+  ArrowBigUpDash,
+  Baby,
+  Bath,
+  Bell,
+  Car,
+  CircleDot,
+  Coffee,
+  Dog,
+  Dumbbell,
+  Fan,
+  Flame,
+  Flower2,
+  Gamepad2,
+  HeartPulse,
+  Home,
+  Laptop2,
+  Mountain,
+  Shield,
+  Ship,
+  Tv,
+  Umbrella,
+  UtensilsCrossed,
+  WashingMachine,
+  Waves,
+  Wifi,
+  Wind,
+} from 'lucide-react'
+
+export const amenities = [
+  {
+    label: 'WiFi',
+    value: 'wifi',
+    icon: Wifi,
+  },
+  {
+    label: 'Swimming Pool',
+    value: 'swimming-pool',
+    icon: Waves,
+  },
+  {
+    label: 'Hot Tub',
+    value: 'hot-tub',
+    icon: Bath,
+  },
+  {
+    label: 'Tennis Court',
+    value: 'tennis-court',
+    icon: CircleDot,
+  },
+  {
+    label: 'Gym',
+    value: 'gym',
+    icon: Dumbbell,
+  },
+  {
+    label: 'Air Conditioning',
+    value: 'air-conditioning',
+    icon: Fan,
+  },
+  {
+    label: 'Heating',
+    value: 'heating',
+    icon: Flame,
+  },
+  {
+    label: 'Kitchen',
+    value: 'kitchen',
+    icon: UtensilsCrossed,
+  },
+  {
+    label: 'Washer',
+    value: 'washer',
+    icon: WashingMachine,
+  },
+  {
+    label: 'Dryer',
+    value: 'dryer',
+    icon: Wind,
+  },
+  {
+    label: 'TV',
+    value: 'tv',
+    icon: Tv,
+  },
+  {
+    label: 'Free Parking',
+    value: 'free-parking',
+    icon: Car,
+  },
+  {
+    label: 'Sea View',
+    value: 'sea-view',
+    icon: Ship,
+  },
+  {
+    label: 'Mountain View',
+    value: 'mountain-view',
+    icon: Mountain,
+  },
+  {
+    label: 'Garden',
+    value: 'garden',
+    icon: Flower2,
+  },
+  {
+    label: 'BBQ Grill',
+    value: 'bbq-grill',
+    icon: Flame,
+  },
+  {
+    label: 'Playground',
+    value: 'playground',
+    icon: Gamepad2,
+  },
+  {
+    label: 'Beach Access',
+    value: 'beach-access',
+    icon: Umbrella,
+  },
+  {
+    label: 'Fireplace',
+    value: 'fireplace',
+    icon: Flame,
+  },
+  {
+    label: 'Workspace',
+    value: 'workspace',
+    icon: Laptop2,
+  },
+  {
+    label: 'Pet Friendly',
+    value: 'pet-friendly',
+    icon: Dog,
+  },
+  {
+    label: 'Security System',
+    value: 'security-system',
+    icon: Shield,
+  },
+  {
+    label: 'First Aid Kit',
+    value: 'first-aid-kit',
+    icon: HeartPulse,
+  },
+  {
+    label: 'Fire Extinguisher',
+    value: 'fire-extinguisher',
+    icon: AlertTriangle,
+  },
+  {
+    label: 'Smoke Alarm',
+    value: 'smoke-alarm',
+    icon: Bell,
+  },
+  {
+    label: 'Elevator',
+    value: 'elevator',
+    icon: ArrowBigUpDash,
+  },
+  {
+    label: 'Balcony',
+    value: 'balcony',
+    icon: Home,
+  },
+  {
+    label: 'Breakfast Included',
+    value: 'breakfast-included',
+    icon: Coffee,
+  },
+  {
+    label: 'Dishwasher',
+    value: 'dishwasher',
+    icon: UtensilsCrossed,
+  },
+  {
+    label: 'Baby Equipment',
+    value: 'baby-equipment',
+    icon: Baby,
+  },
+]

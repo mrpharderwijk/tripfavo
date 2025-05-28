@@ -20,8 +20,9 @@ import { LocationForm, LocationFormSchema } from '@/features/host/components/for
 import { FloorPlanForm, FloorPlanFormSchema } from '@/features/host/components/forms/floor-plan-form/floor-plan-form'
 import { ImagesForm, ImagesFormSchema } from '@/features/host/components/forms/images-form/images-form'
 import { DescriptionForm } from '@/features/host/components/forms/description-form/description-form'
-import { ListingFull } from '@/actions/get-listing-by-logged-in-user'
 import { ComponentStepProps } from '@/features/host/types/component-step-props'
+import { TitleForm } from '@/features/host/components/forms/title-form/title-form'
+import { AmenitiesForm } from '@/features/host/components/forms/amenities-form/amenities-form'
 
 type StepForm = z.infer<typeof StructureFormSchema> | z.infer<typeof PrivacyTypeFormSchema> | z.infer<typeof LocationFormSchema> | z.infer<typeof FloorPlanFormSchema> | z.infer<typeof ImagesFormSchema>
 type StepType = {
@@ -40,6 +41,8 @@ export const enum HOST_STEP {
   FloorPlan = 'floor-plan',
   Images = 'images',
   Description = 'description',
+  Title = 'title',
+  Amenities = 'amenities',
   Price = 'price',
 }
 
@@ -84,8 +87,23 @@ export const stepMap = {
     subtitle: 'Add a description of your property to help guests find it.',
     component: DescriptionForm,
   },
-  [HOST_STEP.Price]: {
+  [HOST_STEP.Title]: {
     order: 6,
+    url: '/title',
+    title: 'Come up with a catchy title',
+    subtitle: 'This is the first thing guests see. Make it count!',
+    component: TitleForm,
+  },
+
+  [HOST_STEP.Amenities]: {
+    order: 7,
+    url: '/amenities',
+    title: 'Select the amenities of your property',
+    subtitle: 'This will determine the comfort level for your guests.',
+    component: AmenitiesForm,
+  },
+  [HOST_STEP.Price]: {
+    order: 8,
     url: '/price',
     title: 'Set your price',
     subtitle: 'Set a price for your property to help guests find it.',
