@@ -1,5 +1,5 @@
-import { ListingFull } from '@/actions/get-listing-by-logged-in-user'
+import { ListingView } from '@/features/host/types/listing-view'
 
 export type ComponentStepProps = {
-  listing: ListingFull
+  listing: ListingView
 }

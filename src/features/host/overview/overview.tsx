@@ -4,14 +4,14 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
-import { ListingFull } from '@/actions/get-listings-by-logged-in-user'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { Button } from '@/components/molecules/buttons/button'
 import { ListingItem } from '@/features/host/components/listing-item/listing-item'
+import { ListingView } from '@/features/host/types/listing-view'
 import { useAppContext, UserMode } from '@/providers/app-context-provider/app-context-provider'
 
 type HostOverviewProps = {
-  listings?: ListingFull[] | null
+  listings?: ListingView[] | null
 }
 
 export function HostOverview({ listings }: HostOverviewProps) {

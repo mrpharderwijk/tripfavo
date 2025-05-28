@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { ReactElement } from 'react'
 
-import { ListingFull } from '@/actions/get-listings-by-logged-in-user'
 import { Box } from '@/components/atoms/layout/box/box'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
@@ -12,8 +11,9 @@ import { ListingItemActions } from '@/features/host/components/listing-item/list
 import { ListingItemDate } from '@/features/host/components/listing-item/listing-item-date'
 import { ListingItemStatus } from '@/features/host/components/listing-item/listing-item-status'
 import { ListingItemTitle } from '@/features/host/components/listing-item/listing-item-title'
+import { ListingView } from '@/features/host/types/listing-view'
 
-type ListingItemProps = ListingFull
+type ListingItemProps = ListingView
 
 export function ListingItem({
   id,

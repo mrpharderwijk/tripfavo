@@ -8,7 +8,6 @@ import { UploadedFileData } from 'uploadthing/types'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { ListingFull } from '@/actions/get-listing-by-logged-in-user'
 import { Box } from '@/components/atoms/layout/box/box'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { Body } from '@/components/atoms/typography/body/body'
@@ -18,6 +17,7 @@ import { ListingFormImage } from '@/components/organisms/listing-form-image/list
 import { Form } from '@/components/ui/form'
 import { HOST_STEP, useHostContext } from '@/features/host/providers/host-context-provider'
 import { ComponentStepProps } from '@/features/host/types/component-step-props'
+import { ListingView } from '@/features/host/types/listing-view'
 import { UploadDropzone } from '@/utils/uploadthing'
 
 const EMPTY_FIELD_MESSAGE = 'Field cannot be empty'
@@ -56,7 +56,7 @@ export function ImagesForm({ listing }: ComponentStepProps) {
   const [prismaError, setPrismaError] = useState<string | null>(null)
   const [utError, setUtError] = useState<string | null>(null)
   const { updateStep, onNextStep, listingId } = useHostContext()
-  const [images, setImages] = useState<ListingFull['images']>(listing?.images || [])
+  const [images, setImages] = useState<ListingView['images']>(listing?.images || [])
 
   const form = useForm<z.infer<typeof ImagesFormSchema>>({
     resolver: zodResolver(ImagesFormSchema),

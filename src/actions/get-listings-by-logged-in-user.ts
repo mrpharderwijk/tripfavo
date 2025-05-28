@@ -1,28 +1,8 @@
-import {
-  Listing,
-  ListingAmenity,
-  ListingFloorPlan,
-  ListingImage,
-  ListingLocation,
-} from '@prisma/client'
-
 import { getSession } from '@/actions/get-current-user'
+import { ListingView } from '@/features/host/types/listing-view'
 import { prisma } from '@/lib/prisma/db'
 
-export type ListingFull = Omit<Listing, 'userId' | 'status'> & {
-  location: Omit<ListingLocation, 'listingId'>
-  floorPlan: Omit<ListingFloorPlan, 'listingId'>
-  images: (Omit<ListingImage, 'listingId' | 'userId'> & {
-    listingRoom?: {
-      room: {
-        value: string
-      } | null
-    } | null
-  })[]
-  amenities: Omit<ListingAmenity, 'listingId' | 'userId'>[]
-}
-
-export async function getListingsByLoggedInUser(): Promise<ListingFull[] | null> {
+export async function getListingsByLoggedInUser(): Promise<ListingView[] | null> {
   const session = await getSession()
 
   if (!session?.user?.id) {
@@ -105,7 +85,8 @@ export async function getListingsByLoggedInUser(): Promise<ListingFull[] | null>
       return null
     }
 
-    return listings as ListingFull[]
+    // TODO: casting type needs to be fixed
+    return listings as ListingView[]
   } catch (error: any) {
     return null
   }
