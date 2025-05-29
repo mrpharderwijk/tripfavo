@@ -22,7 +22,7 @@ type NavBarProps = VariantProps<typeof navBarClassNames> & {
 }
 
 export function NavBar({
-  fixed = false,
+  fixed = true,
   minimal = false,
   header,
   body,

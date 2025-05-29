@@ -28,7 +28,7 @@ export default function StepPage() {
         customActionLabel={tCommon('forms.saveAndExit')}
         customActionOnClick={handleOnClick}
       />
-      <main className="mt-5 pt-5 pb-32 md:mt-20 md:pt-12 md:pb-25">
+      <main className="mt-20 pt-12 pb-32 md:mt-20 md:pt-12 md:pb-25">
         <HostFunnel />
         <HostFooter />
       </main>
