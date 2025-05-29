@@ -4,9 +4,8 @@ import { amenities } from '@/constants/amenities'
 
 const prisma = new PrismaClient()
 
-const amenityData = amenities.map((amenity) => ({
-  name: amenity.label,
-  value: amenity.value.toUpperCase().replace(/-/g, '_') as AmenityType,
+const amenityData: { value: AmenityType }[] = amenities.map((amenity) => ({
+  value: amenity.value,
 }))
 
 async function populateAmenities(): Promise<void> {
@@ -16,11 +15,10 @@ async function populateAmenities(): Promise<void> {
     for (const amenity of amenityData) {
       await prisma.amenity.create({
         data: {
-          name: amenity.name,
-          value: amenity.value,
+          type: amenity.value,
         },
       })
-      console.log(`Created amenity: ${amenity.name}`)
+      console.log(`Created amenity: ${amenity.value}`)
     }
 
     console.log('Successfully populated all amenities!')

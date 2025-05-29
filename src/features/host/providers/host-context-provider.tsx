@@ -23,6 +23,8 @@ import { DescriptionForm } from '@/features/host/components/forms/description-fo
 import { ComponentStepProps } from '@/features/host/types/component-step-props'
 import { TitleForm } from '@/features/host/components/forms/title-form/title-form'
 import { AmenitiesForm } from '@/features/host/components/forms/amenities-form/amenities-form'
+import { PriceForm } from '@/features/host/components/forms/price-form/price-form'
+import { Summary } from '@/features/host/components/summary/summary'
 
 type StepForm = z.infer<typeof StructureFormSchema> | z.infer<typeof PrivacyTypeFormSchema> | z.infer<typeof LocationFormSchema> | z.infer<typeof FloorPlanFormSchema> | z.infer<typeof ImagesFormSchema>
 type StepType = {
@@ -44,6 +46,7 @@ export const enum HOST_STEP {
   Title = 'title',
   Amenities = 'amenities',
   Price = 'price',
+  Summary = 'summary',
 }
 
 export const stepMap = {
@@ -107,6 +110,14 @@ export const stepMap = {
     url: '/price',
     title: 'Set your price',
     subtitle: 'Set a price for your property to help guests find it.',
+    component: PriceForm,
+  },
+  [HOST_STEP.Summary]: {
+    order: 9,
+    url: '/summary',
+    title: 'Review your listing',
+    subtitle: 'Review your listing to make sure it is correct.',
+    component: Summary,
   },
 }
 
@@ -180,9 +191,10 @@ export function HostContextProvider({
 
       if (currentStepObject.form) {
         const formSend = await currentStepObject.form.trigger()
-    
+        
         if (formSend && currentStepObject.form.formState.isValid && currentStepObject.onSubmitCallback) {
           const formSubmit = await currentStepObject.onSubmitCallback(currentStepObject.form.getValues())
+          console.log('onNextStep - 4', nextStepKey)
           if (formSubmit) {
             router.push(`/host/${listingId}/${stepMap[nextStepKey as HOST_STEP].url}`)
           }

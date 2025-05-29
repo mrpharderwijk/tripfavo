@@ -8,6 +8,6 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true,
-    setupFiles: [path.resolve(__dirname, 'src/test/setup.ts')],
+    setupFiles: [`${path.resolve(__dirname)}/vitest.setup.ts`],
   },
 })

@@ -1,5 +1,8 @@
 import { vi } from 'vitest'
 
+// Make vi globally available
+global.vi = vi
+
 import '@testing-library/jest-dom'
 
 // Mock next-intl

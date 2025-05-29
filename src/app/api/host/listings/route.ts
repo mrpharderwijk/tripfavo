@@ -17,7 +17,6 @@ export async function POST(): Promise<NextResponse> {
         userId: session.user.id,
         title: '',
         description: '',
-        price: 0,
         status: ListingStatus.DRAFT,
       },
     })

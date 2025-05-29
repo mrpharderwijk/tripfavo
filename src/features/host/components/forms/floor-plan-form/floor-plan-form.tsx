@@ -11,7 +11,7 @@ import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
 import { Body } from '@/components/atoms/typography/body/body'
 import { HeadingGroup } from '@/components/molecules/heading/heading'
-import { InputNumber } from '@/components/molecules/input-number/input-number'
+import { InputStep } from '@/components/molecules/input-step/input-step'
 import { Form, FormField } from '@/components/ui/form'
 import { HOST_STEP, useHostContext } from '@/features/host/providers/host-context-provider'
 import { ComponentStepProps } from '@/features/host/types/component-step-props'
@@ -83,7 +83,7 @@ export function FloorPlanForm({ listing }: ComponentStepProps) {
                     </Body>
                   </FlexBoxItem>
                   <FlexBoxItem flex="initial">
-                    <InputNumber
+                    <InputStep
                       id="guestCount"
                       value={field.value}
                       onChange={field.onChange}
@@ -107,7 +107,7 @@ export function FloorPlanForm({ listing }: ComponentStepProps) {
                     <Body size="base-xl">Rooms (includes living room)</Body>
                   </FlexBoxItem>
                   <FlexBoxItem flex="initial">
-                    <InputNumber
+                    <InputStep
                       id="roomCount"
                       value={field.value}
                       onChange={field.onChange}
@@ -131,7 +131,7 @@ export function FloorPlanForm({ listing }: ComponentStepProps) {
                     <Body size="base-xl">Bedrooms</Body>
                   </FlexBoxItem>
                   <FlexBoxItem flex="initial">
-                    <InputNumber
+                    <InputStep
                       id="bedroomCount"
                       value={field.value}
                       onChange={field.onChange}
@@ -155,7 +155,7 @@ export function FloorPlanForm({ listing }: ComponentStepProps) {
                     <Body size="base-xl">Beds</Body>
                   </FlexBoxItem>
                   <FlexBoxItem flex="initial">
-                    <InputNumber
+                    <InputStep
                       id="bedCount"
                       value={field.value}
                       onChange={field.onChange}
@@ -179,7 +179,7 @@ export function FloorPlanForm({ listing }: ComponentStepProps) {
                     <Body size="base-xl">Bathrooms</Body>
                   </FlexBoxItem>
                   <FlexBoxItem flex="initial">
-                    <InputNumber
+                    <InputStep
                       id="bathroomCount"
                       value={field.value}
                       onChange={field.onChange}

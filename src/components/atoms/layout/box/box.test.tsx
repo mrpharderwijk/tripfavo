@@ -31,9 +31,7 @@ describe('Box', () => {
       )
 
       // Assert
-      expect(container).toContainHTML(
-        `<${tag} class="absolute">Hello World!</${tag}>`,
-      )
+      expect(container).toContainHTML(`<${tag} class="absolute">Hello World!</${tag}>`)
     })
   })
 
@@ -72,8 +70,7 @@ describe('Box', () => {
         'display-sm': 'inline-block',
         'display-md': 'inline-block',
         'display-lg': 'inline-block',
-        className:
-          'inline-block sm:inline-block md:inline-block lg:inline-block',
+        className: 'inline-block sm:inline-block md:inline-block lg:inline-block',
       },
       {
         display: 'inline-flex',
@@ -117,9 +114,7 @@ describe('Box', () => {
         )
 
         // Assert
-        expect(container).toContainHTML(
-          `<div class="${className} relative">Hello World!</div>`,
-        )
+        expect(container).toContainHTML(`<div class="${className} relative">Hello World!</div>`)
       },
     )
   })
@@ -145,8 +140,7 @@ describe('Box', () => {
         'flex-direction-sm': 'colReverse',
         'flex-direction-md': 'colReverse',
         'flex-direction-lg': 'colReverse',
-        className:
-          'flex-col-reverse sm:flex-col-reverse md:flex-col-reverse lg:flex-col-reverse',
+        className: 'flex-col-reverse sm:flex-col-reverse md:flex-col-reverse lg:flex-col-reverse',
       },
     ] as {
       'flex-direction': BoxProps['flex-direction']
@@ -176,9 +170,7 @@ describe('Box', () => {
         )
 
         // Assert
-        expect(container).toContainHTML(
-          `<div class="${className} relative">Hello World!</div>`,
-        )
+        expect(container).toContainHTML(`<div class="${className} relative">Hello World!</div>`)
       },
     )
   })

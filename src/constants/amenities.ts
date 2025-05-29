@@ -27,156 +27,158 @@ import {
   Wifi,
   Wind,
 } from 'lucide-react'
+import { LucideIcon } from 'lucide-react'
+import { AmenityType } from '@prisma/client'
 
-export const amenities = [
+export const amenities: { label: string; value: AmenityType; icon: LucideIcon }[] = [
   {
     label: 'WiFi',
-    value: 'wifi',
+    value: AmenityType.WIFI,
     icon: Wifi,
   },
   {
     label: 'Swimming Pool',
-    value: 'swimming-pool',
+    value: AmenityType.SWIMMING_POOL,
     icon: Waves,
   },
   {
     label: 'Hot Tub',
-    value: 'hot-tub',
+    value: AmenityType.HOT_TUB,
     icon: Bath,
   },
   {
     label: 'Tennis Court',
-    value: 'tennis-court',
+    value: AmenityType.TENNIS_COURT,
     icon: CircleDot,
   },
   {
     label: 'Gym',
-    value: 'gym',
+    value: AmenityType.GYM,
     icon: Dumbbell,
   },
   {
     label: 'Air Conditioning',
-    value: 'air-conditioning',
+    value: AmenityType.AIR_CONDITIONING,
     icon: Fan,
   },
   {
     label: 'Heating',
-    value: 'heating',
+    value: AmenityType.HEATING,
     icon: Flame,
   },
   {
     label: 'Kitchen',
-    value: 'kitchen',
+    value: AmenityType.KITCHEN,
     icon: UtensilsCrossed,
   },
   {
     label: 'Washer',
-    value: 'washer',
+    value: AmenityType.WASHER,
     icon: WashingMachine,
   },
   {
     label: 'Dryer',
-    value: 'dryer',
+    value: AmenityType.DRYER,
     icon: Wind,
   },
   {
     label: 'TV',
-    value: 'tv',
+    value: AmenityType.TV,
     icon: Tv,
   },
   {
     label: 'Free Parking',
-    value: 'free-parking',
+    value: AmenityType.FREE_PARKING,
     icon: Car,
   },
   {
     label: 'Sea View',
-    value: 'sea-view',
+    value: AmenityType.SEA_VIEW,
     icon: Ship,
   },
   {
     label: 'Mountain View',
-    value: 'mountain-view',
+    value: AmenityType.MOUNTAIN_VIEW,
     icon: Mountain,
   },
   {
     label: 'Garden',
-    value: 'garden',
+    value: AmenityType.GARDEN,
     icon: Flower2,
   },
   {
     label: 'BBQ Grill',
-    value: 'bbq-grill',
+    value: AmenityType.BBQ_GRILL,
     icon: Flame,
   },
   {
     label: 'Playground',
-    value: 'playground',
+    value: AmenityType.PLAYGROUND,
     icon: Gamepad2,
   },
   {
     label: 'Beach Access',
-    value: 'beach-access',
+    value: AmenityType.BEACH_ACCESS,
     icon: Umbrella,
   },
   {
     label: 'Fireplace',
-    value: 'fireplace',
+    value: AmenityType.FIREPLACE,
     icon: Flame,
   },
   {
     label: 'Workspace',
-    value: 'workspace',
+    value: AmenityType.WORKSPACE,
     icon: Laptop2,
   },
   {
     label: 'Pet Friendly',
-    value: 'pet-friendly',
+    value: AmenityType.PET_FRIENDLY,
     icon: Dog,
   },
   {
     label: 'Security System',
-    value: 'security-system',
+    value: AmenityType.SECURITY_SYSTEM,
     icon: Shield,
   },
   {
     label: 'First Aid Kit',
-    value: 'first-aid-kit',
+    value: AmenityType.FIRST_AID_KIT,
     icon: HeartPulse,
   },
   {
     label: 'Fire Extinguisher',
-    value: 'fire-extinguisher',
+    value: AmenityType.FIRE_EXTINGUISHER,
     icon: AlertTriangle,
   },
   {
     label: 'Smoke Alarm',
-    value: 'smoke-alarm',
+    value: AmenityType.SMOKE_ALARM,
     icon: Bell,
   },
   {
     label: 'Elevator',
-    value: 'elevator',
+    value: AmenityType.ELEVATOR,
     icon: ArrowBigUpDash,
   },
   {
     label: 'Balcony',
-    value: 'balcony',
+    value: AmenityType.BALCONY,
     icon: Home,
   },
   {
     label: 'Breakfast Included',
-    value: 'breakfast-included',
+    value: AmenityType.BREAKFAST_INCLUDED,
     icon: Coffee,
   },
   {
     label: 'Dishwasher',
-    value: 'dishwasher',
+    value: AmenityType.DISHWASHER,
     icon: UtensilsCrossed,
   },
   {
     label: 'Baby Equipment',
-    value: 'baby-equipment',
+    value: AmenityType.BABY_EQUIPMENT,
     icon: Baby,
   },
 ]

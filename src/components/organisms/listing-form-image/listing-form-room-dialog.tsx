@@ -19,26 +19,26 @@ import { useHostContext } from '@/features/host/providers/host-context-provider'
 import { cn } from '@/utils/class-names'
 
 type ListingFormRoomDialogProps = {
+  id: string
   isOpen: boolean
   onClose: () => void
   index: number
   field: FieldValues
-  fileKey: string
 }
 
 export function ListingFormRoomDialog({
+  id,
   isOpen,
   onClose,
   field,
-  fileKey,
 }: ListingFormRoomDialogProps): ReactElement {
   const { listingId } = useHostContext()
   const tListing = useTranslations('host.listing')
 
   async function handleOnClickConfirm(): Promise<void> {
     try {
-      await axios.patch(`/api/host/listings/${listingId}/images/${fileKey}`, {
-        roomValue: field.value,
+      await axios.patch(`/api/host/listings/${listingId}/images/${id}`, {
+        roomType: field.value,
       })
 
       onClose()

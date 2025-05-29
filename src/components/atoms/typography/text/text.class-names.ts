@@ -6,6 +6,7 @@ import {
   letterSpacingVariants,
   lineClampVariants,
   lineHeightVariants,
+  paddingVariants,
   textAlignVariants,
   textDecorationVariants,
   textIndentVariants,
@@ -33,5 +34,6 @@ export const textClassNames = cva('underline-offset-1 decoration-1', {
     ...textWrapVariants,
     ...verticalAlignVariants,
     ...whiteSpaceVariants,
+    ...paddingVariants,
   },
 })

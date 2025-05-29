@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import { ReactElement } from 'react'
 
-import { getListingByLoggedInUser } from '@/actions/get-listing-by-logged-in-user'
+import { getHostListing } from '@/features/host/actions/get-host-listings'
 
 export default async function HostListingPage({
   params,
@@ -9,7 +9,7 @@ export default async function HostListingPage({
   params: Promise<{ listingId: string }>
 }): Promise<ReactElement> {
   const { listingId } = await params
-  const listing = await getListingByLoggedInUser(listingId)
+  const listing = await getHostListing(listingId)
 
   if (listing) {
     redirect(`/host/${listingId}/structure`)

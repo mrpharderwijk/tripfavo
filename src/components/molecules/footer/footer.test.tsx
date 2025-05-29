@@ -13,12 +13,9 @@ jest.mock('@/components/atoms/layout/container/container', () => ({
 }))
 const ContainerMock = jest.mocked(Container)
 
-jest.mock(
-  '@/components/molecules/footer/components/footer-list/footer-list',
-  () => ({
-    FooterList: jest.fn(({ children }) => <>{children}</>),
-  }),
-)
+jest.mock('@/components/molecules/footer/components/footer-list/footer-list', () => ({
+  FooterList: jest.fn(({ children }) => <>{children}</>),
+}))
 const FooterListMock = jest.mocked(FooterList)
 
 jest.mock(
@@ -26,14 +23,10 @@ jest.mock(
 )
 const FooterListItemMock = jest.mocked(FooterListItem)
 
-jest.mock(
-  '@/components/molecules/footer/components/footer-disclaimer/footer-disclaimer',
-)
+jest.mock('@/components/molecules/footer/components/footer-disclaimer/footer-disclaimer')
 const FooterDisclaimerMock = jest.mocked(FooterDisclaimer)
 
-jest.mock(
-  '@/components/molecules/footer/components/footer-copyright/footer-copyright',
-)
+jest.mock('@/components/molecules/footer/components/footer-copyright/footer-copyright')
 const FooterCopyrightMock = jest.mocked(FooterCopyright)
 
 // Mock the translation hook

@@ -44,9 +44,9 @@ export const Footer = () => {
         </div>
 
         <FooterDisclaimer title="Disclaimer">
-          The Casabnb Newsroom is aimed at journalists. All Homes and Experiences referenced on the
-          Casabnb Newsroom are intended purely to inspire and illustrate. Casabnb does not recommend
-          or endorse specific Home or Experience listings on the Casabnb platform.
+          The TripFavo Newsroom is aimed at journalists. All Homes and Experiences referenced on the
+          TripFavo Newsroom are intended purely to inspire and illustrate. TripFavo does not
+          recommend or endorse specific Home or Experience listings on the TripFavo platform.
         </FooterDisclaimer>
 
         <FooterCopyright />

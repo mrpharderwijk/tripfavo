@@ -1,3 +1,3 @@
-export type ApiListingParams = {
+export type HostListingParams = {
   params: Promise<{ listingId: string }>
 }

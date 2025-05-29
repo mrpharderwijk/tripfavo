@@ -61,11 +61,11 @@ model Listing {
   id          String        @id @default(auto()) @map("_id") @db.ObjectId
   title       String?
   description String?
-  price       Int?
   structure   String?
   privacyType String?
   status      ListingStatus @default(DRAFT)
   createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
 
   userId String @db.ObjectId
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -74,8 +74,8 @@ model Listing {
   location     ListingLocation?
   floorPlan    ListingFloorPlan?
   images       ListingImage[]
-  rooms        ListingRoom[]
   amenities    ListingAmenity[]
+  priceDetails ListingPriceDetail[]
 }
 
 enum ListingStatus {
@@ -118,58 +118,61 @@ model ListingFloorPlan {
 }
 
 model ListingImage {
-  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
   fileHash String
-  fileKey  String  @unique
+  fileKey  String    @unique
   fileName String
   fileType String
-  isMain   Boolean @default(false)
+  isMain   Boolean   @default(false)
   size     Int
   url      String
+  roomType RoomType?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  listingRoomId String?      @db.ObjectId
-  listingRoom   ListingRoom? @relation(fields: [listingRoomId], references: [id])
 
   listingId String  @db.ObjectId
   listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
 
   userId String? @db.ObjectId
   User   User?   @relation(fields: [userId], references: [id])
-}
 
-model ListingRoom {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-
-  roomValue RoomType?
-  room      Room?     @relation(fields: [roomValue], references: [value], onDelete: Cascade)
-
-  listingId String  @db.ObjectId
-  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
-
-  ListingImage ListingImage[]
+  roomId String? @db.ObjectId
+  Room   Room?   @relation(fields: [roomId], references: [id])
 }
 
 model ListingAmenity {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  amenityValue AmenityType?
-  amenity      Amenity?     @relation(fields: [amenityValue], references: [value], onDelete: Cascade)
-  Listing      Listing?     @relation(fields: [listingId], references: [id])
-  listingId    String?      @db.ObjectId
+  type      AmenityType?
+  amenity   Amenity?     @relation(fields: [type], references: [type], onDelete: Cascade)
+  Listing   Listing?     @relation(fields: [listingId], references: [id])
+  listingId String?      @db.ObjectId
+}
+
+model ListingPriceDetail {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  type      PriceType?
+  amount    Float
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  Listing   Listing?   @relation(fields: [listingId], references: [id])
+  listingId String?    @db.ObjectId
+}
+
+enum PriceType {
+  HIGH_SEASON
+  MID_SEASON
+  LOW_SEASON
+  CLEANING_FEE
 }
 
 model Room {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  value     RoomType @unique
-  locale    String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  ListingRoom ListingRoom[]
+  id           String         @id @default(auto()) @map("_id") @db.ObjectId
+  type         RoomType       @unique
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  ListingImage ListingImage[]
 }
 
 enum RoomType {
@@ -201,8 +204,7 @@ enum RoomType {
 
 model Amenity {
   id             String           @id @default(auto()) @map("_id") @db.ObjectId
-  name           String
-  value          AmenityType      @unique
+  type           AmenityType      @unique
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
   ListingAmenity ListingAmenity[]

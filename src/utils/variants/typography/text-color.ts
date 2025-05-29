@@ -22,6 +22,7 @@ export const textColorVariants = {
     gray: 'text-text-gray',
     blue: 'text-mykonos',
     'grey-700': 'text-text-grey-700',
+    purple: 'text-text-purple',
   },
   'text-color-sm': {
     primary: 'sm:text-text-primary',

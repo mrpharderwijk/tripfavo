@@ -11,9 +11,9 @@ import { ListingItemActions } from '@/features/host/components/listing-item/list
 import { ListingItemDate } from '@/features/host/components/listing-item/listing-item-date'
 import { ListingItemStatus } from '@/features/host/components/listing-item/listing-item-status'
 import { ListingItemTitle } from '@/features/host/components/listing-item/listing-item-title'
-import { ListingView } from '@/features/host/types/listing-view'
+import { HostListing } from '@/features/host/types/host-listing'
 
-type ListingItemProps = ListingView
+type ListingItemProps = HostListing
 
 export function ListingItem({
   id,

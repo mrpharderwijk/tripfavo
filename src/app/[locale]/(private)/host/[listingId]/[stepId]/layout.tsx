@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import { PropsWithChildren } from 'react'
 
-import { getListingByLoggedInUser } from '@/actions/get-listing-by-logged-in-user'
+import { getHostListing } from '@/features/host/actions/get-host-listings'
 import { HostContextProvider } from '@/features/host/providers/host-context-provider'
 
 type HostListingStepLayoutProps = PropsWithChildren<{
@@ -13,7 +13,7 @@ export default async function HostListingStepLayout({
   params,
 }: HostListingStepLayoutProps) {
   const { listingId, stepId } = await params
-  const listing = await getListingByLoggedInUser(listingId)
+  const listing = await getHostListing(listingId)
 
   if (!listing) {
     redirect(`/host/overview`)

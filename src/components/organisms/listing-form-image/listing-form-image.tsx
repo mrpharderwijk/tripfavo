@@ -27,13 +27,11 @@ type ListingFormImageProps = {
 
 export function ListingFormImage({
   control,
+  id,
   index,
   url,
   alt,
-  fileKey,
-  fileHash,
   isMain,
-  remove,
   onChange,
 }: ListingFormImageProps): ReactElement {
   const { listingId } = useHostContext()
@@ -46,8 +44,8 @@ export function ListingFormImage({
   async function handleOnClickRemove(index: number): Promise<void> {
     setIsLoading(true)
     try {
-      await axios.delete(`/api/host/listings/${listingId}/images/${fileKey}`)
-      remove(index)
+      await axios.delete(`/api/host/listings/${listingId}/images/${id}`)
+      // remove(index)
       onChange?.()
     } catch (error: unknown) {
       console.error(error)
@@ -59,7 +57,7 @@ export function ListingFormImage({
   async function handleOnClickMakeMain(): Promise<void> {
     setIsLoading(true)
     try {
-      await axios.patch(`/api/host/listings/${listingId}/images/${fileKey}`, {
+      await axios.patch(`/api/host/listings/${listingId}/images/${id}`, {
         isMain: true,
       })
       onChange?.()
@@ -71,7 +69,7 @@ export function ListingFormImage({
   }
 
   function handleOnClickRoomType(): void {
-    openDialog(`listing-form-room-dialog-${fileHash}`)
+    openDialog(`listing-form-room-dialog-${id}`)
   }
 
   return (
@@ -117,19 +115,21 @@ export function ListingFormImage({
                 tListing('images.roomDialog.buttonLabel')}
             </Button>
 
-            <FormField
-              control={control}
-              name={`images.${index}.roomType`}
-              render={({ field }) => (
-                <ListingFormRoomDialog
-                  isOpen={currentOpenDialog === `listing-form-room-dialog-${fileHash}`}
-                  onClose={() => closeDialog(`listing-form-room-dialog-${fileHash}`)}
-                  index={index}
-                  field={field}
-                  fileKey={fileKey}
-                />
-              )}
-            />
+            {id && (
+              <FormField
+                control={control}
+                name={`images.${index}.roomType`}
+                render={({ field }) => (
+                  <ListingFormRoomDialog
+                    id={id}
+                    isOpen={currentOpenDialog === `listing-form-room-dialog-${id}`}
+                    onClose={() => closeDialog(`listing-form-room-dialog-${id}`)}
+                    index={index}
+                    field={field}
+                  />
+                )}
+              />
+            )}
           </Box>
         </>
       )}

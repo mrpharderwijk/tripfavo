@@ -4,7 +4,7 @@ import { Body } from '@/components/atoms/typography/body/body'
 
 type ListingItemDateProps = {
   title: string | null
-  city: string | null
+  city?: string
 }
 
 export function ListingItemTitle({ title, city }: ListingItemDateProps) {

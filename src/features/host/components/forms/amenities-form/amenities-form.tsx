@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { AmenityType } from '@prisma/client'
 
 import { Box } from '@/components/atoms/layout/box/box'
 import { GridItem } from '@/components/atoms/layout/grid/components/grid-item/grid-item'
@@ -24,7 +25,7 @@ const MIN_AMENITIES_LENGTH = 1
 
 const AmenitySchema = z.object({
   id: z.string().optional(),
-  amenityValue: z.string().min(1, { message: EMPTY_FIELD_MESSAGE }),
+  type: z.nativeEnum(AmenityType),
 })
 
 export const AmenitiesFormSchema = z.object({
@@ -39,12 +40,11 @@ export function AmenitiesForm({ listing }: ComponentStepProps) {
     resolver: zodResolver(AmenitiesFormSchema),
     mode: 'onChange',
     defaultValues: {
-      amenities: listing?.amenities?.length
-        ? listing.amenities.map((a) => ({
-            id: a.id,
-            amenityValue: a.amenityValue?.toLowerCase().replace(/_/g, '-') || '',
-          }))
-        : [],
+      amenities:
+        listing?.amenities?.map((amenity) => ({
+          type: amenity.type as AmenityType,
+          id: amenity.id,
+        })) ?? [],
     },
   })
   const {
@@ -56,8 +56,10 @@ export function AmenitiesForm({ listing }: ComponentStepProps) {
   async function onSubmit(data: z.infer<typeof AmenitiesFormSchema>): Promise<boolean> {
     setIsLoading(true)
 
+    const amenitiesData = data.amenities.map((amenity) => amenity.type)
+
     try {
-      await axios.post(`/api/host/listings/${listingId}/amenities`, data)
+      await axios.post(`/api/host/listings/${listingId}/amenities`, { amenities: amenitiesData })
       return true
     } catch (error) {
       console.error(error)
@@ -71,7 +73,7 @@ export function AmenitiesForm({ listing }: ComponentStepProps) {
    * This effect is used to update the step form to the context
    */
   useEffect(() => {
-    updateStep(HOST_STEP.Structure, form as any, onSubmit)
+    updateStep(HOST_STEP.Amenities, form as any, onSubmit)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -95,15 +97,15 @@ export function AmenitiesForm({ listing }: ComponentStepProps) {
                       <div className="w-full">
                         <Checkbox
                           id={`${value}-${idx}`}
-                          checked={field.value.some((a) => a.amenityValue === value)}
+                          checked={field.value.some((amenity) => amenity.type === value)}
                           onCheckedChange={(checked: boolean) => {
                             if (checked) {
                               field.onChange([
                                 ...field.value,
-                                { id: undefined, amenityValue: value },
+                                { id: undefined, type: value as AmenityType },
                               ])
                             } else {
-                              field.onChange(field.value.filter((a) => a.amenityValue !== value))
+                              field.onChange(field.value.filter((a) => a.type !== value))
                             }
                           }}
                           className="peer sr-only"
@@ -114,20 +116,16 @@ export function AmenitiesForm({ listing }: ComponentStepProps) {
                             'w-full rounded-xl border-1 p-4 flex flex-col items-start hover:border-black hover:outline-black hover:outline-1 transition cursor-pointer',
                             {
                               'border-tertiary-selected outline-1 bg-bg-tertiary-selected':
-                                field.value.some((a) => a.amenityValue === value),
-                              'border-border-tertiary': !field.value.some(
-                                (a) => a.amenityValue === value,
-                              ),
+                                field.value.some((a) => a.type === value),
+                              'border-border-tertiary': !field.value.some((a) => a.type === value),
                             },
                           )}
                         >
                           <div className="w-12 h-12 flex justify-start">
                             <Icon
                               className={cn('transition-all duration-300', {
-                                'animate-icon-size': field.value.some(
-                                  (a) => a.amenityValue === value,
-                                ),
-                                'size-[30px]': !field.value.some((a) => a.amenityValue === value),
+                                'animate-icon-size': field.value.some((a) => a.type === value),
+                                'size-[30px]': !field.value.some((a) => a.type === value),
                               })}
                               size={30}
                             />

@@ -7,6 +7,7 @@ import { useFieldArray, useForm } from 'react-hook-form'
 import { UploadedFileData } from 'uploadthing/types'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { ListingImage, RoomType } from '@prisma/client'
 
 import { Box } from '@/components/atoms/layout/box/box'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
@@ -17,7 +18,6 @@ import { ListingFormImage } from '@/components/organisms/listing-form-image/list
 import { Form } from '@/components/ui/form'
 import { HOST_STEP, useHostContext } from '@/features/host/providers/host-context-provider'
 import { ComponentStepProps } from '@/features/host/types/component-step-props'
-import { ListingView } from '@/features/host/types/listing-view'
 import { UploadDropzone } from '@/utils/uploadthing'
 
 const EMPTY_FIELD_MESSAGE = 'Field cannot be empty'
@@ -30,7 +30,7 @@ const ImageSchema = z.object({
   fileKey: z.string().min(1, { message: EMPTY_FIELD_MESSAGE }),
   fileName: z.string().min(1, { message: EMPTY_FIELD_MESSAGE }),
   fileType: z.string().min(1, { message: EMPTY_FIELD_MESSAGE }),
-  roomType: z.string().optional(),
+  roomType: z.nativeEnum(RoomType).nullable().optional(),
   size: z.number().min(1, { message: EMPTY_FIELD_MESSAGE }),
   url: z
     .string()
@@ -55,17 +55,22 @@ export function ImagesForm({ listing }: ComponentStepProps) {
   const tListingImages = useTranslations('host.listing.images')
   const [prismaError, setPrismaError] = useState<string | null>(null)
   const [utError, setUtError] = useState<string | null>(null)
-  const { updateStep, onNextStep, listingId } = useHostContext()
-  const [images, setImages] = useState<ListingView['images']>(listing?.images || [])
+  const { updateStep, listingId } = useHostContext()
+  const [images, setImages] = useState<
+    Omit<ListingImage, 'listingId' | 'userId' | 'updatedAt' | 'roomId'>[]
+  >(listing?.images || [])
+  const sortedImagesByCreatedAt = images?.sort((a, b) => {
+    return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+  })
 
   const form = useForm<z.infer<typeof ImagesFormSchema>>({
     resolver: zodResolver(ImagesFormSchema),
     mode: 'onChange',
     defaultValues: {
-      images: images?.length
-        ? images.map((image) => ({
+      images: sortedImagesByCreatedAt?.length
+        ? sortedImagesByCreatedAt.map((image) => ({
             ...image,
-            roomType: image?.listingRoom?.room?.value,
+            roomType: image?.roomType,
           }))
         : [],
     },
@@ -147,10 +152,6 @@ export function ImagesForm({ listing }: ComponentStepProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const sortedImagesByCreatedAt = images.sort((a, b) => {
-    return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-  })
-
   return (
     <Box display="flex" flex-direction="col" gap={11}>
       <HeadingGroup title={tListingImages('title')} subtitle={tListingImages('subtitle')} />
@@ -167,7 +168,7 @@ export function ImagesForm({ listing }: ComponentStepProps) {
       <Form {...form}>
         <form noValidate>
           <FlexBox flex-direction="col" gap={6}>
-            {sortedImagesByCreatedAt?.map((field, index) => (
+            {images?.map((field, index) => (
               <Box
                 key={`${field.fileHash}-${field.fileKey}-${index}`}
                 padding-b={6}
@@ -177,6 +178,7 @@ export function ImagesForm({ listing }: ComponentStepProps) {
               >
                 <ListingFormImage
                   {...field}
+                  id={field.id}
                   index={index}
                   control={control}
                   remove={remove}

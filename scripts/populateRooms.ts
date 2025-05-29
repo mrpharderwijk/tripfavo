@@ -4,9 +4,8 @@ import { roomTypes } from '@/constants/room-types'
 
 const prisma = new PrismaClient()
 
-const roomData = roomTypes.map((roomType) => ({
-  name: roomType.label,
-  value: roomType.value,
+const roomData: { type: RoomType }[] = roomTypes.map((roomType) => ({
+  type: roomType.value as RoomType,
 }))
 
 async function populateRooms(): Promise<void> {
@@ -16,12 +15,10 @@ async function populateRooms(): Promise<void> {
     for (const room of roomData) {
       await prisma.room.create({
         data: {
-          name: room.name,
-          value: room.value as RoomType,
-          locale: 'en', // Default locale
+          type: room.type,
         },
       })
-      console.log(`Created room: ${room.name}`)
+      console.log(`Created room: ${room.type}`)
     }
 
     console.log('Successfully populated all rooms!')

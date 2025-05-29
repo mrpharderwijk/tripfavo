@@ -7,11 +7,11 @@ import { useEffect } from 'react'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { Button } from '@/components/molecules/buttons/button'
 import { ListingItem } from '@/features/host/components/listing-item/listing-item'
-import { ListingView } from '@/features/host/types/listing-view'
+import { HostListing } from '@/features/host/types/host-listing'
 import { useAppContext, UserMode } from '@/providers/app-context-provider/app-context-provider'
 
 type HostOverviewProps = {
-  listings?: ListingView[] | null
+  listings?: HostListing[] | null
 }
 
 export function HostOverview({ listings }: HostOverviewProps) {

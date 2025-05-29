@@ -39,6 +39,7 @@ export function Body({
 }: BodyProps): ReactElement {
   return (
     <Text
+      {...bodyProps}
       tag={tag}
       font-size={size}
       font-size-sm={sizeSm}
@@ -47,7 +48,6 @@ export function Body({
       font-size-xl={sizeXl}
       text-color={color}
       data-testid={testId}
-      {...bodyProps}
     >
       {children}
     </Text>

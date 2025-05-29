@@ -1,5 +1,5 @@
-import { ListingView } from '@/features/host/types/listing-view'
+import { HostListing } from '@/features/host/types/host-listing'
 
 export type ComponentStepProps = {
-  listing: ListingView
+  listing: HostListing
 }

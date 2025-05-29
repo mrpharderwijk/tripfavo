@@ -7,7 +7,7 @@ import { prisma } from '@/lib/prisma/db'
 type ImageParams = {
   params: Promise<{
     listingId: string
-    fileKey: string
+    imageId: string
   }>
 }
 
@@ -18,53 +18,41 @@ export async function PATCH(request: NextRequest, { params }: ImageParams) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
   }
 
-  const { listingId, fileKey } = await params
+  const { listingId, imageId } = await params
 
-  if (!listingId || !fileKey) {
+  if (!listingId || !imageId) {
     return NextResponse.json({ message: 'Invalid params' }, { status: 400 })
   }
 
-  const { roomValue, isMain } = await request.json()
+  const { roomType, isMain } = await request.json()
 
-  if (!roomValue && !isMain) {
+  if (!roomType && !isMain) {
     return NextResponse.json({ message: 'Invalid request body' }, { status: 400 })
   }
 
   try {
-    if (roomValue) {
-      // First try to find an existing room
-      const existingRoom = await prisma.listingRoom.findFirst({
+    if (roomType) {
+      // First ensure the Room exists
+      const room = await prisma.room.upsert({
         where: {
-          listingId,
-          roomValue: roomValue,
+          type: roomType,
         },
+        create: {
+          type: roomType,
+        },
+        update: {},
       })
-
-      // Update existing room
-      const listingRoom = existingRoom
-        ? await prisma.listingRoom.update({
-            where: {
-              id: existingRoom.id,
-            },
-            data: {
-              roomValue: roomValue,
-            },
-          })
-        : // Create new room
-          await prisma.listingRoom.create({
-            data: {
-              listingId,
-              roomValue: roomValue,
-            },
-          })
 
       const listingImage = await prisma.listingImage.update({
         where: {
-          fileKey,
-          listingId,
+          id: imageId,
         },
         data: {
-          listingRoomId: listingRoom.id,
+          roomType: roomType,
+          roomId: room.id,
+        },
+        include: {
+          Room: true,
         },
       })
 
@@ -85,7 +73,7 @@ export async function PATCH(request: NextRequest, { params }: ImageParams) {
 
       const listingImage = await prisma.listingImage.update({
         where: {
-          fileKey,
+          id: imageId,
           listingId,
         },
         data: {
@@ -108,23 +96,30 @@ export async function DELETE(request: NextRequest, { params }: ImageParams) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
   }
 
-  const { listingId, fileKey } = await params
+  const { listingId, imageId } = await params
 
-  if (!listingId || !fileKey) {
+  if (!listingId || !imageId) {
     return NextResponse.json({ message: 'Invalid params' }, { status: 400 })
   }
 
   try {
     const utapi = new UTApi()
-
-    await prisma.listingImage.delete({
+    const listingImage = await prisma.listingImage.findUnique({
       where: {
-        fileKey,
-        listingId,
+        id: imageId,
       },
     })
 
-    await utapi.deleteFiles([fileKey])
+    await prisma.listingImage.delete({
+      where: {
+        id: imageId,
+        listingId,
+      },
+    })
+    console.log('listingImage: ', listingImage)
+    if (listingImage?.fileKey) {
+      await utapi.deleteFiles([listingImage?.fileKey])
+    }
 
     return NextResponse.json({ message: 'Image deleted' })
   } catch (error: unknown) {

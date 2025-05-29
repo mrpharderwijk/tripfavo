@@ -3,10 +3,10 @@ import { UploadedFileData } from 'uploadthing/types'
 import { ListingImage, RoomType } from '@prisma/client'
 
 import { getSession } from '@/actions/get-current-user'
-import { ApiListingParams } from '@/features/host/types/api-listing-params'
+import { HostListingParams } from '@/features/host/types/host-listing-params'
 import { prisma } from '@/lib/prisma/db'
 
-export async function GET(request: NextRequest, { params }: ApiListingParams) {
+export async function GET(request: NextRequest, { params }: HostListingParams) {
   const session = await getSession()
   if (!session?.user?.id) {
     return new Response('Unauthorized', { status: 401 })
@@ -35,12 +35,8 @@ export async function GET(request: NextRequest, { params }: ApiListingParams) {
         createdAt: true,
         updatedAt: true,
         userId: true,
-        listingRoomId: true,
-        listingRoom: {
-          select: {
-            room: true,
-          },
-        },
+        roomType: true,
+        roomId: true,
       },
     })
 
@@ -51,7 +47,7 @@ export async function GET(request: NextRequest, { params }: ApiListingParams) {
   }
 }
 
-export async function POST(request: NextRequest, { params }: ApiListingParams) {
+export async function POST(request: NextRequest, { params }: HostListingParams) {
   const session = await getSession()
   if (!session?.user?.id) {
     return new Response('Unauthorized', { status: 401 })
@@ -103,45 +99,6 @@ export async function POST(request: NextRequest, { params }: ApiListingParams) {
               listingId,
             },
           })
-
-          // If there's a room value, create or update the ListingRoom
-          if (file.roomValue) {
-            // First try to find an existing room
-            const existingRoom = await prisma.listingRoom.findFirst({
-              where: {
-                listingId,
-                roomValue: file.roomValue,
-              },
-            })
-
-            // Update existing room
-            const listingRoom = existingRoom
-              ? await prisma.listingRoom.update({
-                  where: {
-                    id: existingRoom.id,
-                  },
-                  data: {
-                    roomValue: file.roomValue,
-                  },
-                })
-              : // Create new room
-                await prisma.listingRoom.create({
-                  data: {
-                    listingId,
-                    roomValue: file.roomValue,
-                  },
-                })
-
-            // Connect the image to the room
-            await prisma.listingImage.update({
-              where: {
-                id: image.id,
-              },
-              data: {
-                listingRoomId: listingRoom.id,
-              },
-            })
-          }
 
           return image
         },
