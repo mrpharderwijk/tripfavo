@@ -87,6 +87,18 @@
       }
     }
   },
+  "listing": {
+    "structure": {
+      "apartment": "Entire Apartment",
+      "house": "Enitre house",
+      "villa": "Entire Villa",
+      "cabin": "Entire Cabin",
+      "other": "Entire Place"
+    },
+    "description": {
+      "title": "{structure} in {city}"
+    }
+  },
   "guest": {
     "heading": "Plan your next trip"
   },
@@ -136,6 +148,11 @@
     "back": "Back",
     "next": "Next",
     "upload": "Upload",
-    "uploadClick": "Click to upload"
+    "uploadClick": "Click to upload",
+    "guestCount": "{amount} guests",
+    "roomCount": "{amount} rooms",
+    "bedroomCount": "{amount} bedrooms",
+    "bathroomCount": "{amount} bathrooms",
+    "bedCount": "{amount} beds"
   }
 }

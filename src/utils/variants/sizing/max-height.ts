@@ -7,6 +7,7 @@ export const maxHeightVariants = {
     md: 'max-h-md',
     lg: 'max-h-lg',
     xl: 'max-h-xl',
+
     '2xl': 'max-h-2xl',
     '3xl': 'max-h-3xl',
     '4xl': 'max-h-4xl',
@@ -19,7 +20,7 @@ export const maxHeightVariants = {
     fit: 'max-h-fit',
     prose: 'max-h-prose',
     'screen-sm': 'max-h-screen-sm',
-    'screen-md': 'max-h-screen-md',
+    'screen-md': 'max-h-[60vh]',
     'screen-lg': 'max-h-screen-lg',
     'screen-xl': 'max-h-screen-xl',
     'screen-2xl': 'max-h-screen-2xl',

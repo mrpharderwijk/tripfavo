@@ -25,7 +25,7 @@ export function StructureSelect({ control }: StructureSelectProps): ReactElement
       name="structure"
       render={({ field }) => (
         <RadioGroup onValueChange={field.onChange} defaultValue={field.value}>
-          <Grid grid-cols={1} grid-cols-md={3} gap={4}>
+          <Grid columns={1} columns-md={3} gap={4}>
             {categories.map(({ label, value, icon: Icon }) => (
               <GridItem col-span={1} key={label}>
                 <div className="w-full">

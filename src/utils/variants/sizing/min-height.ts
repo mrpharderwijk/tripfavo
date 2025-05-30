@@ -1,5 +1,5 @@
 export const minHeightVariants = {
-  'min- ': {
+  'min-height': {
     0: 'min-h-0',
     none: 'min-h-none',
     xs: 'min-h-xs',
@@ -18,8 +18,8 @@ export const minHeightVariants = {
     max: 'min-h-max',
     fit: 'min-h-fit',
     prose: 'min-h-prose',
-    'screen-sm': 'min-h-screen-sm',
-    'screen-md': 'min-h-screen-md',
+    'screen-sm': 'min-h-[300px]',
+    'screen-md': 'min-h-[60vh]',
     'screen-lg': 'min-h-screen-lg',
     'screen-xl': 'min-h-screen-xl',
     'screen-2xl': 'min-h-screen-2xl',

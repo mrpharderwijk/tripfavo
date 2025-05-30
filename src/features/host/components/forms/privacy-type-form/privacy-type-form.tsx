@@ -80,7 +80,7 @@ export function PrivacyTypeForm({ listing }: ComponentStepProps) {
             render={({ field }) => (
               <div className="space-y-2">
                 <RadioGroup {...field} onValueChange={field.onChange} disabled={isLoading}>
-                  <Grid grid-cols={1} gap={4}>
+                  <Grid columns={1} gap={4}>
                     {privacyTypes.map(({ label, value, icon: Icon, description }, idx) => (
                       <GridItem col-span={1} key={value}>
                         <Box full-width>

@@ -72,6 +72,20 @@ export const publicListingSelect = {
   user: publicListingUserSelect,
 }
 
+export async function getPublishedListing(listingId: string): Promise<PublicListing | null> {
+  try {
+    const listing = await prisma.listing.findUnique({
+      where: { id: listingId },
+      select: publicListingSelect,
+    })
+
+    return listing ?? null
+  } catch (error: unknown) {
+    console.error(error)
+    return null
+  }
+}
+
 export async function getPublishedListings(): Promise<PublicListing[]> {
   try {
     const listings = await prisma.listing.findMany({

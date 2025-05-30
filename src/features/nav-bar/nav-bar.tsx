@@ -13,29 +13,31 @@ import { Search } from '@/features/nav-bar/components/search/search'
 import { navBarClassNames } from '@/features/nav-bar/nav-bar.class-names'
 
 type NavBarProps = VariantProps<typeof navBarClassNames> & {
-  minimal?: boolean
+  body?: ReactElement
   customActionLabel?: string | null
   customActionOnClick?: () => void | null
-  header?: ReactElement
-  body?: ReactElement
   footer?: ReactElement
+  header?: ReactElement
+  minimal?: boolean
+  narrow?: boolean
 }
 
 export function NavBar({
-  fixed = true,
-  minimal = false,
-  header,
   body,
-  footer,
   customActionLabel = null,
   customActionOnClick,
+  fixed = true,
+  footer,
+  header,
+  minimal = false,
+  narrow = false,
 }: NavBarProps): ReactElement {
   const navBarClassName = navBarClassNames({ fixed })
 
   return (
     <div className={navBarClassName}>
       <Box border-color="primary-disabled" height={20} height-md={24}>
-        <Container>
+        <Container narrow={narrow ? 'lg' : undefined}>
           <FlexBox
             flex-direction="row"
             align-items="center"

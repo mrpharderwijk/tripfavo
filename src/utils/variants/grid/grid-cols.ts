@@ -1,5 +1,5 @@
 export const gridColsVariants = {
-  'grid-cols': {
+  columns: {
     none: 'grid-cols-none',
     subgrid: 'grid-cols-subgrid',
     1: 'grid-cols-[repeat(1,1fr)]',
@@ -15,7 +15,7 @@ export const gridColsVariants = {
     11: 'grid-cols-[repeat(11,1fr)]',
     12: 'grid-cols-[repeat(12,1fr)]',
   },
-  'grid-cols-sm': {
+  'columns-sm': {
     none: 'sm:grid-cols-none',
     subgrid: 'sm:grid-cols-subgrid',
     1: 'sm:grid-cols-[repeat(1,1fr)]',
@@ -31,7 +31,7 @@ export const gridColsVariants = {
     11: 'sm:grid-cols-[repeat(11,1fr)]',
     12: 'sm:grid-cols-[repeat(12,1fr)]',
   },
-  'grid-cols-md': {
+  'columns-md': {
     none: 'md:grid-cols-none',
     subgrid: 'md:grid-cols-subgrid',
     1: 'md:grid-cols-[repeat(1,1fr)]',
@@ -47,7 +47,7 @@ export const gridColsVariants = {
     11: 'md:grid-cols-[repeat(11,1fr)]',
     12: 'md:grid-cols-[repeat(12,1fr)]',
   },
-  'grid-cols-lg': {
+  'columns-lg': {
     none: 'lg:grid-cols-none',
     subgrid: 'lg:grid-cols-subgrid',
     1: 'lg:grid-cols-[repeat(1,1fr)]',
@@ -63,7 +63,7 @@ export const gridColsVariants = {
     11: 'lg:grid-cols-[repeat(11,1fr)]',
     12: 'lg:grid-cols-[repeat(12,1fr)]',
   },
-  'grid-cols-xl': {
+  'columns-xl': {
     none: 'xl:grid-cols-none',
     subgrid: 'xl:grid-cols-subgrid',
     1: 'xl:grid-cols-[repeat(1,1fr)]',

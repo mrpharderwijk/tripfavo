@@ -20,7 +20,7 @@ export default function ReservationsLayout({ children }: Readonly<PropsWithChild
       </FlexBoxItem>
 
       <FlexBoxItem margin-top={20} flex="auto" min-height="full">
-        <Grid grid-cols={12} height="full">
+        <Grid columns={12} height="full">
           <GridItem display="none" display-md="block" tag="aside" col-span={4} height="full">
             <Box border-r={1} border-color="deco" fullHeight>
               <FlexBox

@@ -78,7 +78,7 @@ export function StructureForm({ listing }: ComponentStepProps) {
             render={({ field }) => (
               <div className="space-y-2">
                 <RadioGroup {...field} onValueChange={field.onChange}>
-                  <Grid grid-cols={1} grid-cols-md={3} gap={4}>
+                  <Grid columns={1} columns-sm={2} columns-md={3} gap={4}>
                     {categories.map(({ label, value, icon: Icon }, idx) => (
                       <GridItem col-span={1} key={value}>
                         <div className="w-full">

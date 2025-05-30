@@ -1,0 +1,42 @@
+export const gridRowsVariants = {
+  rows: {
+    none: 'grid-rows-none',
+    subgrid: 'grid-rows-subgrid',
+    1: 'grid-rows-[repeat(1,1fr)]',
+    2: 'grid-rows-[repeat(2,1fr)]',
+    3: 'grid-rows-[repeat(3,1fr)]',
+    4: 'grid-rows-[repeat(4,1fr)]',
+  },
+  'rows-sm': {
+    none: 'sm:grid-rows-none',
+    subgrid: 'sm:grid-rows-subgrid',
+    1: 'sm:grid-rows-[repeat(1,1fr)]',
+    2: 'sm:grid-rows-[repeat(2,1fr)]',
+    3: 'sm:grid-rows-[repeat(3,1fr)]',
+    4: 'sm:grid-rows-[repeat(4,1fr)]',
+  },
+  'rows-md': {
+    none: 'md:grid-rows-none',
+    subgrid: 'md:grid-rows-subgrid',
+    1: 'md:grid-rows-[repeat(1,1fr)]',
+    2: 'md:grid-rows-[repeat(2,1fr)]',
+    3: 'md:grid-rows-[repeat(3,1fr)]',
+    4: 'md:grid-rows-[repeat(4,1fr)]',
+  },
+  'rows-lg': {
+    none: 'lg:grid-rows-none',
+    subgrid: 'lg:grid-rows-subgrid',
+    1: 'lg:grid-rows-[repeat(1,1fr)]',
+    2: 'lg:grid-rows-[repeat(2,1fr)]',
+    3: 'lg:grid-rows-[repeat(3,1fr)]',
+    4: 'lg:grid-rows-[repeat(4,1fr)]',
+  },
+  'rows-xl': {
+    none: 'xl:grid-rows-none',
+    subgrid: 'xl:grid-rows-subgrid',
+    1: 'xl:grid-rows-[repeat(1,1fr)]',
+    2: 'xl:grid-rows-[repeat(2,1fr)]',
+    3: 'xl:grid-rows-[repeat(3,1fr)]',
+    4: 'xl:grid-rows-[repeat(4,1fr)]',
+  },
+}

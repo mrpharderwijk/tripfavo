@@ -91,7 +91,7 @@ export function AmenitiesForm({ listing }: ComponentStepProps) {
             name="amenities"
             render={({ field }) => (
               <div className="space-y-2">
-                <Grid grid-cols={1} grid-cols-md={3} gap={4}>
+                <Grid columns={1} columns-md={3} gap={4}>
                   {amenities.map(({ label, value, icon: Icon }, idx) => (
                     <GridItem col-span={1} key={value}>
                       <div className="w-full">

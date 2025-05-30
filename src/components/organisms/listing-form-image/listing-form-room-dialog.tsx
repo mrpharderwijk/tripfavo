@@ -65,7 +65,7 @@ export function ListingFormRoomDialog({
         />
 
         <RadioGroup value={field.value ?? ''} onValueChange={field.onChange}>
-          <Grid grid-cols={1} grid-cols-md={3} gap={4}>
+          <Grid columns={1} columns-md={3} gap={4}>
             {roomTypes.map(({ label, value, icon: Icon }, idx) => (
               <GridItem col-span={1} key={label}>
                 <div className="w-full">

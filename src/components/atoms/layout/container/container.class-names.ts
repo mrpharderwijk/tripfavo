@@ -16,6 +16,7 @@ export const containerClassNames = cva('mx-auto', {
     narrow: {
       sm: 'max-w-[568px] px-4',
       md: 'max-w-[623px] px-4',
+      lg: 'max-w-[1280px]',
     },
   },
   defaultVariants: {
