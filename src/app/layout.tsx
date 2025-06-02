@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { PropsWithChildren } from 'react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 import './globals.css'
 import { getCurrentUser } from '@/actions/get-current-user'
@@ -19,6 +20,7 @@ export default async function RootLayout({ children }: Readonly<PropsWithChildre
   return (
     <html lang="en">
       <body className={`${primaryFont.variable} antialiased`} suppressHydrationWarning>
+        <SpeedInsights />
         <AppContextProvider currentUser={currentUser}>
           <DropDownContextProvider>
             <DialogContextProvider>{children}</DialogContextProvider>

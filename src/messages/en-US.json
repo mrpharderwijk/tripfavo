@@ -200,10 +200,10 @@
     "confirm": "Confirm",
     "upload": "Upload",
     "uploadClick": "Click to upload",
-    "guestCount": "{amount} guests",
-    "roomCount": "{amount} rooms",
-    "bedroomCount": "{amount} bedrooms",
-    "bathroomCount": "{amount} bathrooms",
-    "bedCount": "{amount} beds"
+    "guestCount": "{amount, plural, =1 {1 guest} other {# guests}}",
+    "roomCount": "{amount, plural, =1 {1 room} other {# rooms}}",
+    "bedroomCount": "{amount, plural, =1 {1 bedroom} other {# bedrooms}}",
+    "bathroomCount": "{amount, plural, =1 {1 bathroom} other {# bathrooms}}",
+    "bedCount": "{amount, plural, =1 {1 bed} other {# beds}}"
   }
 }

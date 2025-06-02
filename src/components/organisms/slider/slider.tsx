@@ -11,7 +11,7 @@ import { useSlider } from '@/components/organisms/slider/hooks/useSlider'
 import { PropsWithTestId } from '@/types'
 
 type SliderProps = PropsWithChildren<
-  PropsWithTestId & { fullWidth?: boolean; showPagination?: boolean }
+  PropsWithTestId & { fullWidth?: boolean; showPagination?: boolean; disableNavigation?: boolean }
 >
 
 export function Slider({
@@ -19,6 +19,7 @@ export function Slider({
   'data-testid': dataTestId,
   fullWidth = false,
   showPagination = false,
+  disableNavigation = false,
 }: SliderProps): ReactElement {
   const { scrollContainerRef, handleNext, handlePrevious, currentImageNumber, totalImages } =
     useSlider()
@@ -35,28 +36,30 @@ export function Slider({
       data-testid={dataTestId}
       gap={4}
     >
-      <FlexBox
-        flex-direction="row"
-        align-items="center"
-        justify-content="end"
-        fullWidth
-        gap={2}
-        padding-x={4}
-        padding-x-sm={6}
-      >
-        <Button
-          variant="outline"
-          onClick={handlePrevious}
-          icon={BsChevronLeft}
-          aria-label="Previous slide"
-        />
-        <Button
-          variant="outline"
-          onClick={handleNext}
-          icon={BsChevronRight}
-          aria-label="Next slide"
-        />
-      </FlexBox>
+      {!disableNavigation && (
+        <FlexBox
+          flex-direction="row"
+          align-items="center"
+          justify-content="end"
+          fullWidth
+          gap={2}
+          padding-x={4}
+          padding-x-sm={6}
+        >
+          <Button
+            variant="outline"
+            onClick={handlePrevious}
+            icon={BsChevronLeft}
+            aria-label="Previous slide"
+          />
+          <Button
+            variant="outline"
+            onClick={handleNext}
+            icon={BsChevronRight}
+            aria-label="Next slide"
+          />
+        </FlexBox>
+      )}
       <Box
         ref={scrollContainerRef}
         display="flex"
@@ -73,8 +76,8 @@ export function Slider({
         {children}
       </Box>
       {!!showPagination && (
-        <div className="absolute bottom-4 right-4 z-10">
-          <Box bg-color="secondary" padding={2} border-radius="full">
+        <div className="absolute bottom-10 right-4 z-10">
+          <Box bg-color="secondary" padding-x={3} padding-y={2} border-radius="full">
             <Body color="primary-core" size="base-sm">
               {currentImageNumber} / {totalImages}
             </Body>

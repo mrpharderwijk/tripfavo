@@ -19,15 +19,7 @@ export function ListingImages({ images }: ListingImagesProps): ReactElement {
 
   return (
     <>
-      <Display
-        show-xs={false}
-        show-sm={false}
-        show-md={true}
-        show-lg={true}
-        show-xl={true}
-        show-2xl={true}
-        show-3xl={true}
-      >
+      <Display show-md show-lg show-xl show-2xl show-3xl>
         <Grid columns={4} rows={2} gap={1}>
           <GridItem col-span={1} row-span-md={2} max-height="screen-md" min-height="screen-sm">
             <Box border-radius-l="xl" overflow="hidden" fullHeight fullWidth>
@@ -78,24 +70,16 @@ export function ListingImages({ images }: ListingImagesProps): ReactElement {
         </Grid>
       </Display>
 
-      <Display
-        show-xs={true}
-        show-sm={true}
-        show-md={false}
-        show-lg={false}
-        show-xl={false}
-        show-2xl={false}
-        show-3xl={false}
-      >
-        <Slider fullWidth showPagination>
+      <Display show-xs show-sm>
+        <Slider fullWidth showPagination disableNavigation>
           {images.map((image) => (
             <SliderSlide key={image.url} width="full">
               <Image
-                className="aspect-video"
+                className="aspect-square object-cover"
                 src={image.url}
                 alt={image.url}
-                width={560}
-                height={417}
+                width={1024}
+                height={768}
               />
             </SliderSlide>
           ))}

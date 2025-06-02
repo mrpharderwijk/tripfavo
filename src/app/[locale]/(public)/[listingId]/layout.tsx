@@ -9,17 +9,10 @@ export default function ListingDetailLayout({ children }: { children: ReactEleme
   return (
     <FlexBox flex-direction="col" fullHeight>
       <FlexBoxItem flex="initial">
-        <NavBar narrow />
+        <NavBar narrow fixed={false} />
       </FlexBoxItem>
 
-      <FlexBoxItem
-        tag="main"
-        margin-top={20}
-        padding-t={12}
-        padding-b={32}
-        flex="auto"
-        min-height="full"
-      >
+      <FlexBoxItem tag="main" padding-b={32} flex="auto" min-height="full">
         {children}
       </FlexBoxItem>
 
