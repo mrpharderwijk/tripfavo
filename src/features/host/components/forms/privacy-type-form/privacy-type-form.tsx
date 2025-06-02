@@ -1,6 +1,7 @@
 'use client'
 
 import axios from 'axios'
+import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -27,6 +28,7 @@ export const PrivacyTypeFormSchema = z.object({
 })
 
 export function PrivacyTypeForm({ listing }: ComponentStepProps) {
+  const tPrivacyTypeForm = useTranslations('host.listing.privacyTypeForm')
   const { steps, currentStep, updateStep, onNextStep, setIsLoading, listingId, isLoading } =
     useHostContext()
   const form = useForm<z.infer<typeof PrivacyTypeFormSchema>>({
@@ -66,7 +68,7 @@ export function PrivacyTypeForm({ listing }: ComponentStepProps) {
 
   return (
     <Box display="flex" flex-direction="col" gap={11}>
-      <HeadingGroup title={stepData.title} subtitle={stepData.subtitle} />
+      <HeadingGroup title={tPrivacyTypeForm('heading.title')} />
 
       <Form {...form}>
         <form noValidate onSubmit={onNextStep}>

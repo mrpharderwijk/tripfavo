@@ -21,19 +21,20 @@ export default async function ListingPage({ params }: ListingPageProps): Promise
   }
 
   return (
-    <Container narrow="lg">
-      <FlexBox flex-direction="col" gap={6}>
+    <FlexBox flex-direction="col" gap={6}>
+      <Container narrow="lg">
         <ListingHeader title={listing.title ?? ''} />
-        <ListingImages images={listing?.images ?? []} />
+      </Container>
 
-        <FlexBox flex-direction="col" flex-direction-md="row" gap={6}>
-          <ListingDescription
-            structure={listing.structure}
-            city={listing.location?.city ?? ''}
-            floorPlan={listing.floorPlan}
-          />
-        </FlexBox>
+      <ListingImages images={listing?.images ?? []} />
+
+      <FlexBox flex-direction="col" flex-direction-md="row" gap={6}>
+        <ListingDescription
+          structure={listing.structure}
+          city={listing.location?.city ?? ''}
+          floorPlan={listing.floorPlan}
+        />
       </FlexBox>
-    </Container>
+    </FlexBox>
   )
 }

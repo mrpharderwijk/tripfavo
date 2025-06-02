@@ -2,6 +2,7 @@
 
 import axios from 'axios'
 import { Euro } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -35,7 +36,7 @@ export const PriceFormSchema = z.object({
 })
 
 export function PriceForm({ listing }: ComponentStepProps) {
-  console.log('listing', listing)
+  const tPriceForm = useTranslations('host.listing.priceForm')
   const { steps, currentStep, updateStep, setIsLoading, listingId } = useHostContext()
   const form = useForm<z.infer<typeof PriceFormSchema>>({
     resolver: zodResolver(PriceFormSchema),
@@ -95,7 +96,7 @@ export function PriceForm({ listing }: ComponentStepProps) {
 
   return (
     <Box display="flex" flex-direction="col" gap={11}>
-      <HeadingGroup title={stepData.title} subtitle={stepData.subtitle} />
+      <HeadingGroup title={tPriceForm('heading.title')} subtitle={tPriceForm('heading.subtitle')} />
 
       {errors.priceDetails && (
         <Body size="base-sm" font-weight="medium" color="secondary-error">
@@ -109,19 +110,24 @@ export function PriceForm({ listing }: ComponentStepProps) {
             <Box
               key={priceDetail.type}
               padding-y={4}
-              border-b={1}
-              border-color="secondary-disabled"
+              border-b={idx === Object.values(priceDetails).length - 1 ? undefined : 1}
+              border-color={'secondary-disabled'}
             >
               <FormField
                 control={control}
                 name={`priceDetails.${idx}`}
                 render={({ field }) => (
-                  <FlexBox flex-direction="row" justify-content="between" gap={4}>
+                  <FlexBox
+                    flex-direction="col"
+                    flex-direction-sm="row"
+                    justify-content="between"
+                    gap={4}
+                  >
                     <FlexBoxItem display="flex" flex-direction="col" flex="auto" gap={2}>
                       <Body size="base-xl" font-weight="semibold">
                         {priceDetail.label}
                       </Body>
-                      <Body size="base-lg" font-weight="semibold" color="secondary" padding-r={24}>
+                      <Body size="base-lg" font-weight="normal" color="secondary" padding-r={10}>
                         {priceDetail.description}
                       </Body>
                     </FlexBoxItem>

@@ -69,28 +69,78 @@
   "host": {
     "heading": "Host your property",
     "listing": {
-      "status": {
-        "draft": "Draft",
-        "inReview": "In Review",
-        "published": "Published"
+      "amenitiesForm": {
+        "heading": {
+          "title": "Select the amenities of your property",
+          "subtitle": "This will determine the comfort level for your guests."
+        }
       },
-      "yourListing": "Your property in",
-      "images": {
-        "title": "Add images",
-        "subtitle": "Add at least 5 images to your property to help guests find it.",
+      "descriptionForm": {
+        "heading": {
+          "title": "Describe your place",
+          "subtitle": "Add a description of your property to help guests find it."
+        }
+      },
+      "floorPlanForm": {
+        "heading": {
+          "title": "Share some basics about your place",
+          "subtitle": "You'll add more details later, like bed types."
+        }
+      },
+      "locationForm": {
+        "heading": {
+          "title": "Where's your place located?",
+          "subtitle": "Your address is only shared with guests after they've made a reservation."
+        }
+      },
+      "imagesForm": {
+        "heading": {
+          "title": "Add images",
+          "subtitle": "Add at least {minImagesAmount} images to your property to help guests find it."
+        },
         "roomDialog": {
           "header": "Assign room",
           "buttonLabel": "Assign room",
           "heading": "What type of room is this?",
           "subtitle": "By assigning a room type your guests can get a better view of your property."
+        },
+        "makeMainImage": "Make main image"
+      },
+      "priceForm": {
+        "heading": {
+          "title": "Set your price",
+          "subtitle": "Set a price for your property. Remember to stay competitive for your property to be successful."
         }
-      }
+      },
+      "privacyTypeForm": {
+        "heading": {
+          "title": "What type of place will guests have?"
+        }
+      },
+      "structureForm": {
+        "heading": {
+          "title": "Which of these best describes your place?"
+        }
+      },
+      "titleForm": {
+        "heading": {
+          "title": "Give your property a title",
+          "subtitle": "With a proper title, your property will be more visible to guests."
+        }
+      },
+
+      "status": {
+        "draft": "Draft",
+        "inReview": "In Review",
+        "published": "Published"
+      },
+      "yourListing": "Your property in"
     }
   },
   "listing": {
     "structure": {
       "apartment": "Entire Apartment",
-      "house": "Enitre house",
+      "house": "Entire house",
       "villa": "Entire Villa",
       "cabin": "Entire Cabin",
       "other": "Entire Place"
@@ -147,6 +197,7 @@
     },
     "back": "Back",
     "next": "Next",
+    "confirm": "Confirm",
     "upload": "Upload",
     "uploadClick": "Click to upload",
     "guestCount": "{amount} guests",

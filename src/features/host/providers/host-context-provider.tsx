@@ -25,13 +25,12 @@ import { TitleForm } from '@/features/host/components/forms/title-form/title-for
 import { AmenitiesForm } from '@/features/host/components/forms/amenities-form/amenities-form'
 import { PriceForm } from '@/features/host/components/forms/price-form/price-form'
 import { Summary } from '@/features/host/components/summary/summary'
+import { getRouteNameByRoutePath, getRoutePathByRouteName } from '@/utils/get-route'
 
 type StepForm = z.infer<typeof StructureFormSchema> | z.infer<typeof PrivacyTypeFormSchema> | z.infer<typeof LocationFormSchema> | z.infer<typeof FloorPlanFormSchema> | z.infer<typeof ImagesFormSchema>
 type StepType = {
   url: string
   order: number
-  title: string
-  subtitle?: string
   form?: UseFormReturn<StepForm>
   component?: ComponentType<ComponentStepProps>
   onSubmitCallback?: (data: z.infer<any>) => Promise<boolean>
@@ -46,78 +45,54 @@ export const enum HOST_STEP {
   Title = 'title',
   Amenities = 'amenities',
   Price = 'price',
-  Summary = 'summary',
 }
 
 export const stepMap = {
   [HOST_STEP.Structure]: {
     url: '/structure',
     order: 0,
-    title: 'Which of these best describes your place?',
     component: StructureForm,
   },
   [HOST_STEP.PrivacyType]: {
     order: 1,
     url: '/privacy-type',
-    title: 'What type of place will guests have?',
     component: PrivacyTypeForm,
   },
   [HOST_STEP.Location]: {
     order: 2,
     url: '/location',
-    title: "Where's your place located?",
-    subtitle: "Your address is only shared with guests after they've made a reservation.",
     component: LocationForm,
   },
   [HOST_STEP.FloorPlan]: {
     order: 3,
     url: '/floor-plan',
-    title: 'Share some basics about your place',
-    subtitle: "You'll add more details later, like bed types.",
     component: FloorPlanForm,
   },
   [HOST_STEP.Images]: {
     order: 4,
     url: '/images',
-    title: 'Add images',
-    subtitle: 'Add images to your property to help guests find it.',
     component: ImagesForm,
   },
   [HOST_STEP.Description]: {
     order: 5,
     url: '/description',
-    title: 'Describe your place',
-    subtitle: 'Add a description of your property to help guests find it.',
     component: DescriptionForm,
   },
   [HOST_STEP.Title]: {
     order: 6,
     url: '/title',
-    title: 'Come up with a catchy title',
-    subtitle: 'This is the first thing guests see. Make it count!',
     component: TitleForm,
   },
 
   [HOST_STEP.Amenities]: {
     order: 7,
     url: '/amenities',
-    title: 'Select the amenities of your property',
-    subtitle: 'This will determine the comfort level for your guests.',
     component: AmenitiesForm,
   },
   [HOST_STEP.Price]: {
     order: 8,
     url: '/price',
-    title: 'Set your price',
-    subtitle: 'Set a price for your property to help guests find it.',
     component: PriceForm,
-  },
-  [HOST_STEP.Summary]: {
-    order: 9,
-    url: '/summary',
-    title: 'Review your listing',
-    subtitle: 'Review your listing to make sure it is correct.',
-    component: Summary,
   },
 }
 
@@ -180,6 +155,12 @@ export function HostContextProvider({
   }
 
   async function onNextStep(): Promise<void> {
+    if (currentStepNumber > 0 && currentStepNumber === Object.keys(steps).length - 1) {
+      const overviewStepPath = getRoutePathByRouteName('myListings')
+      router.push(overviewStepPath)
+      return
+    }
+
     if (currentStepNumber < Object.keys(steps).length - 1) {
       const nextStepNumber = currentStepNumber + 1
       const nextStepKey = Object.keys(steps).find(key => steps[key as HOST_STEP].order === nextStepNumber) ?? null;

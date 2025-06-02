@@ -3,6 +3,7 @@
 import axios from 'axios'
 import { XIcon } from 'lucide-react'
 import dynamic from 'next/dynamic'
+import { useTranslations } from 'next-intl'
 import { useEffect, useMemo, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -51,6 +52,7 @@ export const LocationFormSchema = z.object({
 })
 
 export function LocationForm({ listing }: ComponentStepProps) {
+  const tLocationForm = useTranslations('host.listing.locationForm')
   const { steps, currentStep, updateStep, onNextStep, setIsLoading, listingId } = useHostContext()
   const [inputValue, setInputValue] = useState('')
   const [selectedAddress, setSelectedAddress] = useState<AddressResult | null>(null)
@@ -169,7 +171,10 @@ export function LocationForm({ listing }: ComponentStepProps) {
 
   return (
     <Box display="flex" flex-direction="col" gap={11}>
-      <HeadingGroup title={stepData.title} subtitle={stepData.subtitle} />
+      <HeadingGroup
+        title={tLocationForm('heading.title')}
+        subtitle={tLocationForm('heading.subtitle')}
+      />
 
       <Form {...form}>
         <form noValidate onSubmit={onNextStep}>

@@ -15,6 +15,23 @@ export const gridColsVariants = {
     11: 'grid-cols-[repeat(11,1fr)]',
     12: 'grid-cols-[repeat(12,1fr)]',
   },
+
+  'columns-xs': {
+    none: 'xs:grid-cols-none',
+    subgrid: 'xs:grid-cols-subgrid',
+    1: 'xs:grid-cols-[repeat(1,1fr)]',
+    2: 'xs:grid-cols-[repeat(2,1fr)]',
+    3: 'xs:grid-cols-[repeat(3,1fr)]',
+    4: 'xs:grid-cols-[repeat(4,1fr)]',
+    5: 'xs:grid-cols-[repeat(5,1fr)]',
+    6: 'xs:grid-cols-[repeat(6,1fr)]',
+    7: 'xs:grid-cols-[repeat(7,1fr)]',
+    8: 'xs:grid-cols-[repeat(8,1fr)]',
+    9: 'xs:grid-cols-[repeat(9,1fr)]',
+    10: 'xs:grid-cols-[repeat(10,1fr)]',
+    11: 'xs:grid-cols-[repeat(11,1fr)]',
+    12: 'xs:grid-cols-[repeat(12,1fr)]',
+  },
   'columns-sm': {
     none: 'sm:grid-cols-none',
     subgrid: 'sm:grid-cols-subgrid',

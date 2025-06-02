@@ -6,6 +6,8 @@ export type UseSliderReturnType = {
   scrollContainerRef: RefObject<HTMLDivElement | null>
   handleNext: () => void
   handlePrevious: () => void
+  currentImageNumber: number
+  totalImages: number
 }
 
 export function useSlider(): UseSliderReturnType {
@@ -16,6 +18,8 @@ export function useSlider(): UseSliderReturnType {
 
   const [isFirstSlide, setIsFirstSlide] = useState(true)
   const [isLastSlide, setIsLastSlide] = useState(false)
+  const [currentImageNumber, setCurrentImageNumber] = useState(1)
+  const [totalImages, setTotalImages] = useState(0)
 
   const updateNavigationState = useCallback(() => {
     const container = scrollContainerRef?.current
@@ -24,6 +28,7 @@ export function useSlider(): UseSliderReturnType {
     }
 
     const slides = Array.from(container.children)
+    setTotalImages(slides.length)
 
     // Find current slide index
     const containerRect = container.getBoundingClientRect()
@@ -36,6 +41,7 @@ export function useSlider(): UseSliderReturnType {
 
     setIsFirstSlide(currentSlideIndex === 0)
     setIsLastSlide(currentSlideIndex === slides.length - 1)
+    setCurrentImageNumber(currentSlideIndex + 1)
   }, [])
 
   // Debounced scroll handler
@@ -148,5 +154,7 @@ export function useSlider(): UseSliderReturnType {
     scrollContainerRef,
     handleNext,
     handlePrevious,
+    currentImageNumber,
+    totalImages,
   }
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import axios from 'axios'
+import { useTranslations } from 'next-intl'
 import { ReactElement, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -18,6 +19,7 @@ export const DescriptionFormSchema = z.object({
 })
 
 export function DescriptionForm({ listing }: ComponentStepProps): ReactElement {
+  const tDescriptionForm = useTranslations('host.listing.descriptionForm')
   const { steps, currentStep, updateStep, setIsLoading, listingId } = useHostContext()
   const form = useForm<z.infer<typeof DescriptionFormSchema>>({
     resolver: zodResolver(DescriptionFormSchema),
@@ -55,7 +57,10 @@ export function DescriptionForm({ listing }: ComponentStepProps): ReactElement {
 
   return (
     <Box display="flex" flex-direction="col" gap={11}>
-      <HeadingGroup title={stepData.title} subtitle={stepData.subtitle} />
+      <HeadingGroup
+        title={tDescriptionForm('heading.title')}
+        subtitle={tDescriptionForm('heading.subtitle')}
+      />
 
       <Form {...form}>
         <form noValidate>

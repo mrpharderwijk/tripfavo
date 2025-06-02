@@ -39,9 +39,11 @@ export function AppLoader({ message, loading = false }: AppLoaderProps): ReactEl
         clearTimeout(timeoutRef.current)
       }
     }
-  }, [loading, delayedMessage])
+  }, [loading, delayedMessage, message])
 
-  if (!isVisible && !loading) return null
+  if (!isVisible && !loading) {
+    return null
+  }
 
   return (
     <div

@@ -3,6 +3,7 @@ import { getLocale } from 'next-intl/server'
 
 import { routes } from '@/constants/routes'
 import { defaultLocale } from '@/i18n/routing'
+import { auth } from '@/lib/auth/auth'
 import { MiddlewareFactory } from '@/middlewares/types'
 import { getRouteObjectByRouteName } from '@/utils/get-route'
 import { getRouteNameByRoutePath } from '@/utils/get-route'
@@ -41,80 +42,66 @@ function containsProtectedRoute(value: string) {
 
 export const withAuth: MiddlewareFactory = (next: NextMiddleware) => {
   return async (request: NextRequest, _next: NextFetchEvent) => {
+    const session = await auth()
     const { nextUrl } = request
     const locale = await getLocale()
 
-    // Check for auth token in cookies instead of using auth() directly
-    const tokenKey = process.env.ENVIRONMENT?.startsWith('PRD')
-      ? '__Secure-authjs.session-token'
-      : 'authjs.session-token'
-    const token = request.cookies.get(tokenKey)?.value
+    // Check if the route is protected
+    if (containsProtectedRoute(nextUrl.pathname)) {
+      if (!session) {
+        // Not logged in & Protected route -> Redirect to login
+        const url =
+          locale !== defaultLocale
+            ? `/${locale}/${routes.auth?.path}${routes.auth?.children?.login.path}?callbackUrl=${encodeURIComponent(nextUrl.pathname)}`
+            : `${routes.auth?.path}${routes.auth?.children?.login.path}?callbackUrl=${encodeURIComponent(nextUrl.pathname)}`
+        return NextResponse.redirect(new URL(url, request.url))
+      }
+    }
 
-    /**
-     * Not logged in & Dashboard page -> Redirect to login
-     */
-    if (!token && containsProtectedRoute(nextUrl.pathname)) {
+    // Handle auth pages when logged in
+    if (session && containsAuth(nextUrl.pathname)) {
+      const callbackUrl = nextUrl.searchParams.get('callbackUrl')
       const url =
         locale !== defaultLocale
-          ? `/${locale}/${routes.auth?.path}${routes.auth?.children?.login.path}?callbackUrl=${encodeURIComponent(nextUrl.pathname)}`
-          : `${routes.auth?.path}${routes.auth?.children?.login.path}?callbackUrl=${encodeURIComponent(nextUrl.pathname)}`
+          ? `/${locale}${callbackUrl ? callbackUrl : routes.guest.path}`
+          : `${callbackUrl ? callbackUrl : routes.guest.path}`
       return NextResponse.redirect(new URL(url, request.url))
     }
 
-    /**
-     * Logged in
-     */
-    if (token) {
-      /**
-       * Logged in & Auth page -> Redirect to dashboard
-       */
-      if (containsAuth(nextUrl.pathname)) {
-        const callbackUrl = nextUrl.searchParams.get('callbackUrl')
-        const url =
-          locale !== defaultLocale
-            ? `/${locale}${callbackUrl ? callbackUrl : routes.guest.path}`
-            : `${callbackUrl ? callbackUrl : routes.guest.path}`
-        return NextResponse.redirect(new URL(url, request.url))
-      }
+    // Handle account settings redirect
+    if (session && containsAccountSettingsOnly(nextUrl.pathname)) {
+      const defaultRoute = routes.account?.children
+        ? Object.values(routes.account.children).find((child) => !!child.default)
+        : undefined
+      const url =
+        locale !== defaultLocale
+          ? `/${locale}${routes.account.path}${defaultRoute?.path}`
+          : `${routes.account.path}${defaultRoute?.path}`
+      return NextResponse.redirect(new URL(url, request.url))
+    }
 
-      /**
-       * Logged in & Account Settings page -> Redirect to default child route
-       */
-      if (containsAccountSettingsOnly(nextUrl.pathname)) {
-        const defaultRoute = routes.account?.children
-          ? Object.values(routes.account.children).find((child) => !!child.default)
-          : undefined
-        const url =
-          locale !== defaultLocale
-            ? `/${locale}${routes.account.path}${defaultRoute?.path}`
-            : `${routes.account.path}${defaultRoute?.path}`
-        return NextResponse.redirect(new URL(url, request.url))
-      }
+    // Handle host routes
+    if (session && containsHostOnly(nextUrl.pathname)) {
+      const defaultRoute = routes.host?.children
+        ? Object.values(routes.host.children).find((child) => !!child.default)
+        : undefined
+      const url =
+        locale !== defaultLocale
+          ? `/${locale}${routes.host.path}${defaultRoute?.path}`
+          : `${routes.host.path}${defaultRoute?.path}`
+      return NextResponse.redirect(new URL(url, request.url))
+    }
 
-      /**
-       * Logged in & Host
-       */
-      if (containsHostOnly(nextUrl.pathname)) {
-        const defaultRoute = routes.host?.children
-          ? Object.values(routes.host.children).find((child) => !!child.default)
-          : undefined
-        const url =
-          locale !== defaultLocale
-            ? `/${locale}${routes.host.path}${defaultRoute?.path}`
-            : `${routes.host.path}${defaultRoute?.path}`
-        return NextResponse.redirect(new URL(url, request.url))
-      }
-
-      if (containsGuestOnly(nextUrl.pathname)) {
-        const defaultRoute = routes.guest?.children
-          ? Object.values(routes.guest.children).find((child) => !!child.default)
-          : undefined
-        const url =
-          locale !== defaultLocale
-            ? `/${locale}${routes.guest.path}${defaultRoute?.path}`
-            : `${routes.guest.path}${defaultRoute?.path}`
-        return NextResponse.redirect(new URL(url, request.url))
-      }
+    // Handle guest routes
+    if (session && containsGuestOnly(nextUrl.pathname)) {
+      const defaultRoute = routes.guest?.children
+        ? Object.values(routes.guest.children).find((child) => !!child.default)
+        : undefined
+      const url =
+        locale !== defaultLocale
+          ? `/${locale}${routes.guest.path}${defaultRoute?.path}`
+          : `${routes.guest.path}${defaultRoute?.path}`
+      return NextResponse.redirect(new URL(url, request.url))
     }
 
     return next(request, _next)

@@ -33,7 +33,7 @@ export function ListingFormRoomDialog({
   field,
 }: ListingFormRoomDialogProps): ReactElement {
   const { listingId } = useHostContext()
-  const tListing = useTranslations('host.listing')
+  const tImagesFormRoomDialog = useTranslations('host.listing.imagesForm.roomDialog')
 
   async function handleOnClickConfirm(): Promise<void> {
     try {
@@ -49,7 +49,7 @@ export function ListingFormRoomDialog({
 
   return (
     <ModalDialog
-      header={<>{tListing('images.roomDialog.header')}</>}
+      header={<>{tImagesFormRoomDialog('header')}</>}
       footer={
         <Button variant="primary-inverse" size="lg" onClick={handleOnClickConfirm}>
           Confirm
@@ -60,8 +60,8 @@ export function ListingFormRoomDialog({
     >
       <FlexBox flex-direction="col" gap={6}>
         <HeadingGroup
-          title={tListing('images.roomDialog.heading')}
-          subtitle={tListing('images.roomDialog.subtitle')}
+          title={tImagesFormRoomDialog('heading')}
+          subtitle={tImagesFormRoomDialog('subtitle')}
         />
 
         <RadioGroup value={field.value ?? ''} onValueChange={field.onChange}>

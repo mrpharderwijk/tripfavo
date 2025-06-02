@@ -1,6 +1,7 @@
 'use client'
 
 import axios from 'axios'
+import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -25,6 +26,7 @@ export const FloorPlanFormSchema = z.object({
 })
 
 export function FloorPlanForm({ listing }: ComponentStepProps) {
+  const tFloorPlanForm = useTranslations('host.listing.floorPlanForm')
   const { steps, currentStep, updateStep, onNextStep, setIsLoading, listingId } = useHostContext()
   const form = useForm<z.infer<typeof FloorPlanFormSchema>>({
     resolver: zodResolver(FloorPlanFormSchema),
@@ -67,7 +69,10 @@ export function FloorPlanForm({ listing }: ComponentStepProps) {
 
   return (
     <Box display="flex" flex-direction="col" gap={11}>
-      <HeadingGroup title={stepData.title} subtitle={stepData.subtitle} />
+      <HeadingGroup
+        title={tFloorPlanForm('heading.title')}
+        subtitle={tFloorPlanForm('heading.subtitle')}
+      />
 
       <Form {...form}>
         <form noValidate onSubmit={onNextStep}>

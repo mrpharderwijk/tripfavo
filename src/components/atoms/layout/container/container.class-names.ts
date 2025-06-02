@@ -6,7 +6,7 @@ export const containerClassNames = cva('mx-auto', {
   variants: {
     ...backgroundColorVariants,
     padding: {
-      true: 'px-6 md:px-10 lg:px-10 xl:px-20',
+      true: 'px-4 sm:px-6 md:px-10 lg:px-10 xl:px-20',
       false: undefined,
     },
     fullWidth: {

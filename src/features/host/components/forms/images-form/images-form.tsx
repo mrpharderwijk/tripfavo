@@ -52,7 +52,7 @@ export const ImagesFormSchema = z.object({
 })
 
 export function ImagesForm({ listing }: ComponentStepProps) {
-  const tListingImages = useTranslations('host.listing.images')
+  const tListingImagesForm = useTranslations('host.listing.imagesForm')
   const [prismaError, setPrismaError] = useState<string | null>(null)
   const [utError, setUtError] = useState<string | null>(null)
   const { updateStep, listingId } = useHostContext()
@@ -154,7 +154,12 @@ export function ImagesForm({ listing }: ComponentStepProps) {
 
   return (
     <Box display="flex" flex-direction="col" gap={11}>
-      <HeadingGroup title={tListingImages('title')} subtitle={tListingImages('subtitle')} />
+      <HeadingGroup
+        title={tListingImagesForm('heading.title')}
+        subtitle={tListingImagesForm('heading.subtitle', {
+          minImagesAmount: MIN_IMAGES_LENGTH,
+        })}
+      />
 
       {!!Object.values(errors)?.length && (
         <FormNotification variant="danger">

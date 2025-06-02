@@ -60,7 +60,7 @@ export const buttonClassNames = cva('box-border transition-all duration-300', {
       sm: ['h-[34px]', 'text-base-sm'], // 34px
       md: ['h-10', 'text-base-md'], // 40px
       lg: ['h-12', 'text-base-lg'], // 48px
-      xl: ['h-14', 'text-base-xl'], // 56px
+      xl: ['h-12 md:h-14', 'text-base-md md:text-base-xl'], // 56px
     },
     avatar: {
       true: 'rounded-full',
@@ -137,7 +137,7 @@ export const buttonClassNames = cva('box-border transition-all duration-300', {
       avatar: false,
       iconOnly: false,
       rounded: false,
-      class: 'px-8 py-4',
+      class: 'px-6 py-4 md:px-8 md:py-4',
     },
     {
       variant: buttonVariants.filter((v) => v !== 'primary-link'),

@@ -36,16 +36,15 @@ export function ListingFormImage({
 }: ListingFormImageProps): ReactElement {
   const { listingId } = useHostContext()
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const tListing = useTranslations('host.listing')
+  const tImagesForm = useTranslations('host.listing.imagesForm')
   const { openDialog, currentOpenDialog, closeDialog } = useDialogContext()
   const { getValues } = useFormContext()
   const currentRoomType = getValues(`images.${index}.roomType`)
 
-  async function handleOnClickRemove(index: number): Promise<void> {
+  async function handleOnClickRemove(): Promise<void> {
     setIsLoading(true)
     try {
       await axios.delete(`/api/host/listings/${listingId}/images/${id}`)
-      // remove(index)
       onChange?.()
     } catch (error: unknown) {
       console.error(error)
@@ -90,18 +89,13 @@ export function ListingFormImage({
                 size="md"
                 onClick={handleOnClickMakeMain}
               >
-                Make main image
+                {tImagesForm('makeMainImage')}
               </Button>
             )}
           </Box>
 
           <Box position="absolute" top={6} right={6}>
-            <Button
-              icon={Trash}
-              variant="quaternary"
-              size="md"
-              onClick={() => handleOnClickRemove(index)}
-            />
+            <Button icon={Trash} variant="quaternary" size="md" onClick={handleOnClickRemove} />
           </Box>
 
           <Box position="absolute" bottom={6} right={6}>
@@ -112,7 +106,7 @@ export function ListingFormImage({
               onClick={handleOnClickRoomType}
             >
               {roomTypes.find((roomType) => roomType.value === currentRoomType)?.label ||
-                tListing('images.roomDialog.buttonLabel')}
+                tImagesForm('roomDialog.buttonLabel')}
             </Button>
 
             {id && (

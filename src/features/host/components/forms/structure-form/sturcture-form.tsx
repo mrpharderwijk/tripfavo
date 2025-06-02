@@ -1,6 +1,7 @@
 'use client'
 
 import axios from 'axios'
+import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -27,6 +28,7 @@ export const StructureFormSchema = z.object({
 })
 
 export function StructureForm({ listing }: ComponentStepProps) {
+  const tStructureForm = useTranslations('host.listing.structureForm')
   const { steps, currentStep, updateStep, setIsLoading, listingId } = useHostContext()
   const form = useForm<z.infer<typeof StructureFormSchema>>({
     resolver: zodResolver(StructureFormSchema),
@@ -65,7 +67,7 @@ export function StructureForm({ listing }: ComponentStepProps) {
 
   return (
     <Box display="flex" flex-direction="col" gap={11}>
-      <HeadingGroup title={stepData.title} subtitle={stepData.subtitle} />
+      <HeadingGroup title={tStructureForm('heading.title')} />
 
       <Form {...form}>
         <form noValidate>

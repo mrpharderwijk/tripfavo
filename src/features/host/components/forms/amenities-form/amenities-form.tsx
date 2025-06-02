@@ -1,6 +1,7 @@
 'use client'
 
 import axios from 'axios'
+import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -35,6 +36,7 @@ export const AmenitiesFormSchema = z.object({
 })
 
 export function AmenitiesForm({ listing }: ComponentStepProps) {
+  const tAmenitiesForm = useTranslations('host.listing.amenitiesForm')
   const { steps, currentStep, updateStep, setIsLoading, listingId } = useHostContext()
   const form = useForm<z.infer<typeof AmenitiesFormSchema>>({
     resolver: zodResolver(AmenitiesFormSchema),
@@ -79,7 +81,10 @@ export function AmenitiesForm({ listing }: ComponentStepProps) {
 
   return (
     <Box display="flex" flex-direction="col" gap={11}>
-      <HeadingGroup title={stepData.title} subtitle={stepData.subtitle} />
+      <HeadingGroup
+        title={tAmenitiesForm('heading.title')}
+        subtitle={tAmenitiesForm('heading.subtitle')}
+      />
 
       <Form {...form}>
         <form noValidate>
@@ -91,7 +96,7 @@ export function AmenitiesForm({ listing }: ComponentStepProps) {
             name="amenities"
             render={({ field }) => (
               <div className="space-y-2">
-                <Grid columns={1} columns-md={3} gap={4}>
+                <Grid columns-xs={1} columns-sm={2} columns-md={3} gap={4}>
                   {amenities.map(({ label, value, icon: Icon }, idx) => (
                     <GridItem col-span={1} key={value}>
                       <div className="w-full">
@@ -130,7 +135,13 @@ export function AmenitiesForm({ listing }: ComponentStepProps) {
                               size={30}
                             />
                           </div>
-                          <Body size="base-lg" font-weight="semibold" text-align="left">
+                          <Body
+                            size="base-lg"
+                            font-weight="semibold"
+                            text-align="left"
+                            text-overflow="ellipsis"
+                            line-clamp={1}
+                          >
                             {label}
                           </Body>
                         </Label>
