@@ -4,17 +4,13 @@
 
 import { FooterCopyright } from './components/footer-copyright/footer-copyright'
 
-import { FooterDisclaimer } from '@/components/molecules/footer/components/footer-disclaimer/footer-disclaimer'
-import { FooterListItem } from '@/components/molecules/footer/components/footer-list/components/footer-list-item/footer-list-item'
-import { FooterList } from '@/components/molecules/footer/components/footer-list/footer-list'
-
 export const Footer = () => {
   // const { t } = useTranslation()
 
   return (
-    <footer className="border-t border-t-gray-light bg-gray-lightest pt-8 md:pt-10 xl:pt-12">
+    <footer className="border-t border-border-secondary bg-bg-secondary pt-8 md:pt-10 xl:pt-12">
       <div className="flex flex-col gap-y-6">
-        <div className="grid gap-y-6 grid-cols-1 xl:grid-cols-3">
+        {/* <div className="grid gap-y-6 grid-cols-1 xl:grid-cols-3">
           <FooterList title="Support">
             <FooterListItem>Help Center</FooterListItem>
             <FooterListItem>AirCover</FooterListItem>
@@ -41,13 +37,13 @@ export const Footer = () => {
             <FooterListItem>Cancellation options</FooterListItem>
             <FooterListItem>Report a neighborhood concern</FooterListItem>
           </FooterList>
-        </div>
+        </div> */}
 
-        <FooterDisclaimer title="Disclaimer">
+        {/* <FooterDisclaimer title="Disclaimer">
           The TripFavo Newsroom is aimed at journalists. All Homes and Experiences referenced on the
           TripFavo Newsroom are intended purely to inspire and illustrate. TripFavo does not
           recommend or endorse specific Home or Experience listings on the TripFavo platform.
-        </FooterDisclaimer>
+        </FooterDisclaimer> */}
 
         <FooterCopyright />
       </div>

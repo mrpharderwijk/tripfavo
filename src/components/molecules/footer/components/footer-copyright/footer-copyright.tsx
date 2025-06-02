@@ -19,14 +19,10 @@ export function FooterCopyright(): ReactElement {
       justify-content-md="center"
       justify-content-lg="between"
       padding-b={6}
+      padding-x={6}
       gap-y={3}
     >
-      <Box
-        display="flex"
-        justify-content="start"
-        display-md="inline-flex"
-        justify-content-md="center"
-      >
+      <Box display="flex" display-md="inline-flex" justify-content="center">
         <ul className="inline-flex flex-row nowrap gap-3">
           <li>
             <FaXTwitter fontSize={20} />
@@ -43,12 +39,7 @@ export function FooterCopyright(): ReactElement {
         </ul>
       </Box>
 
-      <Box
-        display="flex"
-        justify-content="start"
-        display-md="inline-flex"
-        justify-content-md="center"
-      >
+      <Box display="flex" display-md="inline-flex" justify-content="center">
         <Box
           display="inline-flex"
           flex-direction="col"
@@ -56,20 +47,20 @@ export function FooterCopyright(): ReactElement {
           align-items="start"
           align-items-md="center"
           justify-content="center"
-          gap="0.5"
+          gap={1}
         >
-          <Body tag="label" size="base-sm">
+          <Body tag="label" size="base-sm" color="secondary">
             &copy; {currentYear} Whatever, All Rights Reserved
           </Body>
 
-          <ul className="flex flex-row nowrap">
-            <li className="lg:before:content-['·'] lg:before:inline-block lg:before:text-center lg:before:w-5">
+          <ul className="flex flex-row nowrap items-center justify-center w-full">
+            <li className="text-base-sm lg:before:content-['·'] lg:before:inline-block lg:before:text-center lg:before:w-5">
               Privacy
             </li>
-            <li className="not-first:before:content-['·'] not-first:before:inline-block not-first:before:text-center not-first:before:w-5">
+            <li className="text-base-sm not-first:before:content-['·'] not-first:before:inline-block not-first:before:text-center not-first:before:w-5">
               Terms
             </li>
-            <li className="not-first:before:content-['·'] not-first:before:inline-block not-first:before:text-center not-first:before:w-5">
+            <li className="text-base-sm not-first:before:content-['·'] not-first:before:inline-block not-first:before:text-center not-first:before:w-5">
               Sitemap
             </li>
           </ul>

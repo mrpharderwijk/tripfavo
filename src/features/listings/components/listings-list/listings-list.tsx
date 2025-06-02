@@ -32,7 +32,7 @@ export function ListingsList({ listings }: ListingsListProps): ReactElement {
           href={`/${listing.id}`}
         >
           <FlexBox flex-direction="col" gap={4}>
-            <div className="w-full relative overflow-hidden rounded-3xl">
+            <div className="w-full relative overflow-hidden rounded-2xl">
               <Image
                 src={
                   listing.images.length
@@ -44,7 +44,7 @@ export function ListingsList({ listings }: ListingsListProps): ReactElement {
                 width={1024}
                 height={768}
               />
-              <div
+              {/* <div
                 className="absolute top-3 right-3 p-1.5 rounded-full bg-white/40 hover:bg-white/60"
                 aria-label="Add to favorites"
               >
@@ -62,10 +62,10 @@ export function ListingsList({ listings }: ListingsListProps): ReactElement {
                     d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
                   />
                 </svg>
-              </div>
+              </div> */}
             </div>
 
-            <div className="mt-3 space-y-1">
+            <FlexBox flex-direction="col" gap="0.5">
               <Heading tag="h3" like="h6" color="primary" font-weight="bold">
                 {listing.title}
               </Heading>
@@ -104,7 +104,7 @@ export function ListingsList({ listings }: ListingsListProps): ReactElement {
                   </Body>
                 </FlexBoxItem>
               </FlexBox>
-            </div>
+            </FlexBox>
           </FlexBox>
         </Link>
       ))}
