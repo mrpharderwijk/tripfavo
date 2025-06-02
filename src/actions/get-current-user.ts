@@ -22,7 +22,11 @@ export async function getCurrentUser(): Promise<SafeUser | null> {
       },
       select: {
         id: true,
-        image: true,
+        profileImage: {
+          select: {
+            url: true,
+          },
+        },
         hashedPassword: true,
         favoriteIds: true,
         name: {

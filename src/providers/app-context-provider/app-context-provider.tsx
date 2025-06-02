@@ -33,7 +33,7 @@ type AppContextProviderProps = PropsWithChildren<Pick<AppContextState, 'currentU
 const AppContext = createContext<AppContextState | null>(null)
 
 export function AppContextProvider({ children, currentUser }: AppContextProviderProps) {
-  const [isMounted, setIsMounted] = useState(false)
+  const [isMounted, setIsMounted] = useState<boolean>(false)
   const [userMode, setUserMode] = useSessionStorage<UserMode>('userMode', UserMode.GUEST)
 
   const [loading, setLoading] = useState<boolean>(false)

@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+import { useEffect } from 'react'
 
 import { HostFooter } from '@/features/host/components/host-footer/host-footer'
 import { HostFunnel } from '@/features/host/components/host-funnel/host-funnel'
@@ -11,15 +12,19 @@ import { getRoutePathByRouteName } from '@/utils/get-route'
 export default function StepPage() {
   const router = useRouter()
   const tCommon = useTranslations('common')
+  const fullRoutePath = getRoutePathByRouteName('myListings')
 
   function handleOnClick() {
-    const fullRoutePath = getRoutePathByRouteName('myListings')
     if (!fullRoutePath) {
       return null
     }
 
     router.push(fullRoutePath)
   }
+
+  useEffect(() => {
+    router.prefetch(fullRoutePath)
+  }, [router, fullRoutePath])
 
   return (
     <>

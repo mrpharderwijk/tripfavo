@@ -116,7 +116,7 @@ export async function DELETE(request: NextRequest, { params }: ImageParams) {
         listingId,
       },
     })
-    console.log('listingImage: ', listingImage)
+
     if (listingImage?.fileKey) {
       await utapi.deleteFiles([listingImage?.fileKey])
     }

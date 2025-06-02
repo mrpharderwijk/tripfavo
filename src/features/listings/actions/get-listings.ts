@@ -50,7 +50,7 @@ export const publicListingUserSelect = {
         firstName: true,
       },
     },
-    image: true,
+    profileImage: true,
     createdAt: true,
   },
 }
@@ -78,8 +78,22 @@ export async function getPublishedListing(listingId: string): Promise<PublicList
       where: { id: listingId },
       select: publicListingSelect,
     })
+    if (!listing) {
+      return null
+    }
 
-    return listing ?? null
+    const { user, ...listingWithoutUser } = listing
+    const listingWithHost: PublicListing = {
+      ...listingWithoutUser,
+      host: {
+        id: user.id,
+        name: user.name,
+        profileImage: user.profileImage?.url ?? null,
+        createdAt: user.createdAt,
+      },
+    }
+
+    return listingWithHost ?? null
   } catch (error: unknown) {
     console.error(error)
     return null
@@ -97,7 +111,18 @@ export async function getPublishedListings(): Promise<PublicListing[]> {
       select: publicListingSelect,
     })
 
-    return listings ?? []
+    return listings.map((listing) => {
+      const { user, ...listingWithoutUser } = listing
+      return {
+        ...listingWithoutUser,
+        host: {
+          id: user.id,
+          name: user.name,
+          profileImage: user.profileImage?.url ?? null,
+          createdAt: user.createdAt,
+        },
+      }
+    })
   } catch (error: unknown) {
     console.error(error)
     return []

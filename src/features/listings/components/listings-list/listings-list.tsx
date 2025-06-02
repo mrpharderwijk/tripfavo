@@ -19,6 +19,7 @@ export function ListingsList({ listings }: ListingsListProps): ReactElement {
 
   return (
     <section>
+      {!listings.length && <div>no listings found</div>}
       {listings.map((listing, idx) => (
         <button
           key={`${listing.id}-${idx}`}

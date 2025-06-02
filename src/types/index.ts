@@ -31,4 +31,7 @@ export type SafeUser = Omit<User, 'createdAt' | 'updatedAt' | 'emailVerified'> &
     middleName: string | null
   } | null
   role: UserRole[]
+  profileImage: {
+    url: string | null
+  } | null
 }

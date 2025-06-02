@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+
 import { Container } from '@/components/atoms/layout/container/container'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
@@ -24,7 +26,9 @@ export default async function Home() {
       >
         <Container>
           <div className="flex flex-row items-center justify-start flex-wrap gap-6">
-            <ListingsList listings={listings} />
+            <Suspense fallback={<div>Loading...</div>}>
+              <ListingsList listings={listings} />
+            </Suspense>
           </div>
         </Container>
       </FlexBoxItem>

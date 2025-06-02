@@ -147,6 +147,12 @@
     },
     "description": {
       "title": "{structure} in {city}"
+    },
+    "host": {
+      "label": "Hosted by"
+    },
+    "about": {
+      "label": "About this property"
     }
   },
   "guest": {

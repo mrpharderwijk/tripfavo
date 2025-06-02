@@ -15,7 +15,7 @@ export default function PersonalInfoPage(): ReactElement {
         {tPersonalInfo('heading')}
       </Heading>
 
-      <FlexBox flex-direction="col" gap={6}>
+      <FlexBox flex-direction="col">
         <PersonalInfoContextProvider>
           <PersonalInfo />
         </PersonalInfoContextProvider>
