@@ -196,6 +196,9 @@ export function LocationForm({ listing }: ComponentStepProps) {
                     center={[form.getValues('latitude'), form.getValues('longitude')]}
                     zoom={15}
                     onLatLngChange={onLatLngChange}
+                    draggablePin
+                    dragging
+                    zoomControl
                   />
                 </FlexBox>
               )}

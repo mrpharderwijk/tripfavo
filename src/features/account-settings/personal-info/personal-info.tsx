@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { UploadedFileData } from 'uploadthing/types'
 
+import { DotLoader } from '@/components/atoms/dot-loader/dot-loader'
 import { Body } from '@/components/atoms/typography/body/body'
 import { Button } from '@/components/molecules/buttons/button'
 import { ModalDialog } from '@/components/molecules/modal-dialog/modal-dialog'
@@ -24,7 +25,7 @@ export function PersonalInfo() {
   const [profileImage, setProfileImage] = useState<string | null>(
     currentUser?.profileImage?.url ?? null,
   )
-  console.log('profileImage: ', profileImage)
+  const [profileImageUploading, setProfileImageUploading] = useState(false)
   const tPersonalInfo = useTranslations('personal-info')
   const tCommonForms = useTranslations('common.forms')
 
@@ -54,12 +55,15 @@ export function PersonalInfo() {
 
       setProfileImage(response.data.profileImage.url)
       closeDialog('profile-image')
+      setProfileImageUploading(false)
     } catch (error: any) {
+      setProfileImageUploading(false)
       return
     }
   }
 
   function handleOnBeforeUploadBegin(files: File[]) {
+    setProfileImageUploading(true)
     // Preprocess files before uploading (e.g. rename them)
     return files.map((f) => new File([f], `${currentUser?.id}-${f.name}`, { type: f.type }))
   }
@@ -67,6 +71,7 @@ export function PersonalInfo() {
   return (
     <>
       <div className="flex flex-col gap-2 items-center justify-center w-full border-b border-deco pb-6">
+        {profileImageUploading && <DotLoader />}
         <Image
           className="aspect-square rounded-full object-cover"
           src={profileImage ?? '/placeholder.png'}
@@ -83,9 +88,9 @@ export function PersonalInfo() {
           onClose={() => closeDialog('profile-image')}
         >
           <UploadDropzone
-            endpoint="imageUploader"
+            endpoint="profileImageUploader"
             onClientUploadComplete={handleOnClientUploadComplete}
-            onUploadError={() => {}}
+            onUploadError={() => setProfileImageUploading(false)}
             onBeforeUploadBegin={handleOnBeforeUploadBegin}
           />
         </ModalDialog>

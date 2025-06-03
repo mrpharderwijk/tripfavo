@@ -1,3 +1,5 @@
+'use client'
+
 import L from 'leaflet'
 import markerIcon from 'leaflet/dist/images/marker-icon.png'
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png'
@@ -18,30 +20,49 @@ L.Icon.Default.mergeOptions({
 type MapProps = {
   center?: L.LatLngExpression
   zoom?: number
-  onLatLngChange: (position: [number, number]) => void
+  onLatLngChange?: (position: [number, number]) => void
+  draggablePin?: boolean
+  dragging?: boolean
+  zoomControl?: boolean
+  doubleClickZoom?: boolean
 }
 
-export function Map({ center = [51, -0.09], zoom = 15, onLatLngChange }: MapProps): ReactElement {
+export function Map({
+  center = [51, -0.09],
+  zoom = 15,
+  onLatLngChange,
+  draggablePin = false,
+  dragging = false,
+  zoomControl = false,
+  doubleClickZoom = false,
+}: MapProps): ReactElement | null {
   function onChangeMarker(position: L.LatLngExpression) {
     if ((position as [number, number])?.length !== 2) {
       return
     }
 
-    onLatLngChange(position as [number, number])
+    onLatLngChange?.(position as [number, number])
   }
 
   return (
-    <div>
-      <MapContainer
-        center={center as L.LatLngExpression}
-        zoom={zoom}
-        scrollWheelZoom={false}
-        className="h-[35vh] rounded-lg"
-      >
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        {center && <DraggableMarker onChangeMarker={onChangeMarker} center={center} draggable />}
-      </MapContainer>
-    </div>
+    <MapContainer
+      center={center as L.LatLngExpression}
+      zoom={zoom}
+      scrollWheelZoom={false}
+      className="h-[35vh] rounded-lg w-full"
+      dragging={dragging}
+      zoomControl={zoomControl}
+      doubleClickZoom={doubleClickZoom}
+    >
+      {/* <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" /> */}
+      <TileLayer
+        attribution="Google Maps"
+        url="https://www.google.cn/maps/vt?lyrs=m@189&gl=cn&x={x}&y={y}&z={z}"
+      />
+      {center && (
+        <DraggableMarker onChangeMarker={onChangeMarker} center={center} draggable={draggablePin} />
+      )}
+    </MapContainer>
   )
 }
 

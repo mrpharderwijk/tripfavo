@@ -50,7 +50,7 @@ export function FooterCopyright(): ReactElement {
           gap={1}
         >
           <Body tag="label" size="base-sm" color="secondary">
-            &copy; {currentYear} Whatever, All Rights Reserved
+            &copy; {currentYear} TripFavo, All Rights Reserved
           </Body>
 
           <ul className="flex flex-row nowrap items-center justify-center w-full">

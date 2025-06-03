@@ -153,6 +153,10 @@
     },
     "about": {
       "label": "About this property"
+    },
+    "location": {
+      "label": "Where you'll find it",
+      "about": "About the neighborhood"
     }
   },
   "guest": {

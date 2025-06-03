@@ -84,7 +84,8 @@ export function ListingsList({ listings }: ListingsListProps): ReactElement {
                   </Body>
                 </FlexBoxItem>
 
-                <FlexBoxItem display="flex" flex-direction="row" align-items="center" gap={1}>
+                {/* TODO: Rating */}
+                {/* <FlexBoxItem display="flex" flex-direction="row" align-items="center" gap={1}>
                   <Body size="base-sm" color="secondary" text-align="left">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -102,7 +103,7 @@ export function ListingsList({ listings }: ListingsListProps): ReactElement {
                   <Body size="base-md" color="secondary" text-align="left">
                     4.9
                   </Body>
-                </FlexBoxItem>
+                </FlexBoxItem> */}
               </FlexBox>
             </FlexBox>
           </FlexBox>

@@ -12,6 +12,7 @@ import { Heading } from '@/components/atoms/typography/heading/heading'
 import { DotList } from '@/components/organisms/dot-list/dot-list'
 import { DotListItem } from '@/components/organisms/dot-list/dot-list-item'
 import { getPublishedListing } from '@/features/listings/actions/get-listings'
+import { ListingDetailMap } from '@/features/listings/components/listing-detail-map/listing-detail-map'
 import { ListingHeader } from '@/features/listings/components/listing-header/listing-header'
 import { ListingImages } from '@/features/listings/components/listing-images/listing-images'
 
@@ -86,7 +87,6 @@ export default async function ListingPage({ params }: ListingPageProps): Promise
               </FlexBoxItem>
             </FlexBox>
           </FlexBox>
-
           {/* Host Info */}
           <FlexBox
             flex-direction="row"
@@ -116,16 +116,23 @@ export default async function ListingPage({ params }: ListingPageProps): Promise
               </Body>
             </FlexBoxItem>
           </FlexBox>
-
           {/* About Property */}
           <FlexBox flex-direction="col" gap={6}>
             <Heading tag="h3" like="h3-semibold">
               {tListing('about.label')}
             </Heading>
-            <Body color="secondary" size="base-md">
+            <Body color="secondary" size="base-lgt">
               {listing.description}
             </Body>
           </FlexBox>
+
+          {/* Map */}
+          {listing?.location?.latitude && listing?.location?.longitude && (
+            <ListingDetailMap
+              latitude={listing?.location?.latitude}
+              longitude={listing?.location?.longitude}
+            />
+          )}
         </FlexBox>
       </FlexBox>
     </FlexBox>

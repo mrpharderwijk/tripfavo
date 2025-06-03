@@ -3,6 +3,7 @@ import { Suspense } from 'react'
 import { Container } from '@/components/atoms/layout/container/container'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
+import { Footer } from '@/components/molecules/footer/footer'
 import { getPublishedListings } from '@/features/listings/actions/get-listings'
 import { ListingsList } from '@/features/listings/components/listings-list/listings-list'
 import { NavBar } from '@/features/nav-bar/nav-bar'
@@ -32,6 +33,8 @@ export default async function Home() {
           </div>
         </Container>
       </FlexBoxItem>
+
+      <Footer />
     </FlexBox>
   )
 }
