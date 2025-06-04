@@ -9,6 +9,7 @@ type DisplayProps = PropsWithChildren<PropsWithTestId<VariantProps<typeof displa
 export function Display({
   show = false,
   'show-xs': showOnXs = false,
+  'show-sm': showOnSm = false,
   'show-md': showOnMd = false,
   'show-lg': showOnLg = false,
   'show-xl': showOnXl = false,
@@ -20,6 +21,7 @@ export function Display({
   const displayClassName = displayClassNames({
     show,
     'show-xs': showOnXs,
+    'show-sm': showOnSm,
     'show-md': showOnMd,
     'show-lg': showOnLg,
     'show-xl': showOnXl,

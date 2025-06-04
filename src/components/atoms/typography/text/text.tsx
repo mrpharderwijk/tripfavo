@@ -17,7 +17,7 @@ export function Text({ tag = 'span', children, ...textProps }: TextProps): React
   const textClassName = cn(textClassNames({ ...textProps }))
 
   return (
-    <Tag className={textClassName} data-testid={textProps['text-color']}>
+    <Tag className={textClassName} data-testid={textProps['data-testid']}>
       {children}
     </Tag>
   )

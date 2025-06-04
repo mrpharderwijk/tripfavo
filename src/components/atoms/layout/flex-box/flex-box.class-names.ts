@@ -4,10 +4,14 @@ import {
   backgroundColorVariants,
   borderColorVariants,
   borderVariants,
+  bottomVariants,
   fullHeightVariants,
   fullWidthVariants,
   heightVariants,
+  leftVariants,
   maxWidthVariants,
+  rightVariants,
+  topVariants,
   widthVariants,
 } from '@/utils/variants'
 import { borderRadiusVariants } from '@/utils/variants/border/border-radius'
@@ -53,5 +57,9 @@ export const flexBoxClassNames = cva('', {
     ...maxHeightVariants,
     ...minWidthVariants,
     ...maxWidthVariants,
+    ...rightVariants,
+    ...leftVariants,
+    ...bottomVariants,
+    ...topVariants,
   },
 })

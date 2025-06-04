@@ -10,6 +10,10 @@ export const displayClassNames = cva('', {
       true: 'xs:block',
       false: 'xs:hidden',
     },
+    'show-sm': {
+      true: 'sm:block',
+      false: 'sm:hidden',
+    },
     'show-md': {
       true: 'md:block',
       false: 'md:hidden',

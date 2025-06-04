@@ -157,6 +157,13 @@
     "location": {
       "label": "Where you'll find it",
       "about": "About the neighborhood"
+    },
+    "dates": {
+      "label": "Plan your stay",
+      "button": {
+        "check": "Check availability",
+        "book": "Reserve"
+      }
     }
   },
   "guest": {
@@ -206,6 +213,7 @@
       }
     },
     "back": "Back",
+    "previous": "Previous",
     "next": "Next",
     "confirm": "Confirm",
     "upload": "Upload",

@@ -10,11 +10,13 @@ import { Body } from '@/components/atoms/typography/body/body'
 import { Heading } from '@/components/atoms/typography/heading/heading'
 
 type ListingDetailMapProps = {
+  heading?: string
   latitude?: number
   longitude?: number
 }
 
 export function ListingDetailMap({
+  heading,
   latitude,
   longitude,
 }: ListingDetailMapProps): ReactElement | null {
@@ -40,9 +42,11 @@ export function ListingDetailMap({
       fullHeight
       gap={6}
     >
-      <Heading tag="h3" like="h3-semibold">
-        {tListingLocation('label')}
-      </Heading>
+      {heading && (
+        <Heading tag="h2" like="h3-semibold">
+          {heading}
+        </Heading>
+      )}
 
       <Box position="relative" fullWidth>
         <button className="w-full h-[35vh]" type="button" onClick={() => console.log('clicked')}>
@@ -57,8 +61,11 @@ export function ListingDetailMap({
 
         {/* TODO: Add the neighborhood description */}
         <Body color="secondary" size="base-lgt">
-          The appartment is located in the heart of Roquebrune Cap Martin. It is a 5-minute drive
-          from the beach of Menton and a 10-minute drive from the city of Monaco. <br />
+          The apartment is located in the heart of Roquebrune Cap-Martin, located 7 kilometer from
+          the Italian border. It is a 5-minute drive to the beach of Menton and a 10-minute drive to
+          the Principality of Monaco. Within 30 minutes you can travel to the city centre of Nice
+          and Nice Airport.
+          <br />
           <br />
           In the neighborhood, you can find a{' '}
           <strong>

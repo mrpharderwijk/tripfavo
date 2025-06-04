@@ -12,6 +12,8 @@ import { Heading } from '@/components/atoms/typography/heading/heading'
 import { DotList } from '@/components/organisms/dot-list/dot-list'
 import { DotListItem } from '@/components/organisms/dot-list/dot-list-item'
 import { getPublishedListing } from '@/features/listings/actions/get-listings'
+import { ListingDetailAbout } from '@/features/listings/components/listing-detail-about/listing-detail-about'
+import { ListingDetailDatePicker } from '@/features/listings/components/listing-detail-date-picker/listing-detail-date-picker'
 import { ListingDetailMap } from '@/features/listings/components/listing-detail-map/listing-detail-map'
 import { ListingHeader } from '@/features/listings/components/listing-header/listing-header'
 import { ListingImages } from '@/features/listings/components/listing-images/listing-images'
@@ -87,6 +89,7 @@ export default async function ListingPage({ params }: ListingPageProps): Promise
               </FlexBoxItem>
             </FlexBox>
           </FlexBox>
+
           {/* Host Info */}
           <FlexBox
             flex-direction="row"
@@ -116,23 +119,20 @@ export default async function ListingPage({ params }: ListingPageProps): Promise
               </Body>
             </FlexBoxItem>
           </FlexBox>
+
           {/* About Property */}
-          <FlexBox flex-direction="col" gap={6}>
-            <Heading tag="h3" like="h3-semibold">
-              {tListing('about.label')}
-            </Heading>
-            <Body color="secondary" size="base-lgt">
-              {listing.description}
-            </Body>
-          </FlexBox>
+          <ListingDetailAbout heading={tListing('about.label')} description={listing.description} />
 
           {/* Map */}
           {listing?.location?.latitude && listing?.location?.longitude && (
             <ListingDetailMap
+              heading={tListing('location.label')}
               latitude={listing?.location?.latitude}
               longitude={listing?.location?.longitude}
             />
           )}
+
+          <ListingDetailDatePicker heading={tListing('dates.label')} />
         </FlexBox>
       </FlexBox>
     </FlexBox>

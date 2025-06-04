@@ -28,9 +28,9 @@ type AppContextState = {
   isMounted: boolean
 }
 
-type AppContextProviderProps = PropsWithChildren<Pick<AppContextState, 'currentUser'>>
-
 const AppContext = createContext<AppContextState | null>(null)
+
+type AppContextProviderProps = PropsWithChildren<Pick<AppContextState, 'currentUser'>>
 
 export function AppContextProvider({ children, currentUser }: AppContextProviderProps) {
   const [isMounted, setIsMounted] = useState<boolean>(false)

@@ -14,9 +14,9 @@ export default function ListingDetailLayout({ children }: { children: ReactEleme
 
       <FlexBoxItem tag="main" padding-b={32} flex="auto" min-height="full">
         {children}
-      </FlexBoxItem>
 
-      <Footer />
+        <Footer />
+      </FlexBoxItem>
     </FlexBox>
   )
 }
