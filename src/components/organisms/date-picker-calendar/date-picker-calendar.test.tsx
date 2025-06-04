@@ -18,19 +18,20 @@ const datePickerCalendarContextProviderMock = vi.mocked(DatePickerCalendarContex
 vi.mock('react-day-picker')
 const dayPickerMock = vi.mocked(DayPicker)
 
-const mockDisabledDates = [new Date('2023-07-15')]
-const mockPriceDates = [
+const disabledDatesMock = [new Date('2023-07-15')]
+const priceDatesMock = [
   {
     startMonth: 6, // July
     endMonth: 7, // August
     price: 250,
   },
 ]
-const mockSelected: DateRange = {
+const selectedMock: DateRange = {
   from: new Date('2023-07-01'),
   to: new Date('2023-07-05'),
 }
-const mockOnSelect = vi.fn()
+const onSelectMock = vi.fn()
+const localeMock = 'en-US'
 
 describe('DatePickerCalendar', () => {
   beforeEach(vi.clearAllMocks)
@@ -40,11 +41,11 @@ describe('DatePickerCalendar', () => {
 
     render(
       <DatePickerCalendar
-        disabledDates={mockDisabledDates}
-        priceDates={mockPriceDates}
-        locale="en-US"
-        selected={mockSelected}
-        onSelect={mockOnSelect}
+        disabledDates={disabledDatesMock}
+        priceDates={priceDatesMock}
+        locale={localeMock}
+        selected={selectedMock}
+        onSelect={onSelectMock}
       />,
     )
 
@@ -52,8 +53,8 @@ describe('DatePickerCalendar', () => {
     expect(DatePickerCalendarContextProvider).toHaveBeenCalledTimes(1)
     expect(datePickerCalendarContextProviderMock).toHaveBeenCalledWith(
       {
-        selected: mockSelected,
-        datePrices: mockPriceDates,
+        selected: selectedMock,
+        datePrices: priceDatesMock,
         getPriceForDate: expect.any(Function),
         children: expect.anything(),
         components: expect.any(Object),
@@ -64,9 +65,9 @@ describe('DatePickerCalendar', () => {
 
     expect(dayPickerMock).toHaveBeenCalledWith({
       mode: 'single',
-      selected: mockSelected,
-      onSelect: mockOnSelect,
-      disabled: mockDisabledDates,
+      selected: selectedMock,
+      onSelect: onSelectMock,
+      disabled: disabledDatesMock,
       locale: 'en-US',
     })
     screen.debug()
@@ -79,11 +80,11 @@ describe('DatePickerCalendar', () => {
     const user = userEvent.setup()
     render(
       <DatePickerCalendar
-        disabledDates={mockDisabledDates}
-        priceDates={mockPriceDates}
-        locale="en"
-        selected={mockSelected}
-        onSelect={mockOnSelect}
+        disabledDates={disabledDatesMock}
+        priceDates={priceDatesMock}
+        locale={localeMock}
+        selected={selectedMock}
+        onSelect={onSelectMock}
       />,
     )
 
@@ -99,11 +100,11 @@ describe('DatePickerCalendar', () => {
     // Arrange & Act
     render(
       <DatePickerCalendar
-        disabledDates={mockDisabledDates}
-        priceDates={mockPriceDates}
-        locale="en"
-        selected={mockSelected}
-        onSelect={mockOnSelect}
+        disabledDates={disabledDatesMock}
+        priceDates={priceDatesMock}
+        locale={localeMock}
+        selected={selectedMock}
+        onSelect={onSelectMock}
       />,
     )
 
@@ -116,11 +117,11 @@ describe('DatePickerCalendar', () => {
     // Arrange & Act
     render(
       <DatePickerCalendar
-        disabledDates={mockDisabledDates}
-        priceDates={mockPriceDates}
-        locale="en"
-        selected={mockSelected}
-        onSelect={mockOnSelect}
+        disabledDates={disabledDatesMock}
+        priceDates={priceDatesMock}
+        locale={localeMock}
+        selected={selectedMock}
+        onSelect={onSelectMock}
       />,
     )
 
@@ -134,11 +135,11 @@ describe('DatePickerCalendar', () => {
     const user = userEvent.setup()
     render(
       <DatePickerCalendar
-        disabledDates={mockDisabledDates}
-        priceDates={mockPriceDates}
-        locale="en"
+        disabledDates={disabledDatesMock}
+        priceDates={priceDatesMock}
+        locale={localeMock}
         selected={undefined}
-        onSelect={mockOnSelect}
+        onSelect={onSelectMock}
       />,
     )
 
@@ -147,6 +148,6 @@ describe('DatePickerCalendar', () => {
     await user.click(dateButton)
 
     // Assert
-    expect(mockOnSelect).toHaveBeenCalled()
+    expect(onSelectMock).toHaveBeenCalled()
   })
 })
