@@ -5,10 +5,13 @@ import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { flexBoxClassNames } from '@/components/atoms/layout/flex-box/flex-box.class-names'
 
 type BottomBarProps = PropsWithChildren<{
-  'bg-color': VariantProps<typeof flexBoxClassNames>['bg-color']
+  'bg-color'?: VariantProps<typeof flexBoxClassNames>['bg-color']
 }>
 
-export function BottomBar({ children, 'bg-color': bgColor }: BottomBarProps): ReactElement {
+export function BottomBar({
+  children,
+  'bg-color': bgColor = 'primary',
+}: BottomBarProps): ReactElement {
   return (
     <FlexBox
       position="fixed"

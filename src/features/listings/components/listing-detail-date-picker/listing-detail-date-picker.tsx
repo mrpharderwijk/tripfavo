@@ -91,7 +91,7 @@ export function ListingDetailDatePicker({ heading }: ListingDetailDatePickerProp
         </Body>
       )}
 
-      <BottomBar bg-color="primary">
+      <BottomBar>
         <FlexBox flex-direction="row" align-items="center" justify-content="between" fullWidth>
           <div className="flex flex-col">
             {selected?.from && selected?.to && (
