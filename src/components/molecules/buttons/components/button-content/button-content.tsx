@@ -19,7 +19,6 @@ export type ButtonContentProps = PropsWithChildren<
     noPadding?: boolean
     onClick?: (e: MouseEvent<HTMLButtonElement>) => void
     outline?: boolean
-    underline?: boolean
     disabled?: boolean
   }
 >
@@ -32,13 +31,14 @@ export function ButtonContent({
   size = 'lg',
   loading = false,
   disabled = false,
+  underline = false,
 }: ButtonContentProps): ReactElement {
   const wrapperClassNames = buttonContentClassNames({
     variant,
     disabled,
     withIcon: !!Icon,
   })
-  const labelClassNames = buttonContentLabelClassNames({ variant, loading })
+  const labelClassNames = buttonContentLabelClassNames({ variant, loading, underline })
   const iconClassNames = buttonContentIconClassNames({ size, variant, loading })
 
   return (

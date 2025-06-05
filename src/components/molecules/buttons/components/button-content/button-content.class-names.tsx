@@ -55,6 +55,11 @@ export const buttonContentClassNames = cva(
         true: 'gap-2',
         false: 'gap-0',
       },
+
+      underline: {
+        true: '',
+        false: '',
+      },
     },
     compoundVariants: [
       // DISABLED
@@ -101,6 +106,10 @@ export const buttonContentLabelClassNames = cva('flex-initial', {
     loading: {
       true: 'invisible',
       false: 'visible',
+    },
+    underline: {
+      true: 'underline underline-offset-1 decoration-1',
+      false: '',
     },
   },
   compoundVariants: [

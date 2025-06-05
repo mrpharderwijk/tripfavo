@@ -19,7 +19,7 @@ type ListingDetailDatePickerProps = { heading?: string }
 
 export function ListingDetailDatePicker({ heading }: ListingDetailDatePickerProps): ReactElement {
   const locale = useLocale()
-  const tListing = useTranslations('listing')
+  const tListingDates = useTranslations('listing.dates')
   const tCommon = useTranslations('common')
   const [selected, setSelected] = useState<DateRange | undefined>(undefined)
 
@@ -70,9 +70,9 @@ export function ListingDetailDatePicker({ heading }: ListingDetailDatePickerProp
 
   return (
     <FlexBox tag="section" flex-direction="col" gap={6}>
-      {heading && (
+      {tListingDates('heading') && (
         <Heading tag="h2" like="h3-semibold">
-          {heading}
+          {tListingDates('heading')}
         </Heading>
       )}
 
@@ -84,36 +84,30 @@ export function ListingDetailDatePicker({ heading }: ListingDetailDatePickerProp
         onSelect={(date) => handleOnSelectDayPicker(date, setSelected, disabledDates)}
       />
 
-      {selected && (
-        <Body color="primary" size="base-mdt">
-          {selected?.from?.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })} -{' '}
-          {selected?.to?.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}
-        </Body>
-      )}
-
       <BottomBar>
         <FlexBox flex-direction="row" align-items="center" justify-content="between" fullWidth>
           <div className="flex flex-col">
             {selected?.from && selected?.to && (
-              <>
-                <Body color="primary" size="base-mdt">
-                  {selected.from.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })} -{' '}
-                  {selected.to.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}
-                </Body>
-                <Body color="primary" size="base-mdt" font-weight="semibold">
-                  Total:{' '}
-                  <LocalizedPrice
-                    price={calculateTotalPrice(selected, datePrices)}
-                    locale={locale as Locales}
-                    minFractionDigits={0}
-                    maxFractionDigits={0}
-                  />
-                </Body>
-              </>
+              <Body color="primary" size="base-xl" font-weight="semibold">
+                Total:{' '}
+                <LocalizedPrice
+                  price={calculateTotalPrice(selected, datePrices)}
+                  locale={locale as Locales}
+                  minFractionDigits={0}
+                  maxFractionDigits={0}
+                />
+              </Body>
+            )}
+
+            {selected && (
+              <Body color="primary" size="base-lgt">
+                {selected?.from?.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })} -{' '}
+                {selected?.to?.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}
+              </Body>
             )}
           </div>
           <Button variant="secondary" size="lg">
-            {tListing('dates.button.book')}
+            {tListingDates('button.book')}
           </Button>
         </FlexBox>
       </BottomBar>

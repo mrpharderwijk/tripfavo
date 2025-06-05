@@ -1,3 +1,5 @@
+'use client'
+
 import { ReactElement } from 'react'
 
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
@@ -10,7 +12,7 @@ type ListingHeaderProps = {
 
 export function ListingHeader({ title }: ListingHeaderProps): ReactElement {
   return (
-    <FlexBox>
+    <FlexBox tag="header" flex-direction="col" gap={2}>
       <FlexBoxItem>
         <Heading tag="h1" like="h2-semibold">
           {title}

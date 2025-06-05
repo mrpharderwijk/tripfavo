@@ -70,6 +70,10 @@ export const buttonClassNames = cva('box-border transition-all duration-300', {
       true: '',
       false: '',
     },
+    underline: {
+      true: '',
+      false: '',
+    },
     iconOnly: {
       true: 'px-0 py-0 p-0',
     },

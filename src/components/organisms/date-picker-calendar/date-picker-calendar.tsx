@@ -2,6 +2,8 @@ import { isSameDay } from 'date-fns'
 import { ReactElement, useState } from 'react'
 import { DateRange, DayPicker } from 'react-day-picker'
 
+import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
+import { Button } from '@/components/molecules/buttons/button'
 import { CustomDayButton } from '@/components/organisms/date-picker-calendar/components/custom-day-button/custom-day-button'
 import { CustomDaycell } from '@/components/organisms/date-picker-calendar/components/custom-day-cell/custom-day-cell'
 import { CustomMonth } from '@/components/organisms/date-picker-calendar/components/custom-month/custom-month'
@@ -85,6 +87,19 @@ export function DatePickerCalendar({
         showOutsideDays={false}
         required
       />
+
+      {selected && (
+        <FlexBox flex-direction="row" align-items="center" justify-content="start">
+          <Button
+            variant="quaternary-inverse"
+            size="md"
+            underline
+            onClick={() => onSelect(undefined)}
+          >
+            Clear dates
+          </Button>
+        </FlexBox>
+      )}
     </DatePickerCalendarContextProvider>
   )
 }

@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import { ReactElement } from 'react'
 
@@ -7,13 +9,12 @@ import { GridItem } from '@/components/atoms/layout/grid/components/grid-item/gr
 import { Grid } from '@/components/atoms/layout/grid/grid'
 import { SliderSlide } from '@/components/organisms/slider/components/slider-slide/slider-slide'
 import { Slider } from '@/components/organisms/slider/slider'
-import { PublicListing } from '@/features/listings/types/public-listing'
+import { useListingDetailContext } from '@/features/listings/listing-detail/providers/listing-detail-context-provider'
 
-type ListingImagesProps = {
-  images: PublicListing['images']
-}
-
-export function ListingImages({ images }: ListingImagesProps): ReactElement {
+export function ListingDetailSlider(): ReactElement {
+  const {
+    listing: { images },
+  } = useListingDetailContext()
   const mainImage = images.find((image) => image.isMain) ?? images[0]
   const otherImages = images.filter((image) => image.url !== mainImage.url)
 

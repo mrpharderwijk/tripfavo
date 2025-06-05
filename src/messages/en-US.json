@@ -138,6 +138,15 @@
     }
   },
   "listing": {
+    "amenities": {
+      "heading": "What this place offers",
+      "showAll": {
+        "button": "Show all {amount} amenities",
+        "dialog": {
+          "header": "What this place offers"
+        }
+      }
+    },
     "structure": {
       "apartment": "Entire Apartment",
       "house": "Entire house",
@@ -146,20 +155,20 @@
       "other": "Entire Place"
     },
     "description": {
-      "title": "{structure} in {city}"
+      "heading": "{structure} in {city}"
     },
     "host": {
       "label": "Hosted by"
     },
     "about": {
-      "label": "About this property"
+      "heading": "About this property"
     },
     "location": {
-      "label": "Where you'll find it",
+      "heading": "Where you'll find it",
       "about": "About the neighborhood"
     },
     "dates": {
-      "label": "Plan your stay",
+      "heading": "Plan your stay",
       "button": {
         "check": "Check availability",
         "book": "Reserve"
@@ -211,6 +220,39 @@
       "error": {
         "unknown": "An unknown error occurred. Please contact customer support."
       }
+    },
+    "amenities": {
+      "wifi": "WiFi",
+      "swimmingPool": "Swimming pool",
+      "hotTub": "Hot tub",
+      "gym": "Gym",
+      "parking": "Parking",
+      "airConditioning": "Air Conditioning",
+      "heating": "Heating",
+      "kitchen": "Kitchen",
+      "washer": "Washer",
+      "dryer": "Dryer",
+      "tv": "TV",
+      "freeParking": "Free Parking",
+      "seaView": "Sea View",
+      "mountainView": "Mountain View",
+      "garden": "Garden",
+      "bbqGrill": "BBQ Grill",
+      "playground": "Playground",
+      "beachAccess": "Beach Access",
+      "fireplace": "Fireplace",
+      "workspace": "Workspace",
+      "petFriendly": "Pet Friendly",
+      "securitySystem": "Security System",
+      "firstAidKit": "First Aid Kit",
+      "fireExtinguisher": "Fire Extinguisher",
+      "smokeAlarm": "Smoke Alarm",
+      "elevator": "Elevator",
+      "balcony": "Balcony",
+      "breakfastIncluded": "Breakfast Included",
+      "dishwasher": "Dishwasher",
+      "babyEquipment": "Baby Equipment",
+      "tennisCourt": "Tennis Court"
     },
     "back": "Back",
     "previous": "Previous",

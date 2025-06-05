@@ -1,7 +1,13 @@
+import { VariantProps } from 'class-variance-authority'
 import { ReactElement } from 'react'
 
-export function Divider(): ReactElement {
-  return (
-    <hr className="w-full h-px bg-gray-light border-0 mt-12 mb-6 md:mb-8 lg:mt-20" />
-  )
+import { dividerClassNames } from '@/components/atoms/layout/divider/divider.class-names'
+import { cn } from '@/utils/class-names'
+
+type DividerProps = VariantProps<typeof dividerClassNames>
+
+export function Divider({ ...props }: DividerProps): ReactElement {
+  const dividerClassName = cn(dividerClassNames({ ...props }))
+
+  return <hr className={dividerClassName} />
 }
