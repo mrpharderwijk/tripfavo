@@ -51,55 +51,57 @@ export function DatePickerCalendar({
       datePrices={priceDates}
       getPriceForDate={(date) => getPriceForDate(date, priceDates)}
     >
-      <DayPicker
-        components={{
-          Root: CustomRoot,
-          Day: CustomDaycell,
-          DayButton: CustomDayButton,
-          Nav: CustomNav,
-          Month: CustomMonth,
-          Months: CustomMonths,
-          MonthCaption: CustomMonthCaption,
-          MonthGrid: CustomMonthGrid,
-          Weeks: CustomWeeks,
-          Week: CustomWeek,
-          Weekdays: CustomWeekdays,
-          Weekday: CustomWeekday,
-        }}
-        mode="range"
-        selected={selected}
-        onSelect={onSelect}
-        month={month}
-        defaultMonth={new Date()}
-        onMonthChange={setMonth}
-        disabled={(date) => isDateDisabled(date, disabledDates)}
-        locale={localeToDateFnsLocale(locale)}
-        formatters={{
-          formatWeekdayName: (date) => date.toLocaleDateString(locale, { weekday: 'narrow' }),
-          formatMonthCaption: (date) =>
-            date.toLocaleDateString(locale, { month: 'long', year: 'numeric' }),
-        }}
-        className="p-4 bg-bg-primary rounded-lg shadow-lg"
-        modifiers={{
-          selected_start: (date) => Boolean(selected?.from && isSameDay(date, selected.from)),
-          selected_end: (date) => Boolean(selected?.to && isSameDay(date, selected.to)),
-        }}
-        showOutsideDays={false}
-        required
-      />
+      <FlexBox flex-direction="col" gap={4} fullWidth>
+        <DayPicker
+          components={{
+            Root: CustomRoot,
+            Day: CustomDaycell,
+            DayButton: CustomDayButton,
+            Nav: CustomNav,
+            Month: CustomMonth,
+            Months: CustomMonths,
+            MonthCaption: CustomMonthCaption,
+            MonthGrid: CustomMonthGrid,
+            Weeks: CustomWeeks,
+            Week: CustomWeek,
+            Weekdays: CustomWeekdays,
+            Weekday: CustomWeekday,
+          }}
+          mode="range"
+          selected={selected}
+          onSelect={onSelect}
+          month={month}
+          defaultMonth={new Date()}
+          onMonthChange={setMonth}
+          disabled={(date) => isDateDisabled(date, disabledDates)}
+          locale={localeToDateFnsLocale(locale)}
+          formatters={{
+            formatWeekdayName: (date) => date.toLocaleDateString(locale, { weekday: 'narrow' }),
+            formatMonthCaption: (date) =>
+              date.toLocaleDateString(locale, { month: 'long', year: 'numeric' }),
+          }}
+          className="p-4 bg-bg-primary rounded-lg shadow-lg"
+          modifiers={{
+            selected_start: (date) => Boolean(selected?.from && isSameDay(date, selected.from)),
+            selected_end: (date) => Boolean(selected?.to && isSameDay(date, selected.to)),
+          }}
+          showOutsideDays={false}
+          required
+        />
 
-      {selected && (
-        <FlexBox flex-direction="row" align-items="center" justify-content="start">
-          <Button
-            variant="quaternary-inverse"
-            size="md"
-            underline
-            onClick={() => onSelect(undefined)}
-          >
-            Clear dates
-          </Button>
-        </FlexBox>
-      )}
+        {selected && (
+          <FlexBox flex-direction="row" align-items="center" justify-content="start">
+            <Button
+              variant="quaternary-inverse"
+              size="md"
+              underline
+              onClick={() => onSelect(undefined)}
+            >
+              Clear dates
+            </Button>
+          </FlexBox>
+        )}
+      </FlexBox>
     </DatePickerCalendarContextProvider>
   )
 }

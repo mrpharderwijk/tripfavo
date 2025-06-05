@@ -1,16 +1,15 @@
 'use client'
 
+import { LucideIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { ReactElement } from 'react'
 
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
-import { GridItem } from '@/components/atoms/layout/grid/components/grid-item/grid-item'
-import { Grid } from '@/components/atoms/layout/grid/grid'
 import { Heading } from '@/components/atoms/typography/heading/heading'
 import { Button } from '@/components/molecules/buttons/button'
-import { IconTile } from '@/components/molecules/icon-tile/icon-tile'
 import { ModalDialog } from '@/components/molecules/modal-dialog/modal-dialog'
 import { amenities as amenitiesConstants } from '@/constants/amenities'
+import { ListingDetailAmenitiesList } from '@/features/listings/listing-detail/components/listing-detail-amenities/listing-detail-amenities-list'
 import { useListingDetailContext } from '@/features/listings/listing-detail/providers/listing-detail-context-provider'
 import { useDialogContext } from '@/features/nav-bar/providers/dialog-context-provider'
 import { toCamelCase } from '@/utils/casing/to-camel-case'
@@ -18,15 +17,16 @@ import { toCamelCase } from '@/utils/casing/to-camel-case'
 export function ListingDetailAmenities(): ReactElement {
   const tListingAmenities = useTranslations('listing.amenities')
   const tCommonAmenities = useTranslations('common.amenities')
+  const tCommon = useTranslations('common')
   const {
     listing: { amenities },
   } = useListingDetailContext()
   const { openDialog, closeDialog, currentOpenDialog } = useDialogContext()
 
-  const amenitiesWithIcons = amenities
-    .map((amenity) => {
+  const amenitiesWithIcons = amenities.reduce<Array<{ label: string; icon: LucideIcon | null }>>(
+    (acc, amenity) => {
       if (!amenity?.type) {
-        return null
+        return acc
       }
 
       const amenityLabel = amenity?.type ? tCommonAmenities(toCamelCase(amenity?.type)) : 'No label'
@@ -35,9 +35,10 @@ export function ListingDetailAmenities(): ReactElement {
       )
       const amenityIcon = amenityConstant?.icon || null
 
-      return { label: amenityLabel, icon: amenityIcon }
-    })
-    .filter(Boolean)
+      return [...acc, { label: amenityLabel, icon: amenityIcon }]
+    },
+    [],
+  )
 
   function handleOnClickShowAllAmenities() {
     openDialog('amenities-show-all')
@@ -51,17 +52,9 @@ export function ListingDetailAmenities(): ReactElement {
         </Heading>
       )}
 
-      <Grid columns-xs={1} columns-sm={2} columns-md={3} gap={4}>
-        {amenitiesWithIcons.slice(0, 6).map((amenityWithIcon) => {
-          return (
-            amenityWithIcon?.icon && (
-              <GridItem col-span={1} key={amenityWithIcon?.label}>
-                <IconTile icon={amenityWithIcon?.icon} label={amenityWithIcon?.label} />
-              </GridItem>
-            )
-          )
-        })}
-      </Grid>
+      <ListingDetailAmenitiesList amenities={amenitiesWithIcons.slice(0, 6)} />
+
+      {/* <ListingDetailAmenitiesTileList amenities={amenitiesWithIcons.slice(0, 6)} /> */}
 
       <Button variant="quaternary" size="xl" onClick={handleOnClickShowAllAmenities}>
         {tListingAmenities('showAll.button', { amount: amenitiesWithIcons.length })}
@@ -71,19 +64,19 @@ export function ListingDetailAmenities(): ReactElement {
         isVisible={!!currentOpenDialog}
         onClose={() => closeDialog('amenities-show-all')}
         header={<>{tListingAmenities('showAll.dialog.header')}</>}
+        footer={
+          <Button
+            variant="quaternary"
+            size="xl"
+            onClick={() => closeDialog('amenities-show-all')}
+            fullWidth
+          >
+            {tCommon('close')}
+          </Button>
+        }
       >
         <FlexBox flex-direction="col" gap={4}>
-          {amenitiesWithIcons.map((amenityWithIcon) => {
-            return (
-              amenityWithIcon?.icon && (
-                <IconTile
-                  key={amenityWithIcon.label}
-                  icon={amenityWithIcon?.icon}
-                  label={amenityWithIcon?.label}
-                />
-              )
-            )
-          })}
+          <ListingDetailAmenitiesList amenities={amenitiesWithIcons} />
         </FlexBox>
       </ModalDialog>
     </FlexBox>

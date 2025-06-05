@@ -76,13 +76,17 @@ export function ListingDetailDatePicker({ heading }: ListingDetailDatePickerProp
         </Heading>
       )}
 
-      <DatePickerCalendar
-        disabledDates={disabledDates}
-        priceDates={datePrices}
-        locale={locale as Locales}
-        selected={selected}
-        onSelect={(date) => handleOnSelectDayPicker(date, setSelected, disabledDates)}
-      />
+      <FlexBox align-items="center" justify-content="center" fullWidth>
+        <FlexBox max-width="lg" fullWidth>
+          <DatePickerCalendar
+            disabledDates={disabledDates}
+            priceDates={datePrices}
+            locale={locale as Locales}
+            selected={selected}
+            onSelect={(date) => handleOnSelectDayPicker(date, setSelected, disabledDates)}
+          />
+        </FlexBox>
+      </FlexBox>
 
       <BottomBar>
         <FlexBox flex-direction="row" align-items="center" justify-content="between" fullWidth>

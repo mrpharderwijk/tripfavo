@@ -22,7 +22,7 @@ export function BottomBar({
       bg-color={bgColor}
       border-t={1}
       border-color="tertiary"
-      z-index={50}
+      z-index={40}
     >
       <FlexBox
         flex-direction="row"

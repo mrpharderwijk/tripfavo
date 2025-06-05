@@ -2,7 +2,6 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { ReactElement } from 'react'
 
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
@@ -16,12 +15,6 @@ interface ListingsListProps {
 }
 
 export function ListingsList({ listings }: ListingsListProps): ReactElement {
-  const router = useRouter()
-
-  function handleOnClickListing(listingId: string) {
-    router.push(`/${listingId}`)
-  }
-
   return (
     <section className="w-full">
       {!listings.length && <div>no listings found</div>}
@@ -71,7 +64,7 @@ export function ListingsList({ listings }: ListingsListProps): ReactElement {
               </Heading>
 
               <Body size="base-lg" color="secondary" text-align="left" font-weight="semibold">
-                5 km from Monaco
+                4 km from Monaco
               </Body>
 
               <FlexBox flex-direction="row" gap={2} align-items="center">
