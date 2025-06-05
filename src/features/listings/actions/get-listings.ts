@@ -2,6 +2,7 @@ import { ListingStatus } from '@prisma/client'
 
 import { PublicListing } from '@/features/listings/types/public-listing'
 import { prisma } from '@/lib/prisma/db'
+import { isMongoObjectId } from '@/utils/is-mongo-object-id'
 
 export const publicListingAmenitySelect = {
   select: {
@@ -73,6 +74,10 @@ export const publicListingSelect = {
 }
 
 export async function getPublishedListing(listingId: string): Promise<PublicListing | null> {
+  if (!listingId || !isMongoObjectId(listingId)) {
+    return null
+  }
+
   try {
     const listing = await prisma.listing.findUnique({
       where: { id: listingId },
