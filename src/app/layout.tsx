@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { PropsWithChildren } from 'react'
+import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
 import './globals.css'
@@ -20,12 +21,13 @@ export default async function RootLayout({ children }: Readonly<PropsWithChildre
   return (
     <html lang="en">
       <body className={`${primaryFont.variable} antialiased`} suppressHydrationWarning>
-        <SpeedInsights />
         <AppContextProvider currentUser={currentUser}>
           <DropDownContextProvider>
             <DialogContextProvider>{children}</DialogContextProvider>
           </DropDownContextProvider>
         </AppContextProvider>
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   )
