@@ -16,9 +16,12 @@ export function Container({
   padding = true,
   fullWidth,
   narrow,
+  fullHeight = false,
   ...props
 }: ContainerProps): ReactElement {
-  const containerClassName = cn(containerClassNames({ padding, fullWidth, narrow, ...props }))
+  const containerClassName = cn(
+    containerClassNames({ padding, fullWidth, fullHeight, narrow, ...props }),
+  )
   const Tag = tag
 
   return <Tag data-testid={dataTestId} className={containerClassName} {...props} />

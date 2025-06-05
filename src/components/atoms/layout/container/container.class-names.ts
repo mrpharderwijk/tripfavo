@@ -1,6 +1,6 @@
 import { cva } from 'class-variance-authority'
 
-import { backgroundColorVariants } from '@/utils/variants'
+import { backgroundColorVariants, fullHeightVariants } from '@/utils/variants'
 
 export const containerClassNames = cva('mx-auto', {
   variants: {
@@ -13,6 +13,7 @@ export const containerClassNames = cva('mx-auto', {
       true: 'w-full',
       false: 'max-w-[2520px] w-full',
     },
+    ...fullHeightVariants,
     narrow: {
       sm: 'max-w-[568px] px-4',
       md: 'max-w-[623px] px-4',
