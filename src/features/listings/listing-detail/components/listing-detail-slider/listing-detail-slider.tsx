@@ -3,10 +3,6 @@
 import Image from 'next/image'
 import { ReactElement } from 'react'
 
-import { Display } from '@/components/atoms/display/display'
-import { Box } from '@/components/atoms/layout/box/box'
-import { GridItem } from '@/components/atoms/layout/grid/components/grid-item/grid-item'
-import { Grid } from '@/components/atoms/layout/grid/grid'
 import { SliderSlide } from '@/components/organisms/slider/components/slider-slide/slider-slide'
 import { Slider } from '@/components/organisms/slider/slider'
 import { useListingDetailContext } from '@/features/listings/listing-detail/providers/listing-detail-context-provider'
@@ -20,7 +16,7 @@ export function ListingDetailSlider(): ReactElement {
 
   return (
     <>
-      <Display show-md show-lg show-xl show-2xl show-3xl>
+      {/* <Display show-md show-lg show-xl show-2xl show-3xl>
         <Grid columns={4} rows={2} gap={1}>
           <GridItem col-span={1} row-span-md={2} max-height="screen-md" min-height="screen-sm">
             <Box border-radius-l="xl" overflow="hidden" fullHeight fullWidth>
@@ -69,23 +65,23 @@ export function ListingDetailSlider(): ReactElement {
             </Grid>
           </GridItem>
         </Grid>
-      </Display>
+      </Display> */}
 
-      <Display show-xs show-sm>
-        <Slider fullWidth showPagination disableNavigation>
-          {images.map((image) => (
-            <SliderSlide key={image.url} width="full">
-              <Image
-                className="aspect-square object-cover"
-                src={image.url}
-                alt={image.url}
-                width={1024}
-                height={768}
-              />
-            </SliderSlide>
-          ))}
-        </Slider>
-      </Display>
+      {/* <Display show-xs show-sm> */}
+      <Slider fullWidth showPagination disableNavigation>
+        {images.map((image) => (
+          <SliderSlide key={image.url} width="full">
+            <Image
+              className="aspect-square md:aspect-video object-cover"
+              src={image.url}
+              alt={image.url}
+              width={1024}
+              height={768}
+            />
+          </SliderSlide>
+        ))}
+      </Slider>
+      {/* </Display> */}
     </>
   )
 }
