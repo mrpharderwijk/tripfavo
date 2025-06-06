@@ -14,7 +14,10 @@ function getLocale(request: Request): string {
 
   const headersObject = Object.fromEntries(headers.entries())
   const languages = new Negotiator({ headers: headersObject }).languages()
-  return match(languages, locales, defaultLocale)
+  const requestedLocales =
+    languages.length === 1 && languages[0] === '*' ? [defaultLocale] : languages
+
+  return match(requestedLocales, locales, defaultLocale)
 }
 
 export function withLocale(middleware: NextMiddleware) {
