@@ -277,10 +277,46 @@
       "heading": "Summary",
       "dates": {
         "label": "Dates",
-        "noDates": "No dates selected"
+        "noDates": "No dates selected",
+        "dialog": {
+          "header": "Dates",
+          "subtitle": "Select the dates for your stay.",
+          "button": {
+            "confirm": "Confirm"
+          }
+        }
       },
       "guests": {
-        "label": "Guests"
+        "label": "Guests",
+        "value": {
+          "adultsAmount": "{amount, plural, =1 {1 guest} other {# guests}}",
+          "childrenAmount": "{amount, plural, =1 {1 kid} other {# kids}}",
+          "infantsAmount": "{amount, plural, =1 {1 baby} other {# baby's}}",
+          "petsAmount": "{amount, plural, =1 {1 pet} other {# pets}}"
+        },
+        "dialog": {
+          "header": "Guests",
+          "subtitle": "Select the dates for your stay.",
+          "adults": {
+            "label": "Adults",
+            "description": "13 years old or older"
+          },
+          "children": {
+            "label": "Children",
+            "description": "From 2 to 12 years old"
+          },
+          "infants": {
+            "label": "Baby",
+            "description": "Younger than 2 years old"
+          },
+          "pets": {
+            "label": "Pets",
+            "description": "Dogs, cats, and other pets"
+          },
+          "button": {
+            "confirm": "Confirm"
+          }
+        }
       }
     }
   }

@@ -118,24 +118,23 @@ export function InputStep({
           text-center
         `}
       >
-        {editable ? (
-          <input
-            ref={inputRef}
-            type="number"
-            value={value}
-            onChange={handleInputChange}
-            onBlur={handleInputBlur}
-            onKeyDown={handleKeyDown}
-            min={min}
-            max={max}
-            step={step}
-            disabled={disabled}
-            aria-label={ariaLabel}
-            role="spinbutton"
-            aria-valuemin={min}
-            aria-valuemax={max}
-            aria-valuenow={value}
-            className={`
+        <input
+          ref={inputRef}
+          type="number"
+          value={value}
+          onChange={handleInputChange}
+          onBlur={handleInputBlur}
+          onKeyDown={handleKeyDown}
+          min={min}
+          max={max}
+          step={step}
+          disabled={disabled}
+          aria-label={ariaLabel}
+          role="spinbutton"
+          aria-valuemin={min}
+          aria-valuemax={max}
+          aria-valuenow={value}
+          className={`
               h-9 
               w-full 
               border-0 
@@ -148,21 +147,8 @@ export function InputStep({
               [&::-webkit-inner-spin-button]:appearance-none
               [&::-webkit-outer-spin-button]:appearance-none
             `}
-          />
-        ) : (
-          <div
-            className={`
-              flex
-              h-9
-              items-center
-              justify-center
-            `}
-            aria-label={`${ariaLabel}: ${value}`}
-            aria-live="polite"
-          >
-            {value}
-          </div>
-        )}
+          readOnly={!editable}
+        />
       </div>
 
       <Button

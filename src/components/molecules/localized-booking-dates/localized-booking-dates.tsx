@@ -2,8 +2,8 @@ import { LocalizedDate } from '@/components/atoms/localized-date/localized-date'
 import { Locales } from '@/i18n/routing'
 
 type LocalizedBookingDatesProps = {
-  startDate: Date
-  endDate: Date
+  startDate?: Date
+  endDate?: Date
   locale: Locales
 }
 

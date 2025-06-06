@@ -12,9 +12,11 @@ import { Body } from '@/components/atoms/typography/body/body'
 import { Heading } from '@/components/atoms/typography/heading/heading'
 import { BottomBar } from '@/components/molecules/bottom-bar/bottom-bar'
 import { Button } from '@/components/molecules/buttons/button'
+import { LocalizedBookingDates } from '@/components/molecules/localized-booking-dates/localized-booking-dates'
 import { DatePickerCalendar } from '@/components/organisms/date-picker-calendar/date-picker-calendar'
 import { calculateTotalPrice } from '@/components/organisms/date-picker-calendar/utils/calculate-total-price'
 import { handleOnSelectDayPicker } from '@/components/organisms/date-picker-calendar/utils/handle-on-select-day-picker'
+import { DATE_FORMAT_SEARCH_PARAMS } from '@/constants/dates'
 import { useListingDetailContext } from '@/features/listings/listing-detail/providers/listing-detail-context-provider'
 import { Locales } from '@/i18n/routing'
 
@@ -25,7 +27,6 @@ export function ListingDetailDatePicker(): ReactElement {
   const tCommon = useTranslations('common')
   const [selected, setSelected] = useState<DateRange | undefined>(undefined)
   const { listing } = useListingDetailContext()
-  const selectedDatesFormatted = `${selected?.from?.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })} - ${selected?.to?.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}`
 
   const disabledDates = [
     new Date(2025, 5, 18),
@@ -77,8 +78,8 @@ export function ListingDetailDatePicker(): ReactElement {
       return
     }
 
-    const startDate = format(selected?.from, 'yyyy-MM-dd')
-    const endDate = format(selected?.to, 'yyyy-MM-dd')
+    const startDate = format(selected?.from, DATE_FORMAT_SEARCH_PARAMS)
+    const endDate = format(selected?.to, DATE_FORMAT_SEARCH_PARAMS)
 
     router.push(`/reservation/${listing.id}?startDate=${startDate}&endDate=${endDate}`)
   }
@@ -120,7 +121,11 @@ export function ListingDetailDatePicker(): ReactElement {
 
             {selected && (
               <Body color="primary" size="base-lgt">
-                {selectedDatesFormatted}
+                <LocalizedBookingDates
+                  startDate={selected?.from}
+                  endDate={selected?.to}
+                  locale={locale as Locales}
+                />
               </Body>
             )}
           </div>

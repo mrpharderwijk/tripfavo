@@ -17,14 +17,26 @@ export function ReservationDetailPage({ listing }: ReservationDetailPageProps) {
   const searchParams = useSearchParams()
   const startDate = searchParams.get('startDate')
   const endDate = searchParams.get('endDate')
+  const adultsAmount = searchParams.get('adults')
+  const childrenAmount = searchParams.get('children')
+  const infantsAmount = searchParams.get('infants')
+  const petsAmount = searchParams.get('pets')
 
   return (
-    <ReservationDetailContextProvider listing={listing} startDate={startDate} endDate={endDate}>
+    <ReservationDetailContextProvider
+      listing={listing}
+      startDate={startDate}
+      endDate={endDate}
+      guestsAmount={{
+        adults: Number(adultsAmount ?? 1),
+        children: Number(childrenAmount ?? 0),
+        infants: Number(infantsAmount ?? 0),
+        pets: Number(petsAmount ?? 0),
+      }}
+    >
       <FlexBox flex-direction="col" gap={6} padding-x={6} padding-t={6}>
         <ReservationDetailListing />
-
         <Divider />
-
         <ReservationDetailSummary />
       </FlexBox>
     </ReservationDetailContextProvider>

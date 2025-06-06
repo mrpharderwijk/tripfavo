@@ -7,7 +7,7 @@ import { updateSelectedValue } from '@/components/organisms/date-picker-calendar
 export function handleOnSelectDayPicker(
   date: DateRange | undefined,
   setSelected: Dispatch<SetStateAction<DateRange | undefined>>,
-  disabledDates: Date[],
+  disabledDates?: Date[],
 ) {
   if (!date) {
     setSelected(undefined)
@@ -18,7 +18,7 @@ export function handleOnSelectDayPicker(
   if (date.from && date.to) {
     // Check if any disabled dates are between the range
     if (
-      disabledDates.some(
+      disabledDates?.some(
         (disabledDate) => isAfter(disabledDate, date.from!) && isBefore(disabledDate, date.to!),
       )
     ) {
