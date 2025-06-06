@@ -11,8 +11,52 @@ import { primaryFont } from '@/lib/fonts/main'
 import { AppContextProvider } from '@/providers/app-context-provider/app-context-provider'
 
 export const metadata: Metadata = {
-  title: 'TripFavo',
-  description: 'TripFavo - Your gateway to the French Riviera',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.tripfavo.com'),
+  title: {
+    default: 'TripFavo',
+    template: '%s | TripFavo',
+  },
+  description:
+    'Plan your next vacation to the French Riviera √ Cheap prices √ Low service fees √ No commission √ Amazing experiences',
+  keywords: ['travel', 'experiences', 'cotedazur', 'france', 'riviera', 'vacation', 'rental'],
+  authors: [{ name: 'TripFavo' }],
+  creator: 'TripFavo',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: process.env.NEXT_PUBLIC_SITE_URL,
+    siteName: 'TripFavo',
+    title: 'TripFavo',
+    description:
+      'Plan your next vacation to the French Riviera √ Cheap prices √ Low service fees √ No commission √ Amazing experiences',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'TripFavo, your vacation rental in the French Riviera',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'TripFavo',
+    description:
+      'Plan your next vacation to the French Riviera √ Cheap prices √ Low service fees √ No commission √ Amazing experiences',
+    images: ['/og-image.jpg'],
+    creator: '@tripfavo',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 }
 
 export default async function RootLayout({ children }: Readonly<PropsWithChildren>) {
