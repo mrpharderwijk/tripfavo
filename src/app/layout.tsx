@@ -1,4 +1,3 @@
-import type { Metadata } from 'next'
 import { PropsWithChildren } from 'react'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -9,11 +8,6 @@ import { DialogContextProvider } from '@/features/nav-bar/providers/dialog-conte
 import { DropDownContextProvider } from '@/features/nav-bar/providers/drop-down-context-provider'
 import { primaryFont } from '@/lib/fonts/main'
 import { AppContextProvider } from '@/providers/app-context-provider/app-context-provider'
-
-export const metadata: Metadata = {
-  title: 'TripFavo',
-  description: 'TripFavo - Your gateway to the French Riviera',
-}
 
 export default async function RootLayout({ children }: Readonly<PropsWithChildren>) {
   const currentUser = await getCurrentUser()
