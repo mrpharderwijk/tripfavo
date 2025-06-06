@@ -1,5 +1,3 @@
-import { Display } from '@/components/atoms/display/display'
-import { Container } from '@/components/atoms/layout/container/container'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { ListingDetailAbout } from '@/features/listings/listing-detail/components/listing-detail-about/listing-detail-about'
 import { ListingDetailAmenities } from '@/features/listings/listing-detail/components/listing-detail-amenities/listing-detail-amenities'
@@ -10,7 +8,6 @@ import { ListingDetailLocation } from '@/features/listings/listing-detail/compon
 import { ListingDetailSlider } from '@/features/listings/listing-detail/components/listing-detail-slider/listing-detail-slider'
 import { ListingDetailSubtitle } from '@/features/listings/listing-detail/components/listing-detail-subtitle/listing-detail-subtitle'
 import { ListingDetailTitle } from '@/features/listings/listing-detail/components/listing-detail-title/listing-detail-title'
-import { ListingHeader } from '@/features/listings/listing-detail/components/listing-header/listing-header'
 import { ListingDetailContextProvider } from '@/features/listings/listing-detail/providers/listing-detail-context-provider'
 import { PublicListing } from '@/features/listings/types/public-listing'
 
@@ -22,13 +19,6 @@ export function ListingDetailPage({ listing }: ListingDetailPageProps) {
   return (
     <ListingDetailContextProvider listing={listing}>
       <FlexBox flex-direction="col" gap={6}>
-        {/* Header (only on desktop) */}
-        <Display show-lg>
-          <Container narrow="lg">
-            <ListingHeader title={listing.title ?? ''} />
-          </Container>
-        </Display>
-
         {/* Slider */}
         <ListingDetailSlider />
 

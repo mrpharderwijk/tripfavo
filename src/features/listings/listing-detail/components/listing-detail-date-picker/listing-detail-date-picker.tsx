@@ -1,5 +1,7 @@
 'use client'
 
+import { format } from 'date-fns'
+import { useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
 import { ReactElement, useState } from 'react'
 import { DateRange } from 'react-day-picker'
@@ -13,15 +15,17 @@ import { Button } from '@/components/molecules/buttons/button'
 import { DatePickerCalendar } from '@/components/organisms/date-picker-calendar/date-picker-calendar'
 import { calculateTotalPrice } from '@/components/organisms/date-picker-calendar/utils/calculate-total-price'
 import { handleOnSelectDayPicker } from '@/components/organisms/date-picker-calendar/utils/handle-on-select-day-picker'
+import { useListingDetailContext } from '@/features/listings/listing-detail/providers/listing-detail-context-provider'
 import { Locales } from '@/i18n/routing'
 
-type ListingDetailDatePickerProps = { heading?: string }
-
-export function ListingDetailDatePicker({ heading }: ListingDetailDatePickerProps): ReactElement {
+export function ListingDetailDatePicker(): ReactElement {
+  const router = useRouter()
   const locale = useLocale()
   const tListingDates = useTranslations('listing.dates')
   const tCommon = useTranslations('common')
   const [selected, setSelected] = useState<DateRange | undefined>(undefined)
+  const { listing } = useListingDetailContext()
+  const selectedDatesFormatted = `${selected?.from?.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })} - ${selected?.to?.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}`
 
   const disabledDates = [
     new Date(2025, 5, 18),
@@ -68,6 +72,17 @@ export function ListingDetailDatePicker({ heading }: ListingDetailDatePickerProp
     },
   ]
 
+  function handleOnClickBook() {
+    if (!selected?.from || !selected?.to) {
+      return
+    }
+
+    const startDate = format(selected?.from, 'yyyy-MM-dd')
+    const endDate = format(selected?.to, 'yyyy-MM-dd')
+
+    router.push(`/reservation/${listing.id}?startDate=${startDate}&endDate=${endDate}`)
+  }
+
   return (
     <FlexBox tag="section" flex-direction="col" gap={6}>
       {tListingDates('heading') && (
@@ -105,12 +120,12 @@ export function ListingDetailDatePicker({ heading }: ListingDetailDatePickerProp
 
             {selected && (
               <Body color="primary" size="base-lgt">
-                {selected?.from?.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })} -{' '}
-                {selected?.to?.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}
+                {selectedDatesFormatted}
               </Body>
             )}
           </div>
-          <Button variant="secondary" size="lg">
+
+          <Button variant="secondary" size="lg" onClick={handleOnClickBook}>
             {tListingDates('button.book')}
           </Button>
         </FlexBox>

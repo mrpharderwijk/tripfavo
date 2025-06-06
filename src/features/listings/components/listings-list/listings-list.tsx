@@ -22,7 +22,7 @@ export function ListingsList({ listings }: ListingsListProps): ReactElement {
         <Link
           key={`${listing.id}-${idx}`}
           className="group cursor-pointer w-full"
-          href={`/${listing.id}`}
+          href={`/property/${listing.id}`}
         >
           <FlexBox flex-direction="col" gap={4}>
             <div className="w-full relative overflow-hidden rounded-2xl">

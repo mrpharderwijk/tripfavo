@@ -6,6 +6,7 @@ import { ReactElement } from 'react'
 import { Box } from '@/components/atoms/layout/box/box'
 import { Container } from '@/components/atoms/layout/container/container'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
+import { Heading } from '@/components/atoms/typography/heading/heading'
 import { Branding } from '@/components/molecules/branding/branding'
 import { Button } from '@/components/molecules/buttons/button'
 import { MainMenu } from '@/features/nav-bar/components/main-menu/main-menu'
@@ -48,6 +49,12 @@ export function NavBar({
             <Branding />
             {!minimal && <Search />}
             {!minimal && <MainMenu header={header} body={body} footer={footer} />}
+            {!!minimal && (
+              <Heading tag="h1" like="h3-semibold">
+                Reservation
+              </Heading>
+            )}
+            {!!minimal && !customActionLabel && <div />}
             {!!minimal && !!customActionLabel && !!customActionOnClick && (
               <Button variant="outline" size="md" rounded onClick={customActionOnClick}>
                 {customActionLabel}

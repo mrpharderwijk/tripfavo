@@ -173,6 +173,9 @@
         "check": "Check availability",
         "book": "Reserve"
       }
+    },
+    "reservation": {
+      "heading": "Reservation request"
     }
   },
   "guest": {
@@ -254,6 +257,8 @@
       "babyEquipment": "Baby Equipment",
       "tennisCourt": "Tennis Court"
     },
+    "dates": "Dates",
+    "noDates": "No dates selected",
     "close": "Close",
     "back": "Back",
     "previous": "Previous",
@@ -266,5 +271,17 @@
     "bedroomCount": "{amount, plural, =1 {1 bedroom} other {# bedrooms}}",
     "bathroomCount": "{amount, plural, =1 {1 bathroom} other {# bathrooms}}",
     "bedCount": "{amount, plural, =1 {1 bed} other {# beds}}"
+  },
+  "reservationDetail": {
+    "summary": {
+      "heading": "Summary",
+      "dates": {
+        "label": "Dates",
+        "noDates": "No dates selected"
+      },
+      "guests": {
+        "label": "Guests"
+      }
+    }
   }
 }
