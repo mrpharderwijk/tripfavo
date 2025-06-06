@@ -17,7 +17,7 @@ export function ReservationDetailListing(): ReactElement {
         <Image
           className="rounded-lg aspect-square object-cover"
           src={mainImage.url}
-          alt={mainImage.alt ?? ''}
+          alt={mainImage.url ?? ''}
           width={105}
           height={105}
         />
