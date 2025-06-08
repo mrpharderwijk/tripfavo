@@ -1,8 +1,8 @@
 import { getPriceForDate } from './get-price-for-date'
 
-import { PriceDate } from '@/components/organisms/date-picker-calendar/date-picker-calendar'
+import { DatePrice } from '@/components/organisms/date-picker-calendar/providers/date-picker-calendar-context-provider'
 
-const mockPriceDates: PriceDate[] = [
+const mockPriceDates: DatePrice[] = [
   {
     startMonth: 6, // July
     endMonth: 7, // August

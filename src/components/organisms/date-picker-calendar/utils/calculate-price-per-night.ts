@@ -1,11 +1,11 @@
 import { DateRange } from 'react-day-picker'
 
-import { PriceDate } from '@/components/organisms/date-picker-calendar/date-picker-calendar'
+import { DatePrice } from '@/components/organisms/date-picker-calendar/providers/date-picker-calendar-context-provider'
 import { getPriceForDate } from '@/components/organisms/date-picker-calendar/utils/get-price-for-date'
 
 export function calculatePricePerNight(
   range: DateRange | undefined,
-  datePrices: PriceDate[],
+  datePrices: DatePrice[],
 ): number {
   if (!range?.from || !range?.to) {
     return 0

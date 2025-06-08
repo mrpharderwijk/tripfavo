@@ -1,6 +1,6 @@
-import { PriceDate } from '@/components/organisms/date-picker-calendar/date-picker-calendar'
+import { DatePrice } from '@/components/organisms/date-picker-calendar/providers/date-picker-calendar-context-provider'
 
-export function getPriceForDate(date: Date, datePrices: PriceDate[]): number | undefined {
+export function getPriceForDate(date: Date, datePrices: DatePrice[]): number | undefined {
   const month = date.getMonth()
 
   // Find the price range that contains this month
