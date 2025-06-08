@@ -41,7 +41,6 @@ export function ListingDescription({
       </FlexBoxItem>
       <FlexBoxItem>
         <DotList>
-          <DotListItem>{tCommon('guestCount', { amount: floorPlan?.guestCount ?? 0 })}</DotListItem>
           <DotListItem>{tCommon('roomCount', { amount: floorPlan?.roomCount ?? 0 })}</DotListItem>
           <DotListItem>
             {tCommon('bedroomCount', { amount: floorPlan?.bedroomCount ?? 0 })}

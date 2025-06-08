@@ -87,6 +87,24 @@
           "subtitle": "You'll add more details later, like bed types."
         }
       },
+      "guestsAmountForm": {
+        "heading": {
+          "title": "How many guests and what type of guests can stay?",
+          "subtitle": "When guests reserve your property, they cannot exceed this number."
+        },
+        "adultsCount": {
+          "label": "Adults (13+ years old)"
+        },
+        "childrenCount": {
+          "label": "Children (2-12 years old)"
+        },
+        "infantsCount": {
+          "label": "Baby's (0-2 years old)"
+        },
+        "petsCount": {
+          "label": "Pets"
+        }
+      },
       "locationForm": {
         "heading": {
           "title": "Where's your place located?",
@@ -318,6 +336,15 @@
           }
         }
       }
+    },
+    "priceBreakdown": {
+      "heading": "Price information",
+      "nightAmount": "{amount, plural, =1 {1 night} other {# nights}}",
+      "cleaningFee": "Cleaning fee",
+      "total": "Total"
+    },
+    "cancellationDetails": {
+      "heading": "Cancellation details"
     }
   }
 }

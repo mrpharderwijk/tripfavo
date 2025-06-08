@@ -5,7 +5,6 @@ import { prisma } from '@/lib/prisma/db'
 export const hostFloorPlanSelect = {
   select: {
     id: true,
-    guestCount: true,
     roomCount: true,
     bathroomCount: true,
     bedroomCount: true,
@@ -13,6 +12,15 @@ export const hostFloorPlanSelect = {
   },
 }
 
+export const hostGuestsAmountSelect = {
+  select: {
+    id: true,
+    adultsCount: true,
+    childrenCount: true,
+    infantsCount: true,
+    petsCount: true,
+  },
+}
 export const hostImageSelect = {
   select: {
     id: true,
@@ -59,6 +67,7 @@ export const hostListingSelect = {
   updatedAt: true,
   description: true,
   floorPlan: hostFloorPlanSelect,
+  guestsAmount: hostGuestsAmountSelect,
   id: true,
   images: hostImageSelect,
   location: hostLocationSelect,

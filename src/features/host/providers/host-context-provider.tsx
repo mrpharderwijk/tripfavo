@@ -26,6 +26,7 @@ import { AmenitiesForm } from '@/features/host/components/forms/amenities-form/a
 import { PriceForm } from '@/features/host/components/forms/price-form/price-form'
 import { Summary } from '@/features/host/components/summary/summary'
 import { getRouteNameByRoutePath, getRoutePathByRouteName } from '@/utils/get-route'
+import { GuestsAmountForm } from '@/features/host/components/forms/guests-amount-form/guests-amount-form'
 
 type StepForm = z.infer<typeof StructureFormSchema> | z.infer<typeof PrivacyTypeFormSchema> | z.infer<typeof LocationFormSchema> | z.infer<typeof FloorPlanFormSchema> | z.infer<typeof ImagesFormSchema>
 type StepType = {
@@ -45,6 +46,7 @@ export const enum HOST_STEP {
   Title = 'title',
   Amenities = 'amenities',
   Price = 'price',
+  GuestsAmount = 'guests-amount',
 }
 
 export const stepMap = {
@@ -68,29 +70,34 @@ export const stepMap = {
     url: '/floor-plan',
     component: FloorPlanForm,
   },
-  [HOST_STEP.Images]: {
+  [HOST_STEP.GuestsAmount]: {
     order: 4,
+    url: '/guests-amount',
+    component: GuestsAmountForm,
+  },
+  [HOST_STEP.Images]: {
+    order: 5,
     url: '/images',
     component: ImagesForm,
   },
   [HOST_STEP.Description]: {
-    order: 5,
+    order: 6,
     url: '/description',
     component: DescriptionForm,
   },
   [HOST_STEP.Title]: {
-    order: 6,
+    order: 7,
     url: '/title',
     component: TitleForm,
   },
 
   [HOST_STEP.Amenities]: {
-    order: 7,
+    order: 8,
     url: '/amenities',
     component: AmenitiesForm,
   },
   [HOST_STEP.Price]: {
-    order: 8,
+    order: 9,
     url: '/price',
     component: PriceForm,
   },
@@ -175,7 +182,7 @@ export function HostContextProvider({
         
         if (formSend && currentStepObject.form.formState.isValid && currentStepObject.onSubmitCallback) {
           const formSubmit = await currentStepObject.onSubmitCallback(currentStepObject.form.getValues())
-          console.log('onNextStep - 4', nextStepKey)
+          
           if (formSubmit) {
             router.push(`/host/${listingId}/${stepMap[nextStepKey as HOST_STEP].url}`)
           }

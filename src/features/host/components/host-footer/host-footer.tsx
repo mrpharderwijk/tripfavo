@@ -26,9 +26,7 @@ export function HostFooter() {
         )}
 
         <Button variant="primary-inverse" size="xl" onClick={onNextStep} loading={isLoading}>
-          {currentStepNumber > 0 && currentStepNumber < Object.keys(steps).length - 1
-            ? tCommon('next')
-            : tCommon('confirm')}
+          {currentStepNumber < Object.keys(steps).length - 1 ? tCommon('next') : tCommon('confirm')}
         </Button>
       </FlexBox>
     </BottomBar>

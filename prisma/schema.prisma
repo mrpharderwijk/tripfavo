@@ -91,6 +91,7 @@ model Listing {
   images       ListingImage[]
   amenities    ListingAmenity[]
   priceDetails ListingPriceDetail[]
+  guestsAmount ListingGuestsAmount?
 }
 
 enum ListingStatus {
@@ -120,11 +121,23 @@ model ListingLocation {
 
 model ListingFloorPlan {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  guestCount    Int?
   roomCount     Int?
   bathroomCount Int?
   bedroomCount  Int?
   bedCount      Int?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  listingId String  @unique @db.ObjectId
+  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+}
+
+model ListingGuestsAmount {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  adultsCount   Int?
+  childrenCount Int?
+  infantsCount  Int?
+  petsCount     Int?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 

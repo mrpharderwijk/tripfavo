@@ -31,13 +31,19 @@ export function useHostForm(): UseHostFormReturnType {
       aptInfo: '',
 
       // Property
-      guestCount: 1,
       roomCount: 1,
       bathroomCount: 1,
       imageSrc: '',
       price: 1,
+
       title: '',
       description: '',
+
+      // Guests
+      adultsCount: 1,
+      childrenCount: 0,
+      infantsCount: 0,
+      petsCount: 0,
     },
   })
 

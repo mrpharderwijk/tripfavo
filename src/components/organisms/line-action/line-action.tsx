@@ -14,7 +14,6 @@ export function LineAction({ children, label, actionElement }: LineActionProps) 
     <FlexBox
       flex-direction="row"
       gap={4}
-      border-b={1}
       padding-y={6}
       border-color="deco"
       align-items="start"

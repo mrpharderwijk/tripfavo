@@ -55,7 +55,7 @@ export function ImagesForm({ listing }: ComponentStepProps) {
   const tListingImagesForm = useTranslations('host.listing.imagesForm')
   const [prismaError, setPrismaError] = useState<string | null>(null)
   const [utError, setUtError] = useState<string | null>(null)
-  const { updateStep, listingId } = useHostContext()
+  const { updateStep, listingId, setIsLoading } = useHostContext()
   const [images, setImages] = useState<
     Omit<ListingImage, 'listingId' | 'userId' | 'updatedAt' | 'roomId'>[]
   >(listing?.images || [])
@@ -86,6 +86,7 @@ export function ImagesForm({ listing }: ComponentStepProps) {
   })
 
   async function onSubmit(data: z.infer<typeof ImagesFormSchema>): Promise<boolean> {
+    setIsLoading(true)
     try {
       await axios.post(`/api/host/listings/${listingId}/images`, {
         files: data.images,
@@ -94,6 +95,8 @@ export function ImagesForm({ listing }: ComponentStepProps) {
     } catch (error: unknown) {
       console.error(error)
       return false
+    } finally {
+      setIsLoading(false)
     }
   }
 

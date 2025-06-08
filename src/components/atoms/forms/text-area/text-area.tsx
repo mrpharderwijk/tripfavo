@@ -1,13 +1,16 @@
+import { VariantProps } from 'class-variance-authority'
 import { AlertCircle } from 'lucide-react'
 import { ChangeEvent, ReactElement, TextareaHTMLAttributes, useState } from 'react'
 
+import { textAreaClassNames } from '@/components/atoms/forms/text-area/text-area.class-names'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
 import { WithRef } from '@/types/with-ref'
 import { cn } from '@/utils/class-names'
 
 type TextAreaProps = TextareaHTMLAttributes<HTMLTextAreaElement> &
-  WithRef<HTMLTextAreaElement> & {
+  WithRef<HTMLTextAreaElement> &
+  VariantProps<typeof textAreaClassNames> & {
     id: string
     label: string
     error?: string
@@ -26,6 +29,7 @@ export function TextArea({
   disabled,
   disableError = false,
   charCount = false,
+  'min-height': minHeight = '4xl',
   ...props
 }: TextAreaProps): ReactElement {
   const [isFocused, setIsFocused] = useState<boolean>(false)
@@ -33,7 +37,9 @@ export function TextArea({
   const isFloating = isFocused || !!value || !!error
   const hasError = !!error
   const textAreaClassName = cn(
-    'w-full min-h-14 pt-5 px-4 pb-1 border border-border-quarternary rounded-lg transition-all duration-200 text-base-lg font-medium text-text-primary outline-offset-2 outline-black',
+    textAreaClassNames({
+      'min-height': minHeight,
+    }),
     {
       'border-border-secondary-error outline-1 !outline-border-secondary-error':
         hasError && isFocused,

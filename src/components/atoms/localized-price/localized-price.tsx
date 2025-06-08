@@ -39,5 +39,5 @@ export function LocalizedPrice({
     maximumFractionDigits: maxFractionDigits,
   }).format(Number(priceInBaseCurrency))
 
-  return <>{localizedPrice}</>
+  return <span className="lining-nums tabular-nums">{localizedPrice}</span>
 }

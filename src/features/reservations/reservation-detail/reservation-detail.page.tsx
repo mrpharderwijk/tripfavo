@@ -1,11 +1,15 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 
 import { Divider } from '@/components/atoms/layout/divider/divider'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
+import { BottomBar } from '@/components/molecules/bottom-bar/bottom-bar'
+import { Button } from '@/components/molecules/buttons/button'
 import { PublicListing } from '@/features/listings/types/public-listing'
 import { ReservationDetailListing } from '@/features/reservations/reservation-detail/components/reservation-detail-listing/reservation-detail-listing'
+import { ReservationDetailPriceBreakdown } from '@/features/reservations/reservation-detail/components/reservation-detail-price-breakdown/reservation-detail-price-breakdown'
 import { ReservationDetailSummary } from '@/features/reservations/reservation-detail/components/reservation-detail-summary/reservation-detail-summary'
 import { ReservationDetailContextProvider } from '@/features/reservations/reservation-detail/providers/reservation-detail-context-provider'
 
@@ -14,6 +18,7 @@ type ReservationDetailPageProps = {
 }
 
 export function ReservationDetailPage({ listing }: ReservationDetailPageProps) {
+  const tCommon = useTranslations('common')
   const searchParams = useSearchParams()
   const startDate = searchParams.get('startDate')
   const endDate = searchParams.get('endDate')
@@ -38,6 +43,17 @@ export function ReservationDetailPage({ listing }: ReservationDetailPageProps) {
         <ReservationDetailListing />
         <Divider />
         <ReservationDetailSummary />
+        <Divider />
+        <ReservationDetailPriceBreakdown />
+        <Divider />
+
+        {/* TODO: OPTIONAL */}
+        {/* <ReservationDetailCancellationDetails /> */}
+        <BottomBar>
+          <Button variant="primary-inverse" size="md" onClick={() => {}} fullWidth>
+            {tCommon('next')}
+          </Button>
+        </BottomBar>
       </FlexBox>
     </ReservationDetailContextProvider>
   )

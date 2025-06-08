@@ -17,24 +17,24 @@ import { Form, FormField } from '@/components/ui/form'
 import { HOST_STEP, useHostContext } from '@/features/host/providers/host-context-provider'
 import { ComponentStepProps } from '@/features/host/types/component-step-props'
 
-export const FloorPlanFormSchema = z.object({
-  roomCount: z.number().min(1),
-  bedroomCount: z.number().min(0),
-  bedCount: z.number().min(1),
-  bathroomCount: z.number().min(0.5),
+export const GuestsAmountFormSchema = z.object({
+  adultsCount: z.number().min(1),
+  childrenCount: z.number().min(0),
+  infantsCount: z.number().min(0),
+  petsCount: z.number().min(0),
 })
 
-export function FloorPlanForm({ listing }: ComponentStepProps) {
-  const tFloorPlanForm = useTranslations('host.listing.floorPlanForm')
+export function GuestsAmountForm({ listing }: ComponentStepProps) {
+  const tGuestsAmountForm = useTranslations('host.listing.guestsAmountForm')
   const { steps, currentStep, updateStep, onNextStep, setIsLoading, listingId } = useHostContext()
-  const form = useForm<z.infer<typeof FloorPlanFormSchema>>({
-    resolver: zodResolver(FloorPlanFormSchema),
+  const form = useForm<z.infer<typeof GuestsAmountFormSchema>>({
+    resolver: zodResolver(GuestsAmountFormSchema),
     mode: 'onChange',
     defaultValues: {
-      roomCount: listing?.floorPlan?.roomCount ?? 1,
-      bedroomCount: listing?.floorPlan?.bedroomCount ?? 1,
-      bedCount: listing?.floorPlan?.bedCount ?? 1,
-      bathroomCount: listing?.floorPlan?.bathroomCount ?? 1,
+      adultsCount: listing?.guestsAmount?.adultsCount ?? 1,
+      childrenCount: listing?.guestsAmount?.childrenCount ?? 0,
+      infantsCount: listing?.guestsAmount?.infantsCount ?? 0,
+      petsCount: listing?.guestsAmount?.petsCount ?? 0,
     },
   })
   const {
@@ -43,11 +43,11 @@ export function FloorPlanForm({ listing }: ComponentStepProps) {
   } = form
   const stepData = steps[currentStep as HOST_STEP]
 
-  async function onSubmit(data: z.infer<typeof FloorPlanFormSchema>): Promise<boolean> {
+  async function onSubmit(data: z.infer<typeof GuestsAmountFormSchema>): Promise<boolean> {
     setIsLoading(true)
 
     try {
-      await axios.post(`/api/host/listings/${listingId}/floor-plan`, data)
+      await axios.post(`/api/host/listings/${listingId}/guests-amount`, data)
       return true
     } catch (error) {
       console.error(error)
@@ -61,15 +61,15 @@ export function FloorPlanForm({ listing }: ComponentStepProps) {
    * This effect is used to Update the step form to the context
    */
   useEffect(() => {
-    updateStep(HOST_STEP.FloorPlan, form as any, onSubmit)
+    updateStep(HOST_STEP.GuestsAmount, form as any, onSubmit)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
     <Box display="flex" flex-direction="col" gap={11}>
       <HeadingGroup
-        title={tFloorPlanForm('heading.title')}
-        subtitle={tFloorPlanForm('heading.subtitle')}
+        title={tGuestsAmountForm('heading.title')}
+        subtitle={tGuestsAmountForm('heading.subtitle')}
       />
 
       <Form {...form}>
@@ -77,20 +77,22 @@ export function FloorPlanForm({ listing }: ComponentStepProps) {
           <Box padding-y={4} border-b={1} border-color="secondary-disabled">
             <FormField
               control={control}
-              name="roomCount"
+              name="adultsCount"
               render={({ field }) => (
                 <FlexBox flex-direction="row" gap={2}>
                   <FlexBoxItem flex="auto">
-                    <Body size="base-xl">Rooms (includes living room)</Body>
+                    <Body size="base-xl" font-weight="medium">
+                      {tGuestsAmountForm('adultsCount.label')}
+                    </Body>
                   </FlexBoxItem>
                   <FlexBoxItem flex="initial">
                     <InputStep
-                      id="roomCount"
+                      id="adultsCount"
                       value={field.value}
                       onChange={field.onChange}
                       editable={false}
-                      min={FloorPlanFormSchema.shape?.roomCount?.minValue ?? 1}
-                      max={FloorPlanFormSchema.shape?.roomCount?.maxValue ?? undefined}
+                      min={GuestsAmountFormSchema.shape?.adultsCount?.minValue ?? 1}
+                      max={GuestsAmountFormSchema.shape?.adultsCount?.maxValue ?? undefined}
                     />
                   </FlexBoxItem>
                 </FlexBox>
@@ -101,20 +103,20 @@ export function FloorPlanForm({ listing }: ComponentStepProps) {
           <Box padding-y={4} border-b={1} border-color="secondary-disabled">
             <FormField
               control={control}
-              name="bedroomCount"
+              name="childrenCount"
               render={({ field }) => (
                 <FlexBox flex-direction="row" gap={2}>
                   <FlexBoxItem flex="auto">
-                    <Body size="base-xl">Bedrooms</Body>
+                    <Body size="base-xl">{tGuestsAmountForm('childrenCount.label')}</Body>
                   </FlexBoxItem>
                   <FlexBoxItem flex="initial">
                     <InputStep
-                      id="bedroomCount"
+                      id="childrenCount"
                       value={field.value}
                       onChange={field.onChange}
                       editable={false}
-                      min={FloorPlanFormSchema.shape?.bedroomCount?.minValue ?? 0}
-                      max={FloorPlanFormSchema.shape?.bedroomCount?.maxValue ?? undefined}
+                      min={GuestsAmountFormSchema.shape?.childrenCount?.minValue ?? 0}
+                      max={GuestsAmountFormSchema.shape?.childrenCount?.maxValue ?? undefined}
                     />
                   </FlexBoxItem>
                 </FlexBox>
@@ -125,20 +127,20 @@ export function FloorPlanForm({ listing }: ComponentStepProps) {
           <Box padding-y={4} border-b={1} border-color="secondary-disabled">
             <FormField
               control={control}
-              name="bedCount"
+              name="infantsCount"
               render={({ field }) => (
                 <FlexBox flex-direction="row" gap={2}>
                   <FlexBoxItem flex="auto">
-                    <Body size="base-xl">Beds</Body>
+                    <Body size="base-xl">{tGuestsAmountForm('infantsCount.label')}</Body>
                   </FlexBoxItem>
                   <FlexBoxItem flex="initial">
                     <InputStep
-                      id="bedCount"
+                      id="infantsCount"
                       value={field.value}
                       onChange={field.onChange}
-                      min={FloorPlanFormSchema.shape?.bedCount?.minValue ?? 1}
-                      max={FloorPlanFormSchema.shape?.bedCount?.maxValue ?? undefined}
                       editable={false}
+                      min={GuestsAmountFormSchema.shape?.infantsCount?.minValue ?? 0}
+                      max={GuestsAmountFormSchema.shape?.infantsCount?.maxValue ?? undefined}
                     />
                   </FlexBoxItem>
                 </FlexBox>
@@ -149,20 +151,19 @@ export function FloorPlanForm({ listing }: ComponentStepProps) {
           <Box padding-y={4} border-b={1} border-color="secondary-disabled">
             <FormField
               control={control}
-              name="bathroomCount"
+              name="petsCount"
               render={({ field }) => (
                 <FlexBox flex-direction="row" gap={2}>
                   <FlexBoxItem flex="auto">
-                    <Body size="base-xl">Bathrooms</Body>
+                    <Body size="base-xl">{tGuestsAmountForm('petsCount.label')}</Body>
                   </FlexBoxItem>
                   <FlexBoxItem flex="initial">
                     <InputStep
-                      id="bathroomCount"
+                      id="petsCount"
                       value={field.value}
                       onChange={field.onChange}
-                      min={FloorPlanFormSchema.shape?.bathroomCount?.minValue ?? 1}
-                      max={FloorPlanFormSchema.shape?.bathroomCount?.maxValue ?? undefined}
-                      step={field.value < 1 && field.value > 0 ? 0.5 : 1}
+                      min={GuestsAmountFormSchema.shape?.petsCount?.minValue ?? 0}
+                      max={GuestsAmountFormSchema.shape?.petsCount?.maxValue ?? undefined}
                       editable={false}
                     />
                   </FlexBoxItem>

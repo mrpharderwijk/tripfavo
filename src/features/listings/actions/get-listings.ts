@@ -16,7 +16,15 @@ export const publicListingFloorPlanSelect = {
     bedCount: true,
     bedroomCount: true,
     roomCount: true,
-    guestCount: true,
+  },
+}
+
+export const publicListingGuestsAmountSelect = {
+  select: {
+    adultsCount: true,
+    childrenCount: true,
+    infantsCount: true,
+    petsCount: true,
   },
 }
 
@@ -61,6 +69,7 @@ export const publicListingSelect = {
   createdAt: true,
   description: true,
   floorPlan: publicListingFloorPlanSelect,
+  guestsAmount: publicListingGuestsAmountSelect,
   id: true,
   images: publicListingImageSelect,
   location: publicListingLocationSelect,

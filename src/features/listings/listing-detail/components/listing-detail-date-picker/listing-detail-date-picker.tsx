@@ -28,6 +28,7 @@ export function ListingDetailDatePicker(): ReactElement {
   const [selected, setSelected] = useState<DateRange | undefined>(undefined)
   const { listing } = useListingDetailContext()
 
+  // TODO: Get from API
   const disabledDates = [
     new Date(2025, 5, 18),
     new Date(2025, 5, 19),
@@ -35,6 +36,7 @@ export function ListingDetailDatePicker(): ReactElement {
     new Date(2025, 5, 28),
   ]
 
+  // TODO: Get from API
   const datePrices = [
     // High Season
     {

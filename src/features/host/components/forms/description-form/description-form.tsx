@@ -78,6 +78,7 @@ export function DescriptionForm({ listing }: ComponentStepProps): ReactElement {
                 error={errors.description?.message}
                 charCount
                 maxLength={500}
+                min-height="4xl"
               />
             )}
           />
