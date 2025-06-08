@@ -14,17 +14,19 @@ import { HeadingGroup } from '@/components/molecules/heading/heading'
 import { Form, FormField } from '@/components/ui/form'
 import { HOST_STEP, useHostContext } from '@/features/host/providers/host-context-provider'
 import { ComponentStepProps } from '@/features/host/types/component-step-props'
-export const DescriptionFormSchema = z.object({
-  description: z.string().min(30).max(500),
+
+const INPUT_MAX_LENGTH = 1000
+export const NeighbourhoodDescriptionFormSchema = z.object({
+  neighbourhoodDescription: z.string().min(30).max(INPUT_MAX_LENGTH),
 })
 
-export function DescriptionForm({ listing }: ComponentStepProps): ReactElement {
-  const tDescriptionForm = useTranslations('host.listing.descriptionForm')
+export function NeighbourhoodDescriptionForm({ listing }: ComponentStepProps): ReactElement {
+  const tNeighbourhoodDescriptionForm = useTranslations('host.listing.neighbourhoodDescriptionForm')
   const { steps, currentStep, updateStep, setIsLoading, listingId } = useHostContext()
-  const form = useForm<z.infer<typeof DescriptionFormSchema>>({
-    resolver: zodResolver(DescriptionFormSchema),
+  const form = useForm<z.infer<typeof NeighbourhoodDescriptionFormSchema>>({
+    resolver: zodResolver(NeighbourhoodDescriptionFormSchema),
     defaultValues: {
-      description: listing?.description ?? '',
+      neighbourhoodDescription: listing?.neighbourhoodDescription ?? '',
     },
   })
   const {
@@ -33,11 +35,13 @@ export function DescriptionForm({ listing }: ComponentStepProps): ReactElement {
   } = form
   const stepData = steps[currentStep as HOST_STEP]
 
-  async function onSubmit(data: z.infer<typeof DescriptionFormSchema>): Promise<boolean> {
+  async function onSubmit(
+    data: z.infer<typeof NeighbourhoodDescriptionFormSchema>,
+  ): Promise<boolean> {
     setIsLoading(true)
 
     try {
-      await axios.post(`/api/host/listings/${listingId}/description`, data)
+      await axios.post(`/api/host/listings/${listingId}/neighbourhood-description`, data)
       return true
     } catch (error) {
       console.error(error)
@@ -51,33 +55,35 @@ export function DescriptionForm({ listing }: ComponentStepProps): ReactElement {
    * This effect is used to update the step form to the context
    */
   useEffect(() => {
-    updateStep(HOST_STEP.Description, form as any, onSubmit)
+    updateStep(HOST_STEP.NeighbourhoodDescription, form as any, onSubmit)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
     <Box display="flex" flex-direction="col" gap={11}>
       <HeadingGroup
-        title={tDescriptionForm('heading.title')}
-        subtitle={tDescriptionForm('heading.subtitle')}
+        title={tNeighbourhoodDescriptionForm('heading.title')}
+        subtitle={tNeighbourhoodDescriptionForm('heading.subtitle')}
       />
 
       <Form {...form}>
         <form noValidate>
-          {errors.description && (
-            <FormNotification variant="danger">{errors.description.message}</FormNotification>
+          {errors.neighbourhoodDescription && (
+            <FormNotification variant="danger">
+              {errors.neighbourhoodDescription.message}
+            </FormNotification>
           )}
           <FormField
             control={control}
-            name="description"
+            name="neighbourhoodDescription"
             render={({ field }) => (
               <TextArea
                 {...field}
-                id="description"
-                label="Description"
-                error={errors.description?.message}
+                id="neighbourhoodDescription"
+                label={tNeighbourhoodDescriptionForm('inputLabel')}
+                error={errors.neighbourhoodDescription?.message}
                 charCount
-                maxLength={500}
+                maxLength={INPUT_MAX_LENGTH}
                 min-height={500}
               />
             )}

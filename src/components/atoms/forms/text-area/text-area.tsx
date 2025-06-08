@@ -29,7 +29,7 @@ export function TextArea({
   disabled,
   disableError = false,
   charCount = false,
-  'min-height': minHeight = '4xl',
+  'min-height': minHeight = 14,
   ...props
 }: TextAreaProps): ReactElement {
   const [isFocused, setIsFocused] = useState<boolean>(false)

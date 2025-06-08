@@ -15,17 +15,9 @@ export async function POST(request: NextRequest, { params }: HostListingParams) 
     return NextResponse.json({ message: 'Listing ID is required' }, { status: 400 })
   }
 
-  const { maxGuests, adults, children, infants, pets } = await request.json()
-  if (
-    isNaN(maxGuests) ||
-    maxGuests < 0 ||
-    isNaN(adults) ||
-    adults < 0 ||
-    isNaN(children) ||
-    isNaN(infants) ||
-    isNaN(pets)
-  ) {
-    return NextResponse.json({ message: 'Missing required fields' }, { status: 400 })
+  const { neighbourhoodDescription } = await request.json()
+  if (!neighbourhoodDescription) {
+    return NextResponse.json({ message: 'Neighbourhood description is required' }, { status: 400 })
   }
 
   try {
@@ -35,30 +27,13 @@ export async function POST(request: NextRequest, { params }: HostListingParams) 
         id: listingId,
       },
       data: {
-        guestsAmount: {
-          upsert: {
-            create: {
-              maxGuests,
-              adults,
-              children,
-              infants,
-              pets,
-            },
-            update: {
-              maxGuests,
-              adults,
-              children,
-              infants,
-              pets,
-            },
-          },
-        },
+        neighbourhoodDescription,
       },
     })
 
     return NextResponse.json(listing)
   } catch (error) {
     console.error(error)
-    return NextResponse.json({ message: 'Failed to create structure' }, { status: 500 })
+    return NextResponse.json({ message: 'Failed to create description' }, { status: 500 })
   }
 }

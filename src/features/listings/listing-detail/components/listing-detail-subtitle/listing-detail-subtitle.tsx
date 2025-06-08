@@ -12,7 +12,7 @@ import { useListingDetailContext } from '@/features/listings/listing-detail/prov
 
 export function ListingDetailSubtitle(): ReactElement {
   const {
-    listing: { structure, location, floorPlan },
+    listing: { structure, location, floorPlan, guestsAmount },
   } = useListingDetailContext()
   const tListing = useTranslations('listing')
   const tCommon = useTranslations('common')
@@ -28,15 +28,21 @@ export function ListingDetailSubtitle(): ReactElement {
 
       <FlexBoxItem display="flex" align-items="center" justify-content="center">
         <DotList>
-          <DotListItem>{tCommon('guestCount', { amount: floorPlan?.guestCount ?? 0 })}</DotListItem>
-          <DotListItem>{tCommon('roomCount', { amount: floorPlan?.roomCount ?? 0 })}</DotListItem>
-          <DotListItem>
-            {tCommon('bedroomCount', { amount: floorPlan?.bedroomCount ?? 0 })}
-          </DotListItem>
-          <DotListItem>{tCommon('bedCount', { amount: floorPlan?.bedCount ?? 0 })}</DotListItem>
-          <DotListItem last>
-            {tCommon('bathroomCount', { amount: floorPlan?.bathroomCount ?? 0 })}
-          </DotListItem>
+          {guestsAmount?.maxGuests && (
+            <DotListItem>
+              {tListing('guestsAmount.maxGuests', { amount: guestsAmount?.maxGuests })}
+            </DotListItem>
+          )}
+          {floorPlan?.bedroomCount && (
+            <DotListItem>
+              {tCommon('bedroomCount', { amount: floorPlan?.bedroomCount ?? 0 })}
+            </DotListItem>
+          )}
+          {floorPlan?.bathroomCount && (
+            <DotListItem last>
+              {tCommon('bathroomCount', { amount: floorPlan?.bathroomCount ?? 0 })}
+            </DotListItem>
+          )}
         </DotList>
       </FlexBoxItem>
     </FlexBox>

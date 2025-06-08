@@ -18,10 +18,11 @@ import { HOST_STEP, useHostContext } from '@/features/host/providers/host-contex
 import { ComponentStepProps } from '@/features/host/types/component-step-props'
 
 export const GuestsAmountFormSchema = z.object({
-  adultsCount: z.number().min(1),
-  childrenCount: z.number().min(0),
-  infantsCount: z.number().min(0),
-  petsCount: z.number().min(0),
+  maxGuests: z.number().min(1),
+  adults: z.number().min(1),
+  children: z.number().min(0),
+  infants: z.number().min(0),
+  pets: z.number().min(0),
 })
 
 export function GuestsAmountForm({ listing }: ComponentStepProps) {
@@ -31,10 +32,11 @@ export function GuestsAmountForm({ listing }: ComponentStepProps) {
     resolver: zodResolver(GuestsAmountFormSchema),
     mode: 'onChange',
     defaultValues: {
-      adultsCount: listing?.guestsAmount?.adultsCount ?? 1,
-      childrenCount: listing?.guestsAmount?.childrenCount ?? 0,
-      infantsCount: listing?.guestsAmount?.infantsCount ?? 0,
-      petsCount: listing?.guestsAmount?.petsCount ?? 0,
+      maxGuests: listing?.guestsAmount?.maxGuests ?? 1,
+      adults: listing?.guestsAmount?.adults ?? 1,
+      children: listing?.guestsAmount?.children ?? 0,
+      infants: listing?.guestsAmount?.infants ?? 0,
+      pets: listing?.guestsAmount?.pets ?? 0,
     },
   })
   const {
@@ -77,22 +79,22 @@ export function GuestsAmountForm({ listing }: ComponentStepProps) {
           <Box padding-y={4} border-b={1} border-color="secondary-disabled">
             <FormField
               control={control}
-              name="adultsCount"
+              name="maxGuests"
               render={({ field }) => (
                 <FlexBox flex-direction="row" gap={2}>
                   <FlexBoxItem flex="auto">
                     <Body size="base-xl" font-weight="medium">
-                      {tGuestsAmountForm('adultsCount.label')}
+                      {tGuestsAmountForm('maxGuests.label')}
                     </Body>
                   </FlexBoxItem>
                   <FlexBoxItem flex="initial">
                     <InputStep
-                      id="adultsCount"
+                      id="maxGuests"
                       value={field.value}
                       onChange={field.onChange}
                       editable={false}
-                      min={GuestsAmountFormSchema.shape?.adultsCount?.minValue ?? 1}
-                      max={GuestsAmountFormSchema.shape?.adultsCount?.maxValue ?? undefined}
+                      min={GuestsAmountFormSchema.shape?.maxGuests?.minValue ?? 1}
+                      max={GuestsAmountFormSchema.shape?.maxGuests?.maxValue ?? undefined}
                     />
                   </FlexBoxItem>
                 </FlexBox>
@@ -103,20 +105,22 @@ export function GuestsAmountForm({ listing }: ComponentStepProps) {
           <Box padding-y={4} border-b={1} border-color="secondary-disabled">
             <FormField
               control={control}
-              name="childrenCount"
+              name="adults"
               render={({ field }) => (
                 <FlexBox flex-direction="row" gap={2}>
                   <FlexBoxItem flex="auto">
-                    <Body size="base-xl">{tGuestsAmountForm('childrenCount.label')}</Body>
+                    <Body size="base-xl" font-weight="medium">
+                      {tGuestsAmountForm('adults.label')}
+                    </Body>
                   </FlexBoxItem>
                   <FlexBoxItem flex="initial">
                     <InputStep
-                      id="childrenCount"
+                      id="adults"
                       value={field.value}
                       onChange={field.onChange}
                       editable={false}
-                      min={GuestsAmountFormSchema.shape?.childrenCount?.minValue ?? 0}
-                      max={GuestsAmountFormSchema.shape?.childrenCount?.maxValue ?? undefined}
+                      min={GuestsAmountFormSchema.shape?.adults?.minValue ?? 1}
+                      max={GuestsAmountFormSchema.shape?.adults?.maxValue ?? undefined}
                     />
                   </FlexBoxItem>
                 </FlexBox>
@@ -127,20 +131,20 @@ export function GuestsAmountForm({ listing }: ComponentStepProps) {
           <Box padding-y={4} border-b={1} border-color="secondary-disabled">
             <FormField
               control={control}
-              name="infantsCount"
+              name="children"
               render={({ field }) => (
                 <FlexBox flex-direction="row" gap={2}>
                   <FlexBoxItem flex="auto">
-                    <Body size="base-xl">{tGuestsAmountForm('infantsCount.label')}</Body>
+                    <Body size="base-xl">{tGuestsAmountForm('children.label')}</Body>
                   </FlexBoxItem>
                   <FlexBoxItem flex="initial">
                     <InputStep
-                      id="infantsCount"
+                      id="children"
                       value={field.value}
                       onChange={field.onChange}
                       editable={false}
-                      min={GuestsAmountFormSchema.shape?.infantsCount?.minValue ?? 0}
-                      max={GuestsAmountFormSchema.shape?.infantsCount?.maxValue ?? undefined}
+                      min={GuestsAmountFormSchema.shape?.children?.minValue ?? 0}
+                      max={GuestsAmountFormSchema.shape?.children?.maxValue ?? undefined}
                     />
                   </FlexBoxItem>
                 </FlexBox>
@@ -151,19 +155,43 @@ export function GuestsAmountForm({ listing }: ComponentStepProps) {
           <Box padding-y={4} border-b={1} border-color="secondary-disabled">
             <FormField
               control={control}
-              name="petsCount"
+              name="infants"
               render={({ field }) => (
                 <FlexBox flex-direction="row" gap={2}>
                   <FlexBoxItem flex="auto">
-                    <Body size="base-xl">{tGuestsAmountForm('petsCount.label')}</Body>
+                    <Body size="base-xl">{tGuestsAmountForm('infants.label')}</Body>
                   </FlexBoxItem>
                   <FlexBoxItem flex="initial">
                     <InputStep
-                      id="petsCount"
+                      id="infants"
                       value={field.value}
                       onChange={field.onChange}
-                      min={GuestsAmountFormSchema.shape?.petsCount?.minValue ?? 0}
-                      max={GuestsAmountFormSchema.shape?.petsCount?.maxValue ?? undefined}
+                      editable={false}
+                      min={GuestsAmountFormSchema.shape?.infants?.minValue ?? 0}
+                      max={GuestsAmountFormSchema.shape?.infants?.maxValue ?? undefined}
+                    />
+                  </FlexBoxItem>
+                </FlexBox>
+              )}
+            />
+          </Box>
+
+          <Box padding-y={4} border-b={1} border-color="secondary-disabled">
+            <FormField
+              control={control}
+              name="pets"
+              render={({ field }) => (
+                <FlexBox flex-direction="row" gap={2}>
+                  <FlexBoxItem flex="auto">
+                    <Body size="base-xl">{tGuestsAmountForm('pets.label')}</Body>
+                  </FlexBoxItem>
+                  <FlexBoxItem flex="initial">
+                    <InputStep
+                      id="pets"
+                      value={field.value}
+                      onChange={field.onChange}
+                      min={GuestsAmountFormSchema.shape?.pets?.minValue ?? 0}
+                      max={GuestsAmountFormSchema.shape?.pets?.maxValue ?? undefined}
                       editable={false}
                     />
                   </FlexBoxItem>

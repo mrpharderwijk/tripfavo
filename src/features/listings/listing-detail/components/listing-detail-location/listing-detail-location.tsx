@@ -12,7 +12,7 @@ import { useListingDetailContext } from '@/features/listings/listing-detail/prov
 
 export function ListingDetailLocation(): ReactElement | null {
   const {
-    listing: { location },
+    listing: { location, neighbourhoodDescription },
   } = useListingDetailContext()
   const tListingLocation = useTranslations('listing.location')
   const Map = useMemo(
@@ -56,26 +56,11 @@ export function ListingDetailLocation(): ReactElement | null {
           {tListingLocation('about')}
         </Heading>
 
-        {/* TODO: Add the neighborhood description */}
-        <Body color="secondary" size="base-lgt">
-          The apartment is located in the heart of Roquebrune Cap-Martin, located 7 kilometer from
-          the Italian border. It is a 5-minute drive to the beach of Menton and a 10-minute drive to
-          the Principality of Monaco. Within 30 minutes you can travel to the city centre of Nice
-          and Nice Airport.
-          <br />
-          <br />
-          In the neighborhood, you can find a{' '}
-          <strong>
-            pharmacy, boucher, bakery, small supermarket and a wonderful child-friendly park at
-            walking distance
-          </strong>
-          .
-          <br />
-          <br />
-          The rocky beach of Cap Martin can be accessed from the complex with a provided key. This
-          opens up one of the most beautiful hikes along the coast with a view of Monaco and the
-          french Riviera!
-        </Body>
+        {neighbourhoodDescription && (
+          <Body color="secondary" size="base-lgt">
+            {neighbourhoodDescription}
+          </Body>
+        )}
       </FlexBox>
     </FlexBox>
   ) : null

@@ -22,4 +22,9 @@ export const priceDetails = [
     label: 'Cleaning Fee',
     description: 'Cleaning fee is a fee that can be charged for cleaning the property.',
   },
+  {
+    type: PriceType.DEPOSIT,
+    label: 'Deposit',
+    description: 'Deposit is a fee that can be charged for a security deposit.',
+  },
 ]

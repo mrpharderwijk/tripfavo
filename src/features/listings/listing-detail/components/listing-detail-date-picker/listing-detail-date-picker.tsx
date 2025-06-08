@@ -3,7 +3,7 @@
 import { format } from 'date-fns'
 import { useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
-import { ReactElement, useState } from 'react'
+import { ReactElement, useRef, useState } from 'react'
 import { DateRange } from 'react-day-picker'
 
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
@@ -14,13 +14,14 @@ import { BottomBar } from '@/components/molecules/bottom-bar/bottom-bar'
 import { Button } from '@/components/molecules/buttons/button'
 import { LocalizedBookingDates } from '@/components/molecules/localized-booking-dates/localized-booking-dates'
 import { DatePickerCalendar } from '@/components/organisms/date-picker-calendar/date-picker-calendar'
-import { calculateTotalPrice } from '@/components/organisms/date-picker-calendar/utils/calculate-total-price'
+import { calculatePricePerNight } from '@/components/organisms/date-picker-calendar/utils/calculate-price-per-night'
 import { handleOnSelectDayPicker } from '@/components/organisms/date-picker-calendar/utils/handle-on-select-day-picker'
 import { DATE_FORMAT_SEARCH_PARAMS } from '@/constants/dates'
 import { useListingDetailContext } from '@/features/listings/listing-detail/providers/listing-detail-context-provider'
 import { Locales } from '@/i18n/routing'
 
 export function ListingDetailDatePicker(): ReactElement {
+  const datePickerRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
   const locale = useLocale()
   const tListingDates = useTranslations('listing.dates')
@@ -77,6 +78,7 @@ export function ListingDetailDatePicker(): ReactElement {
 
   function handleOnClickBook() {
     if (!selected?.from || !selected?.to) {
+      datePickerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
       return
     }
 
@@ -87,56 +89,65 @@ export function ListingDetailDatePicker(): ReactElement {
   }
 
   return (
-    <FlexBox tag="section" flex-direction="col" gap={6}>
-      {tListingDates('heading') && (
-        <Heading tag="h2" like="h3-semibold">
-          {tListingDates('heading')}
-        </Heading>
-      )}
+    <div ref={datePickerRef}>
+      <FlexBox tag="section" flex-direction="col" gap={6}>
+        {tListingDates('heading') && (
+          <Heading tag="h2" like="h3-semibold">
+            {tListingDates('heading')}
+          </Heading>
+        )}
 
-      <FlexBox align-items="center" justify-content="center" fullWidth>
-        <FlexBox max-width="lg" fullWidth>
-          <DatePickerCalendar
-            disabledDates={disabledDates}
-            priceDates={datePrices}
-            locale={locale as Locales}
-            selected={selected}
-            onSelect={(date) => handleOnSelectDayPicker(date, setSelected, disabledDates)}
-          />
+        <FlexBox align-items="center" justify-content="center" fullWidth>
+          <FlexBox max-width="lg" fullWidth>
+            <DatePickerCalendar
+              disabledDates={disabledDates}
+              priceDates={datePrices}
+              locale={locale as Locales}
+              selected={selected}
+              onSelect={(date) => handleOnSelectDayPicker(date, setSelected, disabledDates)}
+            />
+          </FlexBox>
         </FlexBox>
+
+        <BottomBar>
+          <FlexBox flex-direction="row" align-items="center" justify-content="between" fullWidth>
+            <div className="flex flex-col">
+              {!selected?.from && !selected?.to && (
+                <Body color="primary" size="base-xl" font-weight="semibold">
+                  {tListingDates('selectDates')}
+                </Body>
+              )}
+
+              {selected?.from && selected?.to && (
+                <Body color="primary" size="base-xl" font-weight="semibold">
+                  {/* TODO: Add translation */}
+                  <LocalizedPrice
+                    price={calculatePricePerNight(selected, datePrices)}
+                    locale={locale as Locales}
+                    minFractionDigits={0}
+                    maxFractionDigits={0}
+                  />{' '}
+                  per night
+                </Body>
+              )}
+
+              {selected && (
+                <Body color="primary" size="base-lgt">
+                  <LocalizedBookingDates
+                    startDate={selected?.from}
+                    endDate={selected?.to}
+                    locale={locale as Locales}
+                  />
+                </Body>
+              )}
+            </div>
+
+            <Button variant="secondary" size="lg" onClick={handleOnClickBook}>
+              {selected ? tListingDates('button.book') : tListingDates('button.reserve')}
+            </Button>
+          </FlexBox>
+        </BottomBar>
       </FlexBox>
-
-      <BottomBar>
-        <FlexBox flex-direction="row" align-items="center" justify-content="between" fullWidth>
-          <div className="flex flex-col">
-            {selected?.from && selected?.to && (
-              <Body color="primary" size="base-xl" font-weight="semibold">
-                Total:{' '}
-                <LocalizedPrice
-                  price={calculateTotalPrice(selected, datePrices)}
-                  locale={locale as Locales}
-                  minFractionDigits={0}
-                  maxFractionDigits={0}
-                />
-              </Body>
-            )}
-
-            {selected && (
-              <Body color="primary" size="base-lgt">
-                <LocalizedBookingDates
-                  startDate={selected?.from}
-                  endDate={selected?.to}
-                  locale={locale as Locales}
-                />
-              </Body>
-            )}
-          </div>
-
-          <Button variant="secondary" size="lg" onClick={handleOnClickBook}>
-            {tListingDates('button.book')}
-          </Button>
-        </FlexBox>
-      </BottomBar>
-    </FlexBox>
+    </div>
   )
 }

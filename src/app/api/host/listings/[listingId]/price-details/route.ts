@@ -22,7 +22,7 @@ export async function POST(request: NextRequest, { params }: HostListingParams) 
   }
 
   const { priceDetails } = await request.json()
-  if (!priceDetails?.length && priceDetails?.length !== 5) {
+  if (!priceDetails?.length && priceDetails?.length !== 6) {
     return NextResponse.json({ message: 'Price details are required' }, { status: 400 })
   }
 

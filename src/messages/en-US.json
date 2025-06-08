@@ -92,16 +92,19 @@
           "title": "How many guests and what type of guests can stay?",
           "subtitle": "When guests reserve your property, they cannot exceed this number."
         },
-        "adultsCount": {
+        "maxGuests": {
+          "label": "Maximum number of guests"
+        },
+        "adults": {
           "label": "Adults (13+ years old)"
         },
-        "childrenCount": {
+        "children": {
           "label": "Children (2-12 years old)"
         },
-        "infantsCount": {
+        "infants": {
           "label": "Baby's (0-2 years old)"
         },
-        "petsCount": {
+        "pets": {
           "label": "Pets"
         }
       },
@@ -110,6 +113,13 @@
           "title": "Where's your place located?",
           "subtitle": "Your address is only shared with guests after they've made a reservation."
         }
+      },
+      "neighbourhoodDescriptionForm": {
+        "heading": {
+          "title": "Describe the neighborhood",
+          "subtitle": "Add a description of the neighborhood to help guests find things to do in the area."
+        },
+        "inputLabel": "Neighbourhood description"
       },
       "imagesForm": {
         "heading": {
@@ -175,6 +185,9 @@
     "description": {
       "heading": "{structure} in {city}"
     },
+    "guestsAmount": {
+      "maxGuests": "max. {amount, plural, =1 {1 guest} other {# guests}}"
+    },
     "host": {
       "label": "Hosted by"
     },
@@ -189,8 +202,10 @@
       "heading": "Plan your stay",
       "button": {
         "check": "Check availability",
-        "book": "Reserve"
-      }
+        "book": "Book now",
+        "reserve": "Reserve"
+      },
+      "selectDates": "Add dates to view the prices"
     },
     "reservation": {
       "heading": "Reservation request"
@@ -341,6 +356,7 @@
       "heading": "Price information",
       "nightAmount": "{amount, plural, =1 {1 night} other {# nights}}",
       "cleaningFee": "Cleaning fee",
+      "deposit": "Deposit",
       "total": "Total"
     },
     "cancellationDetails": {

@@ -15,10 +15,11 @@ export const hostFloorPlanSelect = {
 export const hostGuestsAmountSelect = {
   select: {
     id: true,
-    adultsCount: true,
-    childrenCount: true,
-    infantsCount: true,
-    petsCount: true,
+    maxGuests: true,
+    adults: true,
+    children: true,
+    infants: true,
+    pets: true,
   },
 }
 export const hostImageSelect = {
@@ -66,6 +67,7 @@ export const hostListingSelect = {
   createdAt: true,
   updatedAt: true,
   description: true,
+  neighbourhoodDescription: true,
   floorPlan: hostFloorPlanSelect,
   guestsAmount: hostGuestsAmountSelect,
   id: true,

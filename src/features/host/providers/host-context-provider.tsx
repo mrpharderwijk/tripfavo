@@ -27,6 +27,7 @@ import { PriceForm } from '@/features/host/components/forms/price-form/price-for
 import { Summary } from '@/features/host/components/summary/summary'
 import { getRouteNameByRoutePath, getRoutePathByRouteName } from '@/utils/get-route'
 import { GuestsAmountForm } from '@/features/host/components/forms/guests-amount-form/guests-amount-form'
+import { NeighbourhoodDescriptionForm } from '@/features/host/components/forms/neighbourhood-description-form/neighbourhood-description-form'
 
 type StepForm = z.infer<typeof StructureFormSchema> | z.infer<typeof PrivacyTypeFormSchema> | z.infer<typeof LocationFormSchema> | z.infer<typeof FloorPlanFormSchema> | z.infer<typeof ImagesFormSchema>
 type StepType = {
@@ -43,6 +44,7 @@ export const enum HOST_STEP {
   FloorPlan = 'floor-plan',
   Images = 'images',
   Description = 'description',
+  NeighbourhoodDescription = 'neighbourhood-description',
   Title = 'title',
   Amenities = 'amenities',
   Price = 'price',
@@ -85,19 +87,23 @@ export const stepMap = {
     url: '/description',
     component: DescriptionForm,
   },
-  [HOST_STEP.Title]: {
+  [HOST_STEP.NeighbourhoodDescription]: {
     order: 7,
+    url: '/neighbourhood-description',
+    component: NeighbourhoodDescriptionForm,
+  },
+  [HOST_STEP.Title]: {
+    order: 8,
     url: '/title',
     component: TitleForm,
   },
-
   [HOST_STEP.Amenities]: {
-    order: 8,
+    order: 9,
     url: '/amenities',
     component: AmenitiesForm,
   },
   [HOST_STEP.Price]: {
-    order: 9,
+    order: 10,
     url: '/price',
     component: PriceForm,
   },
@@ -161,13 +167,8 @@ export function HostContextProvider({
     }
   }
 
+  // TODO: Refactor this function to be more readable and maintainable
   async function onNextStep(): Promise<void> {
-    if (currentStepNumber > 0 && currentStepNumber === Object.keys(steps).length - 1) {
-      const overviewStepPath = getRoutePathByRouteName('myListings')
-      router.push(overviewStepPath)
-      return
-    }
-
     if (currentStepNumber < Object.keys(steps).length - 1) {
       const nextStepNumber = currentStepNumber + 1
       const nextStepKey = Object.keys(steps).find(key => steps[key as HOST_STEP].order === nextStepNumber) ?? null;
@@ -182,12 +183,36 @@ export function HostContextProvider({
         
         if (formSend && currentStepObject.form.formState.isValid && currentStepObject.onSubmitCallback) {
           const formSubmit = await currentStepObject.onSubmitCallback(currentStepObject.form.getValues())
-          
+
           if (formSubmit) {
             router.push(`/host/${listingId}/${stepMap[nextStepKey as HOST_STEP].url}`)
+            return
           }
         }
       }
+    }
+
+    if (currentStepNumber > 0 && currentStepNumber === Object.keys(steps).length - 1) {
+      const currentStepObject = steps[currentStep as HOST_STEP]
+
+      if (!currentStepObject) {
+        return
+      }
+
+      if (currentStepObject.form) {
+        const formSend = await currentStepObject.form.trigger()
+        
+        if (formSend && currentStepObject.form.formState.isValid && currentStepObject.onSubmitCallback) {
+          const formSubmit = await currentStepObject.onSubmitCallback(currentStepObject.form.getValues())
+
+          if (formSubmit) {
+            const overviewStepPath = getRoutePathByRouteName('myListings')
+            router.push(overviewStepPath)
+            return
+          }
+        }
+      }
+      
     }
   }
 

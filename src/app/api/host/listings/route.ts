@@ -17,6 +17,7 @@ export async function POST(): Promise<NextResponse> {
         userId: session.user.id,
         title: '',
         description: '',
+        neighbourhoodDescription: '',
         status: ListingStatus.DRAFT,
       },
     })

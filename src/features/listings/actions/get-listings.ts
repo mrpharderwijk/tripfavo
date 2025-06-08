@@ -21,10 +21,11 @@ export const publicListingFloorPlanSelect = {
 
 export const publicListingGuestsAmountSelect = {
   select: {
-    adultsCount: true,
-    childrenCount: true,
-    infantsCount: true,
-    petsCount: true,
+    maxGuests: true,
+    adults: true,
+    children: true,
+    infants: true,
+    pets: true,
   },
 }
 
@@ -68,6 +69,7 @@ export const publicListingSelect = {
   amenities: publicListingAmenitySelect,
   createdAt: true,
   description: true,
+  neighbourhoodDescription: true,
   floorPlan: publicListingFloorPlanSelect,
   guestsAmount: publicListingGuestsAmountSelect,
   id: true,

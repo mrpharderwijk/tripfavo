@@ -73,14 +73,15 @@ model Account {
 }
 
 model Listing {
-  id          String        @id @default(auto()) @map("_id") @db.ObjectId
-  title       String?
-  description String?
-  structure   String?
-  privacyType String?
-  status      ListingStatus @default(DRAFT)
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  id                       String        @id @default(auto()) @map("_id") @db.ObjectId
+  title                    String?
+  description              String?
+  neighbourhoodDescription String?
+  structure                String?
+  privacyType              String?
+  status                   ListingStatus @default(DRAFT)
+  createdAt                DateTime      @default(now())
+  updatedAt                DateTime      @updatedAt
 
   userId String @db.ObjectId
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -133,13 +134,14 @@ model ListingFloorPlan {
 }
 
 model ListingGuestsAmount {
-  id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  adultsCount   Int?
-  childrenCount Int?
-  infantsCount  Int?
-  petsCount     Int?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  maxGuests Int?
+  adults    Int?
+  children  Int?
+  infants   Int?
+  pets      Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   listingId String  @unique @db.ObjectId
   listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
@@ -193,6 +195,7 @@ enum PriceType {
   MID_SEASON
   LOW_SEASON
   CLEANING_FEE
+  DEPOSIT
 }
 
 model Room {

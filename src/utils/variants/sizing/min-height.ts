@@ -2,6 +2,7 @@ export const minHeightVariants = {
   'min-height': {
     0: 'min-h-0',
     14: 'min-h-[14px]',
+    500: 'min-h-[500px]',
     none: 'min-h-none',
     xs: 'min-h-xs',
     sm: 'min-h-sm',

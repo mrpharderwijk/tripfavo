@@ -63,6 +63,10 @@ export function PriceForm({ listing }: ComponentStepProps) {
           amount:
             listing?.priceDetails?.find((pd) => pd.type === PriceType.CLEANING_FEE)?.amount ?? 0.0,
         },
+        {
+          type: PriceType.DEPOSIT,
+          amount: listing?.priceDetails?.find((pd) => pd.type === PriceType.DEPOSIT)?.amount ?? 0.0,
+        },
       ],
     },
   })

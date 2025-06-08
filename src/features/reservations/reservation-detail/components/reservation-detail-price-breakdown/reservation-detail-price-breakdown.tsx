@@ -64,6 +64,26 @@ export function ReservationDetailPriceBreakdown() {
               </Body>
             </FlexBoxItem>
           </FlexBox>
+
+          <FlexBox flex-direction="row">
+            <FlexBoxItem flex="auto">
+              <Body tag="span" size="base-lgt" font-weight="normal">
+                {tReservationDetailPriceBreakdown('deposit')}
+              </Body>
+            </FlexBoxItem>
+            <FlexBoxItem flex="initial">
+              <Body tag="span" size="base-lgt" font-weight="normal">
+                <LocalizedPrice
+                  price={
+                    listing.priceDetails.find(
+                      (priceDetail) => priceDetail.type === PriceType.DEPOSIT,
+                    )?.amount ?? 0
+                  }
+                  locale={locale as Locales}
+                />
+              </Body>
+            </FlexBoxItem>
+          </FlexBox>
         </FlexBox>
 
         <Divider />

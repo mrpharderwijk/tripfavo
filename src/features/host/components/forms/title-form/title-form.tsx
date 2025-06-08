@@ -14,8 +14,10 @@ import { HeadingGroup } from '@/components/molecules/heading/heading'
 import { Form, FormField } from '@/components/ui/form'
 import { HOST_STEP, useHostContext } from '@/features/host/providers/host-context-provider'
 import { ComponentStepProps } from '@/features/host/types/component-step-props'
+
+const INPUT_MAX_LENGTH = 120
 export const TitleFormSchema = z.object({
-  title: z.string().min(30).max(500),
+  title: z.string().min(30).max(INPUT_MAX_LENGTH),
 })
 
 export function TitleForm({ listing }: ComponentStepProps): ReactElement {
@@ -74,7 +76,7 @@ export function TitleForm({ listing }: ComponentStepProps): ReactElement {
                 label="Title"
                 error={errors.title?.message}
                 charCount
-                maxLength={500}
+                maxLength={INPUT_MAX_LENGTH}
               />
             )}
           />
