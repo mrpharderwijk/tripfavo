@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
 import { ReactElement, useRef, useState } from 'react'
 import { DateRange } from 'react-day-picker'
+import { PriceType } from '@prisma/client'
 
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { LocalizedPrice } from '@/components/atoms/localized-price/localized-price'
@@ -36,42 +37,42 @@ export function ListingDetailDatePicker(): ReactElement {
     new Date(2025, 5, 28),
   ]
 
-  // TODO: Get from API
+  // TODO: Make util or custom hook
   const datePrices = [
     // High Season
     {
       startMonth: 6, // July (0-based)
       endMonth: 7, // August
-      price: 250,
+      price: listing?.priceDetails?.find((price) => price.type === PriceType.HIGH_SEASON)?.amount,
     },
 
     // Mid Season
     {
       startMonth: 3, // April
       endMonth: 5, // June
-      price: 175,
+      price: listing?.priceDetails?.find((price) => price.type === PriceType.MID_SEASON)?.amount,
     },
     {
       startMonth: 8, // September
       endMonth: 9, // October
-      price: 175,
+      price: listing?.priceDetails?.find((price) => price.type === PriceType.MID_SEASON)?.amount,
     },
     {
       startMonth: 11, // December
       endMonth: 11, // December
-      price: 175,
+      price: listing?.priceDetails?.find((price) => price.type === PriceType.LOW_SEASON)?.amount,
     },
 
     // Low season
     {
       startMonth: 10, // November
       endMonth: 10, // November
-      price: 150,
+      price: listing?.priceDetails?.find((price) => price.type === PriceType.LOW_SEASON)?.amount,
     },
     {
       startMonth: 0, // January
       endMonth: 2, // March
-      price: 150,
+      price: listing?.priceDetails?.find((price) => price.type === PriceType.LOW_SEASON)?.amount,
     },
   ]
 

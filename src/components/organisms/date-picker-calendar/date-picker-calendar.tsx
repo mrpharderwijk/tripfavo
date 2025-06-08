@@ -16,21 +16,18 @@ import { CustomWeek } from '@/components/organisms/date-picker-calendar/componen
 import { CustomWeekday } from '@/components/organisms/date-picker-calendar/components/custom-week-day/custom-week-day'
 import { CustomWeekdays } from '@/components/organisms/date-picker-calendar/components/custom-week-days/custom-week-days'
 import { CustomWeeks } from '@/components/organisms/date-picker-calendar/components/custom-weeks/custom-weeks'
-import { DatePickerCalendarContextProvider } from '@/components/organisms/date-picker-calendar/providers/date-picker-calendar-context-provider'
+import {
+  DatePickerCalendarContextProvider,
+  DatePrice,
+} from '@/components/organisms/date-picker-calendar/providers/date-picker-calendar-context-provider'
 import { getPriceForDate } from '@/components/organisms/date-picker-calendar/utils/get-price-for-date'
 import { isDateDisabled } from '@/components/organisms/date-picker-calendar/utils/is-date-disabled'
 import { Locales } from '@/i18n/routing'
 import { localeToDateFnsLocale } from '@/utils/locale-to-date-fns-locale'
 
-export type PriceDate = {
-  startMonth: number
-  endMonth: number
-  price: number
-}
-
 type DatePickerCalendarProps = {
   disabledDates: Date[]
-  priceDates: PriceDate[]
+  priceDates: DatePrice[]
   locale: Locales
   selected: DateRange | undefined
   onSelect: (date: DateRange | undefined) => void

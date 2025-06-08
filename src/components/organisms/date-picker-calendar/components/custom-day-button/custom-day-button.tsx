@@ -47,7 +47,7 @@ export function CustomDayButton(
     >
       <div className="flex flex-col items-center">
         <span>{day.date.getDate()}</span>
-        {price && !modifiers.disabled && (
+        {!!price && !modifiers.disabled && (
           <Display show-sm show-md show-lg show-xl show-2xl show-3xl>
             <Body
               tag="span"

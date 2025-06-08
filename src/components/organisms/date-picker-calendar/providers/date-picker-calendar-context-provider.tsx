@@ -1,10 +1,10 @@
 import { createContext, ReactElement, ReactNode, useContext } from 'react'
 import { DateRange } from 'react-day-picker'
 
-type DatePrice = {
+export type DatePrice = {
   startMonth: number
   endMonth: number
-  price: number
+  price: number | undefined
 }
 
 type DatePickerCalendarContextState = {
