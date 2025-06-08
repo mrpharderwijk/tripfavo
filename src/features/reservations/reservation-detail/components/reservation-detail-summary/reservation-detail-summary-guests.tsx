@@ -121,19 +121,25 @@ export function ReservationDetailSummaryGuests(): ReactElement {
                 })
               }}
               editable={false}
-              min={1}
-              max={undefined}
+              min={listing.guestsAmount?.adults === 0 ? 0 : 1}
+              max={listing.guestsAmount?.adults ?? undefined}
             />
           </FlexBoxItem>
         </FlexBox>
         <Divider bg-color="deco" />
         <FlexBox flex-direction="row" gap={2} padding-y={4}>
           <FlexBoxItem display="flex" flex="auto" flex-direction="col" gap={1}>
-            <Body size="base-lgt" font-weight="semibold">
+            <Body
+              size="base-lgt"
+              font-weight="semibold"
+              color={listing.guestsAmount?.children === 0 ? 'primary-disabled' : 'primary'}
+            >
               {tReservationDetailSummaryGuests('dialog.children.label')}
             </Body>
             <Body size="base-mdt" color="secondary" font-weight="medium">
-              {tReservationDetailSummaryGuests('dialog.children.description')}
+              {listing.guestsAmount?.children === 0
+                ? tReservationDetailSummaryGuests('dialog.children.notAllowed')
+                : tReservationDetailSummaryGuests('dialog.children.description')}
             </Body>
           </FlexBoxItem>
           <FlexBoxItem flex="initial">
@@ -147,19 +153,25 @@ export function ReservationDetailSummaryGuests(): ReactElement {
                 })
               }}
               editable={false}
-              min={1}
-              max={undefined}
+              min={0}
+              max={listing.guestsAmount?.children ?? undefined}
             />
           </FlexBoxItem>
         </FlexBox>
         <Divider bg-color="deco" />
         <FlexBox flex-direction="row" gap={2} padding-y={4}>
           <FlexBoxItem display="flex" flex="auto" flex-direction="col" gap={1}>
-            <Body size="base-lgt" font-weight="semibold">
+            <Body
+              size="base-lgt"
+              font-weight="semibold"
+              color={listing.guestsAmount?.infants === 0 ? 'secondary-disabled' : 'primary'}
+            >
               {tReservationDetailSummaryGuests('dialog.infants.label')}
             </Body>
             <Body size="base-mdt" color="secondary" font-weight="medium">
-              {tReservationDetailSummaryGuests('dialog.infants.description')}
+              {listing.guestsAmount?.infants === 0
+                ? tReservationDetailSummaryGuests('dialog.infants.notAllowed')
+                : tReservationDetailSummaryGuests('dialog.infants.description')}
             </Body>
           </FlexBoxItem>
           <FlexBoxItem flex="initial">
@@ -173,19 +185,25 @@ export function ReservationDetailSummaryGuests(): ReactElement {
                 })
               }}
               editable={false}
-              min={1}
-              max={undefined}
+              min={0}
+              max={listing.guestsAmount?.infants ?? undefined}
             />
           </FlexBoxItem>
         </FlexBox>
         <Divider bg-color="deco" />
         <FlexBox flex-direction="row" gap={2} padding-y={4}>
           <FlexBoxItem display="flex" flex="auto" flex-direction="col" gap={1}>
-            <Body size="base-lgt" font-weight="semibold">
+            <Body
+              size="base-lgt"
+              font-weight="semibold"
+              color={listing.guestsAmount?.pets === 0 ? 'primary-disabled' : 'primary'}
+            >
               {tReservationDetailSummaryGuests('dialog.pets.label')}
             </Body>
             <Body size="base-mdt" color="secondary" font-weight="medium">
-              {tReservationDetailSummaryGuests('dialog.pets.description')}
+              {listing.guestsAmount?.pets === 0
+                ? tReservationDetailSummaryGuests('dialog.pets.notAllowed')
+                : tReservationDetailSummaryGuests('dialog.pets.description')}
             </Body>
           </FlexBoxItem>
           <FlexBoxItem flex="initial">
@@ -199,8 +217,9 @@ export function ReservationDetailSummaryGuests(): ReactElement {
                 })
               }}
               editable={false}
-              min={1}
-              max={undefined}
+              min={0}
+              max={listing.guestsAmount?.pets ?? undefined}
+              disabled={listing.guestsAmount?.pets === 0}
             />
           </FlexBoxItem>
         </FlexBox>

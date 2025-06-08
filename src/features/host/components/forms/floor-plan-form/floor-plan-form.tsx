@@ -18,23 +18,27 @@ import { HOST_STEP, useHostContext } from '@/features/host/providers/host-contex
 import { ComponentStepProps } from '@/features/host/types/component-step-props'
 
 export const FloorPlanFormSchema = z.object({
-  roomCount: z.number().min(1),
-  bedroomCount: z.number().min(0),
-  bedCount: z.number().min(1),
-  bathroomCount: z.number().min(0.5),
+  rooms: z.number().min(1),
+  bedrooms: z.number().min(0),
+  beds: z.number().min(1),
+  bathrooms: z.number().min(0.5),
+  livingRooms: z.number().min(0),
+  kitchens: z.number().min(0),
 })
 
 export function FloorPlanForm({ listing }: ComponentStepProps) {
-  const tFloorPlanForm = useTranslations('host.listing.floorPlanForm')
+  const tHostListingFloorPlanForm = useTranslations('host.listing.floorPlanForm')
   const { steps, currentStep, updateStep, onNextStep, setIsLoading, listingId } = useHostContext()
   const form = useForm<z.infer<typeof FloorPlanFormSchema>>({
     resolver: zodResolver(FloorPlanFormSchema),
     mode: 'onChange',
     defaultValues: {
-      roomCount: listing?.floorPlan?.roomCount ?? 1,
-      bedroomCount: listing?.floorPlan?.bedroomCount ?? 1,
-      bedCount: listing?.floorPlan?.bedCount ?? 1,
-      bathroomCount: listing?.floorPlan?.bathroomCount ?? 1,
+      rooms: listing?.floorPlan?.rooms ?? 1,
+      bedrooms: listing?.floorPlan?.bedrooms ?? 1,
+      beds: listing?.floorPlan?.beds ?? 1,
+      bathrooms: listing?.floorPlan?.bathrooms ?? 1,
+      livingRooms: listing?.floorPlan?.livingRooms ?? 1,
+      kitchens: listing?.floorPlan?.kitchens ?? 1,
     },
   })
   const {
@@ -68,8 +72,8 @@ export function FloorPlanForm({ listing }: ComponentStepProps) {
   return (
     <Box display="flex" flex-direction="col" gap={11}>
       <HeadingGroup
-        title={tFloorPlanForm('heading.title')}
-        subtitle={tFloorPlanForm('heading.subtitle')}
+        title={tHostListingFloorPlanForm('heading.title')}
+        subtitle={tHostListingFloorPlanForm('heading.subtitle')}
       />
 
       <Form {...form}>
@@ -77,20 +81,20 @@ export function FloorPlanForm({ listing }: ComponentStepProps) {
           <Box padding-y={4} border-b={1} border-color="secondary-disabled">
             <FormField
               control={control}
-              name="roomCount"
+              name="rooms"
               render={({ field }) => (
                 <FlexBox flex-direction="row" gap={2}>
                   <FlexBoxItem flex="auto">
-                    <Body size="base-xl">Rooms (includes living room)</Body>
+                    <Body size="base-xl">{tHostListingFloorPlanForm('rooms.label')}</Body>
                   </FlexBoxItem>
                   <FlexBoxItem flex="initial">
                     <InputStep
-                      id="roomCount"
+                      id="rooms"
                       value={field.value}
                       onChange={field.onChange}
                       editable={false}
-                      min={FloorPlanFormSchema.shape?.roomCount?.minValue ?? 1}
-                      max={FloorPlanFormSchema.shape?.roomCount?.maxValue ?? undefined}
+                      min={FloorPlanFormSchema.shape?.rooms?.minValue ?? 1}
+                      max={FloorPlanFormSchema.shape?.rooms?.maxValue ?? undefined}
                     />
                   </FlexBoxItem>
                 </FlexBox>
@@ -101,20 +105,20 @@ export function FloorPlanForm({ listing }: ComponentStepProps) {
           <Box padding-y={4} border-b={1} border-color="secondary-disabled">
             <FormField
               control={control}
-              name="bedroomCount"
+              name="bedrooms"
               render={({ field }) => (
                 <FlexBox flex-direction="row" gap={2}>
                   <FlexBoxItem flex="auto">
-                    <Body size="base-xl">Bedrooms</Body>
+                    <Body size="base-xl">{tHostListingFloorPlanForm('bedrooms.label')}</Body>
                   </FlexBoxItem>
                   <FlexBoxItem flex="initial">
                     <InputStep
-                      id="bedroomCount"
+                      id="bedrooms"
                       value={field.value}
                       onChange={field.onChange}
                       editable={false}
-                      min={FloorPlanFormSchema.shape?.bedroomCount?.minValue ?? 0}
-                      max={FloorPlanFormSchema.shape?.bedroomCount?.maxValue ?? undefined}
+                      min={FloorPlanFormSchema.shape?.bedrooms?.minValue ?? 0}
+                      max={FloorPlanFormSchema.shape?.bedrooms?.maxValue ?? undefined}
                     />
                   </FlexBoxItem>
                 </FlexBox>
@@ -125,19 +129,19 @@ export function FloorPlanForm({ listing }: ComponentStepProps) {
           <Box padding-y={4} border-b={1} border-color="secondary-disabled">
             <FormField
               control={control}
-              name="bedCount"
+              name="beds"
               render={({ field }) => (
                 <FlexBox flex-direction="row" gap={2}>
                   <FlexBoxItem flex="auto">
-                    <Body size="base-xl">Beds</Body>
+                    <Body size="base-xl">{tHostListingFloorPlanForm('beds.label')}</Body>
                   </FlexBoxItem>
                   <FlexBoxItem flex="initial">
                     <InputStep
-                      id="bedCount"
+                      id="beds"
                       value={field.value}
                       onChange={field.onChange}
-                      min={FloorPlanFormSchema.shape?.bedCount?.minValue ?? 1}
-                      max={FloorPlanFormSchema.shape?.bedCount?.maxValue ?? undefined}
+                      min={FloorPlanFormSchema.shape?.beds?.minValue ?? 1}
+                      max={FloorPlanFormSchema.shape?.beds?.maxValue ?? undefined}
                       editable={false}
                     />
                   </FlexBoxItem>
@@ -149,20 +153,68 @@ export function FloorPlanForm({ listing }: ComponentStepProps) {
           <Box padding-y={4} border-b={1} border-color="secondary-disabled">
             <FormField
               control={control}
-              name="bathroomCount"
+              name="bathrooms"
               render={({ field }) => (
                 <FlexBox flex-direction="row" gap={2}>
                   <FlexBoxItem flex="auto">
-                    <Body size="base-xl">Bathrooms</Body>
+                    <Body size="base-xl">{tHostListingFloorPlanForm('bathrooms.label')}</Body>
                   </FlexBoxItem>
                   <FlexBoxItem flex="initial">
                     <InputStep
-                      id="bathroomCount"
+                      id="bathrooms"
                       value={field.value}
                       onChange={field.onChange}
-                      min={FloorPlanFormSchema.shape?.bathroomCount?.minValue ?? 1}
-                      max={FloorPlanFormSchema.shape?.bathroomCount?.maxValue ?? undefined}
+                      min={FloorPlanFormSchema.shape?.bathrooms?.minValue ?? 1}
+                      max={FloorPlanFormSchema.shape?.bathrooms?.maxValue ?? undefined}
                       step={field.value < 1 && field.value > 0 ? 0.5 : 1}
+                      editable={false}
+                    />
+                  </FlexBoxItem>
+                </FlexBox>
+              )}
+            />
+          </Box>
+
+          <Box padding-y={4} border-b={1} border-color="secondary-disabled">
+            <FormField
+              control={control}
+              name="livingRooms"
+              render={({ field }) => (
+                <FlexBox flex-direction="row" gap={2}>
+                  <FlexBoxItem flex="auto">
+                    <Body size="base-xl">{tHostListingFloorPlanForm('livingRooms.label')}</Body>
+                  </FlexBoxItem>
+                  <FlexBoxItem flex="initial">
+                    <InputStep
+                      id="livingRooms"
+                      value={field.value}
+                      onChange={field.onChange}
+                      min={FloorPlanFormSchema.shape?.livingRooms?.minValue ?? 0}
+                      max={FloorPlanFormSchema.shape?.livingRooms?.maxValue ?? undefined}
+                      editable={false}
+                    />
+                  </FlexBoxItem>
+                </FlexBox>
+              )}
+            />
+          </Box>
+
+          <Box padding-y={4} border-b={1} border-color="secondary-disabled">
+            <FormField
+              control={control}
+              name="kitchens"
+              render={({ field }) => (
+                <FlexBox flex-direction="row" gap={2}>
+                  <FlexBoxItem flex="auto">
+                    <Body size="base-xl">{tHostListingFloorPlanForm('kitchens.label')}</Body>
+                  </FlexBoxItem>
+                  <FlexBoxItem flex="initial">
+                    <InputStep
+                      id="kitchens"
+                      value={field.value}
+                      onChange={field.onChange}
+                      min={FloorPlanFormSchema.shape?.kitchens?.minValue ?? 0}
+                      max={FloorPlanFormSchema.shape?.kitchens?.maxValue ?? undefined}
                       editable={false}
                     />
                   </FlexBoxItem>

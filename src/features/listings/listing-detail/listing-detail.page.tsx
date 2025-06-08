@@ -16,6 +16,7 @@ type ListingDetailPageProps = {
 }
 
 export function ListingDetailPage({ listing }: ListingDetailPageProps) {
+  console.log(listing)
   return (
     <ListingDetailContextProvider listing={listing}>
       <FlexBox flex-direction="col" gap={6}>
@@ -40,6 +41,11 @@ export function ListingDetailPage({ listing }: ListingDetailPageProps) {
               {/* Structure & FloorPlan */}
               <ListingDetailSubtitle />
             </FlexBox>
+
+            {/* Divider */}
+            {/* <ListingDetailDivider />
+
+            <ListingDetailFloorPlan /> */}
 
             {/* Host Info */}
             <ListingDetailHostInfo />

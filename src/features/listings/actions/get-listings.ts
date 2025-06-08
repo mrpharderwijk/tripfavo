@@ -12,10 +12,12 @@ export const publicListingAmenitySelect = {
 
 export const publicListingFloorPlanSelect = {
   select: {
-    bathroomCount: true,
-    bedCount: true,
-    bedroomCount: true,
-    roomCount: true,
+    bathrooms: true,
+    bedrooms: true,
+    beds: true,
+    livingRooms: true,
+    kitchens: true,
+    rooms: true,
   },
 }
 

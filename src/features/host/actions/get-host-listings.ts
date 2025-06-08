@@ -5,10 +5,12 @@ import { prisma } from '@/lib/prisma/db'
 export const hostFloorPlanSelect = {
   select: {
     id: true,
-    roomCount: true,
-    bathroomCount: true,
-    bedroomCount: true,
-    bedCount: true,
+    rooms: true,
+    bathrooms: true,
+    bedrooms: true,
+    beds: true,
+    livingRooms: true,
+    kitchens: true,
   },
 }
 

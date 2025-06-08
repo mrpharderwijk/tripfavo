@@ -85,6 +85,24 @@
         "heading": {
           "title": "Share some basics about your place",
           "subtitle": "You'll add more details later, like bed types."
+        },
+        "rooms": {
+          "label": "Rooms (includes living room)"
+        },
+        "bedrooms": {
+          "label": "Bedrooms"
+        },
+        "beds": {
+          "label": "Beds"
+        },
+        "bathrooms": {
+          "label": "Bathrooms"
+        },
+        "livingRooms": {
+          "label": "Living rooms"
+        },
+        "kitchens": {
+          "label": "Kitchens"
         }
       },
       "guestsAmountForm": {
@@ -300,10 +318,12 @@
     "upload": "Upload",
     "uploadClick": "Click to upload",
     "guestCount": "{amount, plural, =1 {1 guest} other {# guests}}",
-    "roomCount": "{amount, plural, =1 {1 room} other {# rooms}}",
-    "bedroomCount": "{amount, plural, =1 {1 bedroom} other {# bedrooms}}",
-    "bathroomCount": "{amount, plural, =1 {1 bathroom} other {# bathrooms}}",
-    "bedCount": "{amount, plural, =1 {1 bed} other {# beds}}"
+    "roomAmount": "{amount, plural, =1 {1 room} other {# rooms}}",
+    "bedroomAmount": "{amount, plural, =1 {1 bedroom} other {# bedrooms}}",
+    "bathroomAmount": "{amount, plural, =1 {1 bathroom} other {# bathrooms}}",
+    "bedAmount": "{amount, plural, =1 {1 bed} other {# beds}}",
+    "kitchenAmount": "{amount, plural, =1 {1 kitchen} other {# kitchens}}",
+    "livingRoomAmount": "{amount, plural, =1 {1 living room} other {# living rooms}}"
   },
   "reservationDetail": {
     "summary": {
@@ -322,7 +342,7 @@
       "guests": {
         "label": "Guests",
         "value": {
-          "adultsAmount": "{amount, plural, =1 {1 guest} other {# guests}}",
+          "adultsAmount": "{amount, plural, =1 {1 adult} other {# adults}}",
           "childrenAmount": "{amount, plural, =1 {1 kid} other {# kids}}",
           "infantsAmount": "{amount, plural, =1 {1 baby} other {# baby's}}",
           "petsAmount": "{amount, plural, =1 {1 pet} other {# pets}}"
@@ -336,15 +356,18 @@
           },
           "children": {
             "label": "Children",
-            "description": "From 2 to 12 years old"
+            "description": "From 2 to 12 years old",
+            "notAllowed": "The host does not allow children"
           },
           "infants": {
             "label": "Baby",
-            "description": "Younger than 2 years old"
+            "description": "Younger than 2 years old",
+            "notAllowed": "The host does not allow infants"
           },
           "pets": {
             "label": "Pets",
-            "description": "Dogs, cats, and other pets"
+            "description": "Dogs, cats, and other pets",
+            "notAllowed": "The host does not allow pets"
           },
           "button": {
             "confirm": "Confirm"

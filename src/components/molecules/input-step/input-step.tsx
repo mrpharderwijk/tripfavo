@@ -14,6 +14,8 @@ export type InputStepProps = HTMLAttributes<HTMLDivElement> & {
   step?: number
   editable?: boolean
   disabled?: boolean
+  disabledIncrement?: boolean
+  disabledDecrement?: boolean
   ariaLabel?: string
   ariaLabelIncrement?: string
   ariaLabelDecrement?: string
@@ -146,6 +148,7 @@ export function InputStep({
               [-moz-appearance:textfield]
               [&::-webkit-inner-spin-button]:appearance-none
               [&::-webkit-outer-spin-button]:appearance-none
+              disabled:text-text-secondary-disabled
             `}
           readOnly={!editable}
         />

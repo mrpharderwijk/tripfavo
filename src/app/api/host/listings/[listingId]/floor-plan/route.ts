@@ -15,8 +15,8 @@ export async function POST(request: NextRequest, { params }: HostListingParams) 
     return NextResponse.json({ message: 'Listing ID is required' }, { status: 400 })
   }
 
-  const { roomCount, bedroomCount, bedCount, bathroomCount } = await request.json()
-  if (!roomCount || !bedroomCount || !bedCount || !bathroomCount) {
+  const { rooms, bedrooms, beds, bathrooms, livingRooms, kitchens } = await request.json()
+  if (!rooms || !bedrooms || !beds || !bathrooms || !livingRooms || !kitchens) {
     return NextResponse.json({ message: 'Missing required fields' }, { status: 400 })
   }
 
@@ -30,16 +30,20 @@ export async function POST(request: NextRequest, { params }: HostListingParams) 
         floorPlan: {
           upsert: {
             create: {
-              roomCount,
-              bedroomCount,
-              bedCount,
-              bathroomCount,
+              rooms,
+              bedrooms,
+              beds,
+              bathrooms,
+              livingRooms,
+              kitchens,
             },
             update: {
-              roomCount,
-              bedroomCount,
-              bedCount,
-              bathroomCount,
+              rooms,
+              bedrooms,
+              beds,
+              bathrooms,
+              livingRooms,
+              kitchens,
             },
           },
         },

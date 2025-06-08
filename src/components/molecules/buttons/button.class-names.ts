@@ -1,23 +1,23 @@
 import { cva } from 'class-variance-authority'
 
 export const primaryButtonThemeClassNames =
-  'bg-bg-primary hover:bg-bg-primary-hover focus:bg-bg-primary-hover focus-visible:bg-bg-primary-hover'
+  'bg-bg-primary hover:bg-bg-primary-hover focus:bg-bg-primary-hover focus-visible:bg-bg-primary-hover disabled:bg-bg-primary-disabled'
 export const primaryInverseButtonThemeClassNames =
-  'bg-bg-primary-inverse hover:bg-bg-primary-inverse-hover focus:bg-bg-primary-inverse-hover focus-visible:bg-bg-primary-inverse-hover'
-export const primaryLinkButtonThemeClassNames = 'bg-bg-primary'
+  'bg-bg-primary-inverse hover:bg-bg-primary-inverse-hover focus:bg-bg-primary-inverse-hover focus-visible:bg-bg-primary-inverse-hover disabled:bg-bg-primary-inverse-disabled'
+export const primaryLinkButtonThemeClassNames = 'bg-bg-primary disabled:bg-bg-primary-disabled'
 export const secondaryButtonThemeClassNames = 'bg-linear-to-r from-blue-700 to-purple-800'
 export const tertiaryButtonThemeClassNames =
-  'bg-bg-tertiary hover:bg-bg-tertiary-hover focus:bg-bg-tertiary-hover focus-visible:bg-bg-tertiary-hover'
+  'bg-bg-tertiary hover:bg-bg-tertiary-hover focus:bg-bg-tertiary-hover focus-visible:bg-bg-tertiary-hover disabled:bg-bg-tertiary-disabled'
 export const quaternaryButtonThemeClassNames =
-  'bg-bg-quaternary hover:bg-bg-quaternary-hover focus:bg-bg-quaternary-hover focus-visible:bg-bg-quaternary-hover'
+  'bg-bg-quaternary hover:bg-bg-quaternary-hover focus:bg-bg-quaternary-hover focus-visible:bg-bg-quaternary-hover disabled:bg-bg-quaternary-disabled'
 export const quaternaryInverseButtonThemeClassNames =
-  'bg-bg-primary hover:hover:bg-bg-quaternary-hover focus:hover:bg-bg-quaternary-hover focus-visible:hover:bg-bg-quaternary-hover'
+  'bg-bg-primary hover:hover:bg-bg-quaternary-hover focus:hover:bg-bg-quaternary-hover focus-visible:hover:bg-bg-quaternary-hover disabled:bg-bg-quaternary-disabled'
 export const outlineButtonThemeClassNames =
-  'border-1 border-border-tertiary hover:border-border-tertiary-hover focus:border-border-tertiary-hover focus-visible:border-border-tertiary-hover'
+  'border-1 border-border-tertiary hover:border-border-tertiary-hover focus:border-border-tertiary-hover focus-visible:border-border-tertiary-hover disabled:border-border-secondary-disabled hover:disabled:border-border-secondary-disabled'
 export const sidebarMenuItemButtonThemeClassNames =
-  'bg-bg-primary hover:bg-bg-secondary focus:bg-bg-secondary focus-visible:bg-bg-secondary'
+  'bg-bg-primary hover:bg-bg-secondary focus:bg-bg-secondary focus-visible:bg-bg-secondary disabled:bg-bg-primary-disabled'
 export const sidebarMenuItemActiveButtonThemeClassNames =
-  'bg-bg-quaternary hover:bg-bg-secondary focus:bg-bg-secondary focus-visible:bg-bg-secondary'
+  'bg-bg-quaternary hover:bg-bg-secondary focus:bg-bg-secondary focus-visible:bg-bg-secondary disabled:bg-bg-quaternary-disabled'
 
 type ButtonVariant =
   | 'primary'
@@ -92,7 +92,7 @@ export const buttonClassNames = cva('box-border transition-all duration-300', {
     },
     loading: {
       true: 'cursor-not-allowed hover:cursor-not-allowed',
-      false: 'cursor-pointer',
+      false: '',
     },
   },
   compoundVariants: [

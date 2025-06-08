@@ -121,13 +121,15 @@ model ListingLocation {
 }
 
 model ListingFloorPlan {
-  id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  roomCount     Int?
-  bathroomCount Int?
-  bedroomCount  Int?
-  bedCount      Int?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  rooms       Int?
+  bathrooms   Int?
+  bedrooms    Int?
+  beds        Int?
+  livingRooms Int?
+  kitchens    Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   listingId String  @unique @db.ObjectId
   listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)

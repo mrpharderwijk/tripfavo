@@ -41,13 +41,19 @@ export function ListingDescription({
       </FlexBoxItem>
       <FlexBoxItem>
         <DotList>
-          <DotListItem>{tCommon('roomCount', { amount: floorPlan?.roomCount ?? 0 })}</DotListItem>
+          <DotListItem>{tCommon('roomAmount', { amount: floorPlan?.rooms ?? 0 })}</DotListItem>
           <DotListItem>
-            {tCommon('bedroomCount', { amount: floorPlan?.bedroomCount ?? 0 })}
+            {tCommon('bedroomAmount', { amount: floorPlan?.bedrooms ?? 0 })}
           </DotListItem>
-          <DotListItem>{tCommon('bedCount', { amount: floorPlan?.bedCount ?? 0 })}</DotListItem>
+          <DotListItem>{tCommon('bedAmount', { amount: floorPlan?.beds ?? 0 })}</DotListItem>
+          <DotListItem>
+            {tCommon('kitchenAmount', { amount: floorPlan?.kitchens ?? 0 })}
+          </DotListItem>
+          <DotListItem>
+            {tCommon('livingRoomAmount', { amount: floorPlan?.livingRooms ?? 0 })}
+          </DotListItem>
           <DotListItem last>
-            {tCommon('bathroomCount', { amount: floorPlan?.bathroomCount ?? 0 })}
+            {tCommon('bathroomAmount', { amount: floorPlan?.bathrooms ?? 0 })}
           </DotListItem>
         </DotList>
       </FlexBoxItem>

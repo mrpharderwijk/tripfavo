@@ -25,7 +25,6 @@ export function ListingDetailDatePicker(): ReactElement {
   const router = useRouter()
   const locale = useLocale()
   const tListingDates = useTranslations('listing.dates')
-  const tCommon = useTranslations('common')
   const [selected, setSelected] = useState<DateRange | undefined>(undefined)
   const { listing } = useListingDetailContext()
 
@@ -110,16 +109,23 @@ export function ListingDetailDatePicker(): ReactElement {
         </FlexBox>
 
         <BottomBar>
-          <FlexBox flex-direction="row" align-items="center" justify-content="between" fullWidth>
+          <FlexBox
+            flex-direction="row"
+            align-items="center"
+            justify-content="between"
+            fullWidth
+            gap={2}
+            gap-md={10}
+          >
             <div className="flex flex-col">
               {!selected?.from && !selected?.to && (
-                <Body color="primary" size="base-xl" font-weight="semibold">
+                <Body color="secondary" size="base-lgt" font-weight="semibold">
                   {tListingDates('selectDates')}
                 </Body>
               )}
 
               {selected?.from && selected?.to && (
-                <Body color="primary" size="base-xl" font-weight="semibold">
+                <Body color="primary" size="base-lgt" font-weight="semibold">
                   {/* TODO: Add translation */}
                   <LocalizedPrice
                     price={calculatePricePerNight(selected, datePrices)}
@@ -132,7 +138,7 @@ export function ListingDetailDatePicker(): ReactElement {
               )}
 
               {selected && (
-                <Body color="primary" size="base-lgt">
+                <Body color="primary" size="base-mdt">
                   <LocalizedBookingDates
                     startDate={selected?.from}
                     endDate={selected?.to}
