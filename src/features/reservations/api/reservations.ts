@@ -94,6 +94,16 @@ export async function POST(request: NextRequest, { params }: ReservationsParams)
           },
         },
         createdAt: true,
+        email: true,
+      },
+    })
+
+    const host = await prisma.user.findUnique({
+      where: {
+        id: listing?.user?.id,
+      },
+      select: {
+        email: true,
       },
     })
 
@@ -103,7 +113,7 @@ export async function POST(request: NextRequest, { params }: ReservationsParams)
     // Send email to guest
     const { data, error } = await resend.emails.send({
       from: 'TripFavo <noreply@rocketsciencebv.nl>',
-      to: ['mrpharderwijk@gmail.com'],
+      to: [`${process.env.NEXT_PUBLIC_ENV === 'LOCAL' ? 'mrpharderwijk@gmail.com' : guest?.email}`],
       subject: `Your reservation for ${listing?.location?.city}`,
       react: EmailGuestReservationRequest({
         startDate,
@@ -123,7 +133,7 @@ export async function POST(request: NextRequest, { params }: ReservationsParams)
     // Send email to host
     const { data: hostData, error: hostError } = await resend.emails.send({
       from: 'TripFavo <noreply@rocketsciencebv.nl>',
-      to: ['mrpharderwijk@gmail.com'],
+      to: [`${process.env.NEXT_PUBLIC_ENV === 'LOCAL' ? 'mrpharderwijk@gmail.com' : host?.email}`],
       subject: `New reservation for ${listing?.location?.streetName}`,
       react: EmailHostReservationRequest({
         startDate,
