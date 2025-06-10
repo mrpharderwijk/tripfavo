@@ -1,19 +1,23 @@
 'use client'
 
-import Image from 'next/image'
+import { format } from 'date-fns'
 import { useRouter } from 'next/navigation'
-import { ReactElement } from 'react'
+import { useLocale, useTranslations } from 'next-intl'
+import { ReactElement, useMemo } from 'react'
+import { ListingStatus } from '@prisma/client'
 
-import { Box } from '@/components/atoms/layout/box/box'
-import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
-import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
-import { ListingItemActions } from '@/features/host/components/listing-item/listing-item-actions'
-import { ListingItemDate } from '@/features/host/components/listing-item/listing-item-date'
-import { ListingItemStatus } from '@/features/host/components/listing-item/listing-item-status'
-import { ListingItemTitle } from '@/features/host/components/listing-item/listing-item-title'
+import { ListMediaItem } from '@/components/organisms/list-media-item/list-media-item'
+import { ListingMediaItemStatus } from '@/components/organisms/list-media-item/list-media-item-status'
 import { HostListing } from '@/features/host/types/host-listing'
+import { localeToDateFnsLocale } from '@/utils/locale-to-date-fns-locale'
 
 type ListingItemProps = HostListing
+
+const listingMediaItemStatusMap = {
+  [ListingStatus.DRAFT]: { type: ListingMediaItemStatus.DANGER, label: 'Draft' },
+  [ListingStatus.IN_REVIEW]: { type: ListingMediaItemStatus.WARNING, label: 'In review' },
+  [ListingStatus.PUBLISHED]: { type: ListingMediaItemStatus.SUCCESS, label: 'Published' },
+}
 
 export function ListingItem({
   id,
@@ -23,44 +27,43 @@ export function ListingItem({
   status,
   createdAt,
 }: ListingItemProps): ReactElement {
+  const locale = useLocale()
+  const tHost = useTranslations('host')
   const router = useRouter()
-
   const featuredImage = images?.find((image) => image.isMain) ?? images?.[0] ?? null
+  const listingMediaItemTitle = useMemo(() => {
+    if (title) {
+      return title
+    }
 
-  function handleOnClickListing(listingId: string) {
-    router.push(`/host/${listingId}/structure`)
-  }
+    if (!title && !!location?.city) {
+      return `${tHost('listing.yourListing')} ${location?.city}`
+    }
+
+    return ''
+  }, [title, location?.city, tHost])
+
+  const subtitle = useMemo(() => {
+    const startDate = format(createdAt, 'PPPP', {
+      locale: localeToDateFnsLocale(locale),
+    })
+    const endDate = format(createdAt, 'HH:mm', {
+      locale: localeToDateFnsLocale(locale),
+    })
+
+    return `${startDate} - ${endDate}`
+  }, [createdAt, locale])
 
   return (
-    <FlexBox flex-direction="row" gap={4} fullWidth>
-      <FlexBoxItem flex="auto">
-        <div
-          className="relative hover:bg-bg-secondary focus:bg-bg-secondary border border-deco rounded-2xl cursor-pointer"
-          onClick={() => handleOnClickListing(id)}
-        >
-          <ListingItemActions id={id} />
-          <ListingItemStatus status={status} />
-          <FlexBox flex-direction="row" gap={4} padding={4}>
-            <FlexBoxItem flex="initial">
-              <Box width={16} height={16} border-radius="xl" bg-color="deco" overflow="hidden">
-                {!!images?.length && !!featuredImage && (
-                  <Image
-                    src={featuredImage?.url}
-                    alt={featuredImage?.fileName}
-                    width={64}
-                    height={64}
-                    className="object-cover aspect-square"
-                  />
-                )}
-              </Box>
-            </FlexBoxItem>
-            <FlexBox flex-direction="col" gap={2} align-items="start" justify-content="center">
-              <ListingItemTitle title={title} city={location?.city} />
-              <ListingItemDate createdAt={createdAt} />
-            </FlexBox>
-          </FlexBox>
-        </div>
-      </FlexBoxItem>
-    </FlexBox>
+    <ListMediaItem
+      href={`/host/${id}/structure`}
+      status={{
+        type: listingMediaItemStatusMap[status].type,
+        label: listingMediaItemStatusMap[status].label,
+      }}
+      image={featuredImage ?? { url: '', fileName: '' }}
+      title={listingMediaItemTitle}
+      subtitle={subtitle}
+    />
   )
 }

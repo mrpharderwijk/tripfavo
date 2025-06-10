@@ -1,18 +1,22 @@
 'use client'
 
 import { ArrowLeft } from 'lucide-react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
-export function BackButton() {
+export function BackButton({ routePath }: { routePath?: string }) {
   const router = useRouter()
 
-  function handleOnClick() {
-    router.back()
+  function handleOnClick(event: React.MouseEvent<HTMLAnchorElement>) {
+    if (!routePath) {
+      router.back()
+      return
+    }
   }
 
   return (
-    <button className="cursor-pointer" onClick={handleOnClick}>
+    <Link href={routePath ?? '#'} className="cursor-pointer" onClick={handleOnClick}>
       <ArrowLeft />
-    </button>
+    </Link>
   )
 }

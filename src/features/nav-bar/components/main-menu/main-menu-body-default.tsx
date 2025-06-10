@@ -1,38 +1,43 @@
 'use client'
 
 import { Globe, Heart, LayoutDashboard, Ticket } from 'lucide-react'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { ReactElement } from 'react'
 
 import { Button } from '@/components/molecules/buttons/button'
+import { ButtonWrapper } from '@/components/molecules/buttons/button-wrapper/button-wrapper'
 import { useMainMenuContext } from '@/features/nav-bar/components/main-menu/main-menu-context-provider'
 import { useAppContext } from '@/providers/app-context-provider/app-context-provider'
-import { isCurrentRoute } from '@/utils/get-route'
+import { getRoutePathByRouteName, isCurrentRoute } from '@/utils/get-route'
 
 export function MainMenuBodyDefault(): ReactElement {
   const pathname = usePathname()
   const { currentUser } = useAppContext()
   const tMainMenuGuest = useTranslations('mainMenu.guest')
   const tMainMenu = useTranslations('mainMenu')
-  const { handleOnClickSidebarItem, handleOnClickLanguage } = useMainMenuContext()
+  const { handleOnClickLanguage, closeMainMenu } = useMainMenuContext()
 
   return (
     <>
       {currentUser && (
-        <Button
+        <ButtonWrapper
           icon={LayoutDashboard}
           size="lg"
           variant={
             !isCurrentRoute(pathname, 'guest') ? 'sidebar-menu-item' : 'sidebar-menu-item-active'
           }
-          onClick={() => handleOnClickSidebarItem('guest')}
+          onClick={closeMainMenu}
+          renderRoot={({ buttonContent }) => (
+            <Link href={getRoutePathByRouteName('overview')}>{buttonContent}</Link>
+          )}
         >
           {tMainMenuGuest('dashboard')}
-        </Button>
+        </ButtonWrapper>
       )}
       {currentUser && (
-        <Button
+        <ButtonWrapper
           icon={Heart}
           size="lg"
           variant={
@@ -40,22 +45,30 @@ export function MainMenuBodyDefault(): ReactElement {
               ? 'sidebar-menu-item'
               : 'sidebar-menu-item-active'
           }
-          onClick={() => handleOnClickSidebarItem('myFavorites')}
+          onClick={closeMainMenu}
+          renderRoot={({ buttonContent }) => (
+            <Link href={getRoutePathByRouteName('myFavorites')}>{buttonContent}</Link>
+          )}
         >
           {tMainMenuGuest('myFavorites')}
-        </Button>
+        </ButtonWrapper>
       )}
       {currentUser && (
-        <Button
+        <ButtonWrapper
           icon={Ticket}
           size="lg"
           variant={
-            !isCurrentRoute(pathname, 'myTrips') ? 'sidebar-menu-item' : 'sidebar-menu-item-active'
+            !isCurrentRoute(pathname, 'myBookings')
+              ? 'sidebar-menu-item'
+              : 'sidebar-menu-item-active'
           }
-          onClick={() => handleOnClickSidebarItem('myTrips')}
+          onClick={closeMainMenu}
+          renderRoot={({ buttonContent }) => (
+            <Link href={getRoutePathByRouteName('myBookings')}>{buttonContent}</Link>
+          )}
         >
           {tMainMenuGuest('myTrips')}
-        </Button>
+        </ButtonWrapper>
       )}
       <Button
         icon={Globe}

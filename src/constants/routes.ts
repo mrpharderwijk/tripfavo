@@ -58,12 +58,12 @@ export const routes: RoutesObject = {
         protected: true,
         default: true,
       },
-      myFavorites: {
-        path: '/favorites',
+      myBookings: {
+        path: '/bookings',
         protected: true,
       },
-      myTrips: {
-        path: '/trips',
+      myFavorites: {
+        path: '/favorites',
         protected: true,
       },
     },

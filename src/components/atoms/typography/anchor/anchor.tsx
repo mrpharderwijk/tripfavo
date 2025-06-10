@@ -4,14 +4,14 @@ import { HtmlHTMLAttributes } from 'react'
 
 import { textClassNames } from '@/components/atoms/typography/text/text.class-names'
 
-type LinkProps = PropsWithChildren<
+type AnchorProps = PropsWithChildren<
   VariantProps<typeof textClassNames> &
     Omit<HtmlHTMLAttributes<HTMLAnchorElement>, 'className'> & {
       ref?: Ref<HTMLAnchorElement>
     }
 >
 
-export function Link({ children, ref, ...props }: LinkProps): ReactElement {
+export function Anchor({ children, ref, ...props }: AnchorProps): ReactElement {
   const anchorClassName = textClassNames({ ...props })
 
   return (

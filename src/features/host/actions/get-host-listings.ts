@@ -60,7 +60,7 @@ export const hostPriceDetailSelect = {
   select: {
     id: true,
     type: true,
-    amount: true,
+    price: true,
   },
 }
 

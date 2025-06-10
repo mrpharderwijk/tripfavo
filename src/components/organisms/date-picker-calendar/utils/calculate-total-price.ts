@@ -1,16 +1,20 @@
-import { DateRange } from 'react-day-picker'
-
 import { DatePrice } from '@/components/organisms/date-picker-calendar/providers/date-picker-calendar-context-provider'
 import { getPriceForDate } from '@/components/organisms/date-picker-calendar/utils/get-price-for-date'
 
-export function calculateTotalPrice(range: DateRange | undefined, datePrices: DatePrice[]): number {
-  if (!range?.from || !range?.to) return 0
+type CalculateTotalPriceParams = {
+  startDate?: Date,
+  endDate?: Date,
+  datePrices: DatePrice[]
+}
+
+export function calculateTotalPrice({startDate, endDate, datePrices }: CalculateTotalPriceParams): number {
+  if (!startDate || !endDate) return 0
 
   let total = 0
-  let currentDate = new Date(range.from)
+  let currentDate = new Date(startDate)
 
   // We only count nights, so we stop before the end date
-  while (currentDate < range.to) {
+  while (currentDate < endDate) {
     const price = getPriceForDate(currentDate, datePrices)
     if (price) {
       total += price

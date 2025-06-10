@@ -384,6 +384,20 @@
     },
     "cancellationDetails": {
       "heading": "Cancellation details"
+    },
+    "bottomBar": {
+      "button": {
+        "label": "Confirm reservation"
+      }
+    }
+  },
+  "listingDetail": {
+    "bottomBar": {
+      "selectDates": "Select dates to view the prices",
+      "button": {
+        "labelNonSelected": "Check availability",
+        "labelSelected": "Reserve now"
+      }
     }
   }
 }

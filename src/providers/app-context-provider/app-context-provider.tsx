@@ -1,5 +1,6 @@
 'use client'
 
+import { usePathname } from 'next/navigation'
 import {
   createContext,
   Dispatch,
@@ -33,8 +34,12 @@ const AppContext = createContext<AppContextState | null>(null)
 type AppContextProviderProps = PropsWithChildren<Pick<AppContextState, 'currentUser'>>
 
 export function AppContextProvider({ children, currentUser }: AppContextProviderProps) {
+  const pathname = usePathname()
   const [isMounted, setIsMounted] = useState<boolean>(false)
-  const [userMode, setUserMode] = useSessionStorage<UserMode>('userMode', UserMode.GUEST)
+  const [userMode, setUserMode] = useSessionStorage<UserMode>(
+    'userMode',
+    pathname.includes('/host/') ? UserMode.HOST : UserMode.GUEST,
+  )
 
   const [loading, setLoading] = useState<boolean>(false)
   const [loadingMessage, setLoadingMessage] = useState<string | null>('Creating your listing')

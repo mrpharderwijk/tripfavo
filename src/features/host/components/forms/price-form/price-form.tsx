@@ -26,7 +26,7 @@ const MIN_PRICE_DETAILS_LENGTH = 4
 const PriceDetailSchema = z.object({
   id: z.string().optional(),
   type: z.nativeEnum(PriceType),
-  amount: z.number().min(1, { message: EMPTY_FIELD_MESSAGE }),
+  price: z.number().min(1, { message: EMPTY_FIELD_MESSAGE }),
 })
 
 export const PriceFormSchema = z.object({
@@ -45,27 +45,27 @@ export function PriceForm({ listing }: ComponentStepProps) {
       priceDetails: [
         {
           type: PriceType.HIGH_SEASON,
-          amount:
-            listing?.priceDetails?.find((pd) => pd.type === PriceType.HIGH_SEASON)?.amount ?? 0.0,
+          price:
+            listing?.priceDetails?.find((pd) => pd.type === PriceType.HIGH_SEASON)?.price ?? 0.0,
         },
         {
           type: PriceType.MID_SEASON,
-          amount:
-            listing?.priceDetails?.find((pd) => pd.type === PriceType.MID_SEASON)?.amount ?? 0.0,
+          price:
+            listing?.priceDetails?.find((pd) => pd.type === PriceType.MID_SEASON)?.price ?? 0.0,
         },
         {
           type: PriceType.LOW_SEASON,
-          amount:
-            listing?.priceDetails?.find((pd) => pd.type === PriceType.LOW_SEASON)?.amount ?? 0.0,
+          price:
+            listing?.priceDetails?.find((pd) => pd.type === PriceType.LOW_SEASON)?.price ?? 0.0,
         },
         {
           type: PriceType.CLEANING_FEE,
-          amount:
-            listing?.priceDetails?.find((pd) => pd.type === PriceType.CLEANING_FEE)?.amount ?? 0.0,
+          price:
+            listing?.priceDetails?.find((pd) => pd.type === PriceType.CLEANING_FEE)?.price ?? 0.0,
         },
         {
           type: PriceType.DEPOSIT,
-          amount: listing?.priceDetails?.find((pd) => pd.type === PriceType.DEPOSIT)?.amount ?? 0.0,
+          price: listing?.priceDetails?.find((pd) => pd.type === PriceType.DEPOSIT)?.price ?? 0.0,
         },
       ],
     },
@@ -143,10 +143,10 @@ export function PriceForm({ listing }: ComponentStepProps) {
                     >
                       <InputNumber
                         {...field}
-                        error={errors.priceDetails?.[idx]?.amount?.message}
+                        error={errors.priceDetails?.[idx]?.price?.message}
                         id={priceDetail.type}
-                        value={field.value?.amount ?? 0}
-                        onChange={(value) => field.onChange({ ...field.value, amount: value })}
+                        value={field.value?.price ?? 0}
+                        onChange={(value) => field.onChange({ ...field.value, price: value })}
                         prefix={<Euro size={16} />}
                       />
                     </FlexBoxItem>

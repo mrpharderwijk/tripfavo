@@ -1,8 +1,13 @@
+'use client'
+
+import { useRef } from 'react'
+
+import { Divider } from '@/components/atoms/layout/divider/divider'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { ListingDetailAbout } from '@/features/listings/listing-detail/components/listing-detail-about/listing-detail-about'
 import { ListingDetailAmenities } from '@/features/listings/listing-detail/components/listing-detail-amenities/listing-detail-amenities'
+import { ListingDetailBottomBar } from '@/features/listings/listing-detail/components/listing-detail-bottom-bar/listing-detail-bottom-bar'
 import { ListingDetailDatePicker } from '@/features/listings/listing-detail/components/listing-detail-date-picker/listing-detail-date-picker'
-import { ListingDetailDivider } from '@/features/listings/listing-detail/components/listing-detail-divider/listing-detail-divider'
 import { ListingDetailHostInfo } from '@/features/listings/listing-detail/components/listing-detail-host-info/listing-detail-host-info'
 import { ListingDetailLocation } from '@/features/listings/listing-detail/components/listing-detail-location/listing-detail-location'
 import { ListingDetailSlider } from '@/features/listings/listing-detail/components/listing-detail-slider/listing-detail-slider'
@@ -16,7 +21,8 @@ type ListingDetailPageProps = {
 }
 
 export function ListingDetailPage({ listing }: ListingDetailPageProps) {
-  console.log(listing)
+  const datePickerRef = useRef<HTMLDivElement | null>(null)
+
   return (
     <ListingDetailContextProvider listing={listing}>
       <FlexBox flex-direction="col" gap={6}>
@@ -42,34 +48,18 @@ export function ListingDetailPage({ listing }: ListingDetailPageProps) {
               <ListingDetailSubtitle />
             </FlexBox>
 
-            {/* Divider */}
-            {/* <ListingDetailDivider />
-
-            <ListingDetailFloorPlan /> */}
-
-            {/* Host Info */}
+            {/* <ListingDetailFloorPlan /> */}
             <ListingDetailHostInfo />
-
-            {/* About Property */}
             <ListingDetailAbout />
-
-            {/* Divider */}
-            <ListingDetailDivider />
-
-            {/* Map */}
+            <Divider />
             <ListingDetailLocation />
-
-            {/* Divider */}
-            <ListingDetailDivider />
-
-            {/* Amenities */}
+            <Divider />
             <ListingDetailAmenities />
-
-            {/* Divider */}
-            <ListingDetailDivider />
-
-            {/* Date Picker */}
-            <ListingDetailDatePicker />
+            <Divider />
+            <div ref={datePickerRef}>
+              <ListingDetailDatePicker />
+            </div>
+            <ListingDetailBottomBar datePickerRef={datePickerRef} />
           </FlexBox>
         </FlexBox>
       </FlexBox>

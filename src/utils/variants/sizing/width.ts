@@ -294,4 +294,24 @@ export const fullWidthVariants = {
     true: 'w-full',
     false: null,
   },
+  'fullWidth-xs': {
+    true: 'xs:w-full',
+    false: null,
+  },
+  'fullWidth-sm': {
+    true: 'sm:w-full',
+    false: null,
+  },
+  'fullWidth-md': {
+    true: 'md:w-full',
+    false: null,
+  },
+  'fullWidth-lg': {
+    true: 'lg:w-full',
+    false: null,
+  },
+  'fullWidth-xl': {
+    true: 'xl:w-full',
+    false: null,
+  },
 }

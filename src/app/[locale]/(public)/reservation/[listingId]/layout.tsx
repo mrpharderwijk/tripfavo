@@ -7,12 +7,18 @@ import { Footer } from '@/components/molecules/footer/footer'
 import { BackButton } from '@/features/nav-bar/components/back-button/back-button'
 import { NavBar } from '@/features/nav-bar/nav-bar'
 
-export default function ReservationDetailLayout({ children }: PropsWithChildren) {
+type ReservationDetailLayoutProps = PropsWithChildren<{
+  params: Promise<{ listingId: string }>
+}>
+
+export default async function ReservationDetailLayout({ children, params }: ReservationDetailLayoutProps) {
+  const { listingId } = await params
+
   return (
     <FlexBox flex-direction="col" fullHeight>
       <FlexBoxItem flex="initial">
         <NavBar narrow fixed={false}>
-          <BackButton />
+          <BackButton routePath={`/property/${listingId}`} />
           <Heading tag="h1" like="h4-semibold">
             Reservation
           </Heading>

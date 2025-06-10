@@ -1,26 +1,28 @@
 'use client'
 
 import { CalendarDays, Globe, House } from 'lucide-react'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { ReactElement } from 'react'
 
 import { Button } from '@/components/molecules/buttons/button'
+import { ButtonWrapper } from '@/components/molecules/buttons/button-wrapper/button-wrapper'
 import { useMainMenuContext } from '@/features/nav-bar/components/main-menu/main-menu-context-provider'
 import { useAppContext } from '@/providers/app-context-provider/app-context-provider'
-import { isCurrentRoute } from '@/utils/get-route'
+import { getRoutePathByRouteName, isCurrentRoute } from '@/utils/get-route'
 
 export function HostMainMenuBody(): ReactElement {
   const pathname = usePathname()
   const { currentUser } = useAppContext()
-  const { handleOnClickSidebarItem, handleOnClickLanguage } = useMainMenuContext()
+  const { closeMainMenu, handleOnClickLanguage } = useMainMenuContext()
   const tMainMenuHost = useTranslations('mainMenu.host')
   const tMainMenu = useTranslations('mainMenu')
 
   return (
     <>
       {currentUser && (
-        <Button
+        <ButtonWrapper
           icon={House}
           size="lg"
           variant={
@@ -28,14 +30,17 @@ export function HostMainMenuBody(): ReactElement {
               ? 'sidebar-menu-item'
               : 'sidebar-menu-item-active'
           }
-          onClick={() => handleOnClickSidebarItem('myListings')}
+          onClick={closeMainMenu}
+          renderRoot={({ buttonContent }) => (
+            <Link href={getRoutePathByRouteName('myListings')}>{buttonContent}</Link>
+          )}
         >
           {tMainMenuHost('myListings')}
-        </Button>
+        </ButtonWrapper>
       )}
 
       {currentUser && (
-        <Button
+        <ButtonWrapper
           icon={CalendarDays}
           size="lg"
           variant={
@@ -43,10 +48,13 @@ export function HostMainMenuBody(): ReactElement {
               ? 'sidebar-menu-item'
               : 'sidebar-menu-item-active'
           }
-          onClick={() => handleOnClickSidebarItem('myReservations')}
+          onClick={closeMainMenu}
+          renderRoot={({ buttonContent }) => (
+            <Link href={getRoutePathByRouteName('myReservations')}>{buttonContent}</Link>
+          )}
         >
           {tMainMenuHost('myReservations')}
-        </Button>
+        </ButtonWrapper>
       )}
 
       <Button

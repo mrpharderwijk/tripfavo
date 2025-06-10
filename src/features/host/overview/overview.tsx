@@ -36,7 +36,6 @@ export function HostOverview({ listings }: HostOverviewProps) {
     }
 
     setUserMode(UserMode.HOST)
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

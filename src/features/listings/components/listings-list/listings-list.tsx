@@ -70,7 +70,7 @@ export function ListingsList({ listings }: ListingsListProps): ReactElement {
               <FlexBox flex-direction="row" gap={2} align-items="center">
                 <FlexBoxItem display="flex" flex-direction="row" gap={1}>
                   <Body size="base-md" color="secondary" text-align="left">
-                    &euro; {listing.priceDetails[0].amount}
+                    &euro; {listing.priceDetails[0].price}
                   </Body>
                   <Body size="base-md" color="secondary" text-align="left">
                     per night

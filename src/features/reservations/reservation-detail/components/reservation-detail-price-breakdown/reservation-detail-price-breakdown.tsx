@@ -11,14 +11,33 @@ import { Body } from '@/components/atoms/typography/body/body'
 import { Heading } from '@/components/atoms/typography/heading/heading'
 import { useReservationDetailContext } from '@/features/reservations/reservation-detail/providers/reservation-detail-context-provider'
 import { Locales } from '@/i18n/routing'
+import { calculateTotalPricePerNight } from '@/utils/pricing/calculate-total-price-per-night'
+import { datePrices } from '@/data/date-prices'
+import { calculateTotalPriceIncludingCleaningFee } from '@/utils/pricing/calculate-total-price'
+import { getCleaningFee } from '@/features/listings/utils/get-cleaning-fee'
+import { getDeposit } from '@/features/listings/utils/get-deposit'
 
 export function ReservationDetailPriceBreakdown() {
   const locale = useLocale()
-  const { listing, calculateTotalPricePerNight, calculateTotalPriceIncludingCleaningFee } =
+  const { listing, selectedDates } =
     useReservationDetailContext()
   const tReservationDetailPriceBreakdown = useTranslations('reservationDetail.priceBreakdown')
 
-  const totalPricePerNight = calculateTotalPricePerNight()
+  const totalPricePerNight = calculateTotalPricePerNight({
+    startDate: selectedDates?.from,
+    endDate: selectedDates?.to,
+    datePrices,
+  })
+
+  const cleaningFee = getCleaningFee(listing.priceDetails)
+  const deposit = getDeposit(listing.priceDetails)
+  const totalPrice = calculateTotalPriceIncludingCleaningFee({
+    priceDetails: listing.priceDetails,
+    startDate: selectedDates?.from,
+    endDate: selectedDates?.to,
+    datePrices,
+  })
+
   return (
     <FlexBox flex-direction="col" padding-b={6} gap={6}>
       <Heading tag="h3" like="h3-semibold">
@@ -54,11 +73,7 @@ export function ReservationDetailPriceBreakdown() {
             <FlexBoxItem flex="initial">
               <Body tag="span" size="base-lgt" font-weight="normal">
                 <LocalizedPrice
-                  price={
-                    listing.priceDetails.find(
-                      (priceDetail) => priceDetail.type === PriceType.CLEANING_FEE,
-                    )?.amount ?? 0
-                  }
+                  price={cleaningFee}
                   locale={locale as Locales}
                 />
               </Body>
@@ -74,11 +89,7 @@ export function ReservationDetailPriceBreakdown() {
             <FlexBoxItem flex="initial">
               <Body tag="span" size="base-lgt" font-weight="normal">
                 <LocalizedPrice
-                  price={
-                    listing.priceDetails.find(
-                      (priceDetail) => priceDetail.type === PriceType.DEPOSIT,
-                    )?.amount ?? 0
-                  }
+                  price={deposit}
                   locale={locale as Locales}
                 />
               </Body>
@@ -97,7 +108,7 @@ export function ReservationDetailPriceBreakdown() {
           <FlexBoxItem flex="initial">
             <Body tag="span" size="base-lgt" font-weight="bold">
               <LocalizedPrice
-                price={calculateTotalPriceIncludingCleaningFee()}
+                price={totalPrice}
                 locale={locale as Locales}
               />
             </Body>

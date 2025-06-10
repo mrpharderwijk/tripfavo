@@ -6,7 +6,7 @@ import { Button } from '@/components/molecules/buttons/button'
 import { useMainMenuContext } from '@/features/nav-bar/components/main-menu/main-menu-context-provider'
 
 export function MainMenuHeaderDefault(): ReactElement {
-  const { handleMainMenuClick } = useMainMenuContext()
+  const { closeMainMenu } = useMainMenuContext()
 
-  return <Button icon={XIcon} size="sm" variant="quaternary" onClick={handleMainMenuClick} />
+  return <Button icon={XIcon} size="sm" variant="quaternary" onClick={closeMainMenu} />
 }

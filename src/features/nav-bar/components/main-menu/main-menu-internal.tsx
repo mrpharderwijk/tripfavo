@@ -1,33 +1,28 @@
 'use client'
 
 import { AlignJustify } from 'lucide-react'
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { useTranslations } from 'next-intl'
-import { ReactElement, useEffect } from 'react'
+import { ReactElement } from 'react'
 
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { Button } from '@/components/molecules/buttons/button'
+import { ButtonWrapper } from '@/components/molecules/buttons/button-wrapper/button-wrapper'
 import { MainMenuContainer } from '@/features/nav-bar/components/main-menu/main-menu-container'
 import { useMainMenuContext } from '@/features/nav-bar/components/main-menu/main-menu-context-provider'
 import { useAppContext, UserMode } from '@/providers/app-context-provider/app-context-provider'
 import { getRoutePathByRouteName } from '@/utils/get-route'
 
 export function MainMenuInternal(): ReactElement {
-  const router = useRouter()
   const { userMode, setUserMode, isMounted, currentUser } = useAppContext()
-  const { handleMainMenuClick, isOpen, subMenuRef, handleOnClickSidebarItem } = useMainMenuContext()
+  const { toggleMainMenu, isOpen, subMenuRef } = useMainMenuContext()
   const tMainMenuGuest = useTranslations('mainMenu.guest')
   const tMainMenuHost = useTranslations('mainMenu.host')
   const tMainMenu = useTranslations('mainMenu')
+
   const hostRoutePath = getRoutePathByRouteName('host')
   const guestRoutePath = getRoutePathByRouteName('guest')
   const accountRoutePath = getRoutePathByRouteName('account')
-
-  useEffect(() => {
-    router.prefetch(hostRoutePath)
-    router.prefetch(guestRoutePath)
-    router.prefetch(accountRoutePath)
-  }, [router, hostRoutePath, guestRoutePath, accountRoutePath])
 
   return (
     <>
@@ -35,56 +30,60 @@ export function MainMenuInternal(): ReactElement {
         {isMounted && (
           <>
             {!currentUser && (
-              <Button
+              <ButtonWrapper
                 size="md"
                 variant="quaternary-inverse"
                 rounded
-                onClick={() => {
-                  handleOnClickSidebarItem('host')
-                }}
+                renderRoot={({ buttonContent }) => (
+                  <Link href={hostRoutePath}>{buttonContent}</Link>
+                )}
               >
                 {tMainMenu('hostJoin')}
-              </Button>
+              </ButtonWrapper>
             )}
             {currentUser && userMode === UserMode.GUEST && (
-              <Button
+              <ButtonWrapper
                 size="md"
                 variant="quaternary-inverse"
                 rounded
                 onClick={() => {
                   setUserMode(UserMode.HOST)
-                  handleOnClickSidebarItem('host')
                 }}
+                renderRoot={({ buttonContent }) => (
+                  <Link href={hostRoutePath}>{buttonContent}</Link>
+                )}
               >
                 {tMainMenuGuest('switchToHost')}
-              </Button>
+              </ButtonWrapper>
             )}
             {currentUser && userMode === UserMode.HOST && (
-              <Button
+              <ButtonWrapper
                 size="md"
                 variant="quaternary-inverse"
                 rounded
                 onClick={() => {
                   setUserMode(UserMode.GUEST)
-                  handleOnClickSidebarItem('guest')
                 }}
+                renderRoot={({ buttonContent }) => (
+                  <Link href={guestRoutePath}>{buttonContent}</Link>
+                )}
               >
                 {tMainMenuHost('switchToGuest')}
-              </Button>
+              </ButtonWrapper>
             )}
 
             {currentUser && (
-              <Button
+              <ButtonWrapper
                 avatar
                 rounded
-                onClick={() => {
-                  handleOnClickSidebarItem('account')
-                }}
+                renderRoot={({ buttonContent }) => (
+                  <Link href={accountRoutePath}>{buttonContent}</Link>
+                )}
               />
             )}
           </>
         )}
-        <Button size="md" icon={AlignJustify} variant="quaternary" onClick={handleMainMenuClick} />
+        <Button size="md" icon={AlignJustify} variant="quaternary" onClick={toggleMainMenu} />
       </FlexBox>
       {isOpen && <MainMenuContainer ref={subMenuRef} />}
     </>
