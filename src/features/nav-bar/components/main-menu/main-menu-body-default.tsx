@@ -67,7 +67,7 @@ export function MainMenuBodyDefault(): ReactElement {
             <Link href={getRoutePathByRouteName('myBookings')}>{buttonContent}</Link>
           )}
         >
-          {tMainMenuGuest('myTrips')}
+          {tMainMenuGuest('myBookings')}
         </ButtonWrapper>
       )}
       <Button

@@ -4,7 +4,6 @@ export type GuestReservation = {
   id: string
   startDate: Date
   endDate: Date
-  totalPrice: number
   status: ReservationStatus
   guestsAmount: {
     adults: number

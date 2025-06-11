@@ -48,6 +48,16 @@ export function AppContextProvider({ children, currentUser }: AppContextProvider
     setIsMounted(true)
   }, [])
 
+  useEffect(() => {
+    if (pathname.includes('/host/') && userMode !== UserMode.HOST) {
+      setUserMode(UserMode.HOST)
+    }
+    
+    if (pathname.includes('/guest/') && userMode !== UserMode.GUEST) {
+      setUserMode(UserMode.GUEST)
+    }
+  }, [pathname])
+
   function enableAppLoading(message?: string) {
     setLoading(true)
     setLoadingMessage(message ?? null)

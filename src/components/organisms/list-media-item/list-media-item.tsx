@@ -13,7 +13,7 @@ import { ListMediaItemTitle } from '@/components/organisms/list-media-item/list-
 
 type ListMediaItemProps = {
   href: string
-  status: {
+  status?: {
     type: ListingMediaItemStatus
     label: string
   }
@@ -32,7 +32,7 @@ export function ListMediaItem({ href, image, title, subtitle, status }: ListMedi
         href={href}
         className="relative hover:bg-bg-secondary focus:bg-bg-secondary border border-deco rounded-2xl cursor-pointer w-full"
       >
-        <ListMediaItemStatus status={status.type} label={status.label} />
+        {status && <ListMediaItemStatus status={status.type} label={status.label} />}
         <FlexBox flex-direction="row" gap={4} padding={4}>
           <FlexBoxItem flex="initial">
             <Box width={16} height={16} border-radius="xl" bg-color="deco" overflow="hidden">

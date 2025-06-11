@@ -18,7 +18,6 @@ export const guestReservationSelect = {
   id: true,
   startDate: true,
   status: true,
-  totalPrice: true,
   guestsAmount: guestReservationGuestsAmountSelect,
   listing: {
     select: {

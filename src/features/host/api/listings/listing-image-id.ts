@@ -52,7 +52,7 @@ export async function PATCH(request: NextRequest, { params }: ImageParams) {
           roomId: room.id,
         },
         include: {
-          Room: true,
+          room: true,
         },
       })
 

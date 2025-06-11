@@ -11,7 +11,7 @@
     "guest": {
       "dashboard": "Dashboard",
       "myFavorites": "My favorites",
-      "myTrips": "My trips",
+      "myBookings": "My reservations",
       "switchToHost": "Switch to host"
     },
     "logout": "Logout",
@@ -230,7 +230,21 @@
     }
   },
   "guest": {
-    "heading": "Plan your next trip"
+    "heading": "Plan your next trip",
+    "reservations": {
+      "heading": "My reservations",
+      "noResults": {
+        "text": "You don't have any reservations yet. When you request a reservation, it will appear here.",
+        "button": "Book now"
+      }
+    },
+    "favorites": {
+      "heading": "My favorites",
+      "noResults": {
+        "text": "You haven't added any properties to your favorites yet. When you add a property to your favorites, it will appear here.",
+        "button": "Find your next favorite"
+      }
+    }
   },
   "common": {
     "forms": {

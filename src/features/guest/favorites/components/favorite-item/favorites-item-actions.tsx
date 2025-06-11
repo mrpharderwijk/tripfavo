@@ -9,11 +9,11 @@ import { DropDownMenu } from '@/components/organisms/drop-down-menu/drop-down-me
 import { DropDownMenuItem } from '@/components/organisms/drop-down-menu/drop-down-menu-item'
 import { useDropDownContext } from '@/features/nav-bar/providers/drop-down-context-provider'
 
-type ListingItemActionsProps = {
+type FavoritesItemActionsProps = {
   id: string
 }
 
-export function ListingItemActions({ id }: ListingItemActionsProps) {
+export function FavoritesItemActions({ id }: FavoritesItemActionsProps) {
   const router = useRouter()
   const { currentOpenDropDown, closeDropDown, toggleDropDown } = useDropDownContext()
 

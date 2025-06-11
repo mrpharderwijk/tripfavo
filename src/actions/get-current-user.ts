@@ -28,7 +28,6 @@ export async function getCurrentUser(): Promise<SafeUser | null> {
           },
         },
         hashedPassword: true,
-        favoriteIds: true,
         name: {
           select: {
             firstName: true,

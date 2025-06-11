@@ -1,22 +1,21 @@
-import { useTranslations } from 'next-intl'
-import { PropsWithChildren } from 'react'
+import { Box } from "@/components/atoms/layout/box/box";
+import { FlexBox } from "@/components/atoms/layout/flex-box/flex-box";
+import { FlexBoxItem } from "@/components/atoms/layout/flex-box/flex-box-item/flex-box-item";
+import { GridItem } from "@/components/atoms/layout/grid/components/grid-item/grid-item";
+import { Grid } from "@/components/atoms/layout/grid/grid";
+import { NavBar } from "@/features/nav-bar/nav-bar";
+import { PropsWithChildren, ReactElement } from "react";
 
-import { Box } from '@/components/atoms/layout/box/box'
-import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
-import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
-import { GridItem } from '@/components/atoms/layout/grid/components/grid-item/grid-item'
-import { Grid } from '@/components/atoms/layout/grid/grid'
-import { Heading } from '@/components/atoms/typography/heading/heading'
-import { GuestSidebar } from '@/features/guest/components/guest-sidebar/guest-sidebar'
-import { NavBar } from '@/features/nav-bar/nav-bar'
+type AppShellProps = PropsWithChildren<{
+  navBarBody?: ReactElement
+  sidebar?: ReactElement
+}>
 
-export default function FavoritesLayout({ children }: Readonly<PropsWithChildren>) {
-  const tGuest = useTranslations('guest')
-
+export function AppShell({ children, navBarBody, sidebar }: AppShellProps) {
   return (
     <FlexBox flex-direction="col" fullHeight>
       <FlexBoxItem flex="initial">
-        <NavBar />
+        <NavBar body={navBarBody} />
       </FlexBoxItem>
 
       <FlexBoxItem margin-top={20} flex="auto" min-height="full">
@@ -31,14 +30,11 @@ export default function FavoritesLayout({ children }: Readonly<PropsWithChildren
                 padding-y-lg={10}
                 gap={6}
               >
-                <Heading tag="h2" like="h4" color="primary" font-weight="bold">
-                  {tGuest('heading')}
-                </Heading>
-
-                <GuestSidebar />
+                {sidebar}
               </FlexBox>
             </Box>
           </GridItem>
+
           <GridItem tag="main" col-span={12} col-span-md={8} height="full">
             <FlexBox
               flex-direction="col"

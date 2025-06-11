@@ -12,16 +12,14 @@ export default async function HostOverviewPage() {
   const listings = await getHostListings()
 
   return (
-    <>
+    <Suspense fallback={<Loading />}>
       <Heading tag="h2" like="h4" color="primary" font-weight="bold">
         {tMainMenuHost('myListings')}
       </Heading>
 
       <FlexBox flex-direction="col" gap={6}>
-        <Suspense fallback={<Loading />}>
-          <HostOverview listings={listings} />
-        </Suspense>
+        <HostOverview listings={listings} />
       </FlexBox>
-    </>
+    </Suspense>
   )
 }
