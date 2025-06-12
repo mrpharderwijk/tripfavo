@@ -5,7 +5,7 @@ import { HostSidebar } from '@/features/host/components/host-sidebar/host-sideba
 import { AppShell } from '@/components/molecules/layout/app-shell/app-shell'
 import { HostMainMenuBody } from '@/features/host/components/host-main-menu/host-main-menu-body'
 
-export default function ReservationsLayout({ children }: Readonly<PropsWithChildren>) {
+export default function RentLayout({ children }: Readonly<PropsWithChildren>) {
   const tHost = useTranslations('host')
 
   return (

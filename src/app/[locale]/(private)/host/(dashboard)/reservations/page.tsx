@@ -2,7 +2,7 @@ import { getTranslations } from 'next-intl/server'
 
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { Heading } from '@/components/atoms/typography/heading/heading'
-import Loading from '@/app/[locale]/(private)/host/reservations/loading'
+import Loading from '@/app/[locale]/(private)/host/(dashboard)/reservations/loading'
 import { Suspense } from 'react'
 
 export default async function HostOverviewPage() {

@@ -1,16 +1,16 @@
 'use client'
 
-import { CalendarDays, House, Link } from 'lucide-react'
-import { usePathname, useRouter } from 'next/navigation'
+import { CalendarDays, House } from 'lucide-react'
+import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { ReactElement } from 'react'
 
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
-import { Button } from '@/components/molecules/buttons/button'
 import { getRoutePathByRouteName, isCurrentRoute } from '@/utils/get-route'
 import { AppShellSidebar } from '@/components/molecules/layout/app-shell/app-shell-sidebar'
 import { ButtonWrapper } from '@/components/molecules/buttons/button-wrapper/button-wrapper'
+import Link from 'next/link'
 
 type HostSidebarProps = {
   heading?: string

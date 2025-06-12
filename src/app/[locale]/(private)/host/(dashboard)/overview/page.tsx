@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server'
 import { Suspense } from 'react'
 
-import Loading from '@/app/[locale]/(private)/host/overview/loading'
+import Loading from '@/app/[locale]/(private)/host/(dashboard)/overview/loading'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { Heading } from '@/components/atoms/typography/heading/heading'
 import { getHostListings } from '@/features/host/actions/get-host-listings'
