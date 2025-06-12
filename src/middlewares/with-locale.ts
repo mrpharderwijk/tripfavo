@@ -1,41 +1,22 @@
-import Negotiator from 'negotiator'
-import { NextFetchEvent, NextMiddleware, NextRequest, NextResponse } from 'next/server'
-import { match } from '@formatjs/intl-localematcher'
+import { NextFetchEvent, NextMiddleware, NextRequest } from 'next/server'
+import createMiddleware from 'next-intl/middleware';
+import { locales, defaultLocale } from '@/i18n/routing'
 
-import { locales } from '@/i18n/routing'
-import { defaultLocale } from '@/i18n/routing'
+const intlMiddleware = createMiddleware({
+  locales,
+  defaultLocale,
+  localePrefix: 'always'
+})
 
-function getLocale(request: Request): string {
-  const headers = new Headers(request.headers)
-  const acceptLanguage = headers.get('accept-language')
-  if (acceptLanguage) {
-    headers.set('accept-language', acceptLanguage.replaceAll('_', '-'))
-  }
-
-  const headersObject = Object.fromEntries(headers.entries())
-  const languages = new Negotiator({ headers: headersObject }).languages()
-  const requestedLocales =
-    languages.length === 1 && languages[0] === '*' ? [defaultLocale] : languages
-
-  return match(requestedLocales, locales, defaultLocale)
-}
-
-export function withLocale(middleware: NextMiddleware) {
+export function withLocale(middleware: NextMiddleware): NextMiddleware {
   return async (request: NextRequest, event: NextFetchEvent) => {
-    const languageCookie = request.cookies.get('localeCookie')?.value
-    const pathname = request.nextUrl.pathname
+    // First handle the internationalization
+    const response = intlMiddleware(request)
 
-    if (!languageCookie) {
-      let locale = getLocale(request) ?? defaultLocale
-      const newUrl = new URL(`/${locale}${pathname}`, request.nextUrl)
-      console.log('withLocale', locale)
-      return NextResponse.rewrite(newUrl)
-    }
-    const newUrl = new URL(`/${languageCookie}${pathname}`, request.nextUrl)
+    // If there's a response from intl middleware, return it
+    if (response) return response
 
-    if (languageCookie) {
-      return NextResponse.rewrite(newUrl)
-    }
+    // Otherwise continue with the rest of the middleware stack
     return middleware(request, event)
   }
 }

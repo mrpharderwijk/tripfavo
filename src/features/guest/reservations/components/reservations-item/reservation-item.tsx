@@ -1,7 +1,7 @@
 'use client'
 
 import { format } from 'date-fns'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { ReactElement, useMemo } from 'react'
 import { ReservationStatus } from '@prisma/client'
 
@@ -21,12 +21,12 @@ type ReservationItemProps = {
 const reservationItemStatusMap = {
   [ReservationStatus.CANCELLED]: {
     type: ListingMediaItemStatus.DANGER,
-    label: 'Cancelled by host',
+    translationKey: 'cancelled',
   },
-  [ReservationStatus.PENDING]: { type: ListingMediaItemStatus.WARNING, label: 'Waiting for host' },
+  [ReservationStatus.PENDING]: { type: ListingMediaItemStatus.WARNING, translationKey: 'review' },
   [ReservationStatus.CONFIRMED]: {
     type: ListingMediaItemStatus.SUCCESS,
-    label: 'Confirmed by host',
+    translationKey: 'confirmed',
   },
 }
 
@@ -38,6 +38,7 @@ export function ReservationItem({
   startDate,
   endDate,
 }: ReservationItemProps): ReactElement {
+  const tGuestReservationStatus = useTranslations('guest.reservations.status')
   const locale = useLocale()
   const subtitle = useMemo(() => {
     const startDateFormatted = format(startDate, 'dd-MM-yyyy', {
@@ -55,7 +56,7 @@ export function ReservationItem({
       href={`/guest/reservations/${id}`}
       status={{
         type: reservationItemStatusMap[status].type,
-        label: reservationItemStatusMap[status].label,
+        label: tGuestReservationStatus(reservationItemStatusMap[status].translationKey),
       }}
       image={image}
       title={title}

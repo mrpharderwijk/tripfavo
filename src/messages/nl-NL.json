@@ -1,0 +1,422 @@
+{
+  "mainMenu": {
+    "host": {
+      "myListings": "Mijn advertenties",
+      "myReservations": "Mijn reserveringen",
+      "myGuests": "Mijn gasten",
+      "myReviews": "Mijn beoordelingen",
+      "mySettings": "Mijn instellingen",
+      "switchToGuest": "Gastmodus"
+    },
+    "guest": {
+      "dashboard": "Dashboard",
+      "myFavorites": "Mijn favorieten",
+      "myBookings": "Mijn reserveringen",
+      "switchToHost": "Hostmodus"
+    },
+    "logout": "Uitloggen",
+    "login": "Inloggen",
+    "signUp": "Registreren",
+    "language": "Taal wijzigen",
+    "account": "Account",
+    "hostJoin": "Word een host"
+  },
+  "auth": {
+    "loginForm": {
+      "heading": "Log in op je account",
+      "title": "Welkom terug!",
+      "submit": "Doorgaan",
+      "register": {
+        "text": "Heb je nog geen account?",
+        "label": "Registreren"
+      },
+      "error": {
+        "invalidCredentials": "Ongeldige inloggegevens"
+      }
+    },
+    "signUpForm": {
+      "heading": "Registreer voor een account",
+      "title": "Welkom bij TripFavo",
+      "submit": "Doorgaan",
+      "login": {
+        "text": "Heb je al een account?",
+        "label": "Inloggen"
+      },
+      "success": {
+        "heading": "Welkom bij de club!",
+        "description": "Je account is succesvol aangemaakt.",
+        "link": "Klik <link>hier</link> om door te gaan."
+      }
+    }
+  },
+  "personal-info": {
+    "heading": "Persoonlijke info",
+    "legal-name": {
+      "label": "Volledige naam",
+      "formIntro": "Vul je volledige naam in. Dit is dezelfde naam als de naam op je paspoort of ID-kaart."
+    }
+  },
+  "account": {
+    "heading": "Account instellingen",
+    "sidebar": {
+      "personalInfo": "Persoonlijke info",
+      "paymentMethods": "Betalingsmethoden",
+      "security": "Beveiliging",
+      "notifications": "Notificaties",
+      "language": "Taal"
+    }
+  },
+  "host": {
+    "heading": "Host je woning",
+    "listing": {
+      "amenitiesForm": {
+        "heading": {
+          "title": "Selecteer de voorzieningen van je woning",
+          "subtitle": "Dit bepaalt het comfortniveau voor je gasten."
+        }
+      },
+      "descriptionForm": {
+        "heading": {
+          "title": "Beschrijf je ruimte",
+          "subtitle": "Voeg een beschrijving van je woning toe om je gasten in indruk te geven van je ruimte."
+        }
+      },
+      "floorPlanForm": {
+        "heading": {
+          "title": "Deel wat basisinfo over je woning",
+          "subtitle": "Je kunt later meer details toevoegen, zoals bedtypes."
+        },
+        "rooms": {
+          "label": "Ruimtes (incl. woonkamer)"
+        },
+        "bedrooms": {
+          "label": "Slaapkamers"
+        },
+        "beds": {
+          "label": "Bedden"
+        },
+        "bathrooms": {
+          "label": "Badkamers"
+        },
+        "livingRooms": {
+          "label": "Woonkamers"
+        },
+        "kitchens": {
+          "label": "Keukens"
+        }
+      },
+      "guestsAmountForm": {
+        "heading": {
+          "title": "Hoeveel gasten en welke gasten kunnen er blijven?",
+          "subtitle": "Wanneer gasten je woning reserveren, kunnen ze niet hoger zijn dan dit aantal."
+        },
+        "maxGuests": {
+          "label": "Maximum aantal gasten"
+        },
+        "adults": {
+          "label": "Volwassenen (13+ jaar)"
+        },
+        "children": {
+          "label": "Kinderen (2-12 jaar)"
+        },
+        "infants": {
+          "label": "Baby's (0-2 jaar)"
+        },
+        "pets": {
+          "label": "Huisdieren"
+        }
+      },
+      "locationForm": {
+        "heading": {
+          "title": "Waar is je woning gelegen?",
+          "subtitle": "Je adres wordt alleen gedeeld met gasten na het maken van een reservering."
+        }
+      },
+      "neighbourhoodDescriptionForm": {
+        "heading": {
+          "title": "Beschrijf de buurt",
+          "subtitle": "Voeg een beschrijving van de buurt toe om je gasten te helpen bij het vinden van activiteiten in de buurt."
+        },
+        "inputLabel": "Beschrijving van de buurt"
+      },
+      "imagesForm": {
+        "heading": {
+          "title": "Voeg afbeeldingen toe",
+          "subtitle": "Voeg minstens {minImagesAmount} afbeeldingen toe aan je woning om je gasten te helpen bij het vinden van je woning."
+        },
+        "roomDialog": {
+          "header": "Kies een ruimte",
+          "buttonLabel": "Kies een ruimte",
+          "heading": "Welke ruimte is dit?",
+          "subtitle": "Door een ruimte te kiezen, kunnen je gasten een beter beeld krijgen van je woning."
+        },
+        "makeMainImage": "Maak hoofdafbeelding"
+      },
+      "priceForm": {
+        "heading": {
+          "title": "Stel je prijs in",
+          "subtitle": "Stel een prijs in voor je woning. Houd rekening met de prijs van andere woningen in de buurt."
+        }
+      },
+      "privacyTypeForm": {
+        "heading": {
+          "title": "Welke soort privacy hebben je gasten?"
+        }
+      },
+      "structureForm": {
+        "heading": {
+          "title": "Welke van deze beschrijft je woning het best?"
+        }
+      },
+      "titleForm": {
+        "heading": {
+          "title": "Geef je woning een titel",
+          "subtitle": "Met een goede titel, zal je woning beter zichtbaar zijn voor je gasten."
+        }
+      },
+
+      "status": {
+        "draft": "Concept",
+        "inReview": "In beoordeling",
+        "published": "Gepubliceerd"
+      },
+      "yourListing": "Je woning in"
+    }
+  },
+  "listing": {
+    "amenities": {
+      "heading": "Wat je woning biedt",
+      "showAll": {
+        "button": "Toon alle {amount} voorzieningen",
+        "dialog": {
+          "header": "Wat je woning biedt"
+        }
+      }
+    },
+    "structure": {
+      "apartment": "Volledig appartement",
+      "house": "Volledig huis",
+      "villa": "Volledige villa",
+      "cabin": "Volledige cabin",
+      "other": "Volledige accommodatie"
+    },
+    "description": {
+      "heading": "{structure} in {city}"
+    },
+    "guestsAmount": {
+      "maxGuests": "max. {amount, plural, =1 {1 gast} other {# gasten}}"
+    },
+    "host": {
+      "label": "Verhuurd door"
+    },
+    "about": {
+      "heading": "Over deze accommodatie"
+    },
+    "location": {
+      "heading": "Waar je het vindt",
+      "about": "Over de buurt"
+    },
+    "dates": {
+      "heading": "Plan je verblijf",
+      "button": {
+        "check": "Controleer beschikbaarheid",
+        "book": "Nu boeken",
+        "reserve": "Reserveren"
+      },
+      "selectDates": "Voeg datums toe om de prijzen te bekijken"
+    },
+    "reservation": {
+      "heading": "Reserveringsverzoek"
+    }
+  },
+  "guest": {
+    "heading": "Plan je volgende reis",
+    "reservations": {
+      "heading": "Mijn reserveringen",
+      "noResults": {
+        "text": "Je hebt nog geen reserveringen. Wanneer je een reservering aanvraagt, verschijnt deze hier.",
+        "button": "Nu boeken"
+      },
+      "status": {
+        "cancelled": "Geannuleerd",
+        "review": "In behandeling",
+        "confirmed": "Bevestigd"
+      }
+    },
+    "favorites": {
+      "heading": "Mijn favorieten",
+      "noResults": {
+        "text": "Je hebt nog geen accommodaties aan je favorieten toegevoegd. Wanneer je een accommodatie aan je favorieten toevoegt, verschijnt deze hier.",
+        "button": "Vind je volgende favoriet"
+      }
+    }
+  },
+  "common": {
+    "forms": {
+      "firstName": {
+        "label": "Voornaam",
+        "placeholder": "Jan"
+      },
+      "middleName": {
+        "label": "Tussenvoegsel",
+        "placeholder": "van der"
+      },
+      "lastName": {
+        "label": "Achternaam",
+        "placeholder": "Jansen"
+      },
+      "email": {
+        "label": "E-mailadres",
+        "placeholder": "janjansen@voorbeeld.nl"
+      },
+      "password": {
+        "label": "Wachtwoord",
+        "placeholder": "********",
+        "error": {
+          "required": "Wachtwoord is verplicht",
+          "minlength": "Wachtwoord moet minimaal 8 tekens lang zijn",
+          "uppercase": "Wachtwoord moet minimaal één hoofdletter bevatten",
+          "lowercase": "Wachtwoord moet minimaal één kleine letter bevatten",
+          "digit": "Wachtwoord moet minimaal één cijfer bevatten"
+        }
+      },
+      "passwordConfirm": {
+        "label": "Bevestig wachtwoord",
+        "placeholder": "********"
+      },
+      "required": "Vul je {field} in",
+      "cancel": "Annuleren",
+      "edit": "Bewerken",
+      "save": "Opslaan",
+      "saveAndContinue": "Opslaan en doorgaan",
+      "saveAndExit": "Opslaan & afsluiten",
+      "error": {
+        "unknown": "Er is een onbekende fout opgetreden. Neem contact op met klantenservice."
+      }
+    },
+    "amenities": {
+      "wifi": "WiFi",
+      "swimmingPool": "Zwembad",
+      "hotTub": "Hot tub",
+      "gym": "Fitnessruimte",
+      "parking": "Parkeerplaats",
+      "airConditioning": "Airconditioning",
+      "heating": "Verwarming",
+      "kitchen": "Keuken",
+      "washer": "Wasmachine",
+      "dryer": "Droger",
+      "tv": "TV",
+      "freeParking": "Gratis parkeren",
+      "seaView": "Zeezicht",
+      "mountainView": "Bergzicht",
+      "garden": "Tuin",
+      "bbqGrill": "BBQ",
+      "playground": "Speeltuin",
+      "beachAccess": "Strandtoegang",
+      "fireplace": "Open haard",
+      "workspace": "Werkruimte",
+      "petFriendly": "Huisdieren toegestaan",
+      "securitySystem": "Beveiligingssysteem",
+      "firstAidKit": "EHBO-kit",
+      "fireExtinguisher": "Brandblusser",
+      "smokeAlarm": "Rookmelder",
+      "elevator": "Lift",
+      "balcony": "Balkon",
+      "breakfastIncluded": "Ontbijt inbegrepen",
+      "dishwasher": "Vaatwasser",
+      "babyEquipment": "Babyuitrusting",
+      "tennisCourt": "Tennisbaan"
+    },
+    "dates": "Data",
+    "noDates": "Geen data geselecteerd",
+    "close": "Sluiten",
+    "back": "Terug",
+    "previous": "Vorige",
+    "next": "Volgende",
+    "confirm": "Bevestigen",
+    "upload": "Uploaden",
+    "uploadClick": "Klik om te uploaden",
+    "guestCount": "{amount, plural, =1 {1 gast} other {# gasten}}",
+    "roomAmount": "{amount, plural, =1 {1 kamer} other {# kamers}}",
+    "bedroomAmount": "{amount, plural, =1 {1 slaapkamer} other {# slaapkamers}}",
+    "bathroomAmount": "{amount, plural, =1 {1 badkamer} other {# badkamers}}",
+    "bedAmount": "{amount, plural, =1 {1 bed} other {# bedden}}",
+    "kitchenAmount": "{amount, plural, =1 {1 keuken} other {# keukens}}",
+    "livingRoomAmount": "{amount, plural, =1 {1 woonkamer} other {# woonkamers}}"
+  },
+  "reservationDetail": {
+    "summary": {
+      "heading": "Samenvatting",
+      "dates": {
+        "label": "Data",
+        "noDates": "Geen data geselecteerd",
+        "dialog": {
+          "header": "Data",
+          "subtitle": "Selecteer de data voor je verblijf.",
+          "button": {
+            "confirm": "Bevestigen"
+          }
+        }
+      },
+      "guests": {
+        "label": "Gasten",
+        "value": {
+          "adultsAmount": "{amount, plural, =1 {1 volwassene} other {# volwassenen}}",
+          "childrenAmount": "{amount, plural, =1 {1 kind} other {# kinderen}}",
+          "infantsAmount": "{amount, plural, =1 {1 baby} other {# baby's}}",
+          "petsAmount": "{amount, plural, =1 {1 huisdier} other {# huisdieren}}"
+        },
+        "dialog": {
+          "header": "Gasten",
+          "subtitle": "Selecteer de data voor je verblijf.",
+          "adults": {
+            "label": "Volwassenen",
+            "description": "13 jaar of ouder"
+          },
+          "children": {
+            "label": "Kinderen",
+            "description": "Van 2 tot 12 jaar",
+            "notAllowed": "De verhuurder staat geen kinderen toe"
+          },
+          "infants": {
+            "label": "Baby",
+            "description": "Jonger dan 2 jaar",
+            "notAllowed": "De verhuurder staat geen baby's toe"
+          },
+          "pets": {
+            "label": "Huisdieren",
+            "description": "Honden, katten en andere huisdieren",
+            "notAllowed": "De verhuurder staat geen huisdieren toe"
+          },
+          "button": {
+            "confirm": "Bevestigen"
+          }
+        }
+      }
+    },
+    "priceBreakdown": {
+      "heading": "Prijsinformatie",
+      "nightAmount": "{amount, plural, =1 {1 nacht} other {# nachten}}",
+      "cleaningFee": "Schoonmaakkosten",
+      "deposit": "Borg",
+      "total": "Totaal"
+    },
+    "cancellationDetails": {
+      "heading": "Annuleringsvoorwaarden"
+    },
+    "bottomBar": {
+      "button": {
+        "label": "Bevestigen"
+      }
+    }
+  },
+  "listingDetail": {
+    "bottomBar": {
+      "selectDates": "Selecteer data om de prijzen te bekijken",
+      "button": {
+        "labelNonSelected": "Bekijk beschikbaarheid",
+        "labelSelected": "Reserveer nu"
+      }
+    }
+  }
+}

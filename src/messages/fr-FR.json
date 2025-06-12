@@ -1,0 +1,421 @@
+{
+  "mainMenu": {
+    "host": {
+      "myListings": "Mes annonces",
+      "myReservations": "Mes réservations",
+      "myGuests": "Mes invités",
+      "myReviews": "Mes avis",
+      "mySettings": "Mes paramètres",
+      "switchToGuest": "Passer en invité"
+    },
+    "guest": {
+      "dashboard": "Tableau de bord",
+      "myFavorites": "Mes favoris",
+      "myBookings": "Mes réservations",
+      "switchToHost": "Passer en hôte"
+    },
+    "logout": "Déconnexion",
+    "login": "Connexion",
+    "signUp": "Inscription",
+    "language": "Changer de langue",
+    "account": "Compte",
+    "hostJoin": "Devenir hôte"
+  },
+  "auth": {
+    "loginForm": {
+      "heading": "Connectez-vous à votre compte",
+      "title": "Bon retour !",
+      "submit": "Continuer",
+      "register": {
+        "text": "Pas encore de compte ?",
+        "label": "S'inscrire"
+      },
+      "error": {
+        "invalidCredentials": "Identifiants invalides"
+      }
+    },
+    "signUpForm": {
+      "heading": "Créez votre compte",
+      "title": "Bienvenue sur TripFavo",
+      "submit": "Continuer",
+      "login": {
+        "text": "Déjà un compte ?",
+        "label": "Se connecter"
+      },
+      "success": {
+        "heading": "Bienvenue !",
+        "description": "Votre compte a été créé avec succès.",
+        "link": "Veuillez vous <link>connecter</link> pour continuer."
+      }
+    }
+  },
+  "personal-info": {
+    "heading": "Informations personnelles",
+    "legal-name": {
+      "label": "Nom légal",
+      "formIntro": "Veuillez remplir votre nom légal. C'est le même nom que celui indiqué sur votre passeport ou carte d'identité."
+    }
+  },
+  "account": {
+    "heading": "Paramètres du compte",
+    "sidebar": {
+      "personalInfo": "Informations personnelles",
+      "paymentMethods": "Moyens de paiement",
+      "security": "Sécurité",
+      "notifications": "Notifications",
+      "language": "Langue"
+    }
+  },
+  "host": {
+    "heading": "Hébergez votre propriété",
+    "listing": {
+      "amenitiesForm": {
+        "heading": {
+          "title": "Sélectionnez les équipements",
+          "subtitle": "Cela déterminera le niveau de confort pour vos invités."
+        }
+      },
+      "descriptionForm": {
+        "heading": {
+          "title": "Décrivez votre lieu",
+          "subtitle": "Ajoutez une description pour aider les invités à trouver votre propriété."
+        }
+      },
+      "floorPlanForm": {
+        "heading": {
+          "title": "Informations de base",
+          "subtitle": "Vous ajouterez plus de détails plus tard, comme les types de lits."
+        },
+        "rooms": {
+          "label": "Pièces (inclut salon)"
+        },
+        "bedrooms": {
+          "label": "Chambres"
+        },
+        "beds": {
+          "label": "Lits"
+        },
+        "bathrooms": {
+          "label": "Salles de bain"
+        },
+        "livingRooms": {
+          "label": "Salons"
+        },
+        "kitchens": {
+          "label": "Cuisines"
+        }
+      },
+      "guestsAmountForm": {
+        "heading": {
+          "title": "Nombre et type d'invités",
+          "subtitle": "Les invités ne pourront pas dépasser ce nombre lors de la réservation."
+        },
+        "maxGuests": {
+          "label": "Nombre maximum d'invités"
+        },
+        "adults": {
+          "label": "Adultes (13+ ans)"
+        },
+        "children": {
+          "label": "Enfants (2-12 ans)"
+        },
+        "infants": {
+          "label": "Bébés (0-2 ans)"
+        },
+        "pets": {
+          "label": "Animaux"
+        }
+      },
+      "locationForm": {
+        "heading": {
+          "title": "Où se trouve votre lieu ?",
+          "subtitle": "Votre adresse n'est partagée qu'après réservation."
+        }
+      },
+      "neighbourhoodDescriptionForm": {
+        "heading": {
+          "title": "Décrivez le quartier",
+          "subtitle": "Aidez les invités à découvrir les activités locales."
+        },
+        "inputLabel": "Description du quartier"
+      },
+      "imagesForm": {
+        "heading": {
+          "title": "Ajoutez des photos",
+          "subtitle": "Ajoutez au moins {minImagesAmount} photos pour aider les invités à trouver votre propriété."
+        },
+        "roomDialog": {
+          "header": "Type de pièce",
+          "buttonLabel": "Assigner",
+          "heading": "Quel type de pièce ?",
+          "subtitle": "Aidez vos invités à mieux visualiser votre propriété."
+        },
+        "makeMainImage": "Définir comme photo principale"
+      },
+      "priceForm": {
+        "heading": {
+          "title": "Fixez votre prix",
+          "subtitle": "Fixez un prix compétitif pour le succès de votre annonce."
+        }
+      },
+      "privacyTypeForm": {
+        "heading": {
+          "title": "Type de lieu pour les invités"
+        }
+      },
+      "structureForm": {
+        "heading": {
+          "title": "Quelle description correspond le mieux ?"
+        }
+      },
+      "titleForm": {
+        "heading": {
+          "title": "Titre de votre propriété",
+          "subtitle": "Un bon titre augmente la visibilité de votre annonce."
+        }
+      },
+      "status": {
+        "draft": "Brouillon",
+        "inReview": "En révision",
+        "published": "Publié"
+      },
+      "yourListing": "Votre propriété à"
+    }
+  },
+  "listing": {
+    "amenities": {
+      "heading": "Ce que propose ce lieu",
+      "showAll": {
+        "button": "Voir les {amount} équipements",
+        "dialog": {
+          "header": "Ce que propose ce lieu"
+        }
+      }
+    },
+    "structure": {
+      "apartment": "Appartement entier",
+      "house": "Maison entière",
+      "villa": "Villa entière",
+      "cabin": "Chalet entier",
+      "other": "Logement entier"
+    },
+    "description": {
+      "heading": "{structure} à {city}"
+    },
+    "guestsAmount": {
+      "maxGuests": "max. {amount, plural, =1 {1 invité} other {# invités}}"
+    },
+    "host": {
+      "label": "Hébergé par"
+    },
+    "about": {
+      "heading": "À propos de ce lieu"
+    },
+    "location": {
+      "heading": "Où se trouve le logement",
+      "about": "À propos du quartier"
+    },
+    "dates": {
+      "heading": "Planifiez votre séjour",
+      "button": {
+        "check": "Vérifier",
+        "book": "Réserver",
+        "reserve": "Réserver"
+      },
+      "selectDates": "Ajoutez des dates pour voir les prix"
+    },
+    "reservation": {
+      "heading": "Demande de réservation"
+    }
+  },
+  "guest": {
+    "heading": "Planifiez votre prochain voyage",
+    "reservations": {
+      "heading": "Mes réservations",
+      "noResults": {
+        "text": "Vous n'avez pas encore de réservations. Vos demandes apparaîtront ici.",
+        "button": "Réserver"
+      },
+      "status": {
+        "cancelled": "Annulée",
+        "review": "En attente",
+        "confirmed": "Confirmée"
+      }
+    },
+    "favorites": {
+      "heading": "Mes favoris",
+      "noResults": {
+        "text": "Vous n'avez pas encore de favoris. Vos lieux préférés apparaîtront ici.",
+        "button": "Découvrir"
+      }
+    }
+  },
+  "common": {
+    "forms": {
+      "firstName": {
+        "label": "Prénom",
+        "placeholder": "Jean"
+      },
+      "middleName": {
+        "label": "Deuxième prénom",
+        "placeholder": "Marie"
+      },
+      "lastName": {
+        "label": "Nom",
+        "placeholder": "Dupont"
+      },
+      "email": {
+        "label": "Adresse email",
+        "placeholder": "jean.dupont@exemple.com"
+      },
+      "password": {
+        "label": "Mot de passe",
+        "placeholder": "********",
+        "error": {
+          "required": "Mot de passe requis",
+          "minlength": "8 caractères minimum",
+          "uppercase": "Une majuscule requise",
+          "lowercase": "Une minuscule requise",
+          "digit": "Un chiffre requis"
+        }
+      },
+      "passwordConfirm": {
+        "label": "Confirmer le mot de passe",
+        "placeholder": "********"
+      },
+      "required": "Veuillez remplir votre {field}",
+      "cancel": "Annuler",
+      "edit": "Modifier",
+      "save": "Enregistrer",
+      "saveAndContinue": "Continuer",
+      "saveAndExit": "Enregistrer & quitter",
+      "error": {
+        "unknown": "Une erreur est survenue. Contactez le support."
+      }
+    },
+    "amenities": {
+      "wifi": "WiFi",
+      "swimmingPool": "Piscine",
+      "hotTub": "Jacuzzi",
+      "gym": "Salle de sport",
+      "parking": "Parking",
+      "airConditioning": "Climatisation",
+      "heating": "Chauffage",
+      "kitchen": "Cuisine",
+      "washer": "Lave-linge",
+      "dryer": "Sèche-linge",
+      "tv": "TV",
+      "freeParking": "Parking gratuit",
+      "seaView": "Vue mer",
+      "mountainView": "Vue montagne",
+      "garden": "Jardin",
+      "bbqGrill": "Barbecue",
+      "playground": "Terrain de jeux",
+      "beachAccess": "Accès plage",
+      "fireplace": "Cheminée",
+      "workspace": "Espace de travail",
+      "petFriendly": "Animaux acceptés",
+      "securitySystem": "Système de sécurité",
+      "firstAidKit": "Trousse de secours",
+      "fireExtinguisher": "Extincteur",
+      "smokeAlarm": "Détecteur de fumée",
+      "elevator": "Ascenseur",
+      "balcony": "Balcon",
+      "breakfastIncluded": "Petit-déjeuner inclus",
+      "dishwasher": "Lave-vaisselle",
+      "babyEquipment": "Équipement bébé",
+      "tennisCourt": "Court de tennis"
+    },
+    "dates": "Dates",
+    "noDates": "Aucune date sélectionnée",
+    "close": "Fermer",
+    "back": "Retour",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "confirm": "Confirmer",
+    "upload": "Télécharger",
+    "uploadClick": "Cliquez pour télécharger",
+    "guestCount": "{amount, plural, =1 {1 invité} other {# invités}}",
+    "roomAmount": "{amount, plural, =1 {1 pièce} other {# pièces}}",
+    "bedroomAmount": "{amount, plural, =1 {1 chambre} other {# chambres}}",
+    "bathroomAmount": "{amount, plural, =1 {1 salle de bain} other {# salles de bain}}",
+    "bedAmount": "{amount, plural, =1 {1 lit} other {# lits}}",
+    "kitchenAmount": "{amount, plural, =1 {1 cuisine} other {# cuisines}}",
+    "livingRoomAmount": "{amount, plural, =1 {1 salon} other {# salons}}"
+  },
+  "reservationDetail": {
+    "summary": {
+      "heading": "Résumé",
+      "dates": {
+        "label": "Dates",
+        "noDates": "Aucune date sélectionnée",
+        "dialog": {
+          "header": "Dates",
+          "subtitle": "Sélectionnez vos dates de séjour.",
+          "button": {
+            "confirm": "Confirmer"
+          }
+        }
+      },
+      "guests": {
+        "label": "Invités",
+        "value": {
+          "adultsAmount": "{amount, plural, =1 {1 adulte} other {# adultes}}",
+          "childrenAmount": "{amount, plural, =1 {1 enfant} other {# enfants}}",
+          "infantsAmount": "{amount, plural, =1 {1 bébé} other {# bébés}}",
+          "petsAmount": "{amount, plural, =1 {1 animal} other {# animaux}}"
+        },
+        "dialog": {
+          "header": "Invités",
+          "subtitle": "Sélectionnez le nombre d'invités.",
+          "adults": {
+            "label": "Adultes",
+            "description": "13 ans ou plus"
+          },
+          "children": {
+            "label": "Enfants",
+            "description": "De 2 à 12 ans",
+            "notAllowed": "Les enfants ne sont pas acceptés"
+          },
+          "infants": {
+            "label": "Bébés",
+            "description": "Moins de 2 ans",
+            "notAllowed": "Les bébés ne sont pas acceptés"
+          },
+          "pets": {
+            "label": "Animaux",
+            "description": "Chiens, chats et autres animaux",
+            "notAllowed": "Les animaux ne sont pas acceptés"
+          },
+          "button": {
+            "confirm": "Confirmer"
+          }
+        }
+      }
+    },
+    "priceBreakdown": {
+      "heading": "Détail des prix",
+      "nightAmount": "{amount, plural, =1 {1 nuit} other {# nuits}}",
+      "cleaningFee": "Frais de ménage",
+      "deposit": "Caution",
+      "total": "Total"
+    },
+    "cancellationDetails": {
+      "heading": "Conditions d'annulation"
+    },
+    "bottomBar": {
+      "button": {
+        "label": "Confirmer la réservation"
+      }
+    }
+  },
+  "listingDetail": {
+    "bottomBar": {
+      "selectDates": "Sélectionnez des dates pour voir les prix",
+      "button": {
+        "labelNonSelected": "Vérifier",
+        "labelSelected": "Réserver"
+      }
+    }
+  }
+}

@@ -174,10 +174,9 @@
           "subtitle": "With a proper title, your property will be more visible to guests."
         }
       },
-
       "status": {
         "draft": "Draft",
-        "inReview": "In Review",
+        "review": "In Review",
         "published": "Published"
       },
       "yourListing": "Your property in"
@@ -236,6 +235,11 @@
       "noResults": {
         "text": "You don't have any reservations yet. When you request a reservation, it will appear here.",
         "button": "Book now"
+      },
+      "status": {
+        "cancelled": "Cancelled by host",
+        "review": "Waiting for host",
+        "confirmed": "Confirmed by host"
       }
     },
     "favorites": {

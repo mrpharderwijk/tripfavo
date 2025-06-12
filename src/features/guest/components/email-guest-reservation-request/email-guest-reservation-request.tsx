@@ -180,7 +180,7 @@ export function EmailGuestReservationRequest({
         <Container className="py-[16px]">
           <Heading as="h2">What's next?</Heading>
           <Text>
-            You can check the status of your reservation at any time in your <Link href={`${process.env.NEXT_PUBLIC_APP_URL}/guest/reservations`}>reservations</Link> page.
+            You can check the status of your reservation at any time in your <Link href={`/guest/reservations`}>reservations</Link> page.
           </Text>
         </Container>
       </Section>

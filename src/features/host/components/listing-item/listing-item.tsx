@@ -14,9 +14,9 @@ import { localeToDateFnsLocale } from '@/utils/locale-to-date-fns-locale'
 type ListingItemProps = HostListing
 
 const listingMediaItemStatusMap = {
-  [ListingStatus.DRAFT]: { type: ListingMediaItemStatus.DANGER, label: 'Draft' },
-  [ListingStatus.IN_REVIEW]: { type: ListingMediaItemStatus.WARNING, label: 'In review' },
-  [ListingStatus.PUBLISHED]: { type: ListingMediaItemStatus.SUCCESS, label: 'Published' },
+  [ListingStatus.DRAFT]: { type: ListingMediaItemStatus.DANGER, translationKey: 'draft' },
+  [ListingStatus.IN_REVIEW]: { type: ListingMediaItemStatus.WARNING, translationKey: 'review' },
+  [ListingStatus.PUBLISHED]: { type: ListingMediaItemStatus.SUCCESS, translationKey: 'published' },
 }
 
 export function ListingItem({
@@ -29,7 +29,7 @@ export function ListingItem({
 }: ListingItemProps): ReactElement {
   const locale = useLocale()
   const tHost = useTranslations('host')
-  const router = useRouter()
+  const tHostListingStatus = useTranslations('host.listing.status')
   const featuredImage = images?.find((image) => image.isMain) ?? images?.[0] ?? null
   const listingMediaItemTitle = useMemo(() => {
     if (title) {
@@ -59,7 +59,7 @@ export function ListingItem({
       href={`/host/${id}/structure`}
       status={{
         type: listingMediaItemStatusMap[status].type,
-        label: listingMediaItemStatusMap[status].label,
+        label: tHostListingStatus(listingMediaItemStatusMap[status].translationKey),
       }}
       image={featuredImage ?? { url: '', fileName: '' }}
       title={listingMediaItemTitle}

@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/account-settings/', '/host/', '/guest/'],
+      disallow: ['/account-settings/', '/host/', '/guest/', '/reservation/', '/api/'],
     },
   }
 }
