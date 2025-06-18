@@ -68,7 +68,6 @@ export async function POST(
       },
       select: publicListingSelect,
     })
-    console.log('----> listing: ', listing)
 
     // Then create new ListingAmenity records for each amenity
     await prisma.reservation.create({
@@ -86,10 +85,19 @@ export async function POST(
           },
         },
         priceDetails: {
-          create: priceDetails.map((priceDetail) => ({
-            type: priceDetail.type,
-            price: priceDetail.price,
-          })),
+          create: priceDetails
+            .filter(
+              (
+                priceDetail,
+              ): priceDetail is typeof priceDetail & {
+                type: NonNullable<typeof priceDetail.type>
+                price: NonNullable<typeof priceDetail.price>
+              } => priceDetail.type !== null && priceDetail.price !== null,
+            )
+            .map((priceDetail) => ({
+              type: priceDetail.type,
+              price: priceDetail.price,
+            })),
         },
       },
     })

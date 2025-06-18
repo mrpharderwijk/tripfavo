@@ -45,3 +45,6 @@ next-env.d.ts
 
 .npmrc
 .react-email
+
+# scripts
+scripts/db/exports

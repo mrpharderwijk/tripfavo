@@ -1,18 +1,22 @@
+'use client'
+
 import useSWR from 'swr'
 
 import { HostListing } from '@/features/host/types/host-listing'
-import { axiosFetcher } from '@/utils/axios-fetcher'
 
 type UseListingReturnType = {
   listing: HostListing | undefined
   isLoading: boolean
-  isError: Error
+  isError: Error | null
 }
 
-export function useListing(listingId: string): UseListingReturnType {
-  const { data, isLoading, error } = useSWR(
-    `/api/host/listings/${listingId}`,
-    axiosFetcher as (url: string) => Promise<HostListing>,
+export function useListing(
+  listingId: string | null | undefined,
+): UseListingReturnType {
+  const shouldFetch = listingId && listingId.trim() !== ''
+
+  const { data, isLoading, error } = useSWR<HostListing>(
+    shouldFetch ? `/api/host/listings/${listingId}` : null,
   )
 
   return {

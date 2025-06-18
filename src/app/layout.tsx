@@ -10,6 +10,7 @@ import { DialogContextProvider } from '@/features/nav-bar/providers/dialog-conte
 import { DropDownContextProvider } from '@/features/nav-bar/providers/drop-down-context-provider'
 import { primaryFont } from '@/lib/fonts/main'
 import { AppContextProvider } from '@/providers/app-context-provider/app-context-provider'
+import { SWRProvider } from '@/providers/swr-provider/swr-provider'
 import { isActionError } from '@/server/utils/error'
 
 export const metadata: Metadata = {
@@ -32,11 +33,13 @@ export default async function RootLayout({
         className={`${primaryFont.variable} antialiased`}
         suppressHydrationWarning
       >
-        <AppContextProvider currentUser={currentUser}>
-          <DropDownContextProvider>
-            <DialogContextProvider>{children}</DialogContextProvider>
-          </DropDownContextProvider>
-        </AppContextProvider>
+        <SWRProvider>
+          <AppContextProvider currentUser={currentUser}>
+            <DropDownContextProvider>
+              <DialogContextProvider>{children}</DialogContextProvider>
+            </DropDownContextProvider>
+          </AppContextProvider>
+        </SWRProvider>
         <SpeedInsights />
         <Analytics />
       </body>

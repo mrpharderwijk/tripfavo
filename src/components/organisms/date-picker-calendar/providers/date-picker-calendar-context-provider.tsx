@@ -4,7 +4,7 @@ import { DateRange } from 'react-day-picker'
 export type DatePrice = {
   startMonth: number
   endMonth: number
-  price: number | undefined
+  price: number | null
 }
 
 type DatePickerCalendarContextState = {

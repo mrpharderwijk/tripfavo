@@ -13,7 +13,24 @@ import { useListing } from '@/hooks/use-listing/use-listing'
 
 export function HostFunnel(): ReactElement {
   const { steps, currentStep, listingId } = useHostContext()
-  const { listing, isLoading } = useListing(listingId ?? '')
+  const { listing, isLoading, isError } = useListing(listingId)
+
+  // Show loading state while fetching
+  if (isLoading) {
+    return (
+      <Container narrow="md" padding={false}>
+        <DotLoader />
+      </Container>
+    )
+  }
+
+  // Show error state if there's an error
+  if (isError) {
+    console.error('Error loading listing:', isError)
+    return notFound()
+  }
+
+  // Show not found if no listing and not loading
   if (!listing) {
     return notFound()
   }
@@ -24,7 +41,7 @@ export function HostFunnel(): ReactElement {
   return (
     StepComponent && (
       <Container narrow="md" padding={false}>
-        {!isLoading ? <StepComponent listing={listing} /> : <DotLoader />}
+        <StepComponent listing={listing} />
       </Container>
     )
   )

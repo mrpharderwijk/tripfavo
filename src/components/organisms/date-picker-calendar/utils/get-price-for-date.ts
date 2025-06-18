@@ -11,5 +11,5 @@ export function getPriceForDate(
     return month >= range.startMonth && month <= range.endMonth
   })
 
-  return priceRange?.price
+  return priceRange?.price ?? 0
 }
