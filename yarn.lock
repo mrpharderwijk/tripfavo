@@ -1033,11 +1033,6 @@
   dependencies:
     sparse-bitfield "^3.0.3"
 
-"@mrpharderwijk/eslint-config@^0.0.17":
-  version "0.0.17"
-  resolved "https://npm.pkg.github.com/download/@mrpharderwijk/eslint-config/0.0.17/6095b04fd288d51fe742261bb4b24d0ddc1ea1b8#6095b04fd288d51fe742261bb4b24d0ddc1ea1b8"
-  integrity sha512-Kst9xU3/DNZ0Am09sqhS2mrfkarvMTv36afRnYkWOfWqA+6ip7dsaaU3vhGSsBDPDX41Gg7Q+278Ndp9cIIJKA==
-
 "@msgpackr-extract/msgpackr-extract-darwin-arm64@3.0.3":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@msgpackr-extract/msgpackr-extract-darwin-arm64/-/msgpackr-extract-darwin-arm64-3.0.3.tgz#9edec61b22c3082018a79f6d1c30289ddf3d9d11"

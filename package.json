@@ -77,7 +77,6 @@
     "@chromatic-com/storybook": "^3",
     "@eslint/eslintrc": "^3",
     "@eslint/js": "^9.21.0",
-    "@mrpharderwijk/eslint-config": "^0.0.17",
     "@next/eslint-plugin-next": "^15.2.0",
     "@storybook/addon-essentials": "^8.6.12",
     "@storybook/addon-links": "^8.6.12",
