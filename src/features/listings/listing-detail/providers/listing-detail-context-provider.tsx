@@ -4,6 +4,7 @@ import {
   createContext,
   Dispatch,
   PropsWithChildren,
+  ReactElement,
   SetStateAction,
   useContext,
   useMemo,
@@ -22,7 +23,9 @@ type ListingDetailContextType = {
   setSelectedDateRange: Dispatch<SetStateAction<DateRange | undefined>>
 }
 
-const ListingDetailContext = createContext<ListingDetailContextType | null>(null)
+const ListingDetailContext = createContext<ListingDetailContextType | null>(
+  null,
+)
 
 type ListingDetailContextProviderProps = PropsWithChildren<{
   listing: PublicListing
@@ -31,9 +34,14 @@ type ListingDetailContextProviderProps = PropsWithChildren<{
 export function ListingDetailContextProvider({
   children,
   listing,
-}: ListingDetailContextProviderProps) {
-  const [selectedDateRange, setSelectedDateRange] = useState<DateRange | undefined>(undefined)
-  const calendarPrices = useMemo(() => getCalendarPrices(listing.priceDetails), [listing])
+}: ListingDetailContextProviderProps): ReactElement {
+  const [selectedDateRange, setSelectedDateRange] = useState<
+    DateRange | undefined
+  >(undefined)
+  const calendarPrices = useMemo(
+    () => getCalendarPrices(listing.priceDetails),
+    [listing],
+  )
   const value = useMemo(() => {
     return {
       calendarPrices,
@@ -43,13 +51,19 @@ export function ListingDetailContextProvider({
     }
   }, [calendarPrices, listing, selectedDateRange, setSelectedDateRange])
 
-  return <ListingDetailContext.Provider value={value}>{children}</ListingDetailContext.Provider>
+  return (
+    <ListingDetailContext.Provider value={value}>
+      {children}
+    </ListingDetailContext.Provider>
+  )
 }
 
-export function useListingDetailContext() {
+export function useListingDetailContext(): ListingDetailContextType {
   const context = useContext(ListingDetailContext)
   if (!context) {
-    throw new Error('useListingDetailContext must be used within a ListingDetailContextProvider')
+    throw new Error(
+      'useListingDetailContext must be used within a ListingDetailContextProvider',
+    )
   }
   return context
 }

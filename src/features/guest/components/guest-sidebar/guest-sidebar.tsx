@@ -9,9 +9,8 @@ import { ReactElement } from 'react'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
 import { ButtonWrapper } from '@/components/molecules/buttons/button-wrapper/button-wrapper'
-import { getRoutePathByRouteName, isCurrentRoute } from '@/utils/get-route'
-import { Heading } from '@/components/atoms/typography/heading/heading'
 import { AppShellSidebar } from '@/components/molecules/layout/app-shell/app-shell-sidebar'
+import { getRoutePathByRouteName, isCurrentRoute } from '@/utils/get-route'
 
 type GuestSidebarProps = {
   heading?: string
@@ -31,12 +30,14 @@ export function GuestSidebar({ heading }: GuestSidebarProps): ReactElement {
               icon={CalendarDays}
               size="lg"
               variant={
-                !isCurrentRoute(pathname, 'myBookings')
+                !isCurrentRoute(pathname, 'guestReservations')
                   ? 'sidebar-menu-item'
                   : 'sidebar-menu-item-active'
               }
               renderRoot={({ buttonContent }) => (
-                <Link href={getRoutePathByRouteName('myBookings')}>{buttonContent}</Link>
+                <Link href={getRoutePathByRouteName('guestReservations')}>
+                  {buttonContent}
+                </Link>
               )}
             >
               {tMainMenuGuest('myBookings')}
@@ -48,12 +49,14 @@ export function GuestSidebar({ heading }: GuestSidebarProps): ReactElement {
               icon={Home}
               size="lg"
               variant={
-                !isCurrentRoute(pathname, 'myFavorites')
+                !isCurrentRoute(pathname, 'guestFavorites')
                   ? 'sidebar-menu-item'
                   : 'sidebar-menu-item-active'
               }
               renderRoot={({ buttonContent }) => (
-                <Link href={getRoutePathByRouteName('myFavorites')}>{buttonContent}</Link>
+                <Link href={getRoutePathByRouteName('guestFavorites')}>
+                  {buttonContent}
+                </Link>
               )}
             >
               {tMainMenuGuest('myFavorites')}

@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react'
+import React from 'react'
 
 import { Footer } from './footer'
 
@@ -8,38 +9,49 @@ import { FooterDisclaimer } from '@/components/molecules/footer/components/foote
 import { FooterListItem } from '@/components/molecules/footer/components/footer-list/components/footer-list-item/footer-list-item'
 import { FooterList } from '@/components/molecules/footer/components/footer-list/footer-list'
 
-jest.mock('@/components/atoms/layout/container/container', () => ({
-  Container: jest.fn(({ children }) => <>{children}</>),
+vi.mock('@/components/atoms/layout/container/container', () => ({
+  Container: vi.fn(({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  )),
 }))
-const ContainerMock = jest.mocked(Container)
+const ContainerMock = vi.mocked(Container)
 
-jest.mock('@/components/molecules/footer/components/footer-list/footer-list', () => ({
-  FooterList: jest.fn(({ children }) => <>{children}</>),
-}))
-const FooterListMock = jest.mocked(FooterList)
+vi.mock(
+  '@/components/molecules/footer/components/footer-list/footer-list',
+  () => ({
+    FooterList: vi.fn(({ children }: { children: React.ReactNode }) => (
+      <>{children}</>
+    )),
+  }),
+)
+const FooterListMock = vi.mocked(FooterList)
 
-jest.mock(
+vi.mock(
   '@/components/molecules/footer/components/footer-list/components/footer-list-item/footer-list-item',
 )
-const FooterListItemMock = jest.mocked(FooterListItem)
+const FooterListItemMock = vi.mocked(FooterListItem)
 
-jest.mock('@/components/molecules/footer/components/footer-disclaimer/footer-disclaimer')
-const FooterDisclaimerMock = jest.mocked(FooterDisclaimer)
+vi.mock(
+  '@/components/molecules/footer/components/footer-disclaimer/footer-disclaimer',
+)
+const FooterDisclaimerMock = vi.mocked(FooterDisclaimer)
 
-jest.mock('@/components/molecules/footer/components/footer-copyright/footer-copyright')
-const FooterCopyrightMock = jest.mocked(FooterCopyright)
+vi.mock(
+  '@/components/molecules/footer/components/footer-copyright/footer-copyright',
+)
+const FooterCopyrightMock = vi.mocked(FooterCopyright)
 
 // Mock the translation hook
-jest.mock('react-i18next', () => ({
+vi.mock('react-i18next', () => ({
   useTranslation: () => ({
     t: (key: string) => key,
   }),
 }))
 
-describe('Footer', () => {
-  beforeEach(jest.clearAllMocks)
+describe('Footer', (): void => {
+  beforeEach(vi.clearAllMocks)
 
-  it('renders the component', () => {
+  it('renders the component', (): void => {
     // Arrange
     render(<Footer />)
 

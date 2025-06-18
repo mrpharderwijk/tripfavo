@@ -1,0 +1,42 @@
+[
+  {
+    "_id": "685253d34873f54313950211",
+    "type": "CLEANING_FEE",
+    "price": 50,
+    "createdAt": "2025-06-18T05:51:15.601Z",
+    "updatedAt": "2025-06-18T05:51:15.601Z",
+    "reservationId": "685253d34873f5431395020f"
+  },
+  {
+    "_id": "685253d34873f54313950212",
+    "type": "DEPOSIT",
+    "price": 200,
+    "createdAt": "2025-06-18T05:51:15.601Z",
+    "updatedAt": "2025-06-18T05:51:15.601Z",
+    "reservationId": "685253d34873f5431395020f"
+  },
+  {
+    "_id": "685253d34873f54313950213",
+    "type": "HIGH_SEASON",
+    "price": 150,
+    "createdAt": "2025-06-18T05:51:15.601Z",
+    "updatedAt": "2025-06-18T05:51:15.601Z",
+    "reservationId": "685253d34873f5431395020f"
+  },
+  {
+    "_id": "685253d34873f54313950214",
+    "type": "LOW_SEASON",
+    "price": 150,
+    "createdAt": "2025-06-18T05:51:15.601Z",
+    "updatedAt": "2025-06-18T05:51:15.601Z",
+    "reservationId": "685253d34873f5431395020f"
+  },
+  {
+    "_id": "685253d34873f54313950215",
+    "type": "MID_SEASON",
+    "price": 150,
+    "createdAt": "2025-06-18T05:51:15.601Z",
+    "updatedAt": "2025-06-18T05:51:15.601Z",
+    "reservationId": "685253d34873f5431395020f"
+  }
+]

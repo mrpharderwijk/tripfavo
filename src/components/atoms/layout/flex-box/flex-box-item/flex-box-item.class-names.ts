@@ -14,7 +14,10 @@ import { orderVariants } from '@/utils/variants/flex-box/order'
 import { marginVariants } from '@/utils/variants/margin/margin'
 import { paddingVariants } from '@/utils/variants/padding/padding'
 import { positionVariants } from '@/utils/variants/position/position'
-import { fullHeightVariants, heightVariants } from '@/utils/variants/sizing/height'
+import {
+  fullHeightVariants,
+  heightVariants,
+} from '@/utils/variants/sizing/height'
 import { maxHeightVariants } from '@/utils/variants/sizing/max-height'
 import { maxWidthVariants } from '@/utils/variants/sizing/max-width'
 import { minHeightVariants } from '@/utils/variants/sizing/min-height'

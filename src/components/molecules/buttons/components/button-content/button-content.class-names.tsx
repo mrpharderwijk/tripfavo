@@ -96,6 +96,10 @@ export const buttonContentLabelClassNames = cva('flex-initial', {
       'sidebar-menu-item': 'font-medium',
       'sidebar-menu-item-active': 'font-semibold',
     },
+    avatar: {
+      true: 'rounded-full w-10 h-10',
+      false: '',
+    },
     size: {
       xs: '',
       sm: '',

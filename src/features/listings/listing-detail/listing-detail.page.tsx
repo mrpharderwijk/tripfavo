@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { ReactElement, useRef } from 'react'
 
 import { Divider } from '@/components/atoms/layout/divider/divider'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
@@ -20,13 +20,14 @@ type ListingDetailPageProps = {
   listing: PublicListing
 }
 
-export function ListingDetailPage({ listing }: ListingDetailPageProps) {
+export function ListingDetailPage({
+  listing,
+}: ListingDetailPageProps): ReactElement {
   const datePickerRef = useRef<HTMLDivElement | null>(null)
 
   return (
     <ListingDetailContextProvider listing={listing}>
       <FlexBox flex-direction="col" gap={6}>
-        {/* Slider */}
         <ListingDetailSlider />
 
         <FlexBox flex-direction="col" flex-direction-md="row" gap={6}>
@@ -41,10 +42,7 @@ export function ListingDetailPage({ listing }: ListingDetailPageProps) {
             margin-top-negative={12}
           >
             <FlexBox flex-direction="col" gap={6}>
-              {/* Title */}
               <ListingDetailTitle />
-
-              {/* Structure & FloorPlan */}
               <ListingDetailSubtitle />
             </FlexBox>
 

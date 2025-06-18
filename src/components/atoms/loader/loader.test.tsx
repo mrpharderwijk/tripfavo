@@ -34,13 +34,16 @@ describe('Loader', () => {
       { size: 'sm', expectedClass: 'w-4 h-4' },
       { size: 'md', expectedClass: 'w-8 h-8' },
       { size: 'lg', expectedClass: 'w-12 h-12' },
-    ] as const)('renders $size size with correct classes', ({ size, expectedClass }) => {
-      render(<Loader size={size} />)
+    ] as const)(
+      'renders $size size with correct classes',
+      ({ size, expectedClass }) => {
+        render(<Loader size={size} />)
 
-      const loader = screen.getByLabelText('Loading...')
-      const [widthClass, heightClass] = expectedClass.split(' ')
-      expect(loader).toHaveClass(widthClass, heightClass)
-    })
+        const loader = screen.getByLabelText('Loading...')
+        const [widthClass, heightClass] = expectedClass.split(' ')
+        expect(loader).toHaveClass(widthClass, heightClass)
+      },
+    )
 
     it('uses md size as default', () => {
       render(<Loader />)
@@ -55,7 +58,13 @@ describe('Loader', () => {
 
     const loader = screen.getByLabelText('Loading...')
     expect(loader).toHaveClass('absolute')
-    expect(loader).toHaveClass('top-0', 'left-0', 'right-0', 'bottom-0', 'm-auto')
+    expect(loader).toHaveClass(
+      'top-0',
+      'left-0',
+      'right-0',
+      'bottom-0',
+      'm-auto',
+    )
   })
 
   it('has proper animation class', () => {
@@ -69,6 +78,10 @@ describe('Loader', () => {
     render(<Loader />)
 
     const loader = screen.getByLabelText('Loading...')
-    expect(loader).toHaveClass('border-4', 'border-transparent', 'border-t-white')
+    expect(loader).toHaveClass(
+      'border-4',
+      'border-transparent',
+      'border-t-white',
+    )
   })
 })

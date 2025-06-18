@@ -7,7 +7,9 @@ import { WithRef } from '@/types/with-ref'
 
 type MainMenuContainerProps = WithRef<HTMLDivElement>
 
-export function MainMenuContainer({ ref }: MainMenuContainerProps): ReactElement {
+export function MainMenuContainer({
+  ref,
+}: MainMenuContainerProps): ReactElement {
   const { header, body, footer } = useMainMenuContext()
 
   return (
@@ -29,7 +31,11 @@ export function MainMenuContainer({ ref }: MainMenuContainerProps): ReactElement
         </div>
 
         {/* Footer */}
-        {!!footer && <footer className="flex flex-row gap-4 px-6 flex-initial">{footer}</footer>}
+        {!!footer && (
+          <footer className="flex flex-row gap-4 px-6 flex-initial">
+            {footer}
+          </footer>
+        )}
       </div>
     </div>
   )

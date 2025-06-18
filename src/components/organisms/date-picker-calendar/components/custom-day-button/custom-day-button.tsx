@@ -10,7 +10,10 @@ import { Locales } from '@/i18n/routing'
 import { cn } from '@/utils/class-names'
 
 export function CustomDayButton(
-  props: { day: CalendarDay; modifiers: Modifiers } & ButtonHTMLAttributes<HTMLButtonElement>,
+  props: {
+    day: CalendarDay
+    modifiers: Modifiers
+  } & ButtonHTMLAttributes<HTMLButtonElement>,
 ): ReactElement {
   const { day, modifiers, ...buttonProps } = props
   const isSelected = modifiers.selected
@@ -23,7 +26,8 @@ export function CustomDayButton(
   const buttonClassNames = cn(
     'rounded-full w-full h-full aspect-square flex items-center justify-center',
     {
-      'opacity-40 cursor-not-allowed line-through decoration-2': modifiers.disabled,
+      'opacity-40 cursor-not-allowed line-through decoration-2':
+        modifiers.disabled,
       'bg-bg-primary-inverse text-text-primary-inverse hover:bg-primary-hover':
         isSelected && (isStart || isEnd),
       'bg-bg-quaternary text-text-primary': isSelected && !isStart && !isEnd,

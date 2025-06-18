@@ -1,16 +1,16 @@
 'use client'
 
 import { UserIcon } from 'lucide-react'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { ReactElement } from 'react'
 
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
-import { getRoutePathByRouteName, isCurrentRoute } from '@/utils/get-route'
 import { ButtonWrapper } from '@/components/molecules/buttons/button-wrapper/button-wrapper'
-import Link from 'next/link'
 import { AppShellSidebar } from '@/components/molecules/layout/app-shell/app-shell-sidebar'
+import { getRoutePathByRouteName, isCurrentRoute } from '@/utils/get-route'
 
 type AccountSidebarProps = {
   heading?: string

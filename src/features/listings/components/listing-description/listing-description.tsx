@@ -36,21 +36,30 @@ export function ListingDescription({
     >
       <FlexBoxItem>
         <Heading tag="h2" like="h6" text-align="center">
-          {tListing('description.title', { structure: tListing(`structure.${structure}`), city })}
+          {tListing('description.title', {
+            structure: tListing(`structure.${structure}`),
+            city,
+          })}
         </Heading>
       </FlexBoxItem>
       <FlexBoxItem>
         <DotList>
-          <DotListItem>{tCommon('roomAmount', { amount: floorPlan?.rooms ?? 0 })}</DotListItem>
+          <DotListItem>
+            {tCommon('roomAmount', { amount: floorPlan?.rooms ?? 0 })}
+          </DotListItem>
           <DotListItem>
             {tCommon('bedroomAmount', { amount: floorPlan?.bedrooms ?? 0 })}
           </DotListItem>
-          <DotListItem>{tCommon('bedAmount', { amount: floorPlan?.beds ?? 0 })}</DotListItem>
+          <DotListItem>
+            {tCommon('bedAmount', { amount: floorPlan?.beds ?? 0 })}
+          </DotListItem>
           <DotListItem>
             {tCommon('kitchenAmount', { amount: floorPlan?.kitchens ?? 0 })}
           </DotListItem>
           <DotListItem>
-            {tCommon('livingRoomAmount', { amount: floorPlan?.livingRooms ?? 0 })}
+            {tCommon('livingRoomAmount', {
+              amount: floorPlan?.livingRooms ?? 0,
+            })}
           </DotListItem>
           <DotListItem last>
             {tCommon('bathroomAmount', { amount: floorPlan?.bathrooms ?? 0 })}

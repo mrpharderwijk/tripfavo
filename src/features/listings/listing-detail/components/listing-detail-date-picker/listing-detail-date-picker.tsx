@@ -14,7 +14,8 @@ export function ListingDetailDatePicker(): ReactElement {
   const locale = useLocale()
   const tListingDates = useTranslations('listing.dates')
   const datePickerRef = useRef<HTMLDivElement | null>(null)
-  const { calendarPrices, selectedDateRange, setSelectedDateRange } = useListingDetailContext()
+  const { calendarPrices, selectedDateRange, setSelectedDateRange } =
+    useListingDetailContext()
 
   // TODO: Get from API
   const disabledDates = [
@@ -41,7 +42,11 @@ export function ListingDetailDatePicker(): ReactElement {
               locale={locale as Locales}
               selected={selectedDateRange}
               onSelect={(date) =>
-                handleOnSelectDayPicker(date, setSelectedDateRange, disabledDates)
+                handleOnSelectDayPicker(
+                  date,
+                  setSelectedDateRange,
+                  disabledDates,
+                )
               }
             />
           </FlexBox>

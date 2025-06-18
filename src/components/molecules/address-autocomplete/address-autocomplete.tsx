@@ -2,7 +2,7 @@
 
 import { Check, Loader2, MapPin } from 'lucide-react'
 import type { ChangeEvent } from 'react'
-import { useEffect, useRef, useState } from 'react'
+import { ReactElement, useEffect, useRef, useState } from 'react'
 
 import { DotLoader } from '@/components/atoms/dot-loader/dot-loader'
 import { Input } from '@/components/atoms/forms/input/input'
@@ -78,7 +78,7 @@ export function AddressAutocomplete({
   value = '',
   selectedAddress,
   disabled = false,
-}: AddressAutocompleteProps) {
+}: AddressAutocompleteProps): ReactElement {
   const [results, setResults] = useState<AddressResult[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [open, setOpen] = useState(false)
@@ -86,7 +86,7 @@ export function AddressAutocomplete({
   const inputRef = useRef<HTMLInputElement>(null)
 
   // Fetch address suggestions from our API route
-  const fetchAddressSuggestions = async (query: string) => {
+  const fetchAddressSuggestions = async (query: string): Promise<void> => {
     if (query.length < 2) {
       setResults([])
       return
@@ -95,7 +95,9 @@ export function AddressAutocomplete({
     setIsLoading(true)
 
     try {
-      const response = await fetch(`/api/address?q=${encodeURIComponent(query)}`)
+      const response = await fetch(
+        `/api/address?q=${encodeURIComponent(query)}`,
+      )
 
       if (!response.ok) {
         throw new Error('Failed to fetch address suggestions')
@@ -128,14 +130,14 @@ export function AddressAutocomplete({
       setResults([])
     }
 
-    return () => {
+    return (): void => {
       if (debounceTimerRef.current) {
         clearTimeout(debounceTimerRef.current)
       }
     }
   }, [value, selectedAddress])
 
-  const handleSelectAddress = (address: AddressResult) => {
+  const handleSelectAddress = (address: AddressResult): void => {
     setOpen(false)
 
     if (onChange) {
@@ -148,12 +150,12 @@ export function AddressAutocomplete({
     }
   }
 
-  function handleAddressInputChange(e: ChangeEvent<HTMLInputElement>) {
+  function handleAddressInputChange(e: ChangeEvent<HTMLInputElement>): void {
     const newValue = e.target.value
     onChange?.(newValue, undefined)
   }
 
-  function handleAddressInputFocus() {
+  function handleAddressInputFocus(): void {
     if (value.length >= 2) {
       setOpen(true)
     }
@@ -200,7 +202,11 @@ export function AddressAutocomplete({
                     >
                       <div className="flex flex-initial items-center justify-center">
                         <div className="flex items-center justify-center w-12 h-12 bg-grey-100 rounded-md">
-                          <MapPin strokeWidth={1} size={24} className="text-muted-foreground" />
+                          <MapPin
+                            strokeWidth={1}
+                            size={24}
+                            className="text-muted-foreground"
+                          />
                         </div>
                       </div>
                       <div className="flex flex-col flex-auto">

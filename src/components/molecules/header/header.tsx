@@ -1,9 +1,11 @@
 'use client'
 
+import { ReactElement } from 'react'
+
 import { Container } from '@/components/atoms/layout/container/container'
 import { Branding } from '@/components/molecules/branding/branding'
 
-export const Header = () => {
+export function Header(): ReactElement {
   // const { t } = useTranslations()
 
   return (

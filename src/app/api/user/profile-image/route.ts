@@ -1,3 +1,3 @@
-import { POST } from '@/features/auth/api/profile-image'
+import { POST } from '@/features/auth/server/api/profile-image.api'
 
 export { POST }

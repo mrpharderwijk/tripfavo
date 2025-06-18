@@ -1,10 +1,11 @@
 'use client'
 
-// import { useTranslation } from 'react-i18next'
+import { ReactElement } from 'react'
 
+// import { useTranslation } from 'react-i18next'
 import { FooterCopyright } from './components/footer-copyright/footer-copyright'
 
-export const Footer = () => {
+export const Footer = (): ReactElement => {
   // const { t } = useTranslation()
 
   return (

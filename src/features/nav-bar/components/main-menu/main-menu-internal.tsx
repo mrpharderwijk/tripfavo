@@ -1,6 +1,7 @@
 'use client'
 
 import { AlignJustify } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { ReactElement } from 'react'
@@ -10,7 +11,10 @@ import { Button } from '@/components/molecules/buttons/button'
 import { ButtonWrapper } from '@/components/molecules/buttons/button-wrapper/button-wrapper'
 import { MainMenuContainer } from '@/features/nav-bar/components/main-menu/main-menu-container'
 import { useMainMenuContext } from '@/features/nav-bar/components/main-menu/main-menu-context-provider'
-import { useAppContext, UserMode } from '@/providers/app-context-provider/app-context-provider'
+import {
+  useAppContext,
+  UserMode,
+} from '@/providers/app-context-provider/app-context-provider'
 import { getRoutePathByRouteName } from '@/utils/get-route'
 
 export function MainMenuInternal(): ReactElement {
@@ -79,11 +83,26 @@ export function MainMenuInternal(): ReactElement {
                 renderRoot={({ buttonContent }) => (
                   <Link href={accountRoutePath}>{buttonContent}</Link>
                 )}
-              />
+              >
+                {currentUser?.profileImage?.url && (
+                  <Image
+                    className="rounded-full object-cover aspect-square"
+                    src={currentUser?.profileImage?.url ?? ''}
+                    alt="Profile"
+                    width={40}
+                    height={32}
+                  />
+                )}
+              </ButtonWrapper>
             )}
           </>
         )}
-        <Button size="md" icon={AlignJustify} variant="quaternary" onClick={toggleMainMenu} />
+        <Button
+          size="md"
+          icon={AlignJustify}
+          variant="quaternary"
+          onClick={toggleMainMenu}
+        />
       </FlexBox>
       {isOpen && <MainMenuContainer ref={subMenuRef} />}
     </>

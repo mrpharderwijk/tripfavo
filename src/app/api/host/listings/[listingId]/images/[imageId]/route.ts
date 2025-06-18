@@ -1,3 +1,6 @@
-import { PATCH, DELETE } from '@/features/host/api/listings/listing-image-id'
+import {
+  DELETE,
+  PATCH,
+} from '@/features/host/server/api/listings/listing-image-id.api'
 
-export { PATCH, DELETE }
+export { DELETE, PATCH }

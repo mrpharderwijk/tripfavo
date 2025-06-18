@@ -21,7 +21,9 @@ export function ListingDetailFloorPlan(): ReactElement {
     <FlexBox tag="section" flex-direction="col" gap={2}>
       {guestsAmount?.maxGuests && (
         <Body color="secondary" size="base-lgt" text-align="center">
-          {tListing('guestsAmount.maxGuests', { amount: guestsAmount?.maxGuests })}
+          {tListing('guestsAmount.maxGuests', {
+            amount: guestsAmount?.maxGuests,
+          })}
         </Body>
       )}
 
@@ -44,7 +46,9 @@ export function ListingDetailFloorPlan(): ReactElement {
           )}
           {floorPlan?.livingRooms && (
             <DotListItem last>
-              {tCommon('livingRoomAmount', { amount: floorPlan?.livingRooms ?? 0 })}
+              {tCommon('livingRoomAmount', {
+                amount: floorPlan?.livingRooms ?? 0,
+              })}
             </DotListItem>
           )}
         </DotList>

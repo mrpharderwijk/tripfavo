@@ -21,5 +21,9 @@ export function RouterLoaderProvider({
   //   }
   // }, [pathname, searchParams])
 
-  return <Suspense fallback={<AppLoader message={null} loading={isLoading} />}>{children}</Suspense>
+  return (
+    <Suspense fallback={<AppLoader message={null} loading={isLoading} />}>
+      {children}
+    </Suspense>
+  )
 }

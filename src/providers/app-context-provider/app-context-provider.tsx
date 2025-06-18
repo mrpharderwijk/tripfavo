@@ -5,10 +5,12 @@ import {
   createContext,
   Dispatch,
   PropsWithChildren,
+  ReactElement,
   SetStateAction,
   useContext,
   useEffect,
   useState,
+  useTransition,
 } from 'react'
 import { useSessionStorage } from 'usehooks-ts'
 
@@ -27,13 +29,20 @@ type AppContextState = {
   userMode: UserMode
   setUserMode: Dispatch<SetStateAction<UserMode>>
   isMounted: boolean
+  isRouterLoading: boolean
+  startTransition: (callback: () => void) => void
 }
 
 const AppContext = createContext<AppContextState | null>(null)
 
-type AppContextProviderProps = PropsWithChildren<Pick<AppContextState, 'currentUser'>>
+type AppContextProviderProps = PropsWithChildren<
+  Pick<AppContextState, 'currentUser'>
+>
 
-export function AppContextProvider({ children, currentUser }: AppContextProviderProps) {
+export function AppContextProvider({
+  children,
+  currentUser,
+}: AppContextProviderProps): ReactElement {
   const pathname = usePathname()
   const [isMounted, setIsMounted] = useState<boolean>(false)
   const [userMode, setUserMode] = useSessionStorage<UserMode>(
@@ -42,7 +51,10 @@ export function AppContextProvider({ children, currentUser }: AppContextProvider
   )
 
   const [loading, setLoading] = useState<boolean>(false)
-  const [loadingMessage, setLoadingMessage] = useState<string | null>('Creating your listing')
+  const [loadingMessage, setLoadingMessage] = useState<string | null>(
+    'Creating your listing',
+  )
+  const [isRouterLoading, startTransition] = useTransition()
 
   useEffect(() => {
     setIsMounted(true)
@@ -52,27 +64,38 @@ export function AppContextProvider({ children, currentUser }: AppContextProvider
     if (pathname.includes('/host/') && userMode !== UserMode.HOST) {
       setUserMode(UserMode.HOST)
     }
-    
+
     if (pathname.includes('/guest/') && userMode !== UserMode.GUEST) {
       setUserMode(UserMode.GUEST)
     }
-  }, [pathname])
+  }, [pathname, userMode, setUserMode])
 
-  function enableAppLoading(message?: string) {
+  function enableAppLoading(message?: string): void {
     setLoading(true)
     setLoadingMessage(message ?? null)
   }
 
-  function disableAppLoading() {
+  function disableAppLoading(): void {
     setLoading(false)
     setLoadingMessage(null)
   }
 
   return (
     <AppContext.Provider
-      value={{ currentUser, enableAppLoading, disableAppLoading, userMode, setUserMode, isMounted }}
+      value={{
+        currentUser,
+        enableAppLoading,
+        disableAppLoading,
+        userMode,
+        setUserMode,
+        isRouterLoading,
+        startTransition,
+        isMounted,
+      }}
     >
-      <RouterLoaderProvider isLoading={loading}>{children}</RouterLoaderProvider>
+      <RouterLoaderProvider isLoading={loading || isRouterLoading}>
+        {children}
+      </RouterLoaderProvider>
     </AppContext.Provider>
   )
 }

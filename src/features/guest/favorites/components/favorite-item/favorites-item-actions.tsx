@@ -2,7 +2,7 @@
 import axios from 'axios'
 import { EllipsisVertical } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { MouseEvent } from 'react'
+import { MouseEvent, ReactElement } from 'react'
 
 import { Button } from '@/components/molecules/buttons/button'
 import { DropDownMenu } from '@/components/organisms/drop-down-menu/drop-down-menu'
@@ -13,16 +13,21 @@ type FavoritesItemActionsProps = {
   id: string
 }
 
-export function FavoritesItemActions({ id }: FavoritesItemActionsProps) {
+export function FavoritesItemActions({
+  id,
+}: FavoritesItemActionsProps): ReactElement {
   const router = useRouter()
-  const { currentOpenDropDown, closeDropDown, toggleDropDown } = useDropDownContext()
+  const { currentOpenDropDown, closeDropDown, toggleDropDown } =
+    useDropDownContext()
 
-  function handleOnClickActions(e: MouseEvent<HTMLButtonElement>) {
+  function handleOnClickActions(e: MouseEvent<HTMLButtonElement>): void {
     e.stopPropagation()
     toggleDropDown(`listing-item-actions-${id}`)
   }
 
-  async function handleOnClickDelete(e: MouseEvent<HTMLButtonElement>) {
+  async function handleOnClickDelete(
+    e: MouseEvent<HTMLButtonElement>,
+  ): Promise<void> {
     e.stopPropagation()
 
     try {

@@ -1,11 +1,15 @@
+import { ReactElement } from 'react'
+import { PriceType } from '@prisma/client'
+
 import {
   EmailGuestReservationRequest,
   EmailGuestReservationRequestProps,
 } from '@/features/guest/components/email-guest-reservation-request/email-guest-reservation-request'
 import { PublicListing } from '@/features/listings/types/public-listing'
-import { PriceType } from '@prisma/client'
 
-export default async function GuestReservationRequestSendEmailTemplate(props: EmailGuestReservationRequestProps) {
+export default async function GuestReservationRequestSendEmailTemplate(
+  props: EmailGuestReservationRequestProps,
+): Promise<ReactElement> {
   const startDate = '2025-06-20T22:00:00.000Z'
   const endDate = '2025-06-26T22:00:00.000Z'
   const guestsAmount = {
@@ -18,10 +22,14 @@ export default async function GuestReservationRequestSendEmailTemplate(props: Em
     id: '1',
     title: 'Lorem ipsum dolor sit amet',
     city: 'Amsterdam',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
-    neighbourhoodDescription: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
-    structure: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
-    privacyType: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+    neighbourhoodDescription:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+    structure:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
+    privacyType:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.',
     status: 'published',
     priceDetails: [
       {
@@ -65,10 +73,18 @@ export default async function GuestReservationRequestSendEmailTemplate(props: Em
       id: '1',
       name: 'John Doe',
       profileImage: 'https://picsum.photos/200/300',
-
     },
   }
   const locale = 'en-US'
 
-  return <EmailGuestReservationRequest {...props} startDate={startDate} endDate={endDate} guestsAmount={guestsAmount} listing={listing as unknown as PublicListing} locale={locale} />
+  return (
+    <EmailGuestReservationRequest
+      {...props}
+      startDate={startDate}
+      endDate={endDate}
+      guestsAmount={guestsAmount}
+      listing={listing as unknown as PublicListing}
+      locale={locale}
+    />
+  )
 }

@@ -26,13 +26,15 @@ export function HostMainMenuBody(): ReactElement {
           icon={House}
           size="lg"
           variant={
-            !isCurrentRoute(pathname, 'myListings')
+            !isCurrentRoute(pathname, 'hostListings')
               ? 'sidebar-menu-item'
               : 'sidebar-menu-item-active'
           }
           onClick={closeMainMenu}
           renderRoot={({ buttonContent }) => (
-            <Link href={getRoutePathByRouteName('myListings')}>{buttonContent}</Link>
+            <Link href={getRoutePathByRouteName('hostListings')}>
+              {buttonContent}
+            </Link>
           )}
         >
           {tMainMenuHost('myListings')}
@@ -44,13 +46,15 @@ export function HostMainMenuBody(): ReactElement {
           icon={CalendarDays}
           size="lg"
           variant={
-            !isCurrentRoute(pathname, 'myReservations')
+            !isCurrentRoute(pathname, 'hostReservations')
               ? 'sidebar-menu-item'
               : 'sidebar-menu-item-active'
           }
           onClick={closeMainMenu}
           renderRoot={({ buttonContent }) => (
-            <Link href={getRoutePathByRouteName('myReservations')}>{buttonContent}</Link>
+            <Link href={getRoutePathByRouteName('hostReservations')}>
+              {buttonContent}
+            </Link>
           )}
         >
           {tMainMenuHost('myReservations')}
@@ -61,7 +65,9 @@ export function HostMainMenuBody(): ReactElement {
         icon={Globe}
         size="lg"
         variant={
-          !isCurrentRoute(pathname, 'language') ? 'sidebar-menu-item' : 'sidebar-menu-item-active'
+          !isCurrentRoute(pathname, 'language')
+            ? 'sidebar-menu-item'
+            : 'sidebar-menu-item-active'
         }
         onClick={handleOnClickLanguage}
       >

@@ -1,3 +1,5 @@
+import { ReactElement } from 'react'
+
 import { LocalizedDate } from '@/components/atoms/localized-date/localized-date'
 import { Locales } from '@/i18n/routing'
 
@@ -7,7 +9,11 @@ type LocalizedBookingDatesProps = {
   locale: Locales
 }
 
-export function LocalizedBookingDates({ startDate, endDate, locale }: LocalizedBookingDatesProps) {
+export function LocalizedBookingDates({
+  startDate,
+  endDate,
+  locale,
+}: LocalizedBookingDatesProps): ReactElement | null {
   if (!startDate || !endDate) {
     return null
   }

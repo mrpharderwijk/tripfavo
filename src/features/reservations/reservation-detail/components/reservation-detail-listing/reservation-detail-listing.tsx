@@ -12,7 +12,12 @@ export function ReservationDetailListing(): ReactElement {
   const mainImage = listing.images[0]
 
   return (
-    <FlexBox flex-direction="row" align-items="center" justify-content="start" gap={4}>
+    <FlexBox
+      flex-direction="row"
+      align-items="center"
+      justify-content="start"
+      gap={4}
+    >
       <FlexBoxItem flex="initial">
         <Image
           className="rounded-lg aspect-square object-cover"

@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, ReactElement } from 'react'
 
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
@@ -11,7 +11,10 @@ type ReservationDetailLayoutProps = PropsWithChildren<{
   params: Promise<{ listingId: string }>
 }>
 
-export default async function ReservationDetailLayout({ children, params }: ReservationDetailLayoutProps) {
+export default async function ReservationDetailLayout({
+  children,
+  params,
+}: ReservationDetailLayoutProps): Promise<ReactElement> {
   const { listingId } = await params
 
   return (

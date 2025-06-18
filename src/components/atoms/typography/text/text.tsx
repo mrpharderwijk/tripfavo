@@ -12,7 +12,11 @@ export type TextProps = PropsWithChildren<
     }>
 >
 
-export function Text({ tag = 'span', children, ...textProps }: TextProps): ReactElement {
+export function Text({
+  tag = 'span',
+  children,
+  ...textProps
+}: TextProps): ReactElement {
   const Tag = tag
   const textClassName = cn(textClassNames({ ...textProps }))
 

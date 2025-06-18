@@ -1,4 +1,9 @@
-import { NextFetchEvent, NextMiddleware, NextRequest, NextResponse } from 'next/server'
+import {
+  NextFetchEvent,
+  NextMiddleware,
+  NextRequest,
+  NextResponse,
+} from 'next/server'
 import { getLocale } from 'next-intl/server'
 
 import { routes } from '@/constants/routes'
@@ -8,32 +13,32 @@ import { MiddlewareFactory } from '@/middlewares/types'
 import { getRouteObjectByRouteName } from '@/utils/get-route'
 import { getRouteNameByRoutePath } from '@/utils/get-route'
 
-function containsAuth(value: string) {
+function containsAuth(value: string): boolean {
   const regex = /^(\/[a-zA-Z]{2})?\/auth(\/.*)?$/
   return regex.test(value)
 }
 
-function containsAccountSettingsOnly(value: string) {
+function containsAccountSettingsOnly(value: string): boolean {
   const regex = /^(\/[a-zA-Z]{2})?\/account-settings$/
   return regex.test(value)
 }
 
-function containsHostOnly(value: string) {
+function containsHostOnly(value: string): boolean {
   const regex = /^(\/[a-zA-Z]{2})?\/host$/
   return regex.test(value)
 }
 
-function containsGuestOnly(value: string) {
+function containsGuestOnly(value: string): boolean {
   const regex = /^(\/[a-zA-Z]{2})?\/guest$/
   return regex.test(value)
 }
 
-function containsHostWithListingIdOnly(value: string) {
+function containsHostWithListingIdOnly(value: string): boolean {
   const regex = /^(\/[a-zA-Z]{2})?\/host\/[0-9]+$/
   return regex.test(value)
 }
 
-function containsProtectedRoute(value: string) {
+function containsProtectedRoute(value: string): boolean {
   const currentRouteName = getRouteNameByRoutePath(value)
   const currentRouteObject = getRouteObjectByRouteName(currentRouteName)
 
@@ -71,7 +76,9 @@ export const withAuth: MiddlewareFactory = (next: NextMiddleware) => {
     // Handle account settings redirect
     if (session && containsAccountSettingsOnly(nextUrl.pathname)) {
       const defaultRoute = routes.account?.children
-        ? Object.values(routes.account.children).find((child) => !!child.default)
+        ? Object.values(routes.account.children).find(
+            (child) => !!child.default,
+          )
         : undefined
       const url =
         locale !== defaultLocale

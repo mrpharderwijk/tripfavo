@@ -1,15 +1,17 @@
 import { getTranslations } from 'next-intl/server'
-import { Suspense } from 'react'
+import { ReactElement, Suspense } from 'react'
 
 import Loading from '@/app/[locale]/(private)/host/(dashboard)/overview/loading'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { Heading } from '@/components/atoms/typography/heading/heading'
-import { getHostListings } from '@/features/host/actions/get-host-listings'
 import { HostOverview } from '@/features/host/overview/overview'
+import { getHostListings } from '@/features/host/server/actions/get-host-listings'
+import { isActionError } from '@/server/utils/error'
 
-export default async function HostOverviewPage() {
+export default async function HostOverviewPage(): Promise<ReactElement> {
   const tMainMenuHost = await getTranslations('mainMenu.host')
-  const listings = await getHostListings()
+  const result = await getHostListings()
+  const listings = isActionError(result) ? [] : (result?.data ?? [])
 
   return (
     <Suspense fallback={<Loading />}>

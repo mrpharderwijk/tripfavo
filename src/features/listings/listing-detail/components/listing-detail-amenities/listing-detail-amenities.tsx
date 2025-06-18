@@ -23,24 +23,25 @@ export function ListingDetailAmenities(): ReactElement {
   } = useListingDetailContext()
   const { openDialog, closeDialog, currentOpenDialog } = useDialogContext()
 
-  const amenitiesWithIcons = amenities.reduce<Array<{ label: string; icon: LucideIcon | null }>>(
-    (acc, amenity) => {
-      if (!amenity?.type) {
-        return acc
-      }
+  const amenitiesWithIcons = amenities.reduce<
+    Array<{ label: string; icon: LucideIcon | null }>
+  >((acc, amenity) => {
+    if (!amenity?.type) {
+      return acc
+    }
 
-      const amenityLabel = amenity?.type ? tCommonAmenities(toCamelCase(amenity?.type)) : 'No label'
-      const amenityConstant = amenitiesConstants.find(
-        (amenityConstant) => amenityConstant.value === amenity.type,
-      )
-      const amenityIcon = amenityConstant?.icon || null
+    const amenityLabel = amenity?.type
+      ? tCommonAmenities(toCamelCase(amenity?.type))
+      : 'No label'
+    const amenityConstant = amenitiesConstants.find(
+      (amenityConstant) => amenityConstant.value === amenity.type,
+    )
+    const amenityIcon = amenityConstant?.icon || null
 
-      return [...acc, { label: amenityLabel, icon: amenityIcon }]
-    },
-    [],
-  )
+    return [...acc, { label: amenityLabel, icon: amenityIcon }]
+  }, [])
 
-  function handleOnClickShowAllAmenities() {
+  function handleOnClickShowAllAmenities(): void {
     openDialog('amenities-show-all')
   }
 
@@ -56,8 +57,14 @@ export function ListingDetailAmenities(): ReactElement {
 
       {/* <ListingDetailAmenitiesTileList amenities={amenitiesWithIcons.slice(0, 6)} /> */}
 
-      <Button variant="quaternary" size="xl" onClick={handleOnClickShowAllAmenities}>
-        {tListingAmenities('showAll.button', { amount: amenitiesWithIcons.length })}
+      <Button
+        variant="quaternary"
+        size="xl"
+        onClick={handleOnClickShowAllAmenities}
+      >
+        {tListingAmenities('showAll.button', {
+          amount: amenitiesWithIcons.length,
+        })}
       </Button>
 
       <ModalDialog

@@ -36,7 +36,7 @@ export function Map({
   zoomControl = false,
   doubleClickZoom = false,
 }: MapProps): ReactElement | null {
-  function onChangeMarker(position: L.LatLngExpression) {
+  function onChangeMarker(position: L.LatLngExpression): void {
     if ((position as [number, number])?.length !== 2) {
       return
     }
@@ -60,7 +60,11 @@ export function Map({
         url="https://www.google.cn/maps/vt?lyrs=m@189&gl=cn&x={x}&y={y}&z={z}"
       />
       {center && (
-        <DraggableMarker onChangeMarker={onChangeMarker} center={center} draggable={draggablePin} />
+        <DraggableMarker
+          onChangeMarker={onChangeMarker}
+          center={center}
+          draggable={draggablePin}
+        />
       )}
     </MapContainer>
   )
@@ -74,16 +78,19 @@ function DraggableMarker({
   onChangeMarker: (position: L.LatLngExpression) => void
   center: L.LatLngExpression
   draggable?: boolean
-}) {
+}): ReactElement {
   const map = useMap()
   const [position, setPosition] = useState(center)
   const markerRef = useRef(null)
   const eventHandlers = useMemo(
     () => ({
-      dragend() {
+      dragend(): void {
         const marker = markerRef.current as L.Marker | null
         if (marker != null) {
-          const latLngExp: [number, number] = [marker.getLatLng().lat, marker.getLatLng().lng]
+          const latLngExp: [number, number] = [
+            marker.getLatLng().lat,
+            marker.getLatLng().lng,
+          ]
           setPosition(latLngExp)
           onChangeMarker(latLngExp)
           map.setView(latLngExp)

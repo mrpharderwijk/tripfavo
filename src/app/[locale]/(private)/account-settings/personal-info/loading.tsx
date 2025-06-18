@@ -1,5 +1,12 @@
-import { DotLoader } from '@/components/atoms/dot-loader/dot-loader'
+import { ReactElement } from 'react'
 
-export default function Loading() {
-  return <DotLoader />
+import { DotLoader } from '@/components/atoms/dot-loader/dot-loader'
+import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
+
+export default function Loading(): ReactElement {
+  return (
+    <FlexBox flex-direction="col" align-items="center" fullHeight>
+      <DotLoader />
+    </FlexBox>
+  )
 }

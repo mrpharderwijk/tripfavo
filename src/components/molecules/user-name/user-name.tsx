@@ -5,7 +5,10 @@ import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { Body } from '@/components/atoms/typography/body/body'
 import { SafeUser } from '@/types'
 
-type UserNameProps = Pick<VariantProps<typeof Body>, 'color' | 'font-weight' | 'size'> & {
+type UserNameProps = Pick<
+  VariantProps<typeof Body>,
+  'color' | 'font-weight' | 'size'
+> & {
   name: SafeUser['name']
 }
 

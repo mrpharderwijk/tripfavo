@@ -12,7 +12,10 @@ import { Box } from '@/components/atoms/layout/box/box'
 import { FormNotification } from '@/components/molecules/form-notification/form-notification'
 import { HeadingGroup } from '@/components/molecules/heading/heading'
 import { Form, FormField } from '@/components/ui/form'
-import { HOST_STEP, useHostContext } from '@/features/host/providers/host-context-provider'
+import {
+  HOST_STEP,
+  useHostContext,
+} from '@/features/host/providers/host-context-provider'
 import { ComponentStepProps } from '@/features/host/types/component-step-props'
 
 const INPUT_MAX_LENGTH = 120
@@ -22,7 +25,8 @@ export const TitleFormSchema = z.object({
 
 export function TitleForm({ listing }: ComponentStepProps): ReactElement {
   const tTitleForm = useTranslations('host.listing.titleForm')
-  const { steps, currentStep, updateStep, setIsLoading, listingId } = useHostContext()
+  const { steps, currentStep, updateStep, setIsLoading, listingId } =
+    useHostContext()
   const form = useForm<z.infer<typeof TitleFormSchema>>({
     resolver: zodResolver(TitleFormSchema),
     defaultValues: {
@@ -35,7 +39,9 @@ export function TitleForm({ listing }: ComponentStepProps): ReactElement {
   } = form
   const stepData = steps[currentStep as HOST_STEP]
 
-  async function onSubmit(data: z.infer<typeof TitleFormSchema>): Promise<boolean> {
+  async function onSubmit(
+    data: z.infer<typeof TitleFormSchema>,
+  ): Promise<boolean> {
     setIsLoading(true)
 
     try {
@@ -59,12 +65,18 @@ export function TitleForm({ listing }: ComponentStepProps): ReactElement {
 
   return (
     <Box display="flex" flex-direction="col" gap={11}>
-      <HeadingGroup title={tTitleForm('heading.title')} subtitle={tTitleForm('heading.subtitle')} />
+      <HeadingGroup
+        title={tTitleForm('heading.title')}
+        subtitle={tTitleForm('heading.subtitle')}
+      />
 
       <Form {...form}>
         <form noValidate>
           {errors.title && (
-            <FormNotification variant="danger">{errors.title.message}</FormNotification>
+            <FormNotification
+              variant="danger"
+              description={errors.title.message ?? ''}
+            />
           )}
           <FormField
             control={control}

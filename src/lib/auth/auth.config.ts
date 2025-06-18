@@ -22,7 +22,9 @@ export const authConfig = {
         email: { label: 'email', type: 'email' },
         password: { label: 'password', type: 'password' },
       },
-      async authorize(credentials) {
+      async authorize(
+        credentials: Partial<Record<'email' | 'password', unknown>>,
+      ): Promise<User> {
         const { email, password } = credentials || {}
 
         if (!credentials || !email || !password) {
@@ -31,6 +33,10 @@ export const authConfig = {
 
         const user = await prisma.user.findUnique({
           where: { email: (email as string).toLowerCase() },
+          include: {
+            status: true,
+            profileImage: true,
+          },
         })
 
         if (!user || !user.hashedPassword) {
@@ -38,7 +44,10 @@ export const authConfig = {
         }
 
         try {
-          const isPasswordValid = await verifyPassword(password as string, user.hashedPassword)
+          const isPasswordValid = await verifyPassword(
+            password as string,
+            user.hashedPassword,
+          )
 
           if (!isPasswordValid) {
             console.log('Invalid password')
@@ -54,14 +63,20 @@ export const authConfig = {
     }),
   ],
   callbacks: {
-    jwt({ token, user }: { token: JWT; user: User }) {
+    async jwt({ token, user }: { token: JWT; user: User }): Promise<JWT> {
       if (user) {
         // User is available during sign-in
         token.id = user.id
       }
       return token
     },
-    session({ session, token }: { session: Session; token: JWT }) {
+    async session({
+      session,
+      token,
+    }: {
+      session: Session
+      token: JWT
+    }): Promise<Session> {
       if (token.id && session.user) {
         session.user.id = token.id as string
       }

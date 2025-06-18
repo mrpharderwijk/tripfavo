@@ -1,7 +1,13 @@
 'use client'
 
 import { VariantProps } from 'class-variance-authority'
-import { HtmlHTMLAttributes, MouseEvent, PropsWithChildren, ReactElement, Ref } from 'react'
+import {
+  HtmlHTMLAttributes,
+  MouseEvent,
+  PropsWithChildren,
+  ReactElement,
+  Ref,
+} from 'react'
 import { IconType } from 'react-icons'
 
 import { ButtonContent } from './components/button-content/button-content'

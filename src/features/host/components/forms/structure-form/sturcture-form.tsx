@@ -2,7 +2,7 @@
 
 import axios from 'axios'
 import { useTranslations } from 'next-intl'
-import { useEffect } from 'react'
+import { ReactElement, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -17,19 +17,26 @@ import { Label } from '@/components/ui/label'
 import { RadioGroupItem } from '@/components/ui/radio-group'
 import { RadioGroup } from '@/components/ui/radio-group'
 import { categories } from '@/constants/categories'
-import { HOST_STEP, useHostContext } from '@/features/host/providers/host-context-provider'
+import {
+  HOST_STEP,
+  useHostContext,
+} from '@/features/host/providers/host-context-provider'
 import { ComponentStepProps } from '@/features/host/types/component-step-props'
 import { cn } from '@/utils/class-names'
 
 export const StructureFormSchema = z.object({
-  structure: z.enum(categories.map(({ value }) => value) as [string, ...string[]], {
-    required_error: 'You need to select a notification type.',
-  }),
+  structure: z.enum(
+    categories.map(({ value }) => value) as [string, ...string[]],
+    {
+      required_error: 'You need to select a notification type.',
+    },
+  ),
 })
 
-export function StructureForm({ listing }: ComponentStepProps) {
+export function StructureForm({ listing }: ComponentStepProps): ReactElement {
   const tStructureForm = useTranslations('host.listing.structureForm')
-  const { steps, currentStep, updateStep, setIsLoading, listingId } = useHostContext()
+  const { steps, currentStep, updateStep, setIsLoading, listingId } =
+    useHostContext()
   const form = useForm<z.infer<typeof StructureFormSchema>>({
     resolver: zodResolver(StructureFormSchema),
     mode: 'onChange',
@@ -43,7 +50,9 @@ export function StructureForm({ listing }: ComponentStepProps) {
   } = form
   const stepData = steps[currentStep as HOST_STEP]
 
-  async function onSubmit(data: z.infer<typeof StructureFormSchema>): Promise<boolean> {
+  async function onSubmit(
+    data: z.infer<typeof StructureFormSchema>,
+  ): Promise<boolean> {
     setIsLoading(true)
 
     try {
@@ -72,7 +81,9 @@ export function StructureForm({ listing }: ComponentStepProps) {
       <Form {...form}>
         <form noValidate>
           {errors.structure && (
-            <p className="text-red-500 text-sm mt-1">{errors.structure.message}</p>
+            <p className="text-red-500 text-sm mt-1">
+              {errors.structure.message}
+            </p>
           )}
           <FormField
             control={control}
@@ -111,7 +122,11 @@ export function StructureForm({ listing }: ComponentStepProps) {
                                 size={30}
                               />
                             </div>
-                            <Body size="base-lg" font-weight="semibold" text-align="left">
+                            <Body
+                              size="base-lg"
+                              font-weight="semibold"
+                              text-align="left"
+                            >
                               {label}
                             </Body>
                           </Label>

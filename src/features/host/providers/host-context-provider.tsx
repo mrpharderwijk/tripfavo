@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import {
   ComponentType,
   createContext,
@@ -10,26 +11,44 @@ import {
   useContext,
   useState,
 } from 'react'
+import { UseFormReturn } from 'react-hook-form'
 import { z } from 'zod'
 
-import { StructureForm, StructureFormSchema } from '@/features/host/components/forms/structure-form/sturcture-form'
-import { UseFormReturn } from 'react-hook-form'
-import { useRouter } from 'next/navigation'
-import { PrivacyTypeForm, PrivacyTypeFormSchema } from '@/features/host/components/forms/privacy-type-form/privacy-type-form'
-import { LocationForm, LocationFormSchema } from '@/features/host/components/forms/location-form/location-form'
-import { FloorPlanForm, FloorPlanFormSchema } from '@/features/host/components/forms/floor-plan-form/floor-plan-form'
-import { ImagesForm, ImagesFormSchema } from '@/features/host/components/forms/images-form/images-form'
-import { DescriptionForm } from '@/features/host/components/forms/description-form/description-form'
-import { ComponentStepProps } from '@/features/host/types/component-step-props'
-import { TitleForm } from '@/features/host/components/forms/title-form/title-form'
 import { AmenitiesForm } from '@/features/host/components/forms/amenities-form/amenities-form'
-import { PriceForm } from '@/features/host/components/forms/price-form/price-form'
-import { Summary } from '@/features/host/components/summary/summary'
-import { getRouteNameByRoutePath, getRoutePathByRouteName } from '@/utils/get-route'
+import { DescriptionForm } from '@/features/host/components/forms/description-form/description-form'
+import {
+  FloorPlanForm,
+  FloorPlanFormSchema,
+} from '@/features/host/components/forms/floor-plan-form/floor-plan-form'
 import { GuestsAmountForm } from '@/features/host/components/forms/guests-amount-form/guests-amount-form'
+import {
+  ImagesForm,
+  ImagesFormSchema,
+} from '@/features/host/components/forms/images-form/images-form'
+import {
+  LocationForm,
+  LocationFormSchema,
+} from '@/features/host/components/forms/location-form/location-form'
 import { NeighbourhoodDescriptionForm } from '@/features/host/components/forms/neighbourhood-description-form/neighbourhood-description-form'
+import { PriceForm } from '@/features/host/components/forms/price-form/price-form'
+import {
+  PrivacyTypeForm,
+  PrivacyTypeFormSchema,
+} from '@/features/host/components/forms/privacy-type-form/privacy-type-form'
+import {
+  StructureForm,
+  StructureFormSchema,
+} from '@/features/host/components/forms/structure-form/sturcture-form'
+import { TitleForm } from '@/features/host/components/forms/title-form/title-form'
+import { ComponentStepProps } from '@/features/host/types/component-step-props'
+import { getRoutePathByRouteName } from '@/utils/get-route'
 
-type StepForm = z.infer<typeof StructureFormSchema> | z.infer<typeof PrivacyTypeFormSchema> | z.infer<typeof LocationFormSchema> | z.infer<typeof FloorPlanFormSchema> | z.infer<typeof ImagesFormSchema>
+type StepForm =
+  | z.infer<typeof StructureFormSchema>
+  | z.infer<typeof PrivacyTypeFormSchema>
+  | z.infer<typeof LocationFormSchema>
+  | z.infer<typeof FloorPlanFormSchema>
+  | z.infer<typeof ImagesFormSchema>
 type StepType = {
   url: string
   order: number
@@ -110,7 +129,7 @@ export const stepMap = {
 }
 
 type HostContextState = {
-  steps: { 
+  steps: {
     [key in HOST_STEP]: StepType
   }
   currentStep: string | null
@@ -122,7 +141,7 @@ type HostContextState = {
   updateStep: (
     step: HOST_STEP,
     stepData: UseFormReturn<StepForm>,
-    onSubmitCallback: (data: z.infer<any>) => Promise<boolean>
+    onSubmitCallback: (data: z.infer<any>) => Promise<boolean>,
   ) => void
   setIsLoading: Dispatch<SetStateAction<boolean>>
 }
@@ -159,10 +178,15 @@ export function HostContextProvider({
   function onPreviousStep(): void {
     if (currentStepNumber > 0) {
       const previousStepNumber = currentStepNumber - 1
-      const previousStepKey = Object.keys(steps).find(key => steps[key as HOST_STEP].order === previousStepNumber) ?? null;
+      const previousStepKey =
+        Object.keys(steps).find(
+          (key) => steps[key as HOST_STEP].order === previousStepNumber,
+        ) ?? null
 
       if (previousStepKey) {
-        router.push(`/host/${listingId}/${stepMap[previousStepKey as HOST_STEP].url}`)
+        router.push(
+          `/host/${listingId}/${stepMap[previousStepKey as HOST_STEP].url}`,
+        )
       }
     }
   }
@@ -171,7 +195,10 @@ export function HostContextProvider({
   async function onNextStep(): Promise<void> {
     if (currentStepNumber < Object.keys(steps).length - 1) {
       const nextStepNumber = currentStepNumber + 1
-      const nextStepKey = Object.keys(steps).find(key => steps[key as HOST_STEP].order === nextStepNumber) ?? null;
+      const nextStepKey =
+        Object.keys(steps).find(
+          (key) => steps[key as HOST_STEP].order === nextStepNumber,
+        ) ?? null
       const currentStepObject = steps[currentStep as HOST_STEP]
 
       if (!currentStepObject) {
@@ -180,19 +207,30 @@ export function HostContextProvider({
 
       if (currentStepObject.form) {
         const formSend = await currentStepObject.form.trigger()
-        
-        if (formSend && currentStepObject.form.formState.isValid && currentStepObject.onSubmitCallback) {
-          const formSubmit = await currentStepObject.onSubmitCallback(currentStepObject.form.getValues())
+
+        if (
+          formSend &&
+          currentStepObject.form.formState.isValid &&
+          currentStepObject.onSubmitCallback
+        ) {
+          const formSubmit = await currentStepObject.onSubmitCallback(
+            currentStepObject.form.getValues(),
+          )
 
           if (formSubmit) {
-            router.push(`/host/${listingId}/${stepMap[nextStepKey as HOST_STEP].url}`)
+            router.push(
+              `/host/${listingId}/${stepMap[nextStepKey as HOST_STEP].url}`,
+            )
             return
           }
         }
       }
     }
 
-    if (currentStepNumber > 0 && currentStepNumber === Object.keys(steps).length - 1) {
+    if (
+      currentStepNumber > 0 &&
+      currentStepNumber === Object.keys(steps).length - 1
+    ) {
       const currentStepObject = steps[currentStep as HOST_STEP]
 
       if (!currentStepObject) {
@@ -201,25 +239,30 @@ export function HostContextProvider({
 
       if (currentStepObject.form) {
         const formSend = await currentStepObject.form.trigger()
-        
-        if (formSend && currentStepObject.form.formState.isValid && currentStepObject.onSubmitCallback) {
-          const formSubmit = await currentStepObject.onSubmitCallback(currentStepObject.form.getValues())
+
+        if (
+          formSend &&
+          currentStepObject.form.formState.isValid &&
+          currentStepObject.onSubmitCallback
+        ) {
+          const formSubmit = await currentStepObject.onSubmitCallback(
+            currentStepObject.form.getValues(),
+          )
 
           if (formSubmit) {
-            const overviewStepPath = getRoutePathByRouteName('myListings')
+            const overviewStepPath = getRoutePathByRouteName('hostListings')
             router.push(overviewStepPath)
             return
           }
         }
       }
-      
     }
   }
 
   function updateStep(
     step: HOST_STEP,
     stepData: UseFormReturn<StepForm>,
-    onSubmitCallback: (data: z.infer<any>) => Promise<boolean>
+    onSubmitCallback: (data: z.infer<any>) => Promise<boolean>,
   ): void {
     setSteps((prevSteps) => {
       const newSteps = { ...prevSteps }
@@ -236,15 +279,15 @@ export function HostContextProvider({
 
   return (
     <HostContext.Provider
-      value={{ 
-        steps, 
-        currentStep, 
-        currentStepNumber, 
+      value={{
+        steps,
+        currentStep,
+        currentStepNumber,
         isLoading: isLoadingStep,
         listingId,
-        onPreviousStep, 
-        onNextStep, 
-        updateStep, 
+        onPreviousStep,
+        onNextStep,
+        updateStep,
         setIsLoading: setIsLoadingStep,
       }}
     >

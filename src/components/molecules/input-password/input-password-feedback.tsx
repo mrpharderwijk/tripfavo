@@ -27,7 +27,9 @@ export function InputPasswordFeedback({
       </FlexBoxItem>
 
       <FlexBoxItem flex="auto">
-        <Body size="base-sm">{!valid ? invalidMessage : (validMessage ?? invalidMessage)}</Body>
+        <Body size="base-sm">
+          {!valid ? invalidMessage : (validMessage ?? invalidMessage)}
+        </Body>
       </FlexBoxItem>
     </FlexBox>
   )

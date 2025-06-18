@@ -1,16 +1,16 @@
 'use client'
 
 import { CalendarDays, House } from 'lucide-react'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { ReactElement } from 'react'
 
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
-import { getRoutePathByRouteName, isCurrentRoute } from '@/utils/get-route'
-import { AppShellSidebar } from '@/components/molecules/layout/app-shell/app-shell-sidebar'
 import { ButtonWrapper } from '@/components/molecules/buttons/button-wrapper/button-wrapper'
-import Link from 'next/link'
+import { AppShellSidebar } from '@/components/molecules/layout/app-shell/app-shell-sidebar'
+import { getRoutePathByRouteName, isCurrentRoute } from '@/utils/get-route'
 
 type HostSidebarProps = {
   heading?: string
@@ -30,12 +30,12 @@ export function HostSidebar({ heading }: HostSidebarProps): ReactElement {
               icon={House}
               size="lg"
               variant={
-                !isCurrentRoute(pathname, 'myListings')
+                !isCurrentRoute(pathname, 'hostListings')
                   ? 'sidebar-menu-item'
                   : 'sidebar-menu-item-active'
               }
               renderRoot={({ buttonContent }) => (
-                <Link href={getRoutePathByRouteName('myListings')}>
+                <Link href={getRoutePathByRouteName('hostListings')}>
                   {buttonContent}
                 </Link>
               )}
@@ -49,12 +49,12 @@ export function HostSidebar({ heading }: HostSidebarProps): ReactElement {
               icon={CalendarDays}
               size="lg"
               variant={
-                !isCurrentRoute(pathname, 'myReservations')
+                !isCurrentRoute(pathname, 'hostReservations')
                   ? 'sidebar-menu-item'
                   : 'sidebar-menu-item-active'
               }
               renderRoot={({ buttonContent }) => (
-                <Link href={getRoutePathByRouteName('myReservations')}>
+                <Link href={getRoutePathByRouteName('hostReservations')}>
                   {buttonContent}
                 </Link>
               )}

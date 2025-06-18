@@ -43,7 +43,7 @@ export function ModalDialog({
     }
   }
 
-  function closeDialogOnOutsideClick() {
+  function closeDialogOnOutsideClick(): void {
     if (!closeOnOutsideClick) {
       return
     }
@@ -52,7 +52,10 @@ export function ModalDialog({
 
   useDisableBodyScrolling({ disabled: isVisible })
   useEscapeKey(closeDialog, closeOnEscape)
-  useOnClickOutside(modalDialogRef as RefObject<HTMLElement>, closeDialogOnOutsideClick)
+  useOnClickOutside(
+    modalDialogRef as RefObject<HTMLElement>,
+    closeDialogOnOutsideClick,
+  )
 
   return (
     <Portal>
@@ -97,7 +100,9 @@ export function ModalDialog({
             <div className="flex flex-shrink flex-grow basis-2/3 flex-col overflow-auto">
               {!!header && (
                 <ModalHeader>
-                  {showHeaderCloseButton && <ModalCloseButton closeDialog={closeDialog} />}
+                  {showHeaderCloseButton && (
+                    <ModalCloseButton closeDialog={closeDialog} />
+                  )}
                   <div className="flex-1 text-center">{header}</div>
                 </ModalHeader>
               )}
@@ -113,7 +118,9 @@ export function ModalDialog({
   )
 }
 
-export function ModalFocusTrapWithWrapper({ children }: PropsWithChildren): ReactElement {
+export function ModalFocusTrapWithWrapper({
+  children,
+}: PropsWithChildren): ReactElement {
   const wrapRef = useRef<HTMLDivElement>(null)
   useFocusTrap({
     ref: wrapRef,
@@ -122,7 +129,10 @@ export function ModalFocusTrapWithWrapper({ children }: PropsWithChildren): Reac
   })
 
   return (
-    <div className="flex flex-shrink flex-grow basis-2/3 flex-col overflow-auto" ref={wrapRef}>
+    <div
+      className="flex flex-shrink flex-grow basis-2/3 flex-col overflow-auto"
+      ref={wrapRef}
+    >
       {children}
     </div>
   )

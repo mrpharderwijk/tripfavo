@@ -22,12 +22,12 @@ export const routes: RoutesObject = {
     path: '/host',
     protected: true,
     children: {
-      myListings: {
+      hostListings: {
         path: '/overview',
         protected: true,
         default: true,
       },
-      myReservations: {
+      hostReservations: {
         path: '/reservations',
         protected: true,
       },
@@ -53,16 +53,16 @@ export const routes: RoutesObject = {
     path: '/guest',
     protected: true,
     children: {
-      overview: {
+      guestOverview: {
         path: '/overview',
         protected: true,
         default: true,
       },
-      myBookings: {
-        path: '/bookings',
+      guestReservations: {
+        path: '/reservations',
         protected: true,
       },
-      myFavorites: {
+      guestFavorites: {
         path: '/favorites',
         protected: true,
       },

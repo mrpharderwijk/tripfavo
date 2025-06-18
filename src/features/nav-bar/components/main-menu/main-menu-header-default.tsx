@@ -8,5 +8,12 @@ import { useMainMenuContext } from '@/features/nav-bar/components/main-menu/main
 export function MainMenuHeaderDefault(): ReactElement {
   const { closeMainMenu } = useMainMenuContext()
 
-  return <Button icon={XIcon} size="sm" variant="quaternary" onClick={closeMainMenu} />
+  return (
+    <Button
+      icon={XIcon}
+      size="sm"
+      variant="quaternary"
+      onClick={closeMainMenu}
+    />
+  )
 }

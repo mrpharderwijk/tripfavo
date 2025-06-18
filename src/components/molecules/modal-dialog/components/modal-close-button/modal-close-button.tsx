@@ -9,10 +9,17 @@ export type ModalCloseButtonProps = {
   closeDialog: () => void
 }
 
-export function ModalCloseButton({ closeDialog }: ModalCloseButtonProps): ReactElement {
+export function ModalCloseButton({
+  closeDialog,
+}: ModalCloseButtonProps): ReactElement {
   return (
     <div className="left-4 top-3 absolute flex items-center justify-center">
-      <Button icon={IoMdClose} variant="quaternary" size="xs" onClick={closeDialog}></Button>
+      <Button
+        icon={IoMdClose}
+        variant="quaternary"
+        size="xs"
+        onClick={closeDialog}
+      ></Button>
     </div>
   )
 }

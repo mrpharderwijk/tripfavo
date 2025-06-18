@@ -1,7 +1,14 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { signOut } from 'next-auth/react'
-import React, { createContext, RefObject, useContext, useRef, useState } from 'react'
+import React, {
+  createContext,
+  RefObject,
+  useContext,
+  useRef,
+  useState,
+} from 'react'
 import { PropsWithChildren, ReactElement } from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
 
@@ -33,6 +40,7 @@ export function MainMenuContextProvider({
   footer: ReactElement
   header: ReactElement
 }>): ReactElement {
+  const router = useRouter()
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const subMenuRef = useRef<HTMLDivElement | null>(null)
 
@@ -52,7 +60,8 @@ export function MainMenuContextProvider({
   }
 
   async function handleOnClickLogout(): Promise<void> {
-    await signOut()
+    await signOut({ redirect: false })
+    router.refresh()
     setIsOpen(false)
   }
 
@@ -84,7 +93,9 @@ export function useMainMenuContext(): MainMenuContextType {
   const context = useContext(MainMenuContext)
 
   if (!context) {
-    throw new Error('useMainMenuContext must be used within a MainMenuContextProvider')
+    throw new Error(
+      'useMainMenuContext must be used within a MainMenuContextProvider',
+    )
   }
 
   return context

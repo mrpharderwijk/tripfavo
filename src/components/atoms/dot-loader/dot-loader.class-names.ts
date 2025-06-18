@@ -1,14 +1,17 @@
 import { cva } from 'class-variance-authority'
 
-export const dotLoaderWrapperClassNames = cva('flex items-center justify-center', {
-  variants: {
-    size: {
-      sm: 'gap-1',
-      md: 'gap-2',
-      lg: 'gap-3',
+export const dotLoaderWrapperClassNames = cva(
+  'flex items-center justify-center',
+  {
+    variants: {
+      size: {
+        sm: 'gap-1',
+        md: 'gap-2',
+        lg: 'gap-3',
+      },
     },
   },
-})
+)
 
 export const dotLoaderClassNames = cva('rounded-full animate-dot-loader', {
   variants: {

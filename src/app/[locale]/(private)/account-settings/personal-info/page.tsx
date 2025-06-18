@@ -1,14 +1,18 @@
-
+import { getTranslations } from 'next-intl/server'
 import { ReactElement, Suspense } from 'react'
 
+import Loading from '@/app/[locale]/(private)/account-settings/personal-info/loading'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { Heading } from '@/components/atoms/typography/heading/heading'
 import { PersonalInfo } from '@/features/account-settings/personal-info/personal-info'
 import { PersonalInfoContextProvider } from '@/features/account-settings/personal-info/providers/personal-info-context-provider'
-import Loading from '@/app/[locale]/(private)/account-settings/personal-info/loading'
-import { getTranslations } from 'next-intl/server'
+import { WithSearchParams } from '@/types/with-search-params'
 
-export default async function PersonalInfoPage(): Promise<ReactElement> {
+type PersonalInfoPageProps = WithSearchParams
+
+export default async function PersonalInfoPage({
+  searchParams,
+}: PersonalInfoPageProps): Promise<ReactElement> {
   const tPersonalInfo = await getTranslations('personal-info')
 
   return (

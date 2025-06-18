@@ -2,14 +2,11 @@
 
 import axios from 'axios'
 import { useLocale, useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { ReactElement, useState } from 'react'
+import { PriceType } from '@prisma/client'
 
 import { BottomBar } from '@/components/molecules/bottom-bar/bottom-bar'
 import { Button } from '@/components/molecules/buttons/button'
-import { useReservationDetailContext } from '@/features/reservations/reservation-detail/providers/reservation-detail-context-provider'
-import { useAppContext } from '@/providers/app-context-provider/app-context-provider'
-import { PriceType } from '@prisma/client'
-import { calculateTotalPriceIncludingCleaningFee } from '@/utils/pricing/calculate-total-price'
 import { datePrices } from '@/data/date-prices'
 import { getCleaningFee } from '@/features/listings/utils/get-cleaning-fee'
 import { getDeposit } from '@/features/listings/utils/get-deposit'
@@ -17,15 +14,20 @@ import { getHighSeasonPrice } from '@/features/listings/utils/get-high-season-pr
 import { getLowSeasonPrice } from '@/features/listings/utils/get-low-season-price'
 import { getMidSeasonPrice } from '@/features/listings/utils/get-mid-season-price'
 import { useDialogContext } from '@/features/nav-bar/providers/dialog-context-provider'
+import { useReservationDetailContext } from '@/features/reservations/reservation-detail/providers/reservation-detail-context-provider'
+import { useAppContext } from '@/providers/app-context-provider/app-context-provider'
+import { calculateTotalPriceIncludingCleaningFee } from '@/utils/pricing/calculate-total-price'
 
-export function ReservationDetailBottomBar() {
+export function ReservationDetailBottomBar(): ReactElement {
   const locale = useLocale()
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const { currentUser } = useAppContext()
-  const tReservationDetailBottomBar = useTranslations('reservationDetail.bottomBar')
-  const { listing, selectedDates, totalGuestsAmount, reservationSuccess, setReservationSuccess } =
+  const tReservationDetailBottomBar = useTranslations(
+    'reservationDetail.bottomBar',
+  )
+  const { listing, selectedDates, totalGuestsAmount, reservationSuccess } =
     useReservationDetailContext()
-  const { openDialog, closeDialog, currentOpenDialog } = useDialogContext()
+  const { openDialog } = useDialogContext()
   const totalPrice = calculateTotalPriceIncludingCleaningFee({
     priceDetails: listing.priceDetails,
     startDate: selectedDates?.from,
@@ -33,7 +35,12 @@ export function ReservationDetailBottomBar() {
     datePrices: datePrices,
   })
 
-  async function handleOnClickConfirm() {
+  async function handleOnClickConfirm(): Promise<void> {
+    if (!currentUser) {
+      openDialog('reservation-login')
+      return
+    }
+
     if (
       !currentUser?.id ||
       !selectedDates?.from ||

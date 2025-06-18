@@ -1,6 +1,12 @@
 'use client'
 
-import { createContext, PropsWithChildren, ReactElement, useContext, useReducer } from 'react'
+import {
+  createContext,
+  PropsWithChildren,
+  ReactElement,
+  useContext,
+  useReducer,
+} from 'react'
 
 import {
   DROP_DOWN_TYPE,
@@ -18,7 +24,9 @@ type DropDownContextState = {
 
 const DropDownContext = createContext<DropDownContextState | null>(null)
 
-export function DropDownContextProvider({ children }: PropsWithChildren): ReactElement {
+export function DropDownContextProvider({
+  children,
+}: PropsWithChildren): ReactElement {
   const [state, dispatch] = useReducer(dropDownReducer, initialState)
 
   function openDropDown(dropDownId: string): void {
@@ -26,7 +34,10 @@ export function DropDownContextProvider({ children }: PropsWithChildren): ReactE
   }
 
   function closeDropDown(dropDownId: string): void {
-    dispatch({ type: DROP_DOWN_TYPE.CloseDropDown, payload: dropDownId ?? null })
+    dispatch({
+      type: DROP_DOWN_TYPE.CloseDropDown,
+      payload: dropDownId ?? null,
+    })
   }
 
   function closeAllDropDowns(): void {
@@ -60,7 +71,9 @@ export function useDropDownContext(): DropDownContextState {
   const context = useContext(DropDownContext)
 
   if (!context) {
-    throw new Error('Must use `useDropDownContext` within a `DropDownContextProvider`')
+    throw new Error(
+      'Must use `useDropDownContext` within a `DropDownContextProvider`',
+    )
   }
 
   return context

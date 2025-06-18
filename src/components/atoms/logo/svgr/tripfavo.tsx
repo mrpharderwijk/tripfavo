@@ -1,9 +1,9 @@
 'use client'
 
 import * as React from 'react'
-import { SVGProps } from 'react'
+import { ReactElement, SVGProps } from 'react'
 
-export function SvgTripfavo(props: SVGProps<SVGSVGElement>) {
+export function SvgTripfavo(_props: SVGProps<SVGSVGElement>): ReactElement {
   return (
     <svg
       className="stroke-mykonos stroke-[4]"

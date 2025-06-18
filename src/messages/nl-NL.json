@@ -26,12 +26,28 @@
       "heading": "Log in op je account",
       "title": "Welkom terug!",
       "submit": "Doorgaan",
+      "submitting": "Verzenden...",
       "register": {
         "text": "Heb je nog geen account?",
         "label": "Registreren"
       },
       "error": {
-        "invalidCredentials": "Ongeldige inloggegevens"
+        "invalidCredentials": "Ongeldige inloggegevens",
+        "invalidEmail": "Voer een geldig e-mailadres in",
+        "verificationFailed": "E-mailverificatie mislukt. Probeer opnieuw",
+        "accessDenied": "Toegang geweigerd. Neem contact op met ondersteuning",
+        "configurationError": "Configuratiefout. Neem contact op met ondersteuning",
+        "signinError": "Inloggen mislukt. Probeer opnieuw"
+      },
+      "success": {
+        "heading": "Controleer je e-mail",
+        "title": "Magic link verzonden!",
+        "description": "We hebben een magic link naar {email} gestuurd. Klik op de link in de e-mail om in te loggen op je account.",
+        "checkSpam": "Zie je de e-mail niet? Controleer je spam-map.",
+        "openEmail": "E-mail app openen",
+        "backToLogin": "Terug naar inloggen",
+        "noEmail": "E-mail niet ontvangen?",
+        "resend": "Opnieuw verzenden"
       }
     },
     "signUpForm": {
@@ -46,6 +62,35 @@
         "heading": "Welkom bij de club!",
         "description": "Je account is succesvol aangemaakt.",
         "link": "Klik <link>hier</link> om door te gaan."
+      }
+    },
+    "verifyEmail": {
+      "heading": "E-mailverificatie",
+      "verifying": {
+        "title": "Je e-mail wordt geverifieerd...",
+        "description": "Even geduld terwijl we je e-mailadres verifiëren."
+      },
+      "success": {
+        "title": "E-mail succesvol geverifieerd!",
+        "description": "Je e-mail is geverifieerd. Je wordt zo doorgestuurd."
+      },
+      "error": {
+        "missingParams": "Ongeldige verificatielink. Probeer opnieuw in te loggen.",
+        "verificationFailed": "E-mailverificatie mislukt. Probeer opnieuw.",
+        "invalidToken": "Ongeldig verificatietoken. Vraag een nieuwe magic link aan.",
+        "tokenExpired": "Verificatietoken is verlopen. Vraag een nieuwe magic link aan.",
+        "contactSupport": "Neem contact op met ondersteuning als dit probleem zich blijft voordoen."
+      }
+    },
+    "onboarding": {
+      "heading": "Voltooi je profiel",
+      "title": "Welkom! Laten we je profiel instellen",
+      "description": "Geef je naam op om je account in te stellen.",
+      "submit": "Profiel voltooien",
+      "submitting": "Opslaan...",
+      "profileImage": {
+        "label": "Profielfoto (Optioneel)",
+        "description": "Voeg een profielfoto toe om je account te personaliseren"
       }
     }
   },
@@ -291,7 +336,8 @@
       "saveAndContinue": "Opslaan en doorgaan",
       "saveAndExit": "Opslaan & afsluiten",
       "error": {
-        "unknown": "Er is een onbekende fout opgetreden. Neem contact op met klantenservice."
+        "unknown": "Er is een onbekende fout opgetreden. Neem contact op met klantenservice.",
+        "network": "Netwerkfout. Controleer je verbinding en probeer opnieuw."
       }
     },
     "amenities": {

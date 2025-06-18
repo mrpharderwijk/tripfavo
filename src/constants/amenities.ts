@@ -30,7 +30,11 @@ import {
 import { LucideIcon } from 'lucide-react'
 import { AmenityType } from '@prisma/client'
 
-export const amenities: { label: string; value: AmenityType; icon: LucideIcon }[] = [
+export const amenities: {
+  label: string
+  value: AmenityType
+  icon: LucideIcon
+}[] = [
   {
     label: 'WiFi',
     value: AmenityType.WIFI,

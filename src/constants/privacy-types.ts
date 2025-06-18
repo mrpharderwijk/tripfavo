@@ -11,7 +11,8 @@ export const privacyTypes = [
     label: 'A private room in a shared property',
     value: 'room-shared-property',
     icon: DoorClosed,
-    description: 'Guests have their own room in a home, plus access to shared spaces.',
+    description:
+      'Guests have their own room in a home, plus access to shared spaces.',
   },
   {
     label: 'A shared room in a shared property',

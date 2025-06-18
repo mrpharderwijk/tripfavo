@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -19,11 +23,26 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "@/storybook/*": ["./.storybook/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@/storybook/*": [
+        "./.storybook/*"
+      ]
     },
-    "types": ["vitest/globals"]
+    "types": [
+      "vitest/globals"
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "./src/types/vitest.d.ts", "vitest.setup.ts", "src/emails/email-layout"],
-  "exclude": ["node_modules", "src/**/*.test.ts", "src/**/*.test.tsx", ".next"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "./src/types/vitest.d.ts",
+    "next-env.d.ts",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next"
+  ]
 }

@@ -5,7 +5,9 @@ import { gridClassNames } from '@/components/atoms/layout/grid/grid.class-names'
 import { PropsWithTestId } from '@/types'
 import { cn } from '@/utils/class-names'
 
-export type GridProps = PropsWithChildren<PropsWithTestId<VariantProps<typeof gridClassNames>>>
+export type GridProps = PropsWithChildren<
+  PropsWithTestId<VariantProps<typeof gridClassNames>>
+>
 
 export function Grid({
   children,

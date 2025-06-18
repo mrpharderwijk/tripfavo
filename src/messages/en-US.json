@@ -22,16 +22,74 @@
     "hostJoin": "Become a host"
   },
   "auth": {
+    "verifyEmail": {
+      "heading": "Email Verification",
+      "verifying": {
+        "title": "Verifying your email...",
+        "description": "Please wait while we verify your email address."
+      },
+      "success": {
+        "title": "Email verified successfully!",
+        "description": "Your email has been verified. You will be redirected shortly."
+      },
+      "error": {
+        "missingParams": "Invalid verification link. Please try signing in again.",
+        "verificationFailed": "Email verification failed. Please try again.",
+        "invalidToken": "Invalid verification token. Please request a new magic link.",
+        "tokenExpired": "Verification token has expired. Please request a new magic link.",
+        "contactSupport": "If this problem persists, please contact support."
+      }
+    },
+    "onboarding": {
+      "heading": "Complete Your Profile",
+      "title": "Welcome! Let's set up your profile",
+      "description": "Please provide your name to complete your account setup.",
+      "submit": "Complete Profile",
+      "submitting": "Saving...",
+      "profileImage": {
+        "label": "Profile Photo (Optional)",
+        "description": "Add a profile photo to personalize your account"
+      }
+    },
+    "verifyOtp": {
+      "heading": "One Time Password",
+      "title": "Verify your One Time Password",
+      "description": "We've sent a one time password to your email address.",
+      "expired": {
+        "heading": "Verification token expired",
+        "description": "Please press resend to receive a new token."
+      },
+      "button": {
+        "resend": "Resend",
+        "submit": "Submit"
+      }
+    },
     "loginForm": {
       "heading": "Log in to your account",
       "title": "Welcome back!",
       "submit": "Continue",
+      "submitting": "Sending...",
       "register": {
         "text": "Don't have an account?",
         "label": "Sign up"
       },
       "error": {
-        "invalidCredentials": "Invalid credentials"
+        "invalidCredentials": "Invalid credentials",
+        "invalidEmail": "Please enter a valid email address",
+        "verificationFailed": "Email verification failed. Please try again",
+        "accessDenied": "Access denied. Please contact support",
+        "configurationError": "Configuration error. Please contact support",
+        "signinError": "Sign in failed. Please try again"
+      },
+      "success": {
+        "heading": "Check your email",
+        "title": "Magic link sent!",
+        "description": "We've sent a magic link to {email}. Click the link in the email to sign in to your account.",
+        "checkSpam": "Don't see the email? Check your spam folder.",
+        "openEmail": "Open email app",
+        "backToLogin": "Back to login",
+        "noEmail": "Didn't receive the email?",
+        "resend": "Resend"
       }
     },
     "signUpForm": {
@@ -236,6 +294,9 @@
         "text": "You don't have any reservations yet. When you request a reservation, it will appear here.",
         "button": "Book now"
       },
+      "pendingHeading": "Pending reservations",
+      "confirmedHeading": "Confirmed reservations",
+      "cancelledHeading": "Cancelled reservations",
       "status": {
         "cancelled": "Cancelled by host",
         "review": "Waiting for host",
@@ -290,7 +351,8 @@
       "saveAndContinue": "Save and continue",
       "saveAndExit": "Save & exit",
       "error": {
-        "unknown": "An unknown error occurred. Please contact customer support."
+        "unknown": "An unknown error occurred. Please contact customer support.",
+        "network": "Network error. Please check your connection and try again."
       }
     },
     "amenities": {

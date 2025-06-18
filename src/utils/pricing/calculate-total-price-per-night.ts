@@ -1,5 +1,5 @@
-import { DatePrice } from "@/components/organisms/date-picker-calendar/providers/date-picker-calendar-context-provider"
-import { TotalPricePerNight } from "@/features/reservations/reservation-detail/providers/reservation-detail-context-provider"
+import { DatePrice } from '@/components/organisms/date-picker-calendar/providers/date-picker-calendar-context-provider'
+import { TotalPricePerNight } from '@/features/reservations/reservation-detail/providers/reservation-detail-context-provider'
 
 type CalculateTotalPricePerNightParams = {
   startDate?: Date
@@ -7,7 +7,11 @@ type CalculateTotalPricePerNightParams = {
   datePrices: DatePrice[]
 }
 
-export function calculateTotalPricePerNight({ startDate, endDate, datePrices }: CalculateTotalPricePerNightParams) {
+export function calculateTotalPricePerNight({
+  startDate,
+  endDate,
+  datePrices,
+}: CalculateTotalPricePerNightParams): TotalPricePerNight[] {
   if (!startDate || !endDate) {
     return []
   }
@@ -22,7 +26,8 @@ export function calculateTotalPricePerNight({ startDate, endDate, datePrices }: 
     const price =
       datePrices.find(
         (datePriceRange) =>
-          month >= datePriceRange.startMonth && month <= datePriceRange.endMonth,
+          month >= datePriceRange.startMonth &&
+          month <= datePriceRange.endMonth,
       )?.price || 0
 
     if (currentPrice === null) {

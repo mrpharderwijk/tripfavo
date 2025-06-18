@@ -26,11 +26,15 @@ export function MainMenuBodyDefault(): ReactElement {
           icon={LayoutDashboard}
           size="lg"
           variant={
-            !isCurrentRoute(pathname, 'guest') ? 'sidebar-menu-item' : 'sidebar-menu-item-active'
+            !isCurrentRoute(pathname, 'guest')
+              ? 'sidebar-menu-item'
+              : 'sidebar-menu-item-active'
           }
           onClick={closeMainMenu}
           renderRoot={({ buttonContent }) => (
-            <Link href={getRoutePathByRouteName('overview')}>{buttonContent}</Link>
+            <Link href={getRoutePathByRouteName('guestOverview')}>
+              {buttonContent}
+            </Link>
           )}
         >
           {tMainMenuGuest('dashboard')}
@@ -41,13 +45,15 @@ export function MainMenuBodyDefault(): ReactElement {
           icon={Heart}
           size="lg"
           variant={
-            !isCurrentRoute(pathname, 'myFavorites')
+            !isCurrentRoute(pathname, 'guestFavorites')
               ? 'sidebar-menu-item'
               : 'sidebar-menu-item-active'
           }
           onClick={closeMainMenu}
           renderRoot={({ buttonContent }) => (
-            <Link href={getRoutePathByRouteName('myFavorites')}>{buttonContent}</Link>
+            <Link href={getRoutePathByRouteName('guestFavorites')}>
+              {buttonContent}
+            </Link>
           )}
         >
           {tMainMenuGuest('myFavorites')}
@@ -58,13 +64,15 @@ export function MainMenuBodyDefault(): ReactElement {
           icon={Ticket}
           size="lg"
           variant={
-            !isCurrentRoute(pathname, 'myBookings')
+            !isCurrentRoute(pathname, 'guestReservations')
               ? 'sidebar-menu-item'
               : 'sidebar-menu-item-active'
           }
           onClick={closeMainMenu}
           renderRoot={({ buttonContent }) => (
-            <Link href={getRoutePathByRouteName('myBookings')}>{buttonContent}</Link>
+            <Link href={getRoutePathByRouteName('guestReservations')}>
+              {buttonContent}
+            </Link>
           )}
         >
           {tMainMenuGuest('myBookings')}
@@ -74,7 +82,9 @@ export function MainMenuBodyDefault(): ReactElement {
         icon={Globe}
         size="lg"
         variant={
-          !isCurrentRoute(pathname, 'language') ? 'sidebar-menu-item' : 'sidebar-menu-item-active'
+          !isCurrentRoute(pathname, 'language')
+            ? 'sidebar-menu-item'
+            : 'sidebar-menu-item-active'
         }
         onClick={handleOnClickLanguage}
       >

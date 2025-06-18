@@ -13,9 +13,9 @@ type DatePickerCalendarContextState = {
   getPriceForDate: (date: Date) => number | undefined
 }
 
-const DatePickerCalendarContext = createContext<DatePickerCalendarContextState | undefined>(
-  undefined,
-)
+const DatePickerCalendarContext = createContext<
+  DatePickerCalendarContextState | undefined
+>(undefined)
 
 type DatePickerCalendarContextProviderProps = {
   children: ReactNode
@@ -31,7 +31,9 @@ export function DatePickerCalendarContextProvider({
   getPriceForDate,
 }: DatePickerCalendarContextProviderProps): ReactElement {
   return (
-    <DatePickerCalendarContext.Provider value={{ selected, datePrices, getPriceForDate }}>
+    <DatePickerCalendarContext.Provider
+      value={{ selected, datePrices, getPriceForDate }}
+    >
       {children}
     </DatePickerCalendarContext.Provider>
   )

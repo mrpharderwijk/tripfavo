@@ -15,6 +15,7 @@ export type GuestReservation = {
     id: string
     title: string
     images: {
+      fileName: string
       url: string
       isMain: boolean
     }[]

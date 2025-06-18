@@ -10,7 +10,11 @@ import { cn } from '@/utils/class-names'
 
 type ButtonWrapperProps = PropsWithChildren<
   {
-    renderRoot: ({ buttonContent }: { buttonContent: ReactElement }) => ReactElement
+    renderRoot: ({
+      buttonContent,
+    }: {
+      buttonContent: ReactElement
+    }) => ReactElement
   } & PropsWithTestId<
     {
       fullWidth?: boolean
@@ -37,7 +41,7 @@ export function ButtonWrapper({
   onClick,
   ...rest
 }: ButtonWrapperProps): ReactElement {
-  const iconOnly = Boolean(!children && (Icon || avatar))
+  const iconOnly = Boolean(!children && Icon)
   const isRounded = rounded || iconOnly || avatar
   const buttonWrapperClassName = cn(
     buttonClassNames({
@@ -62,7 +66,12 @@ export function ButtonWrapper({
 
   return renderRoot({
     buttonContent: (
-      <div className={buttonWrapperClassName} ref={ref} data-testid={dataTestId} onClick={onClick}>
+      <div
+        className={buttonWrapperClassName}
+        ref={ref}
+        data-testid={dataTestId}
+        onClick={onClick}
+      >
         <ButtonContent
           avatar={avatar}
           icon={Icon}

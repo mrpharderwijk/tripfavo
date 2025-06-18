@@ -6,7 +6,9 @@ type ListMediaItemTitleProps = {
   title: string
 }
 
-export function ListMediaItemTitle({ title }: ListMediaItemTitleProps): ReactElement {
+export function ListMediaItemTitle({
+  title,
+}: ListMediaItemTitleProps): ReactElement {
   return (
     <Body size="base-lgt" color="primary" font-weight="semibold">
       {!!title && title}

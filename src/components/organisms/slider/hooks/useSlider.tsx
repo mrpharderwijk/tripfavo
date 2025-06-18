@@ -140,7 +140,7 @@ export function useSlider(): UseSliderReturnType {
     container.addEventListener('scroll', handleScroll, { passive: true })
     updateNavigationState() // Initial state
 
-    return () => {
+    return (): void => {
       container.removeEventListener('scroll', handleScroll)
       if (scrollTimeoutRef.current) {
         clearTimeout(scrollTimeoutRef.current)

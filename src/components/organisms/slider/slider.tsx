@@ -11,7 +11,11 @@ import { useSlider } from '@/components/organisms/slider/hooks/useSlider'
 import { PropsWithTestId } from '@/types'
 
 type SliderProps = PropsWithChildren<
-  PropsWithTestId & { fullWidth?: boolean; showPagination?: boolean; disableNavigation?: boolean }
+  PropsWithTestId & {
+    fullWidth?: boolean
+    showPagination?: boolean
+    disableNavigation?: boolean
+  }
 >
 
 export function Slider({
@@ -21,8 +25,13 @@ export function Slider({
   showPagination = false,
   disableNavigation = false,
 }: SliderProps): ReactElement {
-  const { scrollContainerRef, handleNext, handlePrevious, currentImageNumber, totalImages } =
-    useSlider()
+  const {
+    scrollContainerRef,
+    handleNext,
+    handlePrevious,
+    currentImageNumber,
+    totalImages,
+  } = useSlider()
 
   return (
     <Box
@@ -77,7 +86,12 @@ export function Slider({
       </Box>
       {!!showPagination && (
         <div className="absolute bottom-10 right-4 z-10">
-          <Box bg-color="secondary" padding-x={3} padding-y={2} border-radius="full">
+          <Box
+            bg-color="secondary"
+            padding-x={3}
+            padding-y={2}
+            border-radius="full"
+          >
             <Body color="primary-core" size="base-sm">
               {currentImageNumber} / {totalImages}
             </Body>

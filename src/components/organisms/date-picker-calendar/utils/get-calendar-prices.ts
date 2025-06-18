@@ -3,7 +3,9 @@ import { PriceType } from '@prisma/client'
 import { DatePrice } from '@/components/organisms/date-picker-calendar/providers/date-picker-calendar-context-provider'
 import { PublicListing } from '@/features/listings/types/public-listing'
 
-export function getCalendarPrices(priceDetails: PublicListing['priceDetails']): DatePrice[] {
+export function getCalendarPrices(
+  priceDetails: PublicListing['priceDetails'],
+): DatePrice[] {
   return [
     ...getHighSeasonPrice(priceDetails),
     ...getMidSeasonPrice(priceDetails),
@@ -11,50 +13,62 @@ export function getCalendarPrices(priceDetails: PublicListing['priceDetails']): 
   ]
 }
 
-function getHighSeasonPrice(priceDetails: PublicListing['priceDetails']): DatePrice[] {
+function getHighSeasonPrice(
+  priceDetails: PublicListing['priceDetails'],
+): DatePrice[] {
   return [
     // High Season
     {
       startMonth: 6, // July (0-based)
       endMonth: 7, // August
-      price: priceDetails?.find((price) => price.type === PriceType.HIGH_SEASON)?.price,
+      price: priceDetails?.find((price) => price.type === PriceType.HIGH_SEASON)
+        ?.price,
     },
   ]
 }
 
-function getMidSeasonPrice(priceDetails: PublicListing['priceDetails']): DatePrice[] {
+function getMidSeasonPrice(
+  priceDetails: PublicListing['priceDetails'],
+): DatePrice[] {
   return [
     // Mid Season
     {
       startMonth: 3, // April
       endMonth: 5, // June
-      price: priceDetails?.find((price) => price.type === PriceType.MID_SEASON)?.price,
+      price: priceDetails?.find((price) => price.type === PriceType.MID_SEASON)
+        ?.price,
     },
     {
       startMonth: 8, // September
       endMonth: 9, // October
-      price: priceDetails?.find((price) => price.type === PriceType.MID_SEASON)?.price,
+      price: priceDetails?.find((price) => price.type === PriceType.MID_SEASON)
+        ?.price,
     },
     {
       startMonth: 11, // December
       endMonth: 11, // December
-      price: priceDetails?.find((price) => price.type === PriceType.LOW_SEASON)?.price,
+      price: priceDetails?.find((price) => price.type === PriceType.LOW_SEASON)
+        ?.price,
     },
   ]
 }
 
-function getLowSeasonPrice(priceDetails: PublicListing['priceDetails']): DatePrice[] {
+function getLowSeasonPrice(
+  priceDetails: PublicListing['priceDetails'],
+): DatePrice[] {
   return [
     // Low season
     {
       startMonth: 10, // November
       endMonth: 10, // November
-      price: priceDetails?.find((price) => price.type === PriceType.LOW_SEASON)?.price,
+      price: priceDetails?.find((price) => price.type === PriceType.LOW_SEASON)
+        ?.price,
     },
     {
       startMonth: 0, // January
       endMonth: 2, // March
-      price: priceDetails?.find((price) => price.type === PriceType.LOW_SEASON)?.price,
+      price: priceDetails?.find((price) => price.type === PriceType.LOW_SEASON)
+        ?.price,
     },
   ]
 }

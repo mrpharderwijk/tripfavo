@@ -1,0 +1,182 @@
+[
+  {
+    "_id": "68385b405862efe7717adaa6",
+    "type": "WIFI",
+    "createdAt": "2025-05-29T13:04:00.586Z",
+    "updatedAt": "2025-05-29T13:04:00.586Z"
+  },
+  {
+    "_id": "68385b405862efe7717adaa7",
+    "type": "SWIMMING_POOL",
+    "createdAt": "2025-05-29T13:04:00.897Z",
+    "updatedAt": "2025-05-29T13:04:00.897Z"
+  },
+  {
+    "_id": "68385b405862efe7717adaa8",
+    "type": "HOT_TUB",
+    "createdAt": "2025-05-29T13:04:00.946Z",
+    "updatedAt": "2025-05-29T13:04:00.946Z"
+  },
+  {
+    "_id": "68385b415862efe7717adaa9",
+    "type": "TENNIS_COURT",
+    "createdAt": "2025-05-29T13:04:01.001Z",
+    "updatedAt": "2025-05-29T13:04:01.001Z"
+  },
+  {
+    "_id": "68385b415862efe7717adaaa",
+    "type": "GYM",
+    "createdAt": "2025-05-29T13:04:01.049Z",
+    "updatedAt": "2025-05-29T13:04:01.049Z"
+  },
+  {
+    "_id": "68385b415862efe7717adaab",
+    "type": "AIR_CONDITIONING",
+    "createdAt": "2025-05-29T13:04:01.093Z",
+    "updatedAt": "2025-05-29T13:04:01.093Z"
+  },
+  {
+    "_id": "68385b415862efe7717adaac",
+    "type": "HEATING",
+    "createdAt": "2025-05-29T13:04:01.139Z",
+    "updatedAt": "2025-05-29T13:04:01.139Z"
+  },
+  {
+    "_id": "68385b415862efe7717adaad",
+    "type": "KITCHEN",
+    "createdAt": "2025-05-29T13:04:01.198Z",
+    "updatedAt": "2025-05-29T13:04:01.198Z"
+  },
+  {
+    "_id": "68385b415862efe7717adaae",
+    "type": "WASHER",
+    "createdAt": "2025-05-29T13:04:01.248Z",
+    "updatedAt": "2025-05-29T13:04:01.248Z"
+  },
+  {
+    "_id": "68385b415862efe7717adaaf",
+    "type": "DRYER",
+    "createdAt": "2025-05-29T13:04:01.292Z",
+    "updatedAt": "2025-05-29T13:04:01.292Z"
+  },
+  {
+    "_id": "68385b415862efe7717adab0",
+    "type": "TV",
+    "createdAt": "2025-05-29T13:04:01.350Z",
+    "updatedAt": "2025-05-29T13:04:01.350Z"
+  },
+  {
+    "_id": "68385b415862efe7717adab1",
+    "type": "FREE_PARKING",
+    "createdAt": "2025-05-29T13:04:01.402Z",
+    "updatedAt": "2025-05-29T13:04:01.402Z"
+  },
+  {
+    "_id": "68385b415862efe7717adab2",
+    "type": "SEA_VIEW",
+    "createdAt": "2025-05-29T13:04:01.449Z",
+    "updatedAt": "2025-05-29T13:04:01.449Z"
+  },
+  {
+    "_id": "68385b415862efe7717adab3",
+    "type": "MOUNTAIN_VIEW",
+    "createdAt": "2025-05-29T13:04:01.495Z",
+    "updatedAt": "2025-05-29T13:04:01.495Z"
+  },
+  {
+    "_id": "68385b415862efe7717adab4",
+    "type": "GARDEN",
+    "createdAt": "2025-05-29T13:04:01.541Z",
+    "updatedAt": "2025-05-29T13:04:01.541Z"
+  },
+  {
+    "_id": "68385b415862efe7717adab5",
+    "type": "BBQ_GRILL",
+    "createdAt": "2025-05-29T13:04:01.591Z",
+    "updatedAt": "2025-05-29T13:04:01.591Z"
+  },
+  {
+    "_id": "68385b415862efe7717adab6",
+    "type": "PLAYGROUND",
+    "createdAt": "2025-05-29T13:04:01.641Z",
+    "updatedAt": "2025-05-29T13:04:01.641Z"
+  },
+  {
+    "_id": "68385b415862efe7717adab7",
+    "type": "BEACH_ACCESS",
+    "createdAt": "2025-05-29T13:04:01.692Z",
+    "updatedAt": "2025-05-29T13:04:01.692Z"
+  },
+  {
+    "_id": "68385b415862efe7717adab8",
+    "type": "FIREPLACE",
+    "createdAt": "2025-05-29T13:04:01.742Z",
+    "updatedAt": "2025-05-29T13:04:01.742Z"
+  },
+  {
+    "_id": "68385b415862efe7717adab9",
+    "type": "WORKSPACE",
+    "createdAt": "2025-05-29T13:04:01.790Z",
+    "updatedAt": "2025-05-29T13:04:01.790Z"
+  },
+  {
+    "_id": "68385b415862efe7717adaba",
+    "type": "PET_FRIENDLY",
+    "createdAt": "2025-05-29T13:04:01.844Z",
+    "updatedAt": "2025-05-29T13:04:01.844Z"
+  },
+  {
+    "_id": "68385b415862efe7717adabb",
+    "type": "SECURITY_SYSTEM",
+    "createdAt": "2025-05-29T13:04:01.900Z",
+    "updatedAt": "2025-05-29T13:04:01.900Z"
+  },
+  {
+    "_id": "68385b415862efe7717adabc",
+    "type": "FIRST_AID_KIT",
+    "createdAt": "2025-05-29T13:04:01.943Z",
+    "updatedAt": "2025-05-29T13:04:01.943Z"
+  },
+  {
+    "_id": "68385b415862efe7717adabd",
+    "type": "FIRE_EXTINGUISHER",
+    "createdAt": "2025-05-29T13:04:01.993Z",
+    "updatedAt": "2025-05-29T13:04:01.993Z"
+  },
+  {
+    "_id": "68385b425862efe7717adabe",
+    "type": "SMOKE_ALARM",
+    "createdAt": "2025-05-29T13:04:02.054Z",
+    "updatedAt": "2025-05-29T13:04:02.054Z"
+  },
+  {
+    "_id": "68385b425862efe7717adabf",
+    "type": "ELEVATOR",
+    "createdAt": "2025-05-29T13:04:02.104Z",
+    "updatedAt": "2025-05-29T13:04:02.104Z"
+  },
+  {
+    "_id": "68385b425862efe7717adac0",
+    "type": "BALCONY",
+    "createdAt": "2025-05-29T13:04:02.156Z",
+    "updatedAt": "2025-05-29T13:04:02.156Z"
+  },
+  {
+    "_id": "68385b425862efe7717adac1",
+    "type": "BREAKFAST_INCLUDED",
+    "createdAt": "2025-05-29T13:04:02.210Z",
+    "updatedAt": "2025-05-29T13:04:02.210Z"
+  },
+  {
+    "_id": "68385b425862efe7717adac2",
+    "type": "DISHWASHER",
+    "createdAt": "2025-05-29T13:04:02.257Z",
+    "updatedAt": "2025-05-29T13:04:02.257Z"
+  },
+  {
+    "_id": "68385b425862efe7717adac3",
+    "type": "BABY_EQUIPMENT",
+    "createdAt": "2025-05-29T13:04:02.350Z",
+    "updatedAt": "2025-05-29T13:04:02.350Z"
+  }
+]

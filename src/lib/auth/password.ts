@@ -44,7 +44,13 @@ export async function hashPassword(password: string): Promise<string> {
   const passwordData = encoder.encode(password)
 
   // Use PBKDF2 with 100,000 iterations (similar to bcrypt's work factor)
-  const key = await crypto.subtle.importKey('raw', passwordData, 'PBKDF2', false, ['deriveBits'])
+  const key = await crypto.subtle.importKey(
+    'raw',
+    passwordData,
+    'PBKDF2',
+    false,
+    ['deriveBits'],
+  )
 
   const hash = await crypto.subtle.deriveBits(
     {
@@ -67,7 +73,10 @@ export async function hashPassword(password: string): Promise<string> {
  * Verify a password against a hash
  * This is Edge-compatible and secure
  */
-export async function verifyPassword(password: string, storedHash: string): Promise<boolean> {
+export async function verifyPassword(
+  password: string,
+  storedHash: string,
+): Promise<boolean> {
   // Handle bcrypt hashes
   if (isBcryptHash(storedHash)) {
     return bcrypt.compare(password, storedHash)
@@ -83,7 +92,13 @@ export async function verifyPassword(password: string, storedHash: string): Prom
   const encoder = new TextEncoder()
   const passwordData = encoder.encode(password)
 
-  const key = await crypto.subtle.importKey('raw', passwordData, 'PBKDF2', false, ['deriveBits'])
+  const key = await crypto.subtle.importKey(
+    'raw',
+    passwordData,
+    'PBKDF2',
+    false,
+    ['deriveBits'],
+  )
 
   const hash = await crypto.subtle.deriveBits(
     {

@@ -36,7 +36,9 @@ describe('useFocusTrap', () => {
   })
 
   it('should call createFocusTrap when reference element is available', () => {
-    const ref = { current: 'MOCKED ELEMENT' } as unknown as RefObject<HTMLElement>
+    const ref = {
+      current: 'MOCKED ELEMENT',
+    } as unknown as RefObject<HTMLElement>
     const { result } = renderHook(() => useFocusTrap({ ref }))
     const { activateTrap, deActivateTrap } = result.current
 
@@ -48,7 +50,9 @@ describe('useFocusTrap', () => {
   })
 
   it('should call createFocusTrap when reference element via callback is available', () => {
-    const ref = { current: 'MOCKED ELEMENT' } as unknown as RefObject<HTMLElement>
+    const ref = {
+      current: 'MOCKED ELEMENT',
+    } as unknown as RefObject<HTMLElement>
     const { result } = renderHook(() => useFocusTrap({ ref: () => ref }))
     const { activateTrap, deActivateTrap } = result.current
 
@@ -60,8 +64,12 @@ describe('useFocusTrap', () => {
   })
 
   it('should call activate when activateOnInit is set to true', () => {
-    const ref = { current: 'MOCKED ELEMENT' } as unknown as RefObject<HTMLElement>
-    const { result } = renderHook(() => useFocusTrap({ ref, activateOnInit: true }))
+    const ref = {
+      current: 'MOCKED ELEMENT',
+    } as unknown as RefObject<HTMLElement>
+    const { result } = renderHook(() =>
+      useFocusTrap({ ref, activateOnInit: true }),
+    )
     const { activateTrap, deActivateTrap } = result.current
 
     expect(createFocusTrapMock).toHaveBeenCalled()
@@ -72,16 +80,24 @@ describe('useFocusTrap', () => {
   })
 
   it('should call activate when activateTrap is used', () => {
-    const ref = { current: 'MOCKED ELEMENT' } as unknown as RefObject<HTMLElement>
-    const { result } = renderHook(() => useFocusTrap({ ref, activateOnInit: true }))
+    const ref = {
+      current: 'MOCKED ELEMENT',
+    } as unknown as RefObject<HTMLElement>
+    const { result } = renderHook(() =>
+      useFocusTrap({ ref, activateOnInit: true }),
+    )
     const { activateTrap } = result.current
     activateTrap()
     expect(activateMock).toHaveBeenCalled()
   })
 
   it('should call deactivate when deActivateTrap is used', () => {
-    const ref = { current: 'MOCKED ELEMENT' } as unknown as RefObject<HTMLElement>
-    const { result } = renderHook(() => useFocusTrap({ ref, activateOnInit: true }))
+    const ref = {
+      current: 'MOCKED ELEMENT',
+    } as unknown as RefObject<HTMLElement>
+    const { result } = renderHook(() =>
+      useFocusTrap({ ref, activateOnInit: true }),
+    )
     const { deActivateTrap } = result.current
     deActivateTrap()
     expect(deactivateMock).toHaveBeenCalled()

@@ -72,7 +72,9 @@ WithIconOnly.args = {
   noPrimaryLink: true,
   iconOnly: true,
   icon: AlignJustify,
-  buttonVariants: buttonVariants.filter((variant) => variant !== 'primary-link'),
+  buttonVariants: buttonVariants.filter(
+    (variant) => variant !== 'primary-link',
+  ),
 }
 
 export const WithAvatar = OverviewTemplate.bind({})

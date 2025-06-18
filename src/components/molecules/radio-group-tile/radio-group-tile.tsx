@@ -27,7 +27,8 @@ export function RadioGroupTile({
         className={cn(
           'w-full rounded-xl border-1 p-4 flex flex-col items-start hover:border-black hover:outline-black hover:outline-1 transition cursor-pointer',
           {
-            'border-tertiary-selected outline-1 bg-bg-tertiary-selected': selected,
+            'border-tertiary-selected outline-1 bg-bg-tertiary-selected':
+              selected,
             'border-border-tertiary': !selected,
           },
         )}

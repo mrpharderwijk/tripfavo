@@ -7,7 +7,9 @@ import { cn } from '@/utils/class-names'
 
 type ContainerElementTag = ElementTag
 type ContainerProps = PropsWithChildren<
-  PropsWithTestId<VariantProps<typeof containerClassNames> & ContainerElementTag>
+  PropsWithTestId<
+    VariantProps<typeof containerClassNames> & ContainerElementTag
+  >
 >
 
 export function Container({
@@ -24,5 +26,7 @@ export function Container({
   )
   const Tag = tag
 
-  return <Tag data-testid={dataTestId} className={containerClassName} {...props} />
+  return (
+    <Tag data-testid={dataTestId} className={containerClassName} {...props} />
+  )
 }

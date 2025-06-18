@@ -1,7 +1,10 @@
 import { isBefore } from 'date-fns'
 import { DateRange } from 'react-day-picker'
 
-export function updateSelectedValue(prevSelected: DateRange | undefined, date: DateRange) {
+export function updateSelectedValue(
+  prevSelected: DateRange | undefined,
+  date: DateRange,
+): DateRange | undefined {
   // If prevSelected is undefined, just return the new date
   if (!prevSelected) {
     if (date.from && date.to) {

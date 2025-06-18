@@ -29,7 +29,8 @@ export function ReservationDetailSummaryGuests(): ReactElement {
   const infants = searchParams.get('infants')
   const pets = searchParams.get('pets')
   const { openDialog, closeDialog, currentOpenDialog } = useDialogContext()
-  const { listing, totalGuestsAmount, updateGuestsAmount } = useReservationDetailContext()
+  const { listing, totalGuestsAmount, updateGuestsAmount } =
+    useReservationDetailContext()
   const [updatedGuestsAmount, setUpdatedGuestsAmount] = useState<GuestsAmount>({
     ...totalGuestsAmount,
     adults: adults ? Number(adults) : totalGuestsAmount.adults,
@@ -38,9 +39,11 @@ export function ReservationDetailSummaryGuests(): ReactElement {
     pets: pets ? Number(pets) : totalGuestsAmount.pets,
   })
   const tCommon = useTranslations('common')
-  const tReservationDetailSummaryGuests = useTranslations('reservationDetail.summary.guests')
+  const tReservationDetailSummaryGuests = useTranslations(
+    'reservationDetail.summary.guests',
+  )
 
-  function handleOnClickConfirm() {
+  function handleOnClickConfirm(): void {
     updateGuestsAmount({
       ...totalGuestsAmount,
       ...updatedGuestsAmount,
@@ -96,7 +99,12 @@ export function ReservationDetailSummaryGuests(): ReactElement {
           </Heading>
         }
         footer={
-          <Button variant="secondary" size="lg" onClick={handleOnClickConfirm} fullWidth>
+          <Button
+            variant="secondary"
+            size="lg"
+            onClick={handleOnClickConfirm}
+            fullWidth
+          >
             {tReservationDetailSummaryGuests('dialog.button.confirm')}
           </Button>
         }
@@ -132,14 +140,20 @@ export function ReservationDetailSummaryGuests(): ReactElement {
             <Body
               size="base-lgt"
               font-weight="semibold"
-              color={listing.guestsAmount?.children === 0 ? 'primary-disabled' : 'primary'}
+              color={
+                listing.guestsAmount?.children === 0
+                  ? 'primary-disabled'
+                  : 'primary'
+              }
             >
               {tReservationDetailSummaryGuests('dialog.children.label')}
             </Body>
             <Body size="base-mdt" color="secondary" font-weight="medium">
               {listing.guestsAmount?.children === 0
                 ? tReservationDetailSummaryGuests('dialog.children.notAllowed')
-                : tReservationDetailSummaryGuests('dialog.children.description')}
+                : tReservationDetailSummaryGuests(
+                    'dialog.children.description',
+                  )}
             </Body>
           </FlexBoxItem>
           <FlexBoxItem flex="initial">
@@ -164,7 +178,11 @@ export function ReservationDetailSummaryGuests(): ReactElement {
             <Body
               size="base-lgt"
               font-weight="semibold"
-              color={listing.guestsAmount?.infants === 0 ? 'secondary-disabled' : 'primary'}
+              color={
+                listing.guestsAmount?.infants === 0
+                  ? 'secondary-disabled'
+                  : 'primary'
+              }
             >
               {tReservationDetailSummaryGuests('dialog.infants.label')}
             </Body>
@@ -196,7 +214,11 @@ export function ReservationDetailSummaryGuests(): ReactElement {
             <Body
               size="base-lgt"
               font-weight="semibold"
-              color={listing.guestsAmount?.pets === 0 ? 'primary-disabled' : 'primary'}
+              color={
+                listing.guestsAmount?.pets === 0
+                  ? 'primary-disabled'
+                  : 'primary'
+              }
             >
               {tReservationDetailSummaryGuests('dialog.pets.label')}
             </Body>

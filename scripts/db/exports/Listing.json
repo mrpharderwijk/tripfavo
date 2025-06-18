@@ -1,0 +1,14 @@
+[
+  {
+    "_id": "6851a1f04873f543139501d7",
+    "title": "Sea view apartment of the Côte d’Azur",
+    "description": "Located in the heart of Cap Martin, you’ll find our amazing apartment with sea view over the French Riviera. The complex contains a swimming pool, tennis court (bring your own racket) and amazing garden. For hikers the residence gates can be opened to one of the most beautiful hike tours along the Cap Martin coast. The apartment facilities contain a kitchen, living room with TV, bathroom and a bedroom which can be closed for extra privacy.",
+    "neighbourhoodDescription": "The apartment is located in the heart of Roquebrune Cap-Martin, located 7 kilometer from the Italian border. It’s a 5-minute drive to the beach of Menton and a 10-minute drive to the Principality of Monaco. Within 30 minutes you can travel to the city center of Nice and Nice airport. In the neighbourhood you can find a pharmacy, butcher, bakery, small supermarket and a wonderful child-friendly park at walking distance. The rocky beach of Cap Martin can be accessed from the complex with a provided key. This opens up one of the most beautiful views of the French Riviera!",
+    "status": "PUBLISHED",
+    "createdAt": "2025-06-17T17:12:16.825Z",
+    "updatedAt": "2025-06-17T17:23:52.987Z",
+    "userId": "6851a17e4873f543139501d5",
+    "structure": "apartment",
+    "privacyType": "property"
+  }
+]

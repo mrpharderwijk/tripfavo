@@ -73,21 +73,31 @@ export function DatePickerCalendar({
           disabled={(date) => isDateDisabled(date, disabledDates)}
           locale={localeToDateFnsLocale(locale)}
           formatters={{
-            formatWeekdayName: (date) => date.toLocaleDateString(locale, { weekday: 'narrow' }),
+            formatWeekdayName: (date) =>
+              date.toLocaleDateString(locale, { weekday: 'narrow' }),
             formatMonthCaption: (date) =>
-              date.toLocaleDateString(locale, { month: 'long', year: 'numeric' }),
+              date.toLocaleDateString(locale, {
+                month: 'long',
+                year: 'numeric',
+              }),
           }}
           className="p-4 bg-bg-primary rounded-lg shadow-lg"
           modifiers={{
-            selected_start: (date) => Boolean(selected?.from && isSameDay(date, selected.from)),
-            selected_end: (date) => Boolean(selected?.to && isSameDay(date, selected.to)),
+            selected_start: (date) =>
+              Boolean(selected?.from && isSameDay(date, selected.from)),
+            selected_end: (date) =>
+              Boolean(selected?.to && isSameDay(date, selected.to)),
           }}
           showOutsideDays={false}
           required
         />
 
         {selected && (
-          <FlexBox flex-direction="row" align-items="center" justify-content="start">
+          <FlexBox
+            flex-direction="row"
+            align-items="center"
+            justify-content="start"
+          >
             <Button
               variant="quaternary-inverse"
               size="md"

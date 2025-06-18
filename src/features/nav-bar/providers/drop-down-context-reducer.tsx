@@ -15,7 +15,10 @@ export const initialState: DropDownState = {
   currentOpenDropDown: null,
 }
 
-export function dropDownReducer(state: DropDownState, action: DropDownAction): DropDownState {
+export function dropDownReducer(
+  state: DropDownState,
+  action: DropDownAction,
+): DropDownState {
   switch (action.type) {
     case DROP_DOWN_TYPE.OpenDropDown:
       return {
@@ -26,7 +29,9 @@ export function dropDownReducer(state: DropDownState, action: DropDownAction): D
       return {
         ...state,
         currentOpenDropDown:
-          action.payload === state.currentOpenDropDown ? null : state.currentOpenDropDown,
+          action.payload === state.currentOpenDropDown
+            ? null
+            : state.currentOpenDropDown,
       }
 
     case DROP_DOWN_TYPE.CloseAllDropDown:

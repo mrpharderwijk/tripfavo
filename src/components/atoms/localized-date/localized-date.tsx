@@ -10,5 +10,9 @@ export function LocalizedDate({ date }: LocalizedDateProps): string | null {
     return null
   }
 
-  return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+  return date.toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  })
 }

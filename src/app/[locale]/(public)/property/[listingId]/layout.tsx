@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, ReactElement } from 'react'
 
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
@@ -10,8 +10,10 @@ type ListingDetailLayoutProps = PropsWithChildren<{
   params: Promise<{ listingId: string }>
 }>
 
-export default async function ListingDetailLayout({ children, params }: ListingDetailLayoutProps) {
-
+export default async function ListingDetailLayout({
+  children,
+  params,
+}: ListingDetailLayoutProps): Promise<ReactElement> {
   return (
     <FlexBox flex-direction="col" fullHeight>
       <FlexBoxItem flex="initial">

@@ -4,7 +4,7 @@ import { ReactElement } from 'react'
 import { avatarClassNames } from '@/components/atoms/avatar/avatar.class-names'
 
 export type AvatarProps = {
-  size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | null
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | null
 }
 const avatarSizeMap = {
   xs: 24,

@@ -1,9 +1,9 @@
 'use client'
 
 import * as React from 'react'
-import { SVGProps } from 'react'
+import { ReactElement, SVGProps } from 'react'
 
-export function SvgTripfavoDark(props: SVGProps<SVGSVGElement>) {
+export function SvgTripfavoDark(props: SVGProps<SVGSVGElement>): ReactElement {
   return (
     <svg
       width={props.width || 32}
@@ -46,7 +46,10 @@ export function SvgTripfavoDark(props: SVGProps<SVGSVGElement>) {
       </mask>
       <g mask="url(#mask1_4_15)">
         <rect x="157" y="233" width="302" height="267" fill="#312E81" />
-        <path d="M370.5 430.5L202 233L120 284.5L108 519H363L370.5 430.5Z" fill="#4f46e5" />
+        <path
+          d="M370.5 430.5L202 233L120 284.5L108 519H363L370.5 430.5Z"
+          fill="#4f46e5"
+        />
       </g>
     </svg>
   )

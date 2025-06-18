@@ -95,7 +95,12 @@ export function ListingFormImage({
           </Box>
 
           <Box position="absolute" top={6} right={6}>
-            <Button icon={Trash} variant="quaternary" size="md" onClick={handleOnClickRemove} />
+            <Button
+              icon={Trash}
+              variant="quaternary"
+              size="md"
+              onClick={handleOnClickRemove}
+            />
           </Box>
 
           <Box position="absolute" bottom={6} right={6}>
@@ -105,8 +110,8 @@ export function ListingFormImage({
               size="md"
               onClick={handleOnClickRoomType}
             >
-              {roomTypes.find((roomType) => roomType.value === currentRoomType)?.label ||
-                tImagesForm('roomDialog.buttonLabel')}
+              {roomTypes.find((roomType) => roomType.value === currentRoomType)
+                ?.label || tImagesForm('roomDialog.buttonLabel')}
             </Button>
 
             {id && (
@@ -116,8 +121,12 @@ export function ListingFormImage({
                 render={({ field }) => (
                   <ListingFormRoomDialog
                     id={id}
-                    isOpen={currentOpenDialog === `listing-form-room-dialog-${id}`}
-                    onClose={() => closeDialog(`listing-form-room-dialog-${id}`)}
+                    isOpen={
+                      currentOpenDialog === `listing-form-room-dialog-${id}`
+                    }
+                    onClose={() =>
+                      closeDialog(`listing-form-room-dialog-${id}`)
+                    }
                     index={index}
                     field={field}
                   />

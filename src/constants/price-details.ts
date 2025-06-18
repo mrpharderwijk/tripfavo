@@ -15,12 +15,14 @@ export const priceDetails = [
   {
     type: PriceType.LOW_SEASON,
     label: 'Low Season',
-    description: 'November, January, February, March are the months with the lowest demand.',
+    description:
+      'November, January, February, March are the months with the lowest demand.',
   },
   {
     type: PriceType.CLEANING_FEE,
     label: 'Cleaning Fee',
-    description: 'Cleaning fee is a fee that can be charged for cleaning the property.',
+    description:
+      'Cleaning fee is a fee that can be charged for cleaning the property.',
   },
   {
     type: PriceType.DEPOSIT,

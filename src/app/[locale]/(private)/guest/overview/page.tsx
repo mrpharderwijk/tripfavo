@@ -1,6 +1,11 @@
-import { getSession } from "@/actions/get-current-user"
-import { redirect, usePathname } from "next/navigation"
+import { ReactElement } from 'react'
 
-export default async function GuestPage() {
-  return <div>Dashboard</div>
+export default async function GuestPage(): Promise<ReactElement> {
+  return (
+    <>
+      <div>
+        <h1>Guest Overview</h1>
+      </div>
+    </>
+  )
 }

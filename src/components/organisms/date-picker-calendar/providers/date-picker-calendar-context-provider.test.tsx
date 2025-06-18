@@ -1,3 +1,4 @@
+import { ReactElement } from 'react'
 import { DateRange } from 'react-day-picker'
 import { vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
@@ -22,8 +23,9 @@ const mockSelected: DateRange = {
 
 const getPriceForDateMock = vi.fn().mockReturnValue(100)
 
-const TestComponent = () => {
-  const { selected, datePrices, getPriceForDate } = useDatePickerCalendarContext()
+const TestComponent = (): ReactElement => {
+  const { selected, datePrices, getPriceForDate } =
+    useDatePickerCalendarContext()
 
   return (
     <div>
@@ -48,8 +50,12 @@ describe('DatePickerCalendarContextProvider', () => {
     )
 
     // Assert
-    expect(screen.getByTestId('selected')).toHaveTextContent(JSON.stringify(mockSelected))
-    expect(screen.getByTestId('datePrices')).toHaveTextContent(JSON.stringify(mockDatePrices))
+    expect(screen.getByTestId('selected')).toHaveTextContent(
+      JSON.stringify(mockSelected),
+    )
+    expect(screen.getByTestId('datePrices')).toHaveTextContent(
+      JSON.stringify(mockDatePrices),
+    )
     expect(screen.getByTestId('price')).toHaveTextContent('100')
     expect(getPriceForDateMock).toHaveBeenCalledWith(new Date('2023-07-15'))
   })

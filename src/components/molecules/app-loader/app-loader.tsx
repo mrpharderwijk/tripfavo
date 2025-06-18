@@ -13,10 +13,17 @@ type AppLoaderProps = {
   loading?: boolean
 }
 
-export function AppLoader({ message, loading = false }: AppLoaderProps): ReactElement | null {
+export function AppLoader({
+  message,
+  loading = false,
+}: AppLoaderProps): ReactElement | null {
   const [isVisible, setIsVisible] = useState(false)
-  const [delayedMessage, setDelayedMessage] = useState<string | null | undefined>(null)
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+  const [delayedMessage, setDelayedMessage] = useState<
+    string | null | undefined
+  >(null)
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(
+    undefined,
+  )
 
   useEffect(() => {
     if (loading) {
@@ -34,7 +41,7 @@ export function AppLoader({ message, loading = false }: AppLoaderProps): ReactEl
       }, 300) // Match this with the CSS transition duration
     }
 
-    return () => {
+    return (): void => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current)
       }
@@ -47,10 +54,13 @@ export function AppLoader({ message, loading = false }: AppLoaderProps): ReactEl
 
   return (
     <div
-      className={cn('fixed inset-0 z-50 bg-white transition-opacity duration-300 ease-in-out', {
-        'opacity-100': !isVisible,
-        'opacity-0 pointer-events-none': isVisible,
-      })}
+      className={cn(
+        'fixed inset-0 z-50 bg-white transition-opacity duration-300 ease-in-out',
+        {
+          'opacity-100': !isVisible,
+          'opacity-0 pointer-events-none': isVisible,
+        },
+      )}
     >
       <Grid fullWidth fullHeight place-items="center">
         <FlexBox flex-direction="col" gap={4}>

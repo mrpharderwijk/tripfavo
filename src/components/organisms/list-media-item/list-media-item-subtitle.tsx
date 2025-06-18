@@ -6,7 +6,9 @@ type ListMediaItemSubTitleProps = {
   subtitle: string
 }
 
-export function ListMediaItemSubTitle({ subtitle }: ListMediaItemSubTitleProps): ReactElement {
+export function ListMediaItemSubTitle({
+  subtitle,
+}: ListMediaItemSubTitleProps): ReactElement {
   return (
     <Body size="base-mdt" color="secondary">
       {subtitle}

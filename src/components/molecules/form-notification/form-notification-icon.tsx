@@ -18,7 +18,9 @@ const iconMap: {
   success: TriangleAlert,
 }
 
-export function FormNotificationIcon({ variant }: FormNotificationProps): ReactElement | null {
+export function FormNotificationIcon({
+  variant,
+}: FormNotificationProps): ReactElement | null {
   if (!variant) {
     return null
   }

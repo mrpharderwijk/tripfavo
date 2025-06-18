@@ -13,7 +13,9 @@ vi.mock(
     DatePickerCalendarContextProvider: vi.fn(({ children }) => <>{children}</>),
   }),
 )
-const datePickerCalendarContextProviderMock = vi.mocked(DatePickerCalendarContextProvider)
+const datePickerCalendarContextProviderMock = vi.mocked(
+  DatePickerCalendarContextProvider,
+)
 
 vi.mock('react-day-picker')
 const dayPickerMock = vi.mocked(DayPicker)

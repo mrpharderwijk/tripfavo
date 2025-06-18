@@ -1,0 +1,24 @@
+[
+  {
+    "_id": "6851a17e4873f543139501d5",
+    "email": "kim.brantjes@gmail.com",
+    "hashedPassword": "pbkdf2:fedb1a7df0b844683c4809181f2bd09d:49de798a016969e022652577ff4ca9b93d0ebbd6fb665b5a97e203bc3e90c7eb",
+    "role": [
+      "GUEST",
+      "HOST"
+    ],
+    "createdAt": "2025-06-17T17:10:22.785Z",
+    "updatedAt": "2025-06-17T17:10:22.785Z"
+  },
+  {
+    "_id": "685252844873f543139501f8",
+    "email": "mrpharderwijk@gmail.com",
+    "hashedPassword": "pbkdf2:2d9c99d8610a9ca4e304b23b49ee7ada:0f737014a5044fdfeafde5ea68b12133f26efa5de894ef20ceb46c7ae62b8241",
+    "role": [
+      "GUEST",
+      "HOST"
+    ],
+    "createdAt": "2025-06-18T05:45:40.653Z",
+    "updatedAt": "2025-06-18T05:45:40.653Z"
+  }
+]

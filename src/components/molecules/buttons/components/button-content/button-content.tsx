@@ -38,7 +38,12 @@ export function ButtonContent({
     disabled,
     withIcon: !!Icon,
   })
-  const labelClassNames = buttonContentLabelClassNames({ variant, loading, underline })
+  const labelClassNames = buttonContentLabelClassNames({
+    avatar,
+    variant,
+    loading,
+    underline,
+  })
   const iconClassNames = buttonContentIconClassNames({ size, variant, loading })
 
   return (
@@ -49,7 +54,7 @@ export function ButtonContent({
         </div>
       )}
 
-      {!!avatar && <Avatar size={size} />}
+      {!!avatar && !children && <Avatar size={size} />}
       {!!Icon && <Icon className={iconClassNames} />}
       {!!children && <span className={labelClassNames}>{children}</span>}
     </div>

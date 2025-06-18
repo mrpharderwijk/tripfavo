@@ -2,23 +2,40 @@
 
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { ReactElement, useEffect } from 'react'
+import { ListingStatus } from '@prisma/client'
 
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { Button } from '@/components/molecules/buttons/button'
-import { ListingItem } from '@/features/host/components/listing-item/listing-item'
+import { ListingList } from '@/features/host/components/listing-list/listing-list'
 import { HostListing } from '@/features/host/types/host-listing'
-import { useAppContext, UserMode } from '@/providers/app-context-provider/app-context-provider'
+import {
+  useAppContext,
+  UserMode,
+} from '@/providers/app-context-provider/app-context-provider'
 
 type HostOverviewProps = {
   listings?: HostListing[] | null
 }
 
-export function HostOverview({ listings }: HostOverviewProps) {
-  const { enableAppLoading, disableAppLoading, setUserMode, userMode } = useAppContext()
+export function HostOverview({ listings }: HostOverviewProps): ReactElement {
+  const { enableAppLoading, disableAppLoading, setUserMode, userMode } =
+    useAppContext()
   const router = useRouter()
 
-  async function handleOnClickAddListing() {
+  const pendingListings = listings?.filter(
+    (listing) => listing.status === ListingStatus.DRAFT,
+  )
+  const publishedListings = listings?.filter(
+    (listing) => listing.status === ListingStatus.PUBLISHED,
+  )
+
+  // TODO: Add archived listings
+  // const archivedListings = listings?.filter(
+  //   (listing) => listing.status === ListingStatus.ARCHIVED,
+  // )
+
+  async function handleOnClickAddListing(): Promise<void> {
     enableAppLoading('Creating your listing')
     try {
       const response = await axios.post('/api/host/listings')
@@ -41,13 +58,16 @@ export function HostOverview({ listings }: HostOverviewProps) {
 
   return (
     <>
-      <FlexBox flex-direction="col" gap={3}>
-        {!!listings?.length &&
-          listings.map((listing) => (
-            <ListingItem {...listing} data-testid={listing.id} key={listing.id} />
-          ))}
+      <FlexBox flex-direction="col" gap={6}>
+        <ListingList heading="Published listings" items={publishedListings} />
+        <ListingList heading="Pending listings" items={pendingListings} />
       </FlexBox>
-      <Button variant="quaternary" rounded="md" onClick={handleOnClickAddListing}>
+
+      <Button
+        variant="secondary"
+        rounded="lg"
+        onClick={handleOnClickAddListing}
+      >
         Add listing
       </Button>
     </>

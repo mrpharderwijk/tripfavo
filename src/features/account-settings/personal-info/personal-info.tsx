@@ -3,7 +3,7 @@
 import axios from 'axios'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { ReactElement, useState } from 'react'
 import { UploadedFileData } from 'uploadthing/types'
 
 import { DotLoader } from '@/components/atoms/dot-loader/dot-loader'
@@ -18,9 +18,10 @@ import { useDialogContext } from '@/features/nav-bar/providers/dialog-context-pr
 import { useAppContext } from '@/providers/app-context-provider/app-context-provider'
 import { UploadDropzone } from '@/utils/uploadthing'
 
-export function PersonalInfo() {
+export function PersonalInfo(): ReactElement {
   const { currentUser } = useAppContext()
-  const { currentEditMode, enableEditMode, disableEditMode } = usePersonalInfoContext()
+  const { currentEditMode, enableEditMode, disableEditMode } =
+    usePersonalInfoContext()
   const { openDialog, closeDialog, currentOpenDialog } = useDialogContext()
   const [profileImage, setProfileImage] = useState<string | null>(
     currentUser?.profileImage?.url ?? null,
@@ -29,7 +30,7 @@ export function PersonalInfo() {
   const tPersonalInfo = useTranslations('personal-info')
   const tCommonForms = useTranslations('common.forms')
 
-  function handleOnClick(value: string) {
+  function handleOnClick(value: string): void {
     if (!value || value === currentEditMode) {
       disableEditMode()
       return
@@ -38,7 +39,9 @@ export function PersonalInfo() {
     enableEditMode(value)
   }
 
-  async function handleOnClientUploadComplete(res: UploadedFileData[]) {
+  async function handleOnClientUploadComplete(
+    res: UploadedFileData[],
+  ): Promise<void> {
     try {
       const file = res[0]
       const response = await axios.post(`/api/user/profile-image`, {
@@ -62,10 +65,12 @@ export function PersonalInfo() {
     }
   }
 
-  function handleOnBeforeUploadBegin(files: File[]) {
+  function handleOnBeforeUploadBegin(files: File[]): File[] {
     setProfileImageUploading(true)
     // Preprocess files before uploading (e.g. rename them)
-    return files.map((f) => new File([f], `${currentUser?.id}-${f.name}`, { type: f.type }))
+    return files.map(
+      (f) => new File([f], `${currentUser?.id}-${f.name}`, { type: f.type }),
+    )
   }
 
   return (
@@ -79,7 +84,10 @@ export function PersonalInfo() {
           width={100}
           height={100}
         />
-        <Button variant="primary-link" onClick={() => openDialog('profile-image')}>
+        <Button
+          variant="primary-link"
+          onClick={() => openDialog('profile-image')}
+        >
           {tCommonForms('edit')}
         </Button>
         <ModalDialog

@@ -7,7 +7,10 @@ type UserMenuItemProps = {
   onClick: () => void
 }
 
-export function UserMenuItem({ label, onClick }: UserMenuItemProps): ReactElement {
+export function UserMenuItem({
+  label,
+  onClick,
+}: UserMenuItemProps): ReactElement {
   return (
     <button
       onClick={onClick}

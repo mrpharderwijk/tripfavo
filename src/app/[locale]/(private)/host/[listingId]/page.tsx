@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import { ReactElement } from 'react'
 
-import { getHostListing } from '@/features/host/actions/get-host-listings'
+import { getHostListing } from '@/features/host/server/actions/get-host-listings'
 
 export default async function HostListingPage({
   params,

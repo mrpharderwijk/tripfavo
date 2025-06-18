@@ -3,7 +3,7 @@
 import axios from 'axios'
 import { Euro } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { useEffect } from 'react'
+import { ReactElement, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -17,7 +17,10 @@ import { HeadingGroup } from '@/components/molecules/heading/heading'
 import { InputNumber } from '@/components/molecules/input-number/input-number'
 import { Form, FormField } from '@/components/ui/form'
 import { priceDetails } from '@/constants/price-details'
-import { HOST_STEP, useHostContext } from '@/features/host/providers/host-context-provider'
+import {
+  HOST_STEP,
+  useHostContext,
+} from '@/features/host/providers/host-context-provider'
 import { ComponentStepProps } from '@/features/host/types/component-step-props'
 
 const EMPTY_FIELD_MESSAGE = 'Field cannot be empty'
@@ -35,9 +38,10 @@ export const PriceFormSchema = z.object({
   }),
 })
 
-export function PriceForm({ listing }: ComponentStepProps) {
+export function PriceForm({ listing }: ComponentStepProps): ReactElement {
   const tPriceForm = useTranslations('host.listing.priceForm')
-  const { steps, currentStep, updateStep, setIsLoading, listingId } = useHostContext()
+  const { steps, currentStep, updateStep, setIsLoading, listingId } =
+    useHostContext()
   const form = useForm<z.infer<typeof PriceFormSchema>>({
     resolver: zodResolver(PriceFormSchema),
     mode: 'onChange',
@@ -46,26 +50,36 @@ export function PriceForm({ listing }: ComponentStepProps) {
         {
           type: PriceType.HIGH_SEASON,
           price:
-            listing?.priceDetails?.find((pd) => pd.type === PriceType.HIGH_SEASON)?.price ?? 0.0,
+            listing?.priceDetails?.find(
+              (pd) => pd.type === PriceType.HIGH_SEASON,
+            )?.price ?? 0.0,
         },
         {
           type: PriceType.MID_SEASON,
           price:
-            listing?.priceDetails?.find((pd) => pd.type === PriceType.MID_SEASON)?.price ?? 0.0,
+            listing?.priceDetails?.find(
+              (pd) => pd.type === PriceType.MID_SEASON,
+            )?.price ?? 0.0,
         },
         {
           type: PriceType.LOW_SEASON,
           price:
-            listing?.priceDetails?.find((pd) => pd.type === PriceType.LOW_SEASON)?.price ?? 0.0,
+            listing?.priceDetails?.find(
+              (pd) => pd.type === PriceType.LOW_SEASON,
+            )?.price ?? 0.0,
         },
         {
           type: PriceType.CLEANING_FEE,
           price:
-            listing?.priceDetails?.find((pd) => pd.type === PriceType.CLEANING_FEE)?.price ?? 0.0,
+            listing?.priceDetails?.find(
+              (pd) => pd.type === PriceType.CLEANING_FEE,
+            )?.price ?? 0.0,
         },
         {
           type: PriceType.DEPOSIT,
-          price: listing?.priceDetails?.find((pd) => pd.type === PriceType.DEPOSIT)?.price ?? 0.0,
+          price:
+            listing?.priceDetails?.find((pd) => pd.type === PriceType.DEPOSIT)
+              ?.price ?? 0.0,
         },
       ],
     },
@@ -76,7 +90,9 @@ export function PriceForm({ listing }: ComponentStepProps) {
   } = form
   const stepData = steps[currentStep as HOST_STEP]
 
-  async function onSubmit(data: z.infer<typeof PriceFormSchema>): Promise<boolean> {
+  async function onSubmit(
+    data: z.infer<typeof PriceFormSchema>,
+  ): Promise<boolean> {
     setIsLoading(true)
 
     try {
@@ -100,7 +116,10 @@ export function PriceForm({ listing }: ComponentStepProps) {
 
   return (
     <Box display="flex" flex-direction="col" gap={11}>
-      <HeadingGroup title={tPriceForm('heading.title')} subtitle={tPriceForm('heading.subtitle')} />
+      <HeadingGroup
+        title={tPriceForm('heading.title')}
+        subtitle={tPriceForm('heading.subtitle')}
+      />
 
       {errors.priceDetails && (
         <Body size="base-sm" font-weight="medium" color="secondary-error">
@@ -114,7 +133,9 @@ export function PriceForm({ listing }: ComponentStepProps) {
             <Box
               key={priceDetail.type}
               padding-y={4}
-              border-b={idx === Object.values(priceDetails).length - 1 ? undefined : 1}
+              border-b={
+                idx === Object.values(priceDetails).length - 1 ? undefined : 1
+              }
               border-color={'secondary-disabled'}
             >
               <FormField
@@ -127,11 +148,21 @@ export function PriceForm({ listing }: ComponentStepProps) {
                     justify-content="between"
                     gap={4}
                   >
-                    <FlexBoxItem display="flex" flex-direction="col" flex="auto" gap={2}>
+                    <FlexBoxItem
+                      display="flex"
+                      flex-direction="col"
+                      flex="auto"
+                      gap={2}
+                    >
                       <Body size="base-xl" font-weight="semibold">
                         {priceDetail.label}
                       </Body>
-                      <Body size="base-lg" font-weight="normal" color="secondary" padding-r={10}>
+                      <Body
+                        size="base-lg"
+                        font-weight="normal"
+                        color="secondary"
+                        padding-r={10}
+                      >
                         {priceDetail.description}
                       </Body>
                     </FlexBoxItem>
@@ -146,7 +177,9 @@ export function PriceForm({ listing }: ComponentStepProps) {
                         error={errors.priceDetails?.[idx]?.price?.message}
                         id={priceDetail.type}
                         value={field.value?.price ?? 0}
-                        onChange={(value) => field.onChange({ ...field.value, price: value })}
+                        onChange={(value) =>
+                          field.onChange({ ...field.value, price: value })
+                        }
                         prefix={<Euro size={16} />}
                       />
                     </FlexBoxItem>

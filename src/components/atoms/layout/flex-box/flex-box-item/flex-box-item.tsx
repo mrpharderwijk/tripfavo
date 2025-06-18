@@ -9,6 +9,9 @@ export type FlexBoxItemProps = PropsWithChildren<
   VariantProps<typeof flexBoxItemClassNames> & ElementTag
 >
 
-export function FlexBoxItem({ children, ...props }: FlexBoxItemProps): ReactElement {
+export function FlexBoxItem({
+  children,
+  ...props
+}: FlexBoxItemProps): ReactElement {
   return <Box {...props}>{children}</Box>
 }

@@ -10,6 +10,7 @@ export const withHeaders: MiddlewareFactory = (next: NextMiddleware) => {
       response.headers.set('x-dns-prefetch-control', 'false')
       response.headers.set('x-download-options', 'noopen')
       response.headers.set('x-frame-options', 'SAMEORIGIN')
+      response.headers.set('x-url', request.url)
     }
     return response
   }

@@ -1,12 +1,14 @@
-import { PublicListing, PublicListingPriceDetail } from "@/features/listings/types/public-listing"
-import { PriceType } from "@prisma/client"
+import { PriceType } from '@prisma/client'
 
-export function getDeposit(priceDetails: PublicListingPriceDetail[]) {
+import { PublicListingPriceDetail } from '@/features/listings/types/public-listing'
+
+export function getDeposit(priceDetails: PublicListingPriceDetail[]): number {
   if (!priceDetails?.length) {
     return 0
   }
 
-  return priceDetails.find(
-    (priceDetail) => priceDetail.type === PriceType.DEPOSIT,
-  )?.price ?? 0
+  return (
+    priceDetails.find((priceDetail) => priceDetail.type === PriceType.DEPOSIT)
+      ?.price ?? 0
+  )
 }

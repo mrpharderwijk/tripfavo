@@ -12,8 +12,12 @@ import { cn } from '@/utils/class-names'
 
 type StructureSelectProps = { control: Control<FieldValues> }
 
-export function StructureSelect({ control }: StructureSelectProps): ReactElement {
-  const [selectedStructure, setSelectedStructure] = useState<string | null>('house')
+export function StructureSelect({
+  control,
+}: StructureSelectProps): ReactElement {
+  const [selectedStructure, setSelectedStructure] = useState<string | null>(
+    'house',
+  )
 
   function handleOnValueChange(value: string): void {
     setSelectedStructure(value)
@@ -37,20 +41,26 @@ export function StructureSelect({ control }: StructureSelectProps): ReactElement
                       {
                         'border-tertiary-selected outline-1 bg-bg-tertiary-selected':
                           field.value === selectedStructure,
-                        'border-border-tertiary': field.value !== selectedStructure,
+                        'border-border-tertiary':
+                          field.value !== selectedStructure,
                       },
                     )}
                   >
                     <div className="w-12 h-12 flex justify-start">
                       <Icon
                         className={cn('transition-all duration-300', {
-                          'animate-icon-size': field.value === selectedStructure,
+                          'animate-icon-size':
+                            field.value === selectedStructure,
                           'size-[30px]': field.value !== selectedStructure,
                         })}
                         size={30}
                       />
                     </div>
-                    <Body size="base-lg" font-weight="semibold" text-align="left">
+                    <Body
+                      size="base-lg"
+                      font-weight="semibold"
+                      text-align="left"
+                    >
                       {label}
                     </Body>
                   </Label>

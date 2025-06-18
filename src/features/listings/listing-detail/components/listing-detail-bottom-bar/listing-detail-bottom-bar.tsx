@@ -3,7 +3,7 @@
 import { format } from 'date-fns'
 import { useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
-import { RefObject } from 'react'
+import { ReactElement, RefObject } from 'react'
 
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
@@ -21,16 +21,22 @@ type ListingDetailBottomBarProps = {
   datePickerRef: RefObject<HTMLDivElement | null>
 }
 
-export function ListingDetailBottomBar({ datePickerRef }: ListingDetailBottomBarProps) {
+export function ListingDetailBottomBar({
+  datePickerRef,
+}: ListingDetailBottomBarProps): ReactElement {
   const tListingDetailBottomBar = useTranslations('listingDetail.bottomBar')
   const locale = useLocale()
   const router = useRouter()
-  const { listing, selectedDateRange, calendarPrices } = useListingDetailContext()
+  const { listing, selectedDateRange, calendarPrices } =
+    useListingDetailContext()
 
-  function handleOnClickBook() {
+  function handleOnClickBook(): void {
     if (!selectedDateRange?.from || !selectedDateRange?.to) {
       if (datePickerRef?.current) {
-        datePickerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        datePickerRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        })
       }
       return
     }
@@ -38,7 +44,9 @@ export function ListingDetailBottomBar({ datePickerRef }: ListingDetailBottomBar
     const startDate = format(selectedDateRange?.from, DATE_FORMAT_SEARCH_PARAMS)
     const endDate = format(selectedDateRange?.to, DATE_FORMAT_SEARCH_PARAMS)
 
-    router.push(`/reservation/${listing.id}?startDate=${startDate}&endDate=${endDate}`)
+    router.push(
+      `/reservation/${listing.id}?startDate=${startDate}&endDate=${endDate}`,
+    )
   }
 
   return (
@@ -63,7 +71,10 @@ export function ListingDetailBottomBar({ datePickerRef }: ListingDetailBottomBar
             <Body color="primary" size="base-lgt" font-weight="semibold">
               {/* TODO: Add translation */}
               <LocalizedPrice
-                price={calculatePricePerNight(selectedDateRange, calendarPrices)}
+                price={calculatePricePerNight(
+                  selectedDateRange,
+                  calendarPrices,
+                )}
                 locale={locale as Locales}
                 minFractionDigits={0}
                 maxFractionDigits={0}

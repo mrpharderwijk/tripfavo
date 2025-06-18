@@ -4,8 +4,10 @@ export const primaryButtonThemeClassNames =
   'bg-bg-primary hover:bg-bg-primary-hover focus:bg-bg-primary-hover focus-visible:bg-bg-primary-hover disabled:bg-bg-primary-disabled'
 export const primaryInverseButtonThemeClassNames =
   'bg-bg-primary-inverse hover:bg-bg-primary-inverse-hover focus:bg-bg-primary-inverse-hover focus-visible:bg-bg-primary-inverse-hover disabled:bg-bg-primary-inverse-disabled'
-export const primaryLinkButtonThemeClassNames = 'bg-bg-primary disabled:bg-bg-primary-disabled'
-export const secondaryButtonThemeClassNames = 'bg-linear-to-r from-blue-700 to-purple-800'
+export const primaryLinkButtonThemeClassNames =
+  'bg-bg-primary disabled:bg-bg-primary-disabled'
+export const secondaryButtonThemeClassNames =
+  'bg-linear-to-r from-blue-700 to-purple-800'
 export const tertiaryButtonThemeClassNames =
   'bg-bg-tertiary hover:bg-bg-tertiary-hover focus:bg-bg-tertiary-hover focus-visible:bg-bg-tertiary-hover disabled:bg-bg-tertiary-disabled'
 export const quaternaryButtonThemeClassNames =
@@ -146,7 +148,8 @@ export const buttonClassNames = cva('box-border transition-all duration-300', {
     {
       variant: buttonVariants.filter((v) => v !== 'primary-link'),
       loading: true,
-      class: 'cursor-not-allowed bg-bg-tertiary-disabled/60 hover:bg-bg-tertiary-disabled/60',
+      class:
+        'cursor-not-allowed bg-bg-tertiary-disabled/60 hover:bg-bg-tertiary-disabled/60',
     },
 
     {
@@ -201,7 +204,12 @@ export const buttonClassNames = cva('box-border transition-all duration-300', {
     // ROUNDED DEFAULT
     {
       variant: buttonVariants.filter(
-        (v) => !['primary-link', 'sidebar-menu-item', 'sidebar-menu-item-active'].includes(v),
+        (v) =>
+          ![
+            'primary-link',
+            'sidebar-menu-item',
+            'sidebar-menu-item-active',
+          ].includes(v),
       ),
       rounded: false,
       class: 'rounded-sm',

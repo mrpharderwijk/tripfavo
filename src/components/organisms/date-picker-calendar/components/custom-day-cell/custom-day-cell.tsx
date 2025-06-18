@@ -7,7 +7,11 @@ import { useDatePickerCalendarContext } from '@/components/organisms/date-picker
 import { cn } from '@/utils/class-names'
 
 /** Wrapper for the day cell */
-export function CustomDaycell({ children, day, modifiers }: DayProps): ReactElement {
+export function CustomDaycell({
+  children,
+  day,
+  modifiers,
+}: DayProps): ReactElement {
   const isStart = modifiers.selected_start
   const isEnd = modifiers.selected_end
   const isInRange = modifiers.selected && !isStart && !isEnd
@@ -27,7 +31,10 @@ export function CustomDaycell({ children, day, modifiers }: DayProps): ReactElem
       fullHeight
       data-testid="custom-daycell"
     >
-      <div className={dayCellClassNames} data-testid="custom-daycell-label-wrapper">
+      <div
+        className={dayCellClassNames}
+        data-testid="custom-daycell-label-wrapper"
+      >
         {children ?? <Body color="primary">{day.date.getDate()}</Body>}
       </div>
     </FlexBox>

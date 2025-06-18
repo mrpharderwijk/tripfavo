@@ -1,4 +1,6 @@
-const byteSize = (str: string) => new Blob([str]).size
+function byteSize(str: string): number {
+  return new Blob([str]).size
+}
 
 export function isMongoObjectId(str: string): boolean {
   if (str.length !== 24) {

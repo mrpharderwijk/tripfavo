@@ -4,7 +4,7 @@ import axios from 'axios'
 import { XIcon } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import { useTranslations } from 'next-intl'
-import { useEffect, useMemo, useState } from 'react'
+import { ReactElement, useEffect, useMemo, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -18,7 +18,10 @@ import { AddressAutocomplete } from '@/components/molecules/address-autocomplete
 import { Button } from '@/components/molecules/buttons/button'
 import { HeadingGroup } from '@/components/molecules/heading/heading'
 import { Form } from '@/components/ui/form'
-import { HOST_STEP, useHostContext } from '@/features/host/providers/host-context-provider'
+import {
+  HOST_STEP,
+  useHostContext,
+} from '@/features/host/providers/host-context-provider'
 import { ComponentStepProps } from '@/features/host/types/component-step-props'
 
 type LocationFormType = {
@@ -51,11 +54,20 @@ export const LocationFormSchema = z.object({
   }),
 })
 
-export function LocationForm({ listing }: ComponentStepProps) {
+export function LocationForm({ listing }: ComponentStepProps): ReactElement {
   const tLocationForm = useTranslations('host.listing.locationForm')
-  const { steps, currentStep, updateStep, onNextStep, setIsLoading, listingId } = useHostContext()
+  const {
+    steps,
+    currentStep,
+    updateStep,
+    onNextStep,
+    setIsLoading,
+    listingId,
+  } = useHostContext()
   const [inputValue, setInputValue] = useState('')
-  const [selectedAddress, setSelectedAddress] = useState<AddressResult | null>(null)
+  const [selectedAddress, setSelectedAddress] = useState<AddressResult | null>(
+    null,
+  )
   const form = useForm<LocationFormType>({
     resolver: zodResolver(LocationFormSchema),
     mode: 'onChange',
@@ -81,13 +93,18 @@ export function LocationForm({ listing }: ComponentStepProps) {
 
   const Map = useMemo(
     () =>
-      dynamic(() => import('@/components/atoms/map/map').then((mod) => mod.Map), { ssr: false }),
+      dynamic(
+        () => import('@/components/atoms/map/map').then((mod) => mod.Map),
+        { ssr: false },
+      ),
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [selectedAddress],
   )
 
-  async function onSubmit(data: z.infer<typeof LocationFormSchema>): Promise<boolean> {
+  async function onSubmit(
+    data: z.infer<typeof LocationFormSchema>,
+  ): Promise<boolean> {
     setIsLoading(true)
 
     try {
@@ -109,7 +126,10 @@ export function LocationForm({ listing }: ComponentStepProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  function handleOnChangeAddressAutocomplete(value: string, address?: AddressResult) {
+  function handleOnChangeAddressAutocomplete(
+    value: string,
+    address?: AddressResult,
+  ): void {
     setInputValue(value)
     setSelectedAddress(address ?? null)
 
@@ -118,7 +138,7 @@ export function LocationForm({ listing }: ComponentStepProps) {
     }
   }
 
-  function processAddressAutocomplete(address: AddressResult) {
+  function processAddressAutocomplete(address: AddressResult): void {
     const streetName = getStreetName(address)
     const houseNumber = address.address.house_number ?? ''
     const city = getCity(address)
@@ -158,13 +178,13 @@ export function LocationForm({ listing }: ComponentStepProps) {
     }
   }
 
-  function handleOnClickClear() {
+  function handleOnClickClear(): void {
     setInputValue('')
     setSelectedAddress(null)
     form.reset()
   }
 
-  function onLatLngChange(position: [number, number]) {
+  function onLatLngChange(position: [number, number]): void {
     form.setValue('latitude', Number(position?.[0]))
     form.setValue('longitude', Number(position?.[1]))
   }
@@ -193,7 +213,10 @@ export function LocationForm({ listing }: ComponentStepProps) {
               form.getValues('longitude') && (
                 <FlexBox flex-direction="col" gap={1}>
                   <Map
-                    center={[form.getValues('latitude'), form.getValues('longitude')]}
+                    center={[
+                      form.getValues('latitude'),
+                      form.getValues('longitude'),
+                    ]}
                     zoom={15}
                     onLatLngChange={onLatLngChange}
                     draggablePin
@@ -206,7 +229,11 @@ export function LocationForm({ listing }: ComponentStepProps) {
             {(!!selectedAddress || !!formHasValues) && (
               <FlexBox flex-direction="col" gap={2}>
                 <FlexBox flex-direction="row" justify-content="end">
-                  <Button variant="outline" icon={XIcon} onClick={handleOnClickClear}>
+                  <Button
+                    variant="outline"
+                    icon={XIcon}
+                    onClick={handleOnClickClear}
+                  >
                     Clear
                   </Button>
                 </FlexBox>
@@ -285,7 +312,12 @@ export function LocationForm({ listing }: ComponentStepProps) {
                     name="city"
                     control={control}
                     render={({ field }) => (
-                      <Input id="city" label="City" error={errors.city?.message} {...field} />
+                      <Input
+                        id="city"
+                        label="City"
+                        error={errors.city?.message}
+                        {...field}
+                      />
                     )}
                   />
 
@@ -311,62 +343,66 @@ export function LocationForm({ listing }: ComponentStepProps) {
   )
 }
 
-function getStreetName(address: AddressResult | null) {
+function getStreetName(address: AddressResult | null): string {
   if (!address) {
     return ''
   }
 
-  if (address.class === 'place' && address.type !== 'state' && address.type !== 'postcode') {
-    return address.address.name
+  if (
+    address.class === 'place' &&
+    address.type !== 'state' &&
+    address.type !== 'postcode'
+  ) {
+    return address.address.name ?? ''
   }
 
   return address.address.city ?? ''
 }
 
-function getProvince(address: AddressResult | null) {
+function getProvince(address: AddressResult | null): string {
   if (!address) {
     return ''
   }
 
   if (address.class === 'place' && address.type === 'state') {
-    return address.address.name
+    return address?.address?.name ?? ''
   }
 
-  return address.address.state
+  return address?.address?.state ?? ''
 }
 
-function getPostalCode(address: AddressResult | null) {
+function getPostalCode(address: AddressResult | null): string {
   if (!address) {
     return ''
   }
 
   if (address.class === 'place' && address.type === 'postcode') {
-    return address.address.name
+    return address?.address?.name ?? ''
   }
 
-  return address.address.postcode ?? ''
+  return address?.address?.postcode ?? ''
 }
 
-function getCountry(address: AddressResult | null) {
+function getCountry(address: AddressResult | null): string {
   if (!address) {
     return ''
   }
 
   if (address.class === 'place' && address.type === 'country') {
-    return address.address.name
+    return address?.address?.name ?? ''
   }
 
-  return address.address.country ?? ''
+  return address?.address?.country ?? ''
 }
 
-function getCity(address: AddressResult | null) {
+function getCity(address: AddressResult | null): string {
   if (!address) {
     return ''
   }
 
   if (address.class === 'place' && address.type === 'city') {
-    return address.address.name
+    return address?.address?.name ?? ''
   }
 
-  return address.address.city ?? ''
+  return address?.address?.city ?? ''
 }

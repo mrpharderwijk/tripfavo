@@ -7,7 +7,10 @@ type DropDownMenuItemProps = {
   onClick: (e: MouseEvent<HTMLButtonElement>) => void
 }
 
-export function DropDownMenuItem({ label, onClick }: DropDownMenuItemProps): ReactElement {
+export function DropDownMenuItem({
+  label,
+  onClick,
+}: DropDownMenuItemProps): ReactElement {
   return (
     <button
       onClick={onClick}

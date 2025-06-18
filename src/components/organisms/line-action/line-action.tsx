@@ -9,7 +9,11 @@ type LineActionProps = PropsWithChildren<{
   actionElement: ReactElement
 }>
 
-export function LineAction({ children, label, actionElement }: LineActionProps) {
+export function LineAction({
+  children,
+  label,
+  actionElement,
+}: LineActionProps): ReactElement {
   return (
     <FlexBox
       flex-direction="row"
@@ -20,11 +24,18 @@ export function LineAction({ children, label, actionElement }: LineActionProps) 
       justify-content="start"
     >
       <FlexBoxItem display="flex" flex-direction="col" flex="auto" gap={1}>
-        <FlexBox flex-direction="row" gap={4} align-items="center" justify-content="between">
+        <FlexBox
+          flex-direction="row"
+          gap={4}
+          align-items="center"
+          justify-content="between"
+        >
           <Body tag="span" color="primary" font-weight="bold">
             {label}
           </Body>
-          {!!actionElement && <FlexBoxItem flex="initial">{actionElement}</FlexBoxItem>}
+          {!!actionElement && (
+            <FlexBoxItem flex="initial">{actionElement}</FlexBoxItem>
+          )}
         </FlexBox>
 
         {children}

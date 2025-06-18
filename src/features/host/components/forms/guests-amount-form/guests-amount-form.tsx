@@ -2,7 +2,7 @@
 
 import axios from 'axios'
 import { useTranslations } from 'next-intl'
-import { useEffect } from 'react'
+import { ReactElement, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -14,7 +14,10 @@ import { Body } from '@/components/atoms/typography/body/body'
 import { HeadingGroup } from '@/components/molecules/heading/heading'
 import { InputStep } from '@/components/molecules/input-step/input-step'
 import { Form, FormField } from '@/components/ui/form'
-import { HOST_STEP, useHostContext } from '@/features/host/providers/host-context-provider'
+import {
+  HOST_STEP,
+  useHostContext,
+} from '@/features/host/providers/host-context-provider'
 import { ComponentStepProps } from '@/features/host/types/component-step-props'
 
 export const GuestsAmountFormSchema = z.object({
@@ -25,9 +28,18 @@ export const GuestsAmountFormSchema = z.object({
   pets: z.number().min(0),
 })
 
-export function GuestsAmountForm({ listing }: ComponentStepProps) {
+export function GuestsAmountForm({
+  listing,
+}: ComponentStepProps): ReactElement {
   const tGuestsAmountForm = useTranslations('host.listing.guestsAmountForm')
-  const { steps, currentStep, updateStep, onNextStep, setIsLoading, listingId } = useHostContext()
+  const {
+    steps,
+    currentStep,
+    updateStep,
+    onNextStep,
+    setIsLoading,
+    listingId,
+  } = useHostContext()
   const form = useForm<z.infer<typeof GuestsAmountFormSchema>>({
     resolver: zodResolver(GuestsAmountFormSchema),
     mode: 'onChange',
@@ -45,7 +57,9 @@ export function GuestsAmountForm({ listing }: ComponentStepProps) {
   } = form
   const stepData = steps[currentStep as HOST_STEP]
 
-  async function onSubmit(data: z.infer<typeof GuestsAmountFormSchema>): Promise<boolean> {
+  async function onSubmit(
+    data: z.infer<typeof GuestsAmountFormSchema>,
+  ): Promise<boolean> {
     setIsLoading(true)
 
     try {
@@ -93,8 +107,13 @@ export function GuestsAmountForm({ listing }: ComponentStepProps) {
                       value={field.value}
                       onChange={field.onChange}
                       editable={false}
-                      min={GuestsAmountFormSchema.shape?.maxGuests?.minValue ?? 1}
-                      max={GuestsAmountFormSchema.shape?.maxGuests?.maxValue ?? undefined}
+                      min={
+                        GuestsAmountFormSchema.shape?.maxGuests?.minValue ?? 1
+                      }
+                      max={
+                        GuestsAmountFormSchema.shape?.maxGuests?.maxValue ??
+                        undefined
+                      }
                     />
                   </FlexBoxItem>
                 </FlexBox>
@@ -120,7 +139,10 @@ export function GuestsAmountForm({ listing }: ComponentStepProps) {
                       onChange={field.onChange}
                       editable={false}
                       min={GuestsAmountFormSchema.shape?.adults?.minValue ?? 1}
-                      max={GuestsAmountFormSchema.shape?.adults?.maxValue ?? undefined}
+                      max={
+                        GuestsAmountFormSchema.shape?.adults?.maxValue ??
+                        undefined
+                      }
                     />
                   </FlexBoxItem>
                 </FlexBox>
@@ -135,7 +157,9 @@ export function GuestsAmountForm({ listing }: ComponentStepProps) {
               render={({ field }) => (
                 <FlexBox flex-direction="row" gap={2}>
                   <FlexBoxItem flex="auto">
-                    <Body size="base-xl">{tGuestsAmountForm('children.label')}</Body>
+                    <Body size="base-xl">
+                      {tGuestsAmountForm('children.label')}
+                    </Body>
                   </FlexBoxItem>
                   <FlexBoxItem flex="initial">
                     <InputStep
@@ -143,8 +167,13 @@ export function GuestsAmountForm({ listing }: ComponentStepProps) {
                       value={field.value}
                       onChange={field.onChange}
                       editable={false}
-                      min={GuestsAmountFormSchema.shape?.children?.minValue ?? 0}
-                      max={GuestsAmountFormSchema.shape?.children?.maxValue ?? undefined}
+                      min={
+                        GuestsAmountFormSchema.shape?.children?.minValue ?? 0
+                      }
+                      max={
+                        GuestsAmountFormSchema.shape?.children?.maxValue ??
+                        undefined
+                      }
                     />
                   </FlexBoxItem>
                 </FlexBox>
@@ -159,7 +188,9 @@ export function GuestsAmountForm({ listing }: ComponentStepProps) {
               render={({ field }) => (
                 <FlexBox flex-direction="row" gap={2}>
                   <FlexBoxItem flex="auto">
-                    <Body size="base-xl">{tGuestsAmountForm('infants.label')}</Body>
+                    <Body size="base-xl">
+                      {tGuestsAmountForm('infants.label')}
+                    </Body>
                   </FlexBoxItem>
                   <FlexBoxItem flex="initial">
                     <InputStep
@@ -168,7 +199,10 @@ export function GuestsAmountForm({ listing }: ComponentStepProps) {
                       onChange={field.onChange}
                       editable={false}
                       min={GuestsAmountFormSchema.shape?.infants?.minValue ?? 0}
-                      max={GuestsAmountFormSchema.shape?.infants?.maxValue ?? undefined}
+                      max={
+                        GuestsAmountFormSchema.shape?.infants?.maxValue ??
+                        undefined
+                      }
                     />
                   </FlexBoxItem>
                 </FlexBox>
@@ -183,7 +217,9 @@ export function GuestsAmountForm({ listing }: ComponentStepProps) {
               render={({ field }) => (
                 <FlexBox flex-direction="row" gap={2}>
                   <FlexBoxItem flex="auto">
-                    <Body size="base-xl">{tGuestsAmountForm('pets.label')}</Body>
+                    <Body size="base-xl">
+                      {tGuestsAmountForm('pets.label')}
+                    </Body>
                   </FlexBoxItem>
                   <FlexBoxItem flex="initial">
                     <InputStep
@@ -191,7 +227,10 @@ export function GuestsAmountForm({ listing }: ComponentStepProps) {
                       value={field.value}
                       onChange={field.onChange}
                       min={GuestsAmountFormSchema.shape?.pets?.minValue ?? 0}
-                      max={GuestsAmountFormSchema.shape?.pets?.maxValue ?? undefined}
+                      max={
+                        GuestsAmountFormSchema.shape?.pets?.maxValue ??
+                        undefined
+                      }
                       editable={false}
                     />
                   </FlexBoxItem>

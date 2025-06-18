@@ -33,7 +33,9 @@ export function ListingFormRoomDialog({
   field,
 }: ListingFormRoomDialogProps): ReactElement {
   const { listingId } = useHostContext()
-  const tImagesFormRoomDialog = useTranslations('host.listing.imagesForm.roomDialog')
+  const tImagesFormRoomDialog = useTranslations(
+    'host.listing.imagesForm.roomDialog',
+  )
 
   async function handleOnClickConfirm(): Promise<void> {
     try {
@@ -51,7 +53,11 @@ export function ListingFormRoomDialog({
     <ModalDialog
       header={<>{tImagesFormRoomDialog('header')}</>}
       footer={
-        <Button variant="primary-inverse" size="lg" onClick={handleOnClickConfirm}>
+        <Button
+          variant="primary-inverse"
+          size="lg"
+          onClick={handleOnClickConfirm}
+        >
           Confirm
         </Button>
       }
@@ -96,7 +102,11 @@ export function ListingFormRoomDialog({
                         size={30}
                       />
                     </div>
-                    <Body size="base-lg" font-weight="semibold" text-align="left">
+                    <Body
+                      size="base-lg"
+                      font-weight="semibold"
+                      text-align="left"
+                    >
                       {label}
                     </Body>
                   </Label>

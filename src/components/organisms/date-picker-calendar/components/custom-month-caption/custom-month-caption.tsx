@@ -5,7 +5,9 @@ import { Box } from '@/components/atoms/layout/box/box'
 import { Body } from '@/components/atoms/typography/body/body'
 
 /** Wrapper for the month caption */
-export function CustomMonthCaption({ children }: PropsWithChildren): ReactElement {
+export function CustomMonthCaption({
+  children,
+}: PropsWithChildren): ReactElement {
   return (
     <Box
       fullWidth

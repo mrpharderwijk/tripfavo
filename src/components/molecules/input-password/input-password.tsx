@@ -48,7 +48,11 @@ export function InputPassword({
         customAction={
           !!toggleVisibility && (
             <div className="flex items-center justify-center h-14 border border-border-quarternary border-l-0 rounded-r-lg text-base-sm underline p-4">
-              <Button variant="primary-link" size="sm" onClick={handleOnClickPasswordVisibility}>
+              <Button
+                variant="primary-link"
+                size="sm"
+                onClick={handleOnClickPasswordVisibility}
+              >
                 {passwordVisible ? 'Hide' : 'Show'}
               </Button>
             </div>
@@ -87,7 +91,9 @@ export function InputPassword({
           />
           <InputPasswordFeedback
             invalidMessage="Password must contain at least one special character"
-            valid={/(?=.*[!@#$%^&*()_+\-{}[\]:";'<>,.?/\\=])/.test(props.value?.toString() ?? '')}
+            valid={/(?=.*[!@#$%^&*()_+\-{}[\]:";'<>,.?/\\=])/.test(
+              props.value?.toString() ?? '',
+            )}
           />
         </FlexBox>
       )}

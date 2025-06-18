@@ -1,12 +1,15 @@
-import { FlexBox } from "@/components/atoms/layout/flex-box/flex-box";
-import { Heading } from "@/components/atoms/typography/heading/heading";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, ReactElement } from 'react'
+
+import { Heading } from '@/components/atoms/typography/heading/heading'
 
 type SidebarProps = PropsWithChildren<{
   heading?: string
 }>
 
-export function AppShellSidebar({ children, heading }: SidebarProps) {
+export function AppShellSidebar({
+  children,
+  heading,
+}: SidebarProps): ReactElement {
   return (
     <>
       {heading && (
@@ -14,7 +17,7 @@ export function AppShellSidebar({ children, heading }: SidebarProps) {
           {heading}
         </Heading>
       )}
-      
+
       {children}
     </>
   )

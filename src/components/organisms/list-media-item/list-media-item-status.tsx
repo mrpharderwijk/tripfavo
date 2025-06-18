@@ -1,7 +1,6 @@
 import { ReactElement } from 'react'
 
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
-import { Body } from '@/components/atoms/typography/body/body'
 
 export const enum ListingMediaItemStatus {
   DANGER = 'DANGER',
@@ -11,11 +10,12 @@ export const enum ListingMediaItemStatus {
 }
 type ListingMediaItemStatusProps = {
   status: ListingMediaItemStatus
-  label: string
 }
-export function ListMediaItemStatus({ status, label }: ListingMediaItemStatusProps): ReactElement {
+export function ListMediaItemStatus({
+  status,
+}: ListingMediaItemStatusProps): ReactElement {
   return (
-    <div className="absolute bottom-4 right-4 border-1 border-border-secondary-disabled rounded-full px-2 py-1">
+    <div className="absolute -top-1.5 -right-1.5 rounded-full p-0.5 bg-bg-primary">
       <FlexBox flex-direction="row" align-items="center" gap={2}>
         {status === ListingMediaItemStatus.DANGER && (
           <div className="bg-red-700 rounded-full h-3 w-3"></div>
@@ -29,10 +29,6 @@ export function ListMediaItemStatus({ status, label }: ListingMediaItemStatusPro
         {status === ListingMediaItemStatus.INFO && (
           <div className="bg-blue-600 rounded-full h-3 w-3"></div>
         )}
-
-        <Body size="base-sm" color="secondary">
-          {label}
-        </Body>
       </FlexBox>
     </div>
   )

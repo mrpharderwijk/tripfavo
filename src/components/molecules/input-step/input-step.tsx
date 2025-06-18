@@ -2,7 +2,13 @@
 
 import { Minus, PlusIcon } from 'lucide-react'
 import type React from 'react'
-import { type ChangeEvent, HTMLAttributes, type KeyboardEvent, useRef } from 'react'
+import {
+  type ChangeEvent,
+  HTMLAttributes,
+  type KeyboardEvent,
+  ReactElement,
+  useRef,
+} from 'react'
 
 import { Button } from '@/components/molecules/buttons/button'
 
@@ -33,12 +39,12 @@ export function InputStep({
   ariaLabelIncrement = 'Increase value by',
   ariaLabelDecrement = 'Decrease value by',
   ...props
-}: InputStepProps) {
+}: InputStepProps): ReactElement {
   const inputRef = useRef<HTMLInputElement>(null)
   const isMinReached = value <= min
   const isMaxReached = value >= max
 
-  const increment = () => {
+  const increment = (): void => {
     if (disabled || isMaxReached) {
       return
     }
@@ -47,7 +53,7 @@ export function InputStep({
     onChange(newValue)
   }
 
-  const decrement = () => {
+  const decrement = (): void => {
     if (disabled || isMinReached) {
       return
     }
@@ -56,7 +62,7 @@ export function InputStep({
     onChange(newValue)
   }
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     if (disabled || !editable) {
       return
     }
@@ -64,7 +70,7 @@ export function InputStep({
     onChange(e.target.value as unknown as number)
   }
 
-  const handleInputBlur = () => {
+  const handleInputBlur = (): void => {
     if (disabled || !editable) return
 
     let newValue = Number.parseFloat(value.toString())
@@ -78,7 +84,7 @@ export function InputStep({
     onChange(newValue)
   }
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>): void => {
     if (disabled) return
 
     if (e.key === 'ArrowUp') {

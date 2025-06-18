@@ -1,3 +1,5 @@
 import axios from 'axios'
 
-export const axiosFetcher = (url: string) => axios.get(url).then((res) => res.data)
+export function axiosFetcher(url: string): Promise<unknown> {
+  return axios.get(url).then((res) => res.data)
+}

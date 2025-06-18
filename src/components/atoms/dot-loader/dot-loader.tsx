@@ -1,4 +1,5 @@
 import { VariantProps } from 'class-variance-authority'
+import { ReactElement } from 'react'
 
 import {
   dotLoaderClassNames,
@@ -8,7 +9,10 @@ import { cn } from '@/utils/class-names'
 
 type DotLoaderProps = VariantProps<typeof dotLoaderClassNames>
 
-export function DotLoader({ color = 'black', size = 'md' }: DotLoaderProps) {
+export function DotLoader({
+  color = 'black',
+  size = 'md',
+}: DotLoaderProps): ReactElement {
   const wrapperClassName = cn(dotLoaderWrapperClassNames({ size }))
   const dotClassName = cn(dotLoaderClassNames({ color, size }))
 

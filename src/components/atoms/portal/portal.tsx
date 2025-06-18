@@ -1,23 +1,26 @@
-'use client';
+'use client'
 
-import { ReactNode, ReactPortal, useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
+import { ReactNode, ReactPortal, useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 interface PortalProps {
-  children: ReactNode;
-  id?: string;
+  children: ReactNode
+  id?: string
 }
 
-export const Portal = ({ children, id = 'portal' }: PortalProps): ReactPortal | null => {
-  const [mounted, setMounted] = useState(false);
+export function Portal({
+  children,
+  id = 'portal',
+}: PortalProps): ReactPortal | null {
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setMounted(true);
+    setMounted(true)
 
-    return () => setMounted(false);
-  }, []);
+    return (): void => setMounted(false)
+  }, [])
 
   return mounted
     ? createPortal(children, document.querySelector(`#${id}`) || document.body)
-    : null;
-};
+    : null
+}

@@ -1,10 +1,15 @@
+import { ReactElement } from 'react'
+
 type HeadingGroupProps = {
   title: string
   subtitle?: string
   size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl'
 }
 
-export function HeadingGroup({ title, subtitle }: HeadingGroupProps) {
+export function HeadingGroup({
+  title,
+  subtitle,
+}: HeadingGroupProps): ReactElement {
   return (
     <div className="flex flex-col gap-2">
       <div className="text-title-lg font-semibold">{title}</div>

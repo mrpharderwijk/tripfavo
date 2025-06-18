@@ -17,8 +17,8 @@ interface ListingsListProps {
 export function ListingsList({ listings }: ListingsListProps): ReactElement {
   return (
     <section className="w-full">
-      {!listings.length && <div>no listings found</div>}
-      {listings.map((listing, idx) => (
+      {!listings?.length && <div>no listings found</div>}
+      {listings?.map((listing, idx) => (
         <Link
           key={`${listing.id}-${idx}`}
           className="group cursor-pointer w-full"
@@ -29,7 +29,8 @@ export function ListingsList({ listings }: ListingsListProps): ReactElement {
               <Image
                 src={
                   listing.images.length
-                    ? (listing.images.find((image) => image.isMain)?.url ?? listing.images[0].url)
+                    ? (listing.images.find((image) => image.isMain)?.url ??
+                      listing.images[0].url)
                     : ''
                 }
                 alt={''}
@@ -63,7 +64,12 @@ export function ListingsList({ listings }: ListingsListProps): ReactElement {
                 {listing.title}
               </Heading>
 
-              <Body size="base-lg" color="secondary" text-align="left" font-weight="semibold">
+              <Body
+                size="base-lg"
+                color="secondary"
+                text-align="left"
+                font-weight="semibold"
+              >
                 4 km from Monaco
               </Body>
 

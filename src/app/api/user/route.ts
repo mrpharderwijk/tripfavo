@@ -1,3 +1,3 @@
-import { POST } from '@/features/auth/api/user'
+import { POST } from '@/features/auth/server/api/user.api'
 
 export { POST }

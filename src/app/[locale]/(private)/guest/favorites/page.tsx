@@ -1,16 +1,23 @@
-import { getSession } from "@/actions/get-current-user";
-import Loading from "./loading";
-import { FlexBox } from "@/components/atoms/layout/flex-box/flex-box";
-import { Heading } from "@/components/atoms/typography/heading/heading";
-import { getGuestFavorites } from "@/features/guest/actions/get-guest-favorites";
-import { Favorites } from "@/features/guest/favorites/favorites";
-import { getTranslations } from "next-intl/server";
-import { redirect } from "next/navigation";
-import { Suspense } from "react";
+import { getTranslations } from 'next-intl/server'
+import { ReactElement, Suspense } from 'react'
 
-export default async function FavoritesPage() {
-  const favorites = await getGuestFavorites()
-  const tGuestFavorites = await getTranslations('guest.favorites')
+import Loading from './loading'
+
+import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
+import { Heading } from '@/components/atoms/typography/heading/heading'
+import { Favorites } from '@/features/guest/favorites/guest-favorites'
+import { getGuestFavorites } from '@/features/guest/server/actions/get-guest-favorites'
+import { isActionError } from '@/server/utils/error'
+
+export default async function FavoritesPage(): Promise<ReactElement> {
+  const [tGuestFavorites, favoritesResponse] = await Promise.all([
+    getTranslations('guest.favorites'),
+    getGuestFavorites(),
+  ])
+
+  const favorites = isActionError(favoritesResponse)
+    ? []
+    : (favoritesResponse?.data ?? [])
 
   return (
     <>
@@ -20,7 +27,7 @@ export default async function FavoritesPage() {
 
       <FlexBox flex-direction="col" gap={6}>
         <Suspense fallback={<Loading />}>
-          <Favorites items={favorites ?? []} />
+          <Favorites items={favorites} />
         </Suspense>
       </FlexBox>
     </>

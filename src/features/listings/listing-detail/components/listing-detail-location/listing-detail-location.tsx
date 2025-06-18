@@ -17,7 +17,10 @@ export function ListingDetailLocation(): ReactElement | null {
   const tListingLocation = useTranslations('listing.location')
   const Map = useMemo(
     () =>
-      dynamic(() => import('@/components/atoms/map/map').then((mod) => mod.Map), { ssr: false }),
+      dynamic(
+        () => import('@/components/atoms/map/map').then((mod) => mod.Map),
+        { ssr: false },
+      ),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [location?.latitude, location?.longitude],
   )
@@ -46,7 +49,11 @@ export function ListingDetailLocation(): ReactElement | null {
       )}
 
       <Box position="relative" fullWidth>
-        <button className="w-full h-[35vh]" type="button" onClick={() => console.log('clicked')}>
+        <button
+          className="w-full h-[35vh]"
+          type="button"
+          onClick={() => console.log('clicked')}
+        >
           <Map center={[latitude ?? 0, longitude ?? 0]} zoom={15} />
         </button>
       </Box>

@@ -10,7 +10,10 @@ type IconTitleTileProps = {
   label?: string
 }
 
-export function IconTile({ icon: Icon, label }: IconTitleTileProps): ReactElement | null {
+export function IconTile({
+  icon: Icon,
+  label,
+}: IconTitleTileProps): ReactElement | null {
   if (!Icon) {
     return null
   }
@@ -27,7 +30,12 @@ export function IconTile({ icon: Icon, label }: IconTitleTileProps): ReactElemen
       justify-content="start"
       gap={4}
     >
-      <FlexBoxItem width={12} height={12} display="flex" justify-content="start">
+      <FlexBoxItem
+        width={12}
+        height={12}
+        display="flex"
+        justify-content="start"
+      >
         <Icon size={30} />
       </FlexBoxItem>
 

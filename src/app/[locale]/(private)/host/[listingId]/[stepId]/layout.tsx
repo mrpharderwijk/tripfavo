@@ -1,8 +1,8 @@
 import { redirect } from 'next/navigation'
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, ReactElement } from 'react'
 
-import { getHostListing } from '@/features/host/actions/get-host-listings'
 import { HostContextProvider } from '@/features/host/providers/host-context-provider'
+import { getHostListing } from '@/features/host/server/actions/get-host-listings'
 
 type HostListingStepLayoutProps = PropsWithChildren<{
   params: Promise<{ locale: string; listingId: string; stepId: string }>
@@ -11,7 +11,7 @@ type HostListingStepLayoutProps = PropsWithChildren<{
 export default async function HostListingStepLayout({
   children,
   params,
-}: HostListingStepLayoutProps) {
+}: HostListingStepLayoutProps): Promise<ReactElement> {
   const { listingId, stepId } = await params
   const listing = await getHostListing(listingId)
 

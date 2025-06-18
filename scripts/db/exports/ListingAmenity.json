@@ -1,0 +1,82 @@
+[
+  {
+    "_id": "6851a4854873f543139501e4",
+    "type": "SWIMMING_POOL",
+    "listingId": "6851a1f04873f543139501d7"
+  },
+  {
+    "_id": "6851a4854873f543139501ef",
+    "type": "BEACH_ACCESS",
+    "listingId": "6851a1f04873f543139501d7"
+  },
+  {
+    "_id": "6851a4854873f543139501f2",
+    "type": "DISHWASHER",
+    "listingId": "6851a1f04873f543139501d7"
+  },
+  {
+    "_id": "6851a4854873f543139501ec",
+    "type": "FREE_PARKING",
+    "listingId": "6851a1f04873f543139501d7"
+  },
+  {
+    "_id": "6851a4854873f543139501e7",
+    "type": "AIR_CONDITIONING",
+    "listingId": "6851a1f04873f543139501d7"
+  },
+  {
+    "_id": "6851a4854873f543139501e8",
+    "type": "KITCHEN",
+    "listingId": "6851a1f04873f543139501d7"
+  },
+  {
+    "_id": "6851a4854873f543139501f1",
+    "type": "BALCONY",
+    "listingId": "6851a1f04873f543139501d7"
+  },
+  {
+    "_id": "6851a4854873f543139501ea",
+    "type": "DRYER",
+    "listingId": "6851a1f04873f543139501d7"
+  },
+  {
+    "_id": "6851a4854873f543139501ee",
+    "type": "MOUNTAIN_VIEW",
+    "listingId": "6851a1f04873f543139501d7"
+  },
+  {
+    "_id": "6851a4854873f543139501f0",
+    "type": "ELEVATOR",
+    "listingId": "6851a1f04873f543139501d7"
+  },
+  {
+    "_id": "6851a4854873f543139501e5",
+    "type": "TENNIS_COURT",
+    "listingId": "6851a1f04873f543139501d7"
+  },
+  {
+    "_id": "6851a4854873f543139501e9",
+    "type": "WASHER",
+    "listingId": "6851a1f04873f543139501d7"
+  },
+  {
+    "_id": "6851a4854873f543139501ed",
+    "type": "SEA_VIEW",
+    "listingId": "6851a1f04873f543139501d7"
+  },
+  {
+    "_id": "6851a4854873f543139501eb",
+    "type": "TV",
+    "listingId": "6851a1f04873f543139501d7"
+  },
+  {
+    "_id": "6851a4854873f543139501e3",
+    "type": "WIFI",
+    "listingId": "6851a1f04873f543139501d7"
+  },
+  {
+    "_id": "6851a4854873f543139501e6",
+    "type": "GYM",
+    "listingId": "6851a1f04873f543139501d7"
+  }
+]

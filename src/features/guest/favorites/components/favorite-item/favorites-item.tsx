@@ -19,7 +19,10 @@ const reservationItemStatusMap = {
     type: ListingMediaItemStatus.DANGER,
     label: 'Cancelled by host',
   },
-  [ReservationStatus.PENDING]: { type: ListingMediaItemStatus.WARNING, label: 'Waiting for host' },
+  [ReservationStatus.PENDING]: {
+    type: ListingMediaItemStatus.WARNING,
+    label: 'Waiting for host',
+  },
   [ReservationStatus.CONFIRMED]: {
     type: ListingMediaItemStatus.SUCCESS,
     label: 'Confirmed by host',

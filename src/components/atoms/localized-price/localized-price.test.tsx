@@ -39,7 +39,12 @@ describe('LocalizedPrice', () => {
   it('respects custom fraction digits', () => {
     // Arrange & Act
     render(
-      <LocalizedPrice price={100.123} locale="fr-FR" minFractionDigits={1} maxFractionDigits={3} />,
+      <LocalizedPrice
+        price={100.123}
+        locale="fr-FR"
+        minFractionDigits={1}
+        maxFractionDigits={3}
+      />,
     )
 
     // Assert

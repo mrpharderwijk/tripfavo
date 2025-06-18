@@ -1,7 +1,11 @@
 import { cva } from 'class-variance-authority'
 
 import { backgroundColorVariants } from '@/utils/variants/background'
-import { borderColorVariants, borderStyleVariants, borderVariants } from '@/utils/variants/border'
+import {
+  borderColorVariants,
+  borderStyleVariants,
+  borderVariants,
+} from '@/utils/variants/border'
 import { borderRadiusVariants } from '@/utils/variants/border/border-radius'
 import { displayVariants } from '@/utils/variants/display'
 import {

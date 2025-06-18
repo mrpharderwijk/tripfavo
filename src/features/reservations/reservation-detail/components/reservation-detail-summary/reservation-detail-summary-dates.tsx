@@ -22,21 +22,26 @@ export function ReservationDetailSummaryDates(): ReactElement {
   const { openDialog, closeDialog, currentOpenDialog } = useDialogContext()
   const { selectedDates, updateSelectedDates, listing, totalGuestsAmount } =
     useReservationDetailContext()
-  const [updatedSelectedDates, setUpdatedSelectedDates] = useState<DateRange | undefined>(
-    selectedDates,
-  )
+  const [updatedSelectedDates, setUpdatedSelectedDates] = useState<
+    DateRange | undefined
+  >(selectedDates)
   const router = useRouter()
   const locale = useLocale()
   const tCommon = useTranslations('common')
-  const tReservationDetailSummaryDates = useTranslations('reservationDetail.summary.dates')
+  const tReservationDetailSummaryDates = useTranslations(
+    'reservationDetail.summary.dates',
+  )
 
-  function handleOnClickConfirm() {
+  function handleOnClickConfirm(): void {
     if (!updatedSelectedDates?.from || !updatedSelectedDates?.to) {
       return
     }
 
     updateSelectedDates(updatedSelectedDates)
-    const startDate = format(updatedSelectedDates?.from, DATE_FORMAT_SEARCH_PARAMS)
+    const startDate = format(
+      updatedSelectedDates?.from,
+      DATE_FORMAT_SEARCH_PARAMS,
+    )
     const endDate = format(updatedSelectedDates?.to, DATE_FORMAT_SEARCH_PARAMS)
 
     router.replace(
@@ -115,7 +120,9 @@ export function ReservationDetailSummaryDates(): ReactElement {
             priceDates={[]}
             locale={locale as Locales}
             selected={updatedSelectedDates}
-            onSelect={(date) => handleOnSelectDayPicker(date, setUpdatedSelectedDates)}
+            onSelect={(date) =>
+              handleOnSelectDayPicker(date, setUpdatedSelectedDates)
+            }
           />
         </FlexBox>
       </ModalDialog>

@@ -1,4 +1,4 @@
-import { enUS, fr, nl } from 'date-fns/locale'
+import { enUS, fr, Locale, nl } from 'date-fns/locale'
 
 export const localeToDateFnsLocaleMap = {
   'en-US': enUS,
@@ -6,6 +6,9 @@ export const localeToDateFnsLocaleMap = {
   'nl-NL': nl,
 }
 
-export function localeToDateFnsLocale(locale: string) {
-  return localeToDateFnsLocaleMap[locale as keyof typeof localeToDateFnsLocaleMap] ?? enUS
+export function localeToDateFnsLocale(locale: string): Locale {
+  return (
+    localeToDateFnsLocaleMap[locale as keyof typeof localeToDateFnsLocaleMap] ??
+    enUS
+  )
 }

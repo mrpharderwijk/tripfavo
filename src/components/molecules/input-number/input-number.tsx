@@ -16,7 +16,10 @@ import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
 import { cn } from '@/utils/class-names'
 
-export type InputNumberProps = Omit<HTMLAttributes<HTMLDivElement>, 'prefix' | 'suffix'> & {
+export type InputNumberProps = Omit<
+  HTMLAttributes<HTMLDivElement>,
+  'prefix' | 'suffix'
+> & {
   value: number
   onChange: (value: number) => void
   min?: number
@@ -41,7 +44,7 @@ export function InputNumber({
   suffix,
   decimalPlaces = 2,
   ...props
-}: InputNumberProps) {
+}: InputNumberProps): ReactElement {
   const inputRef = useRef<HTMLInputElement>(null)
   const [displayValue, setDisplayValue] = useState(value.toFixed(decimalPlaces))
   const [isFocused, setIsFocused] = useState(false)
@@ -52,7 +55,8 @@ export function InputNumber({
       'outline-2 outline-offset-2 outline-black': isFocused,
       'border-border-secondary-error outline-2 !outline-border-secondary-error':
         hasError && isFocused,
-      'border-border-secondary-error bg-bg-primary-error outline-black': hasError && !isFocused,
+      'border-border-secondary-error bg-bg-primary-error outline-black':
+        hasError && !isFocused,
       'bg-bg-primary-disabled cursor-not-allowed': !!disabled,
     },
   )
@@ -61,7 +65,8 @@ export function InputNumber({
     {
       'pl-2': !!prefix,
       'pr-2': !!suffix,
-      'border-border-secondary-error bg-bg-primary-error outline-black': hasError && !isFocused,
+      'border-border-secondary-error bg-bg-primary-error outline-black':
+        hasError && !isFocused,
       'bg-bg-primary-disabled cursor-not-allowed': !!disabled,
     },
   )
@@ -226,7 +231,12 @@ export function InputNumber({
         </Box>
       </div>
       {error && (
-        <FlexBox flex-direction="row" align-items="center" justify-content="start" gap={1}>
+        <FlexBox
+          flex-direction="row"
+          align-items="center"
+          justify-content="start"
+          gap={1}
+        >
           <div className="text-xs text-text-primary-error" role="alert">
             <AlertCircle size={16} />
           </div>

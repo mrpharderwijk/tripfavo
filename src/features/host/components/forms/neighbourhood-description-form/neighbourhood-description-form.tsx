@@ -12,7 +12,10 @@ import { Box } from '@/components/atoms/layout/box/box'
 import { FormNotification } from '@/components/molecules/form-notification/form-notification'
 import { HeadingGroup } from '@/components/molecules/heading/heading'
 import { Form, FormField } from '@/components/ui/form'
-import { HOST_STEP, useHostContext } from '@/features/host/providers/host-context-provider'
+import {
+  HOST_STEP,
+  useHostContext,
+} from '@/features/host/providers/host-context-provider'
 import { ComponentStepProps } from '@/features/host/types/component-step-props'
 
 const INPUT_MAX_LENGTH = 1000
@@ -20,9 +23,14 @@ export const NeighbourhoodDescriptionFormSchema = z.object({
   neighbourhoodDescription: z.string().min(30).max(INPUT_MAX_LENGTH),
 })
 
-export function NeighbourhoodDescriptionForm({ listing }: ComponentStepProps): ReactElement {
-  const tNeighbourhoodDescriptionForm = useTranslations('host.listing.neighbourhoodDescriptionForm')
-  const { steps, currentStep, updateStep, setIsLoading, listingId } = useHostContext()
+export function NeighbourhoodDescriptionForm({
+  listing,
+}: ComponentStepProps): ReactElement {
+  const tNeighbourhoodDescriptionForm = useTranslations(
+    'host.listing.neighbourhoodDescriptionForm',
+  )
+  const { steps, currentStep, updateStep, setIsLoading, listingId } =
+    useHostContext()
   const form = useForm<z.infer<typeof NeighbourhoodDescriptionFormSchema>>({
     resolver: zodResolver(NeighbourhoodDescriptionFormSchema),
     defaultValues: {
@@ -41,7 +49,10 @@ export function NeighbourhoodDescriptionForm({ listing }: ComponentStepProps): R
     setIsLoading(true)
 
     try {
-      await axios.post(`/api/host/listings/${listingId}/neighbourhood-description`, data)
+      await axios.post(
+        `/api/host/listings/${listingId}/neighbourhood-description`,
+        data,
+      )
       return true
     } catch (error) {
       console.error(error)
@@ -69,9 +80,10 @@ export function NeighbourhoodDescriptionForm({ listing }: ComponentStepProps): R
       <Form {...form}>
         <form noValidate>
           {errors.neighbourhoodDescription && (
-            <FormNotification variant="danger">
-              {errors.neighbourhoodDescription.message}
-            </FormNotification>
+            <FormNotification
+              variant="danger"
+              description={errors.neighbourhoodDescription.message ?? ''}
+            />
           )}
           <FormField
             control={control}

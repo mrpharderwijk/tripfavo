@@ -25,11 +25,90 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  accounts      Account[]
+  accounts Account[]
+  sessions Session[]
+
+  // Optional for WebAuthn support
+  Authenticator Authenticator[]
+
   listings      Listing[]
   reservations  Reservation[]
   listingImages ListingImage[]
   favorites     GuestFavorite[]
+  status        UserStatus?
+  verifyToken   UserVerifyToken?
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique
+  expires      DateTime
+
+  userId String @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+// Optional for WebAuthn support
+model Authenticator {
+  credentialID         String  @id @map("_id")
+  userId               String  @db.ObjectId
+  providerAccountId    String
+  credentialPublicKey  String
+  counter              Int
+  credentialDeviceType String
+  credentialBackedUp   Boolean
+  transports           String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, credentialID])
+}
+
+model UserStatus {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  verified   Boolean   @default(false)
+  verifiedAt DateTime?
+
+  blocked   Boolean   @default(false)
+  blockedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String @unique @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model UserVerifyToken {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  token   String   @unique
+  expires DateTime
+
+  userId String @unique @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model UserProfileImage {
@@ -51,25 +130,6 @@ enum UserRole {
   GUEST
   HOST
   ADMIN
-}
-
-model Account {
-  id                String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId            String  @db.ObjectId
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String? @db.String
-  access_token      String? @db.String
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String? @db.String
-  session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
 }
 
 model Listing {
@@ -167,20 +227,18 @@ model ListingImage {
   listingId String  @db.ObjectId
   listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
 
-  roomId String? @db.ObjectId
-  room   Room?   @relation(fields: [roomId], references: [id])
-
-  user   User?   @relation(fields: [userId], references: [id])
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String? @db.ObjectId
 }
 
 model ListingAmenity {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  type      AmenityType?
-  amenity   Amenity?     @relation(fields: [type], references: [type], onDelete: Cascade)
-  listing   Listing?     @relation(fields: [listingId], references: [id])
-  listingId String?      @db.ObjectId
+  type    AmenityType?
+  amenity Amenity?     @relation(fields: [type], references: [type], onDelete: Cascade)
+
+  listing   Listing? @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  listingId String?  @db.ObjectId
 }
 
 model ListingPriceDetail {
@@ -189,8 +247,9 @@ model ListingPriceDetail {
   price     Float
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
-  listing   Listing?   @relation(fields: [listingId], references: [id])
-  listingId String?    @db.ObjectId
+
+  listing   Listing? @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  listingId String?  @db.ObjectId
 }
 
 enum PriceType {
@@ -199,14 +258,6 @@ enum PriceType {
   LOW_SEASON
   CLEANING_FEE
   DEPOSIT
-}
-
-model Room {
-  id           String         @id @default(auto()) @map("_id") @db.ObjectId
-  type         RoomType       @unique
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
-  ListingImage ListingImage[]
 }
 
 enum RoomType {

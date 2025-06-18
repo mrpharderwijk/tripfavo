@@ -1,6 +1,12 @@
 'use client'
 
-import { createContext, PropsWithChildren, ReactElement, useContext, useReducer } from 'react'
+import {
+  createContext,
+  PropsWithChildren,
+  ReactElement,
+  useContext,
+  useReducer,
+} from 'react'
 
 import {
   DIALOG_TYPE,
@@ -16,7 +22,9 @@ type DialogContextState = {
 
 const DialogContext = createContext<DialogContextState | null>(null)
 
-export function DialogContextProvider({ children }: PropsWithChildren): ReactElement {
+export function DialogContextProvider({
+  children,
+}: PropsWithChildren): ReactElement {
   const [state, dispatch] = useReducer(dialogReducer, initialState)
 
   function openDialog(dialogId: string): void {
@@ -44,7 +52,9 @@ export function useDialogContext(): DialogContextState {
   const context = useContext(DialogContext)
 
   if (!context) {
-    throw new Error('Must use `useDialogContext` within a `DialogContextProvider`')
+    throw new Error(
+      'Must use `useDialogContext` within a `DialogContextProvider`',
+    )
   }
 
   return context

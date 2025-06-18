@@ -2,8 +2,9 @@
  * https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap#generating-a-sitemap-using-code-js-ts
  */
 
-import { locales } from '@/i18n/routing'
 import { MetadataRoute } from 'next'
+
+import { locales } from '@/i18n/routing'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.tripfavo.com'
@@ -39,14 +40,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: route.priority,
       alternates: {
         languages: {
-          'en': `${baseUrl}/en${route.url}`,
-          'nl': `${baseUrl}/nl${route.url}`,
+          en: `${baseUrl}/en${route.url}`,
+          nl: `${baseUrl}/nl${route.url}`,
         },
       },
-    }))
+    })),
   )
 
   return sitemapEntries
 }
-
-

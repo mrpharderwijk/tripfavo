@@ -40,7 +40,8 @@ export function Input({
     {
       'border-border-secondary-error outline-1 !outline-border-secondary-error':
         hasError && isFocused,
-      'border-border-secondary-error bg-bg-primary-error outline-black': hasError && !isFocused,
+      'border-border-secondary-error bg-bg-primary-error outline-black':
+        hasError && !isFocused,
       'bg-bg-primary-disabled cursor-not-allowed': !!disabled,
       'border-r-0 rounded-r-none': !!customAction,
     },
@@ -50,7 +51,8 @@ export function Input({
     {
       'text-xs top-2 left-4 text-text-secondary': isFloating,
       'text-text-primary-error font-bold': hasError,
-      'text-base-lg top-1/2 -translate-y-1/2 left-4 text-text-secondary': !isFloating,
+      'text-base-lg top-1/2 -translate-y-1/2 left-4 text-text-secondary':
+        !isFloating,
     },
   )
 
@@ -68,7 +70,11 @@ export function Input({
 
   return (
     <FlexBox flex-direction="col" gap={2} width="full">
-      <FlexBox flex-direction="row" align-items="center" justify-content="start">
+      <FlexBox
+        flex-direction="row"
+        align-items="center"
+        justify-content="start"
+      >
         <FlexBoxItem flex="auto" position="relative">
           <label htmlFor={id} className={labelClassName}>
             {label}
@@ -86,14 +92,26 @@ export function Input({
             onFocus={handleFocus}
             onBlur={handleBlur}
             onChange={handleChange}
+            disabled={disabled}
           />
         </FlexBoxItem>
-        {!!customAction && <FlexBoxItem flex="initial">{customAction}</FlexBoxItem>}
+        {!!customAction && (
+          <FlexBoxItem flex="initial">{customAction}</FlexBoxItem>
+        )}
       </FlexBox>
 
       {error && !disableError && (
-        <FlexBox flex-direction="row" align-items="center" justify-content="start" gap={1}>
-          <div id={errorId} className="text-xs text-text-primary-error" role="alert">
+        <FlexBox
+          flex-direction="row"
+          align-items="center"
+          justify-content="start"
+          gap={1}
+        >
+          <div
+            id={errorId}
+            className="text-xs text-text-primary-error"
+            role="alert"
+          >
             <AlertCircle size={16} />
           </div>
           <div className="text-xs text-text-primary-error">{error}</div>

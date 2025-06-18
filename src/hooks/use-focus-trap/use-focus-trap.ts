@@ -46,7 +46,7 @@ export function useFocusTrap<T extends HTMLElement>({
 
     setTrap(focusTrap)
 
-    return () => {
+    return (): void => {
       if (focusTrap.active) {
         focusTrap.deactivate()
       }

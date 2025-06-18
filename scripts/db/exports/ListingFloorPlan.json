@@ -1,0 +1,14 @@
+[
+  {
+    "_id": "6851a2374873f543139501d9",
+    "rooms": 2,
+    "bathrooms": 1,
+    "bedrooms": 1,
+    "beds": 2,
+    "livingRooms": 1,
+    "kitchens": 2,
+    "createdAt": "2025-06-17T17:13:27.150Z",
+    "updatedAt": "2025-06-17T17:13:27.150Z",
+    "listingId": "6851a1f04873f543139501d7"
+  }
+]

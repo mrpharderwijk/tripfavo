@@ -1,7 +1,13 @@
 'use client'
 
 import { parse } from 'date-fns'
-import { createContext, PropsWithChildren, useContext, useState } from 'react'
+import {
+  createContext,
+  PropsWithChildren,
+  ReactElement,
+  useContext,
+  useState,
+} from 'react'
 import { DateRange } from 'react-day-picker'
 
 import { DATE_FORMAT_SEARCH_PARAMS } from '@/constants/dates'
@@ -23,7 +29,8 @@ type ReservationDetailContextType = {
   setReservationSuccess: (newReservationSuccess: boolean) => void
 }
 
-const ReservationDetailContext = createContext<ReservationDetailContextType | null>(null)
+const ReservationDetailContext =
+  createContext<ReservationDetailContextType | null>(null)
 
 export type GuestsAmount = {
   adults: number
@@ -45,23 +52,26 @@ export function ReservationDetailContextProvider({
   startDate,
   endDate,
   guestsAmount,
-}: ReservationDetailContextProviderProps) {
+}: ReservationDetailContextProviderProps): ReactElement {
   const formattedStartDate = startDate
     ? parse(startDate, DATE_FORMAT_SEARCH_PARAMS, new Date())
     : null
-  const formattedEndDate = endDate ? parse(endDate, DATE_FORMAT_SEARCH_PARAMS, new Date()) : null
-  const [totalGuestsAmount, setTotalGuestsAmount] = useState<GuestsAmount>(guestsAmount)
+  const formattedEndDate = endDate
+    ? parse(endDate, DATE_FORMAT_SEARCH_PARAMS, new Date())
+    : null
+  const [totalGuestsAmount, setTotalGuestsAmount] =
+    useState<GuestsAmount>(guestsAmount)
   const [selectedDates, setSelectedDates] = useState<DateRange | undefined>({
     from: formattedStartDate ?? undefined,
     to: formattedEndDate ?? undefined,
   })
   const [reservationSuccess, setReservationSuccess] = useState(false)
 
-  function updateGuestsAmount(newGuestsAmount: GuestsAmount) {
+  function updateGuestsAmount(newGuestsAmount: GuestsAmount): void {
     setTotalGuestsAmount({ ...guestsAmount, ...newGuestsAmount })
   }
 
-  function updateSelectedDates(newSelectedDates: DateRange | undefined) {
+  function updateSelectedDates(newSelectedDates: DateRange | undefined): void {
     setSelectedDates(
       newSelectedDates
         ? {
@@ -69,7 +79,7 @@ export function ReservationDetailContextProvider({
           }
         : undefined,
     )
-  } 
+  }
 
   return (
     <ReservationDetailContext.Provider
@@ -88,7 +98,7 @@ export function ReservationDetailContextProvider({
   )
 }
 
-export function useReservationDetailContext() {
+export function useReservationDetailContext(): ReservationDetailContextType {
   const context = useContext(ReservationDetailContext)
   if (!context) {
     throw new Error(

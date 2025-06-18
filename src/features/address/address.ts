@@ -1,11 +1,14 @@
 import { NextResponse } from 'next/server'
 
-export async function GET(request: Request) {
+export async function GET(request: Request): Promise<NextResponse> {
   const { searchParams } = new URL(request.url)
   const query = searchParams.get('q')
 
   if (!query) {
-    return NextResponse.json({ error: 'Query parameter is required' }, { status: 400 })
+    return NextResponse.json(
+      { error: 'Query parameter is required' },
+      { status: 400 },
+    )
   }
 
   try {
@@ -20,7 +23,9 @@ export async function GET(request: Request) {
     const data = await response.json()
 
     // Filter only for data from France
-    const filteredData = data.filter((item: any) => item.address.country_code === 'fr')
+    const filteredData = data.filter(
+      (item: any) => item.address.country_code === 'fr',
+    )
 
     // Filter out duplicates
     const uniqueData = filteredData.filter(
@@ -31,6 +36,9 @@ export async function GET(request: Request) {
     return NextResponse.json(uniqueData)
   } catch (error) {
     console.error('Error fetching address suggestions:', error)
-    return NextResponse.json({ error: 'Failed to fetch address suggestions' }, { status: 500 })
+    return NextResponse.json(
+      { error: 'Failed to fetch address suggestions' },
+      { status: 500 },
+    )
   }
 }

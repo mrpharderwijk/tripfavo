@@ -1,3 +1,3 @@
-import { GET, DELETE } from '@/features/host/api/listings/listing-id'
+import { DELETE, GET } from '@/features/host/server/api/listings/listing-id.api'
 
-export { GET, DELETE }
+export { DELETE, GET }

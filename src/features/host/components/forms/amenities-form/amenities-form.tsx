@@ -2,7 +2,7 @@
 
 import axios from 'axios'
 import { useTranslations } from 'next-intl'
-import { useEffect } from 'react'
+import { ReactElement, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -17,7 +17,10 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Form, FormField } from '@/components/ui/form'
 import { Label } from '@/components/ui/label'
 import { amenities } from '@/constants/amenities'
-import { HOST_STEP, useHostContext } from '@/features/host/providers/host-context-provider'
+import {
+  HOST_STEP,
+  useHostContext,
+} from '@/features/host/providers/host-context-provider'
 import { ComponentStepProps } from '@/features/host/types/component-step-props'
 import { cn } from '@/utils/class-names'
 
@@ -35,9 +38,10 @@ export const AmenitiesFormSchema = z.object({
   }),
 })
 
-export function AmenitiesForm({ listing }: ComponentStepProps) {
+export function AmenitiesForm({ listing }: ComponentStepProps): ReactElement {
   const tAmenitiesForm = useTranslations('host.listing.amenitiesForm')
-  const { steps, currentStep, updateStep, setIsLoading, listingId } = useHostContext()
+  const { steps, currentStep, updateStep, setIsLoading, listingId } =
+    useHostContext()
   const form = useForm<z.infer<typeof AmenitiesFormSchema>>({
     resolver: zodResolver(AmenitiesFormSchema),
     mode: 'onChange',
@@ -55,13 +59,17 @@ export function AmenitiesForm({ listing }: ComponentStepProps) {
   } = form
   const stepData = steps[currentStep as HOST_STEP]
 
-  async function onSubmit(data: z.infer<typeof AmenitiesFormSchema>): Promise<boolean> {
+  async function onSubmit(
+    data: z.infer<typeof AmenitiesFormSchema>,
+  ): Promise<boolean> {
     setIsLoading(true)
 
     const amenitiesData = data.amenities.map((amenity) => amenity.type)
 
     try {
-      await axios.post(`/api/host/listings/${listingId}/amenities`, { amenities: amenitiesData })
+      await axios.post(`/api/host/listings/${listingId}/amenities`, {
+        amenities: amenitiesData,
+      })
       return true
     } catch (error) {
       console.error(error)
@@ -89,7 +97,9 @@ export function AmenitiesForm({ listing }: ComponentStepProps) {
       <Form {...form}>
         <form noValidate>
           {errors.amenities && (
-            <p className="text-red-500 text-sm mt-1">{errors.amenities.message}</p>
+            <p className="text-red-500 text-sm mt-1">
+              {errors.amenities.message}
+            </p>
           )}
           <FormField
             control={control}
@@ -102,7 +112,9 @@ export function AmenitiesForm({ listing }: ComponentStepProps) {
                       <div className="w-full">
                         <Checkbox
                           id={`${value}-${idx}`}
-                          checked={field.value.some((amenity) => amenity.type === value)}
+                          checked={field.value.some(
+                            (amenity) => amenity.type === value,
+                          )}
                           onCheckedChange={(checked: boolean) => {
                             if (checked) {
                               field.onChange([
@@ -110,7 +122,9 @@ export function AmenitiesForm({ listing }: ComponentStepProps) {
                                 { id: undefined, type: value as AmenityType },
                               ])
                             } else {
-                              field.onChange(field.value.filter((a) => a.type !== value))
+                              field.onChange(
+                                field.value.filter((a) => a.type !== value),
+                              )
                             }
                           }}
                           className="peer sr-only"
@@ -122,15 +136,21 @@ export function AmenitiesForm({ listing }: ComponentStepProps) {
                             {
                               'border-tertiary-selected outline-1 bg-bg-tertiary-selected':
                                 field.value.some((a) => a.type === value),
-                              'border-border-tertiary': !field.value.some((a) => a.type === value),
+                              'border-border-tertiary': !field.value.some(
+                                (a) => a.type === value,
+                              ),
                             },
                           )}
                         >
                           <div className="w-12 h-12 flex justify-start">
                             <Icon
                               className={cn('transition-all duration-300', {
-                                'animate-icon-size': field.value.some((a) => a.type === value),
-                                'size-[30px]': !field.value.some((a) => a.type === value),
+                                'animate-icon-size': field.value.some(
+                                  (a) => a.type === value,
+                                ),
+                                'size-[30px]': !field.value.some(
+                                  (a) => a.type === value,
+                                ),
                               })}
                               size={30}
                             />

@@ -2,14 +2,14 @@
 
 import { LogIn } from 'lucide-react'
 import { LogOut, User } from 'lucide-react'
+import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { ReactElement } from 'react'
 
 import { Button } from '@/components/molecules/buttons/button'
+import { ButtonWrapper } from '@/components/molecules/buttons/button-wrapper/button-wrapper'
 import { useMainMenuContext } from '@/features/nav-bar/components/main-menu/main-menu-context-provider'
 import { useAppContext } from '@/providers/app-context-provider/app-context-provider'
-import { ButtonWrapper } from '@/components/molecules/buttons/button-wrapper/button-wrapper'
-import Link from 'next/link'
 import { getRoutePathByRouteName } from '@/utils/get-route'
 
 export function MainMenuFooterDefault(): ReactElement {
@@ -25,7 +25,11 @@ export function MainMenuFooterDefault(): ReactElement {
             icon={User}
             size="lg"
             variant="sidebar-menu-item-active"
-            renderRoot={({ buttonContent }) => <Link href={getRoutePathByRouteName('account')}>{buttonContent}</Link>}
+            renderRoot={({ buttonContent }) => (
+              <Link href={getRoutePathByRouteName('account')}>
+                {buttonContent}
+              </Link>
+            )}
           >
             {tMainMenu('account')}
           </ButtonWrapper>
@@ -47,7 +51,11 @@ export function MainMenuFooterDefault(): ReactElement {
             icon={LogIn}
             size="lg"
             variant="sidebar-menu-item-active"
-            renderRoot={({ buttonContent }) => <Link href={getRoutePathByRouteName('login')}>{buttonContent}</Link>}
+            renderRoot={({ buttonContent }) => (
+              <Link href={getRoutePathByRouteName('login')}>
+                {buttonContent}
+              </Link>
+            )}
           >
             {tMainMenu('login')}
           </ButtonWrapper>
@@ -55,7 +63,11 @@ export function MainMenuFooterDefault(): ReactElement {
             icon={User}
             size="lg"
             variant="sidebar-menu-item-active"
-            renderRoot={({ buttonContent }) => <Link href={getRoutePathByRouteName('signUp')}>{buttonContent}</Link>}
+            renderRoot={({ buttonContent }) => (
+              <Link href={getRoutePathByRouteName('signUp')}>
+                {buttonContent}
+              </Link>
+            )}
           >
             {tMainMenu('signUp')}
           </ButtonWrapper>

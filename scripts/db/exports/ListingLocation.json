@@ -1,0 +1,18 @@
+[
+  {
+    "_id": "6851a2284873f543139501d8",
+    "country": "France",
+    "province": "Provence-Alpes-Côte d'Azur",
+    "city": "Roquebrune-Cap-Martin",
+    "streetName": "Roquebrune-Cap-Martin",
+    "houseNumber": "6",
+    "postalCode": "06190",
+    "latitude": 43.75778617371177,
+    "longitude": 7.471126914024354,
+    "aptInfo": "",
+    "additionalInfo": "",
+    "createdAt": "2025-06-17T17:13:12.387Z",
+    "updatedAt": "2025-06-17T17:13:12.387Z",
+    "listingId": "6851a1f04873f543139501d7"
+  }
+]

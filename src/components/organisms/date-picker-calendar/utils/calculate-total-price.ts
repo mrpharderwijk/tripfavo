@@ -2,12 +2,16 @@ import { DatePrice } from '@/components/organisms/date-picker-calendar/providers
 import { getPriceForDate } from '@/components/organisms/date-picker-calendar/utils/get-price-for-date'
 
 type CalculateTotalPriceParams = {
-  startDate?: Date,
-  endDate?: Date,
+  startDate?: Date
+  endDate?: Date
   datePrices: DatePrice[]
 }
 
-export function calculateTotalPrice({startDate, endDate, datePrices }: CalculateTotalPriceParams): number {
+export function calculateTotalPrice({
+  startDate,
+  endDate,
+  datePrices,
+}: CalculateTotalPriceParams): number {
   if (!startDate || !endDate) return 0
 
   let total = 0

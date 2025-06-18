@@ -41,7 +41,9 @@ export function LegalNameForm(): ReactElement {
   })
   const tCommonForms = useTranslations('common.forms')
 
-  async function onSubmit(data: z.infer<typeof LegalNameFormSchema>) {
+  async function onSubmit(
+    data: z.infer<typeof LegalNameFormSchema>,
+  ): Promise<void> {
     if (!data && !isValid && isLoading) {
       return
     }
@@ -131,10 +133,20 @@ export function LegalNameForm(): ReactElement {
         </FlexBoxItem>
 
         <FlexBoxItem display="flex" justify-content="start" gap={2}>
-          <Button variant="primary-inverse" type="submit" size="lg" disabled={isLoading}>
+          <Button
+            variant="primary-inverse"
+            type="submit"
+            size="lg"
+            disabled={isLoading}
+          >
             {tCommonForms('saveAndContinue')}
           </Button>
-          <Button variant="quaternary" size="lg" onClick={disableEditMode} disabled={isLoading}>
+          <Button
+            variant="quaternary"
+            size="lg"
+            onClick={disableEditMode}
+            disabled={isLoading}
+          >
             {tCommonForms('cancel')}
           </Button>
         </FlexBoxItem>

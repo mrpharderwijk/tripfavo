@@ -1,5 +1,9 @@
 import { routes } from '@/constants/routes'
-import { getRouteNameByRoutePath, getRoutePathByRouteName, isCurrentRoute } from '@/utils/get-route'
+import {
+  getRouteNameByRoutePath,
+  getRoutePathByRouteName,
+  isCurrentRoute,
+} from '@/utils/get-route'
 
 describe('getRoutePathByRouteName', () => {
   const cases = [
@@ -30,7 +34,7 @@ describe('getRoutePathByRouteName', () => {
     {
       routeName: 'host',
       exact: false,
-      expected: `${routes?.host?.path}${routes?.host?.children?.myListings?.path}`,
+      expected: `${routes?.host?.path}${routes?.host?.children?.hostListings?.path}`,
     },
     {
       routeName: 'structure',

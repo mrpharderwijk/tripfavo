@@ -8,7 +8,7 @@ export function handleOnSelectDayPicker(
   date: DateRange | undefined,
   setSelected: Dispatch<SetStateAction<DateRange | undefined>>,
   disabledDates?: Date[],
-) {
+): void {
   if (!date) {
     setSelected(undefined)
     return
@@ -19,7 +19,8 @@ export function handleOnSelectDayPicker(
     // Check if any disabled dates are between the range
     if (
       disabledDates?.some(
-        (disabledDate) => isAfter(disabledDate, date.from!) && isBefore(disabledDate, date.to!),
+        (disabledDate) =>
+          isAfter(disabledDate, date.from!) && isBefore(disabledDate, date.to!),
       )
     ) {
       setSelected((prevValue) => updateSelectedValue(prevValue, date))

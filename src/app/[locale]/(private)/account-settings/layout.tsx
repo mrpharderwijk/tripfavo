@@ -1,11 +1,12 @@
-import { useTranslations } from 'next-intl'
-import { PropsWithChildren } from 'react'
-
-import { AccountSidebar } from '@/features/account-settings/components/account-sidebar/account-sidebar'
-import { AppShell } from '@/components/molecules/layout/app-shell/app-shell'
 import { getTranslations } from 'next-intl/server'
+import { PropsWithChildren, ReactElement } from 'react'
 
-export default async function DashboardLayout({ children }: Readonly<PropsWithChildren>) {
+import { AppShell } from '@/components/molecules/layout/app-shell/app-shell'
+import { AccountSidebar } from '@/features/account-settings/components/account-sidebar/account-sidebar'
+
+export default async function DashboardLayout({
+  children,
+}: Readonly<PropsWithChildren>): Promise<ReactElement> {
   const tAccount = await getTranslations('account')
 
   return (

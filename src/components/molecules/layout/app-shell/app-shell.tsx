@@ -1,17 +1,22 @@
-import { Box } from "@/components/atoms/layout/box/box";
-import { FlexBox } from "@/components/atoms/layout/flex-box/flex-box";
-import { FlexBoxItem } from "@/components/atoms/layout/flex-box/flex-box-item/flex-box-item";
-import { GridItem } from "@/components/atoms/layout/grid/components/grid-item/grid-item";
-import { Grid } from "@/components/atoms/layout/grid/grid";
-import { NavBar } from "@/features/nav-bar/nav-bar";
-import { PropsWithChildren, ReactElement } from "react";
+import { PropsWithChildren, ReactElement } from 'react'
+
+import { Box } from '@/components/atoms/layout/box/box'
+import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
+import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
+import { GridItem } from '@/components/atoms/layout/grid/components/grid-item/grid-item'
+import { Grid } from '@/components/atoms/layout/grid/grid'
+import { NavBar } from '@/features/nav-bar/nav-bar'
 
 type AppShellProps = PropsWithChildren<{
   navBarBody?: ReactElement
   sidebar?: ReactElement
 }>
 
-export function AppShell({ children, navBarBody, sidebar }: AppShellProps) {
+export function AppShell({
+  children,
+  navBarBody,
+  sidebar,
+}: AppShellProps): ReactElement {
   return (
     <FlexBox flex-direction="col" fullHeight>
       <FlexBoxItem flex="initial">
@@ -20,7 +25,13 @@ export function AppShell({ children, navBarBody, sidebar }: AppShellProps) {
 
       <FlexBoxItem margin-top={20} flex="auto" min-height="full">
         <Grid columns={12} height="full">
-          <GridItem display="none" display-md="block" tag="aside" col-span={4} height="full">
+          <GridItem
+            display="none"
+            display-md="block"
+            tag="aside"
+            col-span={4}
+            height="full"
+          >
             <Box border-r={1} border-color="deco" fullHeight>
               <FlexBox
                 flex-direction="col"
@@ -43,6 +54,7 @@ export function AppShell({ children, navBarBody, sidebar }: AppShellProps) {
               padding-x-md={20}
               padding-y-md={10}
               gap={6}
+              fullHeight
             >
               {children}
             </FlexBox>

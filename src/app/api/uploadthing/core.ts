@@ -1,7 +1,7 @@
 import { createUploadthing, type FileRouter } from 'uploadthing/next'
 import { UploadThingError } from 'uploadthing/server'
 
-import { getSession } from '@/actions/get-current-user'
+import { getSession } from '@/features/auth/server/actions/get-current-user'
 
 const f = createUploadthing()
 

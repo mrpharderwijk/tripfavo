@@ -16,6 +16,11 @@
   /* COLORS ------------------------------------------------------------ */
   --color-*: initial;
 
+  --color-logo-primary: #22D3EE;
+  --color-logo-primary-alt: #06B6D4;
+  --color-logo-secondary: #312E81;
+  --color-logo-secondary-alt: #3730A3;
+
   --color-black: #000000;
   --color-hof: #222222;
   --color-foggy: #6A6A6A;

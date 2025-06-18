@@ -18,24 +18,25 @@ import { getRoutePathByRouteName } from '@/utils/get-route'
 export function UserMenuInternal(): ReactElement {
   const router = useRouter()
   const { currentUser } = useAppContext()
-  const { currentOpenDropDown, closeDropDown, toggleDropDown } = useDropDownContext()
+  const { currentOpenDropDown, closeDropDown, toggleDropDown } =
+    useDropDownContext()
   const tMainMenu = useTranslations('mainMenu')
   const pathname = usePathname()
 
-  function handleUserMenuClick() {
+  function handleUserMenuClick(): void {
     toggleDropDown('user-menu')
   }
 
-  function handleOnClickLanguage() {
+  function handleOnClickLanguage(): void {
     closeDropDown('user-menu')
   }
 
-  function onClickMenuItemLogout() {
+  function onClickMenuItemLogout(): void {
     closeDropDown('user-menu')
     signOut()
   }
 
-  function handleOnClick(routeName: string) {
+  function handleOnClick(routeName: string): void {
     const routePath = getRoutePathByRouteName(routeName)
     closeDropDown('user-menu')
 
@@ -48,14 +49,26 @@ export function UserMenuInternal(): ReactElement {
 
   return (
     <FlexBox flex-direction="row" align-items="center" gap={3}>
-      <Button onClick={() => handleOnClick('host')} size="md" variant="quaternary-inverse" rounded>
+      <Button
+        onClick={() => handleOnClick('host')}
+        size="md"
+        variant="quaternary-inverse"
+        rounded
+      >
         {tMainMenu('host')}
       </Button>
 
-      {currentUser && <Button avatar size="md" onClick={() => handleOnClick('account')} />}
+      {currentUser && (
+        <Button avatar size="md" onClick={() => handleOnClick('account')} />
+      )}
 
       {!currentUser && (
-        <Button size="md" icon={Globe} variant="quaternary" onClick={handleOnClickLanguage} />
+        <Button
+          size="md"
+          icon={Globe}
+          variant="quaternary"
+          onClick={handleOnClickLanguage}
+        />
       )}
 
       <DropDownMenu
@@ -83,7 +96,10 @@ export function UserMenuInternal(): ReactElement {
               label={tMainMenu('host')}
             />
             <hr />
-            <UserMenuItem onClick={onClickMenuItemLogout} label={tMainMenu('logout')} />
+            <UserMenuItem
+              onClick={onClickMenuItemLogout}
+              label={tMainMenu('logout')}
+            />
           </>
         ) : (
           <>

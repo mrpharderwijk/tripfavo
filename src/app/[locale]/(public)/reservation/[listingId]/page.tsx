@@ -1,8 +1,9 @@
 import { notFound } from 'next/navigation'
 import { ReactElement } from 'react'
 
-import { getPublishedListing } from '@/features/listings/actions/get-listings'
+import { getPublishedListing } from '@/features/listings/server/actions/get-listings'
 import { ReservationDetailPage } from '@/features/reservations/reservation-detail/reservation-detail.page'
+import { isActionError } from '@/server/utils/error'
 
 type ReservationPageProps = {
   params: Promise<{ listingId: string }>
@@ -14,7 +15,10 @@ export default async function ReservationPage({
   searchParams,
 }: ReservationPageProps): Promise<ReactElement> {
   const { listingId } = await params
-  const listing = await getPublishedListing(listingId)
+  const listingResponse = await getPublishedListing(listingId)
+  const listing = isActionError(listingResponse)
+    ? null
+    : (listingResponse?.data ?? null)
 
   if (!listing) {
     notFound()

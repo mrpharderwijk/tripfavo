@@ -26,10 +26,19 @@ export function Box({
   ...boxProps
 }: BoxProps): ReactElement {
   const Tag = tag
-  const boxClassName = cn(boxClassnames({ ...boxProps }), ...['scrollbar-hidden'])
+  const boxClassName = cn(
+    boxClassnames({ ...boxProps }),
+    ...['scrollbar-hidden'],
+  )
 
   return (
-    <Tag id={id} data-testid={testId} className={boxClassName} ref={ref} tabIndex={tabIndex}>
+    <Tag
+      id={id}
+      data-testid={testId}
+      className={boxClassName}
+      ref={ref}
+      tabIndex={tabIndex}
+    >
       {children}
     </Tag>
   )

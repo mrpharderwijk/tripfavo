@@ -1,32 +1,41 @@
-import { Body, Font, Head, Html, Preview, Tailwind } from "@react-email/components";
-import Header from "@/emails/layout/header";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, ReactElement } from 'react'
+import {
+  Body,
+  Font,
+  Head,
+  Html,
+  Preview,
+  Tailwind,
+} from '@react-email/components'
 
-export default function RootLayout({ children, previewText }: PropsWithChildren<{ previewText?: string }>) {
+import Header from '@/emails/layout/header'
+
+export default function RootLayout({
+  children,
+  previewText,
+}: PropsWithChildren<{ previewText?: string }>): ReactElement {
   return (
     <Html>
-    <Head />
-    <Font
+      <Head />
+      <Font
         fontFamily="Plus Jakarta Sans"
         fallbackFontFamily="Verdana"
         webFont={{
-          url: "https://fonts.gstatic.com/s/plusjakartasans/v11/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko20yygg_vb.woff2",
-          format: "woff2",
+          url: 'https://fonts.gstatic.com/s/plusjakartasans/v11/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko20yygg_vb.woff2',
+          format: 'woff2',
         }}
         fontWeight={400}
         fontStyle="normal"
       />
 
-    <Body>
-      <Tailwind>
-        {!!previewText && (
-          <Preview>{previewText}</Preview>
-        )}
-        <Header />
+      <Body>
+        <Tailwind>
+          {!!previewText && <Preview>{previewText}</Preview>}
+          <Header />
 
-        {children}
-      </Tailwind>
-    </Body>
-  </Html>
+          {children}
+        </Tailwind>
+      </Body>
+    </Html>
   )
 }

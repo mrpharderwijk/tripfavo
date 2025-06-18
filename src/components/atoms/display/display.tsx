@@ -4,7 +4,9 @@ import { PropsWithChildren, ReactElement } from 'react'
 import { displayClassNames } from '@/components/atoms/display/display.class-names'
 import { PropsWithTestId } from '@/types'
 
-type DisplayProps = PropsWithChildren<PropsWithTestId<VariantProps<typeof displayClassNames>>>
+type DisplayProps = PropsWithChildren<
+  PropsWithTestId<VariantProps<typeof displayClassNames>>
+>
 
 export function Display({
   show = false,

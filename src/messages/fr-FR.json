@@ -22,16 +22,61 @@
     "hostJoin": "Devenir hôte"
   },
   "auth": {
+    "verifyEmail": {
+      "heading": "Vérification e-mail",
+      "verifying": {
+        "title": "Vérification de votre e-mail...",
+        "description": "Veuillez patienter pendant que nous vérifions votre adresse e-mail."
+      },
+      "success": {
+        "title": "E-mail vérifié avec succès !",
+        "description": "Votre e-mail a été vérifié. Vous allez être redirigé."
+      },
+      "error": {
+        "missingParams": "Lien de vérification invalide. Veuillez essayer de vous connecter à nouveau.",
+        "verificationFailed": "Vérification e-mail échouée. Veuillez réessayer.",
+        "invalidToken": "Token de vérification invalide. Veuillez demander un nouveau lien magique.",
+        "tokenExpired": "Token de vérification expiré. Veuillez demander un nouveau lien magique.",
+        "contactSupport": "Si ce problème persiste, veuillez contacter le support."
+      }
+    },
+    "onboarding": {
+      "heading": "Complétez votre profil",
+      "title": "Bienvenue ! Configurons votre profil",
+      "description": "Veuillez fournir votre nom pour terminer la configuration de votre compte.",
+      "submit": "Compléter le profil",
+      "submitting": "Enregistrement...",
+      "profileImage": {
+        "label": "Photo de profil (Optionnel)",
+        "description": "Ajoutez une photo de profil pour personnaliser votre compte"
+      }
+    },
     "loginForm": {
       "heading": "Connectez-vous à votre compte",
       "title": "Bon retour !",
       "submit": "Continuer",
+      "submitting": "Envoi en cours...",
       "register": {
         "text": "Pas encore de compte ?",
         "label": "S'inscrire"
       },
       "error": {
-        "invalidCredentials": "Identifiants invalides"
+        "invalidCredentials": "Identifiants invalides",
+        "invalidEmail": "Veuillez entrer une adresse e-mail valide",
+        "verificationFailed": "Vérification e-mail échouée. Réessayez",
+        "accessDenied": "Accès refusé. Contactez le support",
+        "configurationError": "Erreur de configuration. Contactez le support",
+        "signinError": "Connexion échouée. Réessayez"
+      },
+      "success": {
+        "heading": "Vérifiez votre e-mail",
+        "title": "Lien magique envoyé !",
+        "description": "Nous avons envoyé un lien magique à {email}. Cliquez sur le lien dans l'e-mail pour vous connecter à votre compte.",
+        "checkSpam": "Vous ne voyez pas l'e-mail ? Vérifiez votre dossier spam.",
+        "openEmail": "Ouvrir l'app e-mail",
+        "backToLogin": "Retour à la connexion",
+        "noEmail": "E-mail non reçu ?",
+        "resend": "Renvoyer"
       }
     },
     "signUpForm": {
@@ -290,7 +335,8 @@
       "saveAndContinue": "Continuer",
       "saveAndExit": "Enregistrer & quitter",
       "error": {
-        "unknown": "Une erreur est survenue. Contactez le support."
+        "unknown": "Une erreur est survenue. Contactez le support.",
+        "network": "Erreur réseau. Vérifiez votre connexion et réessayez."
       }
     },
     "amenities": {

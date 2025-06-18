@@ -22,7 +22,7 @@ export function SettingsLine({
   handleOnClick,
   label,
   value,
-}: SettingsLineProps) {
+}: SettingsLineProps): ReactElement {
   const tCommonForms = useTranslations('common.forms')
 
   return (

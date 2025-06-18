@@ -2,6 +2,7 @@
 
 import { CircleIcon } from 'lucide-react'
 import * as React from 'react'
+import { ReactElement } from 'react'
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group'
 
 import { cn } from '@/utils/class-names'
@@ -9,7 +10,7 @@ import { cn } from '@/utils/class-names'
 function RadioGroup({
   className,
   ...props
-}: React.ComponentProps<typeof RadioGroupPrimitive.Root>) {
+}: React.ComponentProps<typeof RadioGroupPrimitive.Root>): ReactElement {
   return (
     <RadioGroupPrimitive.Root
       data-slot="radio-group"
@@ -22,7 +23,7 @@ function RadioGroup({
 function RadioGroupItem({
   className,
   ...props
-}: React.ComponentProps<typeof RadioGroupPrimitive.Item>) {
+}: React.ComponentProps<typeof RadioGroupPrimitive.Item>): ReactElement {
   return (
     <RadioGroupPrimitive.Item
       data-slot="radio-group-item"

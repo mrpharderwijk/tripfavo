@@ -2,7 +2,7 @@
 
 import axios from 'axios'
 import { useTranslations } from 'next-intl'
-import { useEffect, useState } from 'react'
+import { ReactElement, useEffect, useState } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { UploadedFileData } from 'uploadthing/types'
 import { z } from 'zod'
@@ -11,12 +11,14 @@ import { ListingImage, RoomType } from '@prisma/client'
 
 import { Box } from '@/components/atoms/layout/box/box'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
-import { Body } from '@/components/atoms/typography/body/body'
 import { FormNotification } from '@/components/molecules/form-notification/form-notification'
 import { HeadingGroup } from '@/components/molecules/heading/heading'
 import { ListingFormImage } from '@/components/organisms/listing-form-image/listing-form-image'
 import { Form } from '@/components/ui/form'
-import { HOST_STEP, useHostContext } from '@/features/host/providers/host-context-provider'
+import {
+  HOST_STEP,
+  useHostContext,
+} from '@/features/host/providers/host-context-provider'
 import { ComponentStepProps } from '@/features/host/types/component-step-props'
 import { UploadDropzone } from '@/utils/uploadthing'
 
@@ -51,7 +53,7 @@ export const ImagesFormSchema = z.object({
     }),
 })
 
-export function ImagesForm({ listing }: ComponentStepProps) {
+export function ImagesForm({ listing }: ComponentStepProps): ReactElement {
   const tListingImagesForm = useTranslations('host.listing.imagesForm')
   const [prismaError, setPrismaError] = useState<string | null>(null)
   const [utError, setUtError] = useState<string | null>(null)
@@ -85,7 +87,9 @@ export function ImagesForm({ listing }: ComponentStepProps) {
     name: 'images',
   })
 
-  async function onSubmit(data: z.infer<typeof ImagesFormSchema>): Promise<boolean> {
+  async function onSubmit(
+    data: z.infer<typeof ImagesFormSchema>,
+  ): Promise<boolean> {
     setIsLoading(true)
     try {
       await axios.post(`/api/host/listings/${listingId}/images`, {
@@ -100,7 +104,9 @@ export function ImagesForm({ listing }: ComponentStepProps) {
     }
   }
 
-  async function handleOnClientUploadComplete(res: UploadedFileData[]) {
+  async function handleOnClientUploadComplete(
+    res: UploadedFileData[],
+  ): Promise<void> {
     // Do something with the response
     const files = res.map((file) => ({
       ...file,
@@ -115,9 +121,12 @@ export function ImagesForm({ listing }: ComponentStepProps) {
     }))
 
     try {
-      const response = await axios.post(`/api/host/listings/${listingId}/images`, {
-        files,
-      })
+      const response = await axios.post(
+        `/api/host/listings/${listingId}/images`,
+        {
+          files,
+        },
+      )
       const newImages = [...images, ...response.data]
       setImages(newImages)
       setValue('images', newImages)
@@ -127,14 +136,16 @@ export function ImagesForm({ listing }: ComponentStepProps) {
     }
   }
 
-  function handleOnUploadError(error: Error) {
+  function handleOnUploadError(error: Error): void {
     // Do something with the error.
     setUtError(error.message)
   }
 
-  function handleOnBeforeUploadBegin(files: File[]) {
+  function handleOnBeforeUploadBegin(files: File[]): File[] {
     // Preprocess files before uploading (e.g. rename them)
-    return files.map((f) => new File([f], `${listingId}-${f.name}`, { type: f.type }))
+    return files.map(
+      (f) => new File([f], `${listingId}-${f.name}`, { type: f.type }),
+    )
   }
 
   async function handleOnChange(): Promise<void> {
@@ -165,13 +176,17 @@ export function ImagesForm({ listing }: ComponentStepProps) {
       />
 
       {!!Object.values(errors)?.length && (
-        <FormNotification variant="danger">
-          {errors.images?.message && <Body>{errors.images.message}</Body>}
-          {errors.images?.root?.message && <Body>{errors.images.root.message}</Body>}
-        </FormNotification>
+        <FormNotification
+          variant="danger"
+          description={
+            errors.images?.message ?? errors.images?.root?.message ?? ''
+          }
+        />
       )}
-      {prismaError && <FormNotification variant="danger">{prismaError}</FormNotification>}
-      {utError && <FormNotification variant="danger">{utError}</FormNotification>}
+      {prismaError && (
+        <FormNotification variant="danger" description={prismaError} />
+      )}
+      {utError && <FormNotification variant="danger" description={utError} />}
 
       <Form {...form}>
         <form noValidate>

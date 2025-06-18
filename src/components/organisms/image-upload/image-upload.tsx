@@ -12,7 +12,10 @@ type ImageUploadProps = {
   value: string
 }
 
-export function ImageUpload({ onChange, value }: ImageUploadProps): ReactElement {
+export function ImageUpload({
+  onChange,
+  value,
+}: ImageUploadProps): ReactElement {
   const tCommon = useTranslations('common')
 
   const handleUpload = useCallback(

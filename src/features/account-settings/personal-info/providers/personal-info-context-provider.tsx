@@ -1,6 +1,12 @@
 'use client'
 
-import { createContext, PropsWithChildren, ReactElement, useContext, useReducer } from 'react'
+import {
+  createContext,
+  PropsWithChildren,
+  ReactElement,
+  useContext,
+  useReducer,
+} from 'react'
 
 import {
   initialState,
@@ -27,11 +33,11 @@ export function PersonalInfoContextProvider({
 }: PersonalInfoContextProviderProps): ReactElement {
   const [state, dispatch] = useReducer(personalInfoReducer, initialState)
 
-  function enableEditMode(value: string) {
+  function enableEditMode(value: string): void {
     dispatch({ type: PERSONAL_INFO_TYPE.EnableEditMode, payload: value })
   }
 
-  function disableEditMode() {
+  function disableEditMode(): void {
     dispatch({ type: PERSONAL_INFO_TYPE.DisableEditMode })
   }
 
@@ -52,7 +58,9 @@ export function usePersonalInfoContext(): PersonalInfoContextType {
   const context = useContext(PersonalInfoContext)
 
   if (!context) {
-    throw new Error('usePersonalInfoContext must be used within a PersonalInfoContextProvider')
+    throw new Error(
+      'usePersonalInfoContext must be used within a PersonalInfoContextProvider',
+    )
   }
 
   return context
