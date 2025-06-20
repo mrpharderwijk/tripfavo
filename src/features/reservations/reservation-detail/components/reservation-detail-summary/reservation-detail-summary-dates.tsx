@@ -1,3 +1,5 @@
+'use client'
+
 import { format } from 'date-fns'
 import { useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
@@ -16,7 +18,7 @@ import { LineAction } from '@/components/organisms/line-action/line-action'
 import { DATE_FORMAT_SEARCH_PARAMS } from '@/constants/dates'
 import { useDialogContext } from '@/features/nav-bar/providers/dialog-context-provider'
 import { useReservationDetailContext } from '@/features/reservations/reservation-detail/providers/reservation-detail-context-provider'
-import { Locales } from '@/i18n/routing'
+import { Locale } from '@/i18n/config'
 
 export function ReservationDetailSummaryDates(): ReactElement {
   const { openDialog, closeDialog, currentOpenDialog } = useDialogContext()
@@ -69,7 +71,7 @@ export function ReservationDetailSummaryDates(): ReactElement {
             <LocalizedBookingDates
               startDate={selectedDates?.from}
               endDate={selectedDates?.to}
-              locale={locale as Locales}
+              locale={locale as Locale}
             />
           )}
           {!selectedDates?.from && !selectedDates?.to && tCommon('noDates')}
@@ -111,14 +113,14 @@ export function ReservationDetailSummaryDates(): ReactElement {
             <LocalizedBookingDates
               startDate={updatedSelectedDates?.from}
               endDate={updatedSelectedDates?.to}
-              locale={locale as Locales}
+              locale={locale as Locale}
             />
           </Body>
 
           <DatePickerCalendar
             disabledDates={[]}
             priceDates={[]}
-            locale={locale as Locales}
+            locale={locale as Locale}
             selected={updatedSelectedDates}
             onSelect={(date) =>
               handleOnSelectDayPicker(date, setUpdatedSelectedDates)

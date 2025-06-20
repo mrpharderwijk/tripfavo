@@ -1,3 +1,3 @@
-import { GET } from '@/features/address/address'
+import { GET } from '@/server/api/address.api'
 
 export { GET }

@@ -3,7 +3,7 @@ import { PriceType } from '@prisma/client'
 import { PublicListingPriceDetail } from '@/features/listings/types/public-listing'
 
 export function getCleaningFee(
-  priceDetails: PublicListingPriceDetail[],
+  priceDetails?: PublicListingPriceDetail[],
 ): number {
   if (!priceDetails?.length) {
     return 0

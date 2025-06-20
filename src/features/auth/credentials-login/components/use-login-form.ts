@@ -68,6 +68,7 @@ export function useLoginForm(): UseLoginFormReturnType {
 
       if (callback?.error) {
         console.log('callback.error: ', callback.code)
+        console.log('callback.error: ', callback.error)
         if (callback?.code) {
           setError(callback.code)
         }

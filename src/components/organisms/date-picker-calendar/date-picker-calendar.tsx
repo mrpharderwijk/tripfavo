@@ -22,13 +22,13 @@ import {
 } from '@/components/organisms/date-picker-calendar/providers/date-picker-calendar-context-provider'
 import { getPriceForDate } from '@/components/organisms/date-picker-calendar/utils/get-price-for-date'
 import { isDateDisabled } from '@/components/organisms/date-picker-calendar/utils/is-date-disabled'
-import { Locales } from '@/i18n/routing'
+import { Locale } from '@/i18n/config'
 import { localeToDateFnsLocale } from '@/utils/locale-to-date-fns-locale'
 
 type DatePickerCalendarProps = {
   disabledDates: Date[]
   priceDates: DatePrice[]
-  locale: Locales
+  locale: Locale
   selected: DateRange | undefined
   onSelect: (date: DateRange | undefined) => void
 }

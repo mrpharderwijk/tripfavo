@@ -8,7 +8,7 @@ import { Heading } from '@/components/atoms/typography/heading/heading'
 import { DatePickerCalendar } from '@/components/organisms/date-picker-calendar/date-picker-calendar'
 import { handleOnSelectDayPicker } from '@/components/organisms/date-picker-calendar/utils/handle-on-select-day-picker'
 import { useListingDetailContext } from '@/features/listings/listing-detail/providers/listing-detail-context-provider'
-import { Locales } from '@/i18n/routing'
+import { Locale } from '@/i18n/config'
 
 export function ListingDetailDatePicker(): ReactElement {
   const locale = useLocale()
@@ -39,7 +39,7 @@ export function ListingDetailDatePicker(): ReactElement {
             <DatePickerCalendar
               disabledDates={disabledDates}
               priceDates={calendarPrices}
-              locale={locale as Locales}
+              locale={locale as Locale}
               selected={selectedDateRange}
               onSelect={(date) =>
                 handleOnSelectDayPicker(

@@ -6,6 +6,7 @@ import {
   EmailGuestReservationRequestProps,
 } from '@/features/guest/components/email-guest-reservation-request/email-guest-reservation-request'
 import { PublicListing } from '@/features/listings/types/public-listing'
+import { defaultLocale } from '@/i18n/config'
 
 export default async function GuestReservationRequestSendEmailTemplate(
   props: EmailGuestReservationRequestProps,
@@ -75,7 +76,7 @@ export default async function GuestReservationRequestSendEmailTemplate(
       profileImage: 'https://picsum.photos/200/300',
     },
   }
-  const locale = 'en-US'
+  const locale = defaultLocale
 
   return (
     <EmailGuestReservationRequest

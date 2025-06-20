@@ -5,11 +5,17 @@ export type RoutesObject = {
 export type RouteObject = {
   path: string
   protected?: boolean
+  localizedPaths?: {
+    [locale: string]: string
+  }
   children?: {
     [key: string]: {
       path: string
       protected?: boolean
       default?: boolean
+      localizedPaths?: {
+        [locale: string]: string
+      }
     }
   }
 }
@@ -18,12 +24,20 @@ export const routes: RoutesObject = {
   home: {
     path: '/',
   },
+  property: {
+    path: '/property',
+    localizedPaths: {
+      en: '/property',
+      nl: '/verhuur',
+      fr: '/propriete',
+    },
+  },
   host: {
     path: '/host',
     protected: true,
     children: {
       hostListings: {
-        path: '/overview',
+        path: '/listings',
         protected: true,
         default: true,
       },

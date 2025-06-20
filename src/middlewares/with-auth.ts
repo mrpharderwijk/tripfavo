@@ -7,7 +7,6 @@ import {
 import { getLocale } from 'next-intl/server'
 
 import { routes } from '@/constants/routes'
-import { defaultLocale } from '@/i18n/routing'
 import { auth } from '@/lib/auth/auth'
 import { MiddlewareFactory } from '@/middlewares/types'
 import { getRouteObjectByRouteName } from '@/utils/get-route'
@@ -55,10 +54,7 @@ export const withAuth: MiddlewareFactory = (next: NextMiddleware) => {
     if (containsProtectedRoute(nextUrl.pathname)) {
       if (!session) {
         // Not logged in & Protected route -> Redirect to login
-        const url =
-          locale !== defaultLocale
-            ? `/${locale}/${routes.auth?.path}${routes.auth?.children?.login.path}?callbackUrl=${encodeURIComponent(nextUrl.pathname)}`
-            : `${routes.auth?.path}${routes.auth?.children?.login.path}?callbackUrl=${encodeURIComponent(nextUrl.pathname)}`
+        const url = `${routes.auth?.path}${routes.auth?.children?.login.path}?callbackUrl=${encodeURIComponent(nextUrl.pathname)}`
         return NextResponse.redirect(new URL(url, request.url))
       }
     }
@@ -66,10 +62,7 @@ export const withAuth: MiddlewareFactory = (next: NextMiddleware) => {
     // Handle auth pages when logged in
     if (session && containsAuth(nextUrl.pathname)) {
       const callbackUrl = nextUrl.searchParams.get('callbackUrl')
-      const url =
-        locale !== defaultLocale
-          ? `/${locale}${callbackUrl ? callbackUrl : routes.guest.path}`
-          : `${callbackUrl ? callbackUrl : routes.guest.path}`
+      const url = `${callbackUrl ? callbackUrl : routes.guest.path}`
       return NextResponse.redirect(new URL(url, request.url))
     }
 
@@ -80,10 +73,7 @@ export const withAuth: MiddlewareFactory = (next: NextMiddleware) => {
             (child) => !!child.default,
           )
         : undefined
-      const url =
-        locale !== defaultLocale
-          ? `/${locale}${routes.account.path}${defaultRoute?.path}`
-          : `${routes.account.path}${defaultRoute?.path}`
+      const url = `${routes.account.path}${defaultRoute?.path}`
       return NextResponse.redirect(new URL(url, request.url))
     }
 
@@ -92,10 +82,7 @@ export const withAuth: MiddlewareFactory = (next: NextMiddleware) => {
       const defaultRoute = routes.host?.children
         ? Object.values(routes.host.children).find((child) => !!child.default)
         : undefined
-      const url =
-        locale !== defaultLocale
-          ? `/${locale}${routes.host.path}${defaultRoute?.path}`
-          : `${routes.host.path}${defaultRoute?.path}`
+      const url = `${routes.host.path}${defaultRoute?.path}`
       return NextResponse.redirect(new URL(url, request.url))
     }
 
@@ -104,10 +91,7 @@ export const withAuth: MiddlewareFactory = (next: NextMiddleware) => {
       const defaultRoute = routes.guest?.children
         ? Object.values(routes.guest.children).find((child) => !!child.default)
         : undefined
-      const url =
-        locale !== defaultLocale
-          ? `/${locale}${routes.guest.path}${defaultRoute?.path}`
-          : `${routes.guest.path}${defaultRoute?.path}`
+      const url = `${routes.guest.path}${defaultRoute?.path}`
       return NextResponse.redirect(new URL(url, request.url))
     }
 

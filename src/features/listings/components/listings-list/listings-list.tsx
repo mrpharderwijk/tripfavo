@@ -1,13 +1,13 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
 import { ReactElement } from 'react'
 
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
 import { Body } from '@/components/atoms/typography/body/body'
 import { Heading } from '@/components/atoms/typography/heading/heading'
+import { LocalizedPropertyLink } from '@/components/molecules/localized-property-link/localized-property-link'
 import { PublicListing } from '@/features/listings/types/public-listing'
 
 interface ListingsListProps {
@@ -19,10 +19,10 @@ export function ListingsList({ listings }: ListingsListProps): ReactElement {
     <section className="w-full">
       {!listings?.length && <div>no listings found</div>}
       {listings?.map((listing, idx) => (
-        <Link
+        <LocalizedPropertyLink
           key={`${listing.id}-${idx}`}
           className="group cursor-pointer w-full"
-          href={`/property/${listing.id}`}
+          propertyId={listing.id}
         >
           <FlexBox flex-direction="col" gap={4}>
             <div className="w-full relative overflow-hidden rounded-2xl">
@@ -85,7 +85,7 @@ export function ListingsList({ listings }: ListingsListProps): ReactElement {
 
                 {/* TODO: Rating */}
                 {/* <FlexBoxItem display="flex" flex-direction="row" align-items="center" gap={1}>
-                  <Body size="base-sm" color="secondary" text-align="left">
+                  <Body size="base-md" color="secondary" text-align="left">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -106,7 +106,7 @@ export function ListingsList({ listings }: ListingsListProps): ReactElement {
               </FlexBox>
             </FlexBox>
           </FlexBox>
-        </Link>
+        </LocalizedPropertyLink>
       ))}
     </section>
   )

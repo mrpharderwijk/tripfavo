@@ -1,6 +1,7 @@
 'use client'
 
 import { VariantProps } from 'class-variance-authority'
+import { useLocale } from 'next-intl'
 import { PropsWithChildren, ReactElement } from 'react'
 
 import { Box } from '@/components/atoms/layout/box/box'
@@ -29,6 +30,7 @@ export function NavBar({
   children,
   narrow = false,
 }: NavBarProps): ReactElement {
+  const currentLocale = useLocale()
   const navBarClassName = navBarClassNames({ fixed })
 
   return (

@@ -6,7 +6,7 @@ import { Body } from '@/components/atoms/typography/body/body'
 
 type LineActionProps = PropsWithChildren<{
   label: string
-  actionElement: ReactElement
+  actionElement?: ReactElement
 }>
 
 export function LineAction({

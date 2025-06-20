@@ -4,6 +4,7 @@ import { PriceType } from '@prisma/client'
 import { EmailGuestReservationRequestProps } from '@/features/guest/components/email-guest-reservation-request/email-guest-reservation-request'
 import { EmailHostReservationRequest } from '@/features/host/components/email-host-reservation-request/email-host-reservation-request'
 import { PublicListing } from '@/features/listings/types/public-listing'
+import { defaultLocale } from '@/i18n/config'
 
 export default async function GuestReservationRequestSendEmailTemplate(
   props: EmailGuestReservationRequestProps,
@@ -78,7 +79,7 @@ export default async function GuestReservationRequestSendEmailTemplate(
     profileImageUrl: 'https://picsum.photos/200/300',
     createdAt: new Date().toISOString(),
   }
-  const locale = 'en-US'
+  const locale = defaultLocale
 
   return (
     <EmailHostReservationRequest

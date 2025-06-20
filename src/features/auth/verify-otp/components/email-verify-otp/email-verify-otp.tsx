@@ -11,11 +11,11 @@ import {
 } from '@react-email/components'
 
 import RootLayout from '@/emails/layout/root-layout'
-import { Locales } from '@/i18n/routing'
+import { Locale } from '@/i18n/config'
 
 export type EmailVerifyOtpProps = {
   token: string
-  locale?: Locales
+  locale?: Locale
 }
 
 /**

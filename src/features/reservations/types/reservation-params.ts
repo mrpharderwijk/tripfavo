@@ -1,5 +1,5 @@
-import { Locales } from '@/i18n/routing'
+import { Locale } from '@/i18n/config'
 
 export type ReservationsParams = {
-  params: Promise<{ reservationId: string; locale: Locales }>
+  params: Promise<{ reservationId: string; locale: Locale }>
 }

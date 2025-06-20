@@ -20,7 +20,7 @@ import { PublicListing } from '@/features/listings/types/public-listing'
 import { getCleaningFee } from '@/features/listings/utils/get-cleaning-fee'
 import { getDeposit } from '@/features/listings/utils/get-deposit'
 import { GuestsAmount } from '@/features/reservations/reservation-detail/providers/reservation-detail-context-provider'
-import { Locales } from '@/i18n/routing'
+import { Locale } from '@/i18n/config'
 import { localeToDateFnsLocale } from '@/utils/locale-to-date-fns-locale'
 import { calculateTotalPriceIncludingCleaningFee } from '@/utils/pricing/calculate-total-price'
 import { calculateTotalPricePerNight } from '@/utils/pricing/calculate-total-price-per-night'
@@ -31,7 +31,7 @@ export type EmailHostReservationRequestProps = {
   listing: PublicListing
   guestsAmount: GuestsAmount
   totalPrice: number
-  locale: Locales
+  locale: Locale
   guest: PublicGuestUser
 }
 

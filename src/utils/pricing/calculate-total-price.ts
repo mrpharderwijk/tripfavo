@@ -5,7 +5,7 @@ import { getCleaningFee } from '@/features/listings/utils/get-cleaning-fee'
 import { getDeposit } from '@/features/listings/utils/get-deposit'
 
 export type CalculateTotalPriceIncludingCleaningFeeParams = {
-  priceDetails: PublicListingPriceDetail[]
+  priceDetails?: PublicListingPriceDetail[]
   startDate?: Date
   endDate?: Date
   datePrices: DatePrice[]
@@ -17,7 +17,7 @@ export function calculateTotalPriceIncludingCleaningFee({
   endDate,
   datePrices,
 }: CalculateTotalPriceIncludingCleaningFeeParams): number {
-  if (!startDate || !endDate || !datePrices.length || !priceDetails.length) {
+  if (!startDate || !endDate || !datePrices.length || !priceDetails?.length) {
     return 0
   }
 
