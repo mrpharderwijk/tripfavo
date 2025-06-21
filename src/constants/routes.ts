@@ -67,14 +67,10 @@ export const routes: RoutesObject = {
     path: '/guest',
     protected: true,
     children: {
-      guestOverview: {
-        path: '/overview',
-        protected: true,
-        default: true,
-      },
       guestReservations: {
         path: '/reservations',
         protected: true,
+        default: true,
       },
       guestFavorites: {
         path: '/favorites',
