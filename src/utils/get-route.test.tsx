@@ -1,7 +1,10 @@
 import { routes } from '@/constants/routes'
+import { Locale } from '@/i18n/config'
 import {
   getRouteNameByRoutePath,
   getRoutePathByRouteName,
+  getLocalizedRoutePathByRouteName,
+  translatePathname,
   isCurrentRoute,
 } from '@/utils/get-route'
 
@@ -72,6 +75,82 @@ describe('getRoutePathByRouteName', () => {
     'Returns $expected for the $routeName route with exact=$exact',
     ({ routeName, exact, expected }) => {
       const result = getRoutePathByRouteName(routeName, exact)
+      expect(result).toBe(expected)
+    },
+  )
+})
+
+describe('getLocalizedRoutePathByRouteName', () => {
+  const cases = [
+    {
+      routeName: 'property',
+      locale: 'en' as Locale,
+      expected: '/property',
+    },
+    {
+      routeName: 'property',
+      locale: 'nl' as Locale,
+      expected: '/verhuur',
+    },
+    {
+      routeName: 'property',
+      locale: 'fr' as Locale,
+      expected: '/propriete',
+    },
+    {
+      routeName: 'home',
+      locale: 'nl' as Locale,
+      expected: '/',
+    },
+  ]
+
+  it.each(cases)(
+    'Returns $expected for the $routeName route with locale $locale',
+    ({ routeName, locale, expected }) => {
+      const result = getLocalizedRoutePathByRouteName(routeName, locale)
+      expect(result).toBe(expected)
+    },
+  )
+})
+
+describe('translatePathname', () => {
+  const cases = [
+    {
+      pathname: '/property/123',
+      fromLocale: 'en' as Locale,
+      toLocale: 'nl' as Locale,
+      expected: '/verhuur/123',
+    },
+    {
+      pathname: '/verhuur/123',
+      fromLocale: 'nl' as Locale,
+      toLocale: 'en' as Locale,
+      expected: '/property/123',
+    },
+    {
+      pathname: '/property/123',
+      fromLocale: 'en' as Locale,
+      toLocale: 'fr' as Locale,
+      expected: '/propriete/123',
+    },
+    {
+      pathname: '/',
+      fromLocale: 'en' as Locale,
+      toLocale: 'nl' as Locale,
+      expected: '/',
+    },
+    {
+      pathname: '/host/123/structure',
+      fromLocale: 'en' as Locale,
+      toLocale: 'nl' as Locale,
+      expected: '/host/123/structure', // No localized path defined, returns original
+    },
+  ]
+
+  it.each(cases)(
+    'Translates $pathname from $fromLocale to $toLocale as $expected',
+    ({ pathname, fromLocale, toLocale, expected }) => {
+      const result = translatePathname(pathname, fromLocale, toLocale)
       expect(result).toBe(expected)
     },
   )

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { NextIntlClientProvider } from 'next-intl'
 import { getLocale } from 'next-intl/server'
 import { PropsWithChildren, ReactElement } from 'react'
 import { Analytics } from '@vercel/analytics/next'
@@ -34,11 +35,13 @@ export default async function RootLayout({
         suppressHydrationWarning
       >
         <SWRProvider>
-          <AppContextProvider currentUser={currentUser}>
-            <DropDownContextProvider>
-              <DialogContextProvider>{children}</DialogContextProvider>
-            </DropDownContextProvider>
-          </AppContextProvider>
+          <NextIntlClientProvider>
+            <AppContextProvider currentUser={currentUser}>
+              <DropDownContextProvider>
+                <DialogContextProvider>{children}</DialogContextProvider>
+              </DropDownContextProvider>
+            </AppContextProvider>
+          </NextIntlClientProvider>
         </SWRProvider>
         <SpeedInsights />
         <Analytics />

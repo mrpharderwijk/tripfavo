@@ -14,7 +14,7 @@ import { Button } from '@/components/molecules/buttons/button'
 import { ListingFormRoomDialog } from '@/components/organisms/listing-form-image/listing-form-room-dialog'
 import { FormField } from '@/components/ui/form'
 import { roomTypes } from '@/constants/room-types'
-import { ImagesFormSchema } from '@/features/host/components/forms/images-form/images-form'
+import { ImagesFormSchema } from '@/features/host/listings/host-listing-detail-funnel/components/forms/images-form/images-form'
 import { useHostContext } from '@/features/host/providers/host-context-provider'
 import { useDialogContext } from '@/features/nav-bar/providers/dialog-context-provider'
 

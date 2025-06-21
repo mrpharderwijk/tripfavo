@@ -1,12 +1,14 @@
-import { enUS, fr, Locale, nl } from 'date-fns/locale'
+import { enUS, fr, Locale as DateFnsLocale, nl } from 'date-fns/locale'
 
-export const localeToDateFnsLocaleMap = {
-  'en-US': enUS,
-  'fr-FR': fr,
-  'nl-NL': nl,
+import { Locale } from '@/i18n/config'
+
+export const localeToDateFnsLocaleMap: Record<Locale, DateFnsLocale> = {
+  en: enUS,
+  fr: fr,
+  nl: nl,
 }
 
-export function localeToDateFnsLocale(locale: string): Locale {
+export function localeToDateFnsLocale(locale: string): DateFnsLocale {
   return (
     localeToDateFnsLocaleMap[locale as keyof typeof localeToDateFnsLocaleMap] ??
     enUS

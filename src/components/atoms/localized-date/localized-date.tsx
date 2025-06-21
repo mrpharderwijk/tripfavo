@@ -1,16 +1,26 @@
-import { Locales } from '@/i18n/routing'
+import { defaultLocale, Locale } from '@/i18n/config'
 
 type LocalizedDateProps = {
   date: Date
-  locale: Locales
+  locale: Locale
 }
 
-export function LocalizedDate({ date }: LocalizedDateProps): string | null {
+const localeToDateLocaleMap: Record<Locale, string> = {
+  en: 'en-US',
+  fr: 'fr-FR',
+  nl: 'nl-NL',
+}
+
+export function LocalizedDate({
+  date,
+  locale,
+}: LocalizedDateProps): string | null {
   if (!date) {
     return null
   }
+  const dateLocale = localeToDateLocaleMap[locale] ?? defaultLocale
 
-  return date.toLocaleDateString('en-US', {
+  return date.toLocaleDateString(dateLocale, {
     month: 'long',
     day: 'numeric',
     year: 'numeric',

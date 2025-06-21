@@ -13,7 +13,7 @@ import {
 } from '@/features/listings/types/public-listing'
 import { GuestsAmount } from '@/features/reservations/reservation-detail/providers/reservation-detail-context-provider'
 import { ReservationsParams } from '@/features/reservations/types/reservation-params'
-import { Locales } from '@/i18n/routing'
+import { Locale } from '@/i18n/config'
 import { prisma } from '@/lib/prisma/db'
 import { resend } from '@/lib/resend/resend'
 import { isActionError } from '@/server/utils/error'
@@ -154,7 +154,7 @@ export async function POST(
         listing: publishedListing as PublicListing,
         guestsAmount,
         totalPrice,
-        locale: locale as Locales,
+        locale: locale as Locale,
         guest: {
           firstName: guest?.name?.firstName ?? '?',
           profileImageUrl: guest?.profileImage?.url ?? '',
@@ -176,7 +176,7 @@ export async function POST(
         listing: publishedListing as PublicListing,
         guestsAmount,
         totalPrice,
-        locale: locale as Locales,
+        locale: locale as Locale,
         guest: {
           firstName: guest?.name?.firstName ?? '?',
           profileImageUrl: guest?.profileImage?.url ?? '',

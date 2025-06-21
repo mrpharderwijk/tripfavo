@@ -14,32 +14,32 @@ import {
 import { UseFormReturn } from 'react-hook-form'
 import { z } from 'zod'
 
-import { AmenitiesForm } from '@/features/host/components/forms/amenities-form/amenities-form'
-import { DescriptionForm } from '@/features/host/components/forms/description-form/description-form'
+import { AmenitiesForm } from '@/features/host/listings/host-listing-detail-funnel/components/forms/amenities-form/amenities-form'
+import { DescriptionForm } from '@/features/host/listings/host-listing-detail-funnel/components/forms/description-form/description-form'
 import {
   FloorPlanForm,
   FloorPlanFormSchema,
-} from '@/features/host/components/forms/floor-plan-form/floor-plan-form'
-import { GuestsAmountForm } from '@/features/host/components/forms/guests-amount-form/guests-amount-form'
+} from '@/features/host/listings/host-listing-detail-funnel/components/forms/floor-plan-form/floor-plan-form'
+import { GuestsAmountForm } from '@/features/host/listings/host-listing-detail-funnel/components/forms/guests-amount-form/guests-amount-form'
 import {
   ImagesForm,
   ImagesFormSchema,
-} from '@/features/host/components/forms/images-form/images-form'
+} from '@/features/host/listings/host-listing-detail-funnel/components/forms/images-form/images-form'
 import {
   LocationForm,
   LocationFormSchema,
-} from '@/features/host/components/forms/location-form/location-form'
-import { NeighbourhoodDescriptionForm } from '@/features/host/components/forms/neighbourhood-description-form/neighbourhood-description-form'
-import { PriceForm } from '@/features/host/components/forms/price-form/price-form'
+} from '@/features/host/listings/host-listing-detail-funnel/components/forms/location-form/location-form'
+import { NeighbourhoodDescriptionForm } from '@/features/host/listings/host-listing-detail-funnel/components/forms/neighbourhood-description-form/neighbourhood-description-form'
+import { PriceForm } from '@/features/host/listings/host-listing-detail-funnel/components/forms/price-form/price-form'
 import {
   PrivacyTypeForm,
   PrivacyTypeFormSchema,
-} from '@/features/host/components/forms/privacy-type-form/privacy-type-form'
+} from '@/features/host/listings/host-listing-detail-funnel/components/forms/privacy-type-form/privacy-type-form'
 import {
   StructureForm,
   StructureFormSchema,
-} from '@/features/host/components/forms/structure-form/sturcture-form'
-import { TitleForm } from '@/features/host/components/forms/title-form/title-form'
+} from '@/features/host/listings/host-listing-detail-funnel/components/forms/structure-form/sturcture-form'
+import { TitleForm } from '@/features/host/listings/host-listing-detail-funnel/components/forms/title-form/title-form'
 import { ComponentStepProps } from '@/features/host/types/component-step-props'
 import { getRoutePathByRouteName } from '@/utils/get-route'
 

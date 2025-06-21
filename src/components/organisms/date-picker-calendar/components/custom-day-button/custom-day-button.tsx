@@ -1,3 +1,5 @@
+'use client'
+
 import { useLocale } from 'next-intl'
 import { ButtonHTMLAttributes, ReactElement } from 'react'
 import { CalendarDay, Modifiers } from 'react-day-picker'
@@ -6,7 +8,7 @@ import { Display } from '@/components/atoms/display/display'
 import { LocalizedPrice } from '@/components/atoms/localized-price/localized-price'
 import { Body } from '@/components/atoms/typography/body/body'
 import { useDatePickerCalendarContext } from '@/components/organisms/date-picker-calendar/providers/date-picker-calendar-context-provider'
-import { Locales } from '@/i18n/routing'
+import { Locale } from '@/i18n/config'
 import { cn } from '@/utils/class-names'
 
 export function CustomDayButton(
@@ -62,7 +64,7 @@ export function CustomDayButton(
             >
               <LocalizedPrice
                 price={price}
-                locale={locale as Locales}
+                locale={locale as Locale}
                 minFractionDigits={0}
                 maxFractionDigits={0}
               />

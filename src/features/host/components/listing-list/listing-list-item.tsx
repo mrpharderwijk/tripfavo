@@ -56,7 +56,7 @@ export function ListingItem({
 
   return (
     <ListMediaItem
-      href={`/host/${id}/structure`}
+      href={`/host/${id}`}
       status={listingMediaItemStatusMap[status]}
       image={featuredImage ?? { url: '', fileName: '' }}
       title={listingMediaItemTitle}

@@ -65,7 +65,7 @@ export const paddingVariants = {
     56: 'md:p-56',
     64: 'md:p-64',
   },
-  'padding-lg': {
+  'padding-leftg': {
     0: 'lg:p-0',
     1: 'lg:p-1',
     2: 'lg:p-2',
@@ -328,7 +328,7 @@ export const paddingVariants = {
     56: 'xl:py-56',
     64: 'xl:py-64',
   },
-  'padding-t': {
+  'padding-top': {
     0: 'pt-0',
     1: 'pt-1',
     2: 'pt-2',
@@ -350,7 +350,7 @@ export const paddingVariants = {
     56: 'pt-56',
     64: 'pt-64',
   },
-  'padding-t-sm': {
+  'padding-top-sm': {
     0: 'sm:pt-0',
     1: 'sm:pt-1',
     2: 'sm:pt-2',
@@ -372,7 +372,7 @@ export const paddingVariants = {
     56: 'sm:pt-56',
     64: 'sm:pt-64',
   },
-  'padding-t-md': {
+  'padding-top-md': {
     0: 'md:pt-0',
     1: 'md:pt-1',
     2: 'md:pt-2',
@@ -394,7 +394,7 @@ export const paddingVariants = {
     56: 'md:pt-56',
     64: 'md:pt-64',
   },
-  'padding-t-lg': {
+  'padding-top-lg': {
     0: 'lg:pt-0',
     1: 'lg:pt-1',
     2: 'lg:pt-2',
@@ -416,7 +416,7 @@ export const paddingVariants = {
     56: 'lg:pt-56',
     64: 'lg:pt-64',
   },
-  'padding-t-xl': {
+  'padding-top-xl': {
     0: 'xl:pt-0',
     1: 'xl:pt-1',
     2: 'xl:pt-2',
@@ -438,7 +438,7 @@ export const paddingVariants = {
     56: 'xl:pt-56',
     64: 'xl:pt-64',
   },
-  'padding-r': {
+  'padding-right': {
     0: 'pr-0',
     1: 'pr-1',
     2: 'pr-2',
@@ -460,7 +460,7 @@ export const paddingVariants = {
     56: 'pr-56',
     64: 'pr-64',
   },
-  'padding-r-sm': {
+  'padding-right-sm': {
     0: 'sm:pr-0',
     1: 'sm:pr-1',
     2: 'sm:pr-2',
@@ -482,7 +482,7 @@ export const paddingVariants = {
     56: 'sm:pr-56',
     64: 'sm:pr-64',
   },
-  'padding-r-md': {
+  'padding-right-md': {
     0: 'md:pr-0',
     1: 'md:pr-1',
     2: 'md:pr-2',
@@ -504,7 +504,7 @@ export const paddingVariants = {
     56: 'md:pr-56',
     64: 'md:pr-64',
   },
-  'padding-r-lg': {
+  'padding-right-lg': {
     0: 'lg:pr-0',
     1: 'lg:pr-1',
     2: 'lg:pr-2',
@@ -526,7 +526,7 @@ export const paddingVariants = {
     56: 'lg:pr-56',
     64: 'lg:pr-64',
   },
-  'padding-r-xl': {
+  'padding-right-xl': {
     0: 'xl:pr-0',
     1: 'xl:pr-1',
     2: 'xl:pr-2',
@@ -548,7 +548,7 @@ export const paddingVariants = {
     56: 'xl:pr-56',
     64: 'xl:pr-64',
   },
-  'padding-b': {
+  'padding-bottom': {
     0: 'pb-0',
     1: 'pb-1',
     2: 'pb-2',
@@ -570,7 +570,7 @@ export const paddingVariants = {
     56: 'pb-56',
     64: 'pb-64',
   },
-  'padding-b-sm': {
+  'padding-bottom-sm': {
     0: 'sm:pb-0',
     1: 'sm:pb-1',
     2: 'sm:pb-2',
@@ -592,7 +592,7 @@ export const paddingVariants = {
     56: 'sm:pb-56',
     64: 'sm:pb-64',
   },
-  'padding-b-md': {
+  'padding-bottom-md': {
     0: 'md:pb-0',
     1: 'md:pb-1',
     2: 'md:pb-2',
@@ -614,7 +614,7 @@ export const paddingVariants = {
     56: 'md:pb-56',
     64: 'md:pb-64',
   },
-  'padding-b-lg': {
+  'padding-bottom-lg': {
     0: 'lg:pb-0',
     1: 'lg:pb-1',
     2: 'lg:pb-2',
@@ -636,7 +636,7 @@ export const paddingVariants = {
     56: 'lg:pb-56',
     64: 'lg:pb-64',
   },
-  'padding-b-xl': {
+  'padding-bottom-xl': {
     0: 'xl:pb-0',
     1: 'xl:pb-1',
     2: 'xl:pb-2',
@@ -657,7 +657,7 @@ export const paddingVariants = {
     56: 'xl:pb-56',
     64: 'xl:pb-64',
   },
-  'padding-l': {
+  'padding-left': {
     0: 'pl-0',
     1: 'pl-1',
     2: 'pl-2',
@@ -679,7 +679,7 @@ export const paddingVariants = {
     56: 'pl-56',
     64: 'pl-64',
   },
-  'padding-l-sm': {
+  'padding-left-sm': {
     0: 'sm:pl-0',
     1: 'sm:pl-1',
     2: 'sm:pl-2',
@@ -701,7 +701,7 @@ export const paddingVariants = {
     56: 'sm:pl-56',
     64: 'sm:pl-64',
   },
-  'padding-l-md': {
+  'padding-left-md': {
     0: 'md:pl-0',
     1: 'md:pl-1',
     2: 'md:pl-2',
@@ -723,7 +723,7 @@ export const paddingVariants = {
     56: 'md:pl-56',
     64: 'md:pl-64',
   },
-  'padding-l-lg': {
+  'padding-left-lg': {
     0: 'lg:pl-0',
     1: 'lg:pl-1',
     2: 'lg:pl-2',
@@ -745,7 +745,7 @@ export const paddingVariants = {
     56: 'lg:pl-56',
     64: 'lg:pl-64',
   },
-  'padding-l-xl': {
+  'padding-left-xl': {
     0: 'xl:pl-0',
     1: 'xl:pl-1',
     2: 'xl:pl-2',

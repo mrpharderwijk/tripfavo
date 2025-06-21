@@ -3,10 +3,14 @@
  */
 
 import { MetadataRoute } from 'next'
+import { cookies } from 'next/headers'
 
-import { locales } from '@/i18n/routing'
+import { getPublishedListings } from '@/features/listings/server/actions/get-listings'
+import { isActionError } from '@/server/utils/error'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const cookieStore = await cookies()
+  const localeCookie = cookieStore.get('NEXT_LOCALE')
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.tripfavo.com'
 
   // Base routes that don't require dynamic parameters
@@ -17,35 +21,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'daily' as const,
       priority: 1,
     },
-    {
-      url: '/auth',
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.5,
-    },
-    {
-      url: '/reservation',
-      lastModified: new Date(),
-      changeFrequency: 'daily' as const,
-      priority: 0.8,
-    },
   ]
 
-  // Generate sitemap entries for each locale and route
-  const sitemapEntries = locales.flatMap((locale) =>
-    baseRoutes.map((route) => ({
-      url: `${baseUrl}/${locale}${route.url}`,
-      lastModified: route.lastModified,
-      changeFrequency: route.changeFrequency,
-      priority: route.priority,
-      alternates: {
-        languages: {
-          en: `${baseUrl}/en${route.url}`,
-          nl: `${baseUrl}/nl${route.url}`,
-        },
-      },
-    })),
-  )
+  // Get all published listings
+  const listingsResponse = await getPublishedListings()
+  const listings = isActionError(listingsResponse)
+    ? []
+    : (listingsResponse?.data ?? [])
 
-  return sitemapEntries
+  // Generate sitemap entries for base routes
+  const baseSitemapEntries = baseRoutes.map((route) => ({
+    url: `${baseUrl}${route.url}`,
+    lastModified: route.lastModified,
+    changeFrequency: route.changeFrequency,
+    priority: route.priority,
+  }))
+
+  // Generate sitemap entries for listings
+  const listingSitemapEntries = listings.map((listing) => ({
+    url: `${baseUrl}/property/${listing.id}`,
+    lastModified: listing.updatedAt,
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }))
+
+  return [...baseSitemapEntries, ...listingSitemapEntries]
 }

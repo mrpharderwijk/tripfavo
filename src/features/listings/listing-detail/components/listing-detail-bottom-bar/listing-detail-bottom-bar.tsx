@@ -15,7 +15,7 @@ import { LocalizedBookingDates } from '@/components/molecules/localized-booking-
 import { calculatePricePerNight } from '@/components/organisms/date-picker-calendar/utils/calculate-price-per-night'
 import { DATE_FORMAT_SEARCH_PARAMS } from '@/constants/dates'
 import { useListingDetailContext } from '@/features/listings/listing-detail/providers/listing-detail-context-provider'
-import { Locales } from '@/i18n/routing'
+import { Locale } from '@/i18n/config'
 
 type ListingDetailBottomBarProps = {
   datePickerRef: RefObject<HTMLDivElement | null>
@@ -75,7 +75,7 @@ export function ListingDetailBottomBar({
                   selectedDateRange,
                   calendarPrices,
                 )}
-                locale={locale as Locales}
+                locale={locale as Locale}
                 minFractionDigits={0}
                 maxFractionDigits={0}
               />{' '}
@@ -88,7 +88,7 @@ export function ListingDetailBottomBar({
               <LocalizedBookingDates
                 startDate={selectedDateRange?.from}
                 endDate={selectedDateRange?.to}
-                locale={locale as Locales}
+                locale={locale as Locale}
               />
             </Body>
           )}

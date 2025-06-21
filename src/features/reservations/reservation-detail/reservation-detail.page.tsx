@@ -41,7 +41,7 @@ export function ReservationDetailPage({
         pets: Number(petsAmount ?? 0),
       }}
     >
-      <FlexBox flex-direction="col" gap={6} padding-x={6} padding-t={6}>
+      <FlexBox flex-direction="col" gap={6} padding-x={6} padding-top={6}>
         <ReservationDetailListing />
         <Divider />
 

@@ -13,7 +13,7 @@ import { datePrices } from '@/data/date-prices'
 import { getCleaningFee } from '@/features/listings/utils/get-cleaning-fee'
 import { getDeposit } from '@/features/listings/utils/get-deposit'
 import { useReservationDetailContext } from '@/features/reservations/reservation-detail/providers/reservation-detail-context-provider'
-import { Locales } from '@/i18n/routing'
+import { Locale } from '@/i18n/config'
 import { calculateTotalPriceIncludingCleaningFee } from '@/utils/pricing/calculate-total-price'
 import { calculateTotalPricePerNight } from '@/utils/pricing/calculate-total-price-per-night'
 
@@ -56,7 +56,7 @@ export function ReservationDetailPriceBreakdown(): ReactElement {
                 <Body tag="span" size="base-lgt" font-weight="normal">
                   <LocalizedPrice
                     price={pricePerNight}
-                    locale={locale as Locales}
+                    locale={locale as Locale}
                   />{' '}
                   x{' '}
                   {tReservationDetailPriceBreakdown('nightAmount', {
@@ -66,7 +66,7 @@ export function ReservationDetailPriceBreakdown(): ReactElement {
               </FlexBoxItem>
               <FlexBoxItem flex="initial">
                 <Body tag="span" size="base-lgt" font-weight="normal">
-                  <LocalizedPrice price={total} locale={locale as Locales} />
+                  <LocalizedPrice price={total} locale={locale as Locale} />
                 </Body>
               </FlexBoxItem>
             </FlexBox>
@@ -80,10 +80,7 @@ export function ReservationDetailPriceBreakdown(): ReactElement {
             </FlexBoxItem>
             <FlexBoxItem flex="initial">
               <Body tag="span" size="base-lgt" font-weight="normal">
-                <LocalizedPrice
-                  price={cleaningFee}
-                  locale={locale as Locales}
-                />
+                <LocalizedPrice price={cleaningFee} locale={locale as Locale} />
               </Body>
             </FlexBoxItem>
           </FlexBox>
@@ -96,7 +93,7 @@ export function ReservationDetailPriceBreakdown(): ReactElement {
             </FlexBoxItem>
             <FlexBoxItem flex="initial">
               <Body tag="span" size="base-lgt" font-weight="normal">
-                <LocalizedPrice price={deposit} locale={locale as Locales} />
+                <LocalizedPrice price={deposit} locale={locale as Locale} />
               </Body>
             </FlexBoxItem>
           </FlexBox>
@@ -112,7 +109,7 @@ export function ReservationDetailPriceBreakdown(): ReactElement {
           </FlexBoxItem>
           <FlexBoxItem flex="initial">
             <Body tag="span" size="base-lgt" font-weight="bold">
-              <LocalizedPrice price={totalPrice} locale={locale as Locales} />
+              <LocalizedPrice price={totalPrice} locale={locale as Locale} />
             </Body>
           </FlexBoxItem>
         </FlexBox>

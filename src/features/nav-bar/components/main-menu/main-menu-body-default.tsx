@@ -1,6 +1,6 @@
 'use client'
 
-import { Globe, Heart, LayoutDashboard, Ticket } from 'lucide-react'
+import { Globe, Heart, Ticket } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
@@ -21,25 +21,6 @@ export function MainMenuBodyDefault(): ReactElement {
 
   return (
     <>
-      {currentUser && (
-        <ButtonWrapper
-          icon={LayoutDashboard}
-          size="lg"
-          variant={
-            !isCurrentRoute(pathname, 'guest')
-              ? 'sidebar-menu-item'
-              : 'sidebar-menu-item-active'
-          }
-          onClick={closeMainMenu}
-          renderRoot={({ buttonContent }) => (
-            <Link href={getRoutePathByRouteName('guestOverview')}>
-              {buttonContent}
-            </Link>
-          )}
-        >
-          {tMainMenuGuest('dashboard')}
-        </ButtonWrapper>
-      )}
       {currentUser && (
         <ButtonWrapper
           icon={Heart}

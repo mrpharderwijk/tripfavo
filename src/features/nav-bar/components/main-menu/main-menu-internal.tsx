@@ -3,7 +3,7 @@
 import { AlignJustify } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { ReactElement } from 'react'
 
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
@@ -20,6 +20,7 @@ import { getRoutePathByRouteName } from '@/utils/get-route'
 export function MainMenuInternal(): ReactElement {
   const { userMode, setUserMode, isMounted, currentUser } = useAppContext()
   const { toggleMainMenu, isOpen, subMenuRef } = useMainMenuContext()
+  const locale = useLocale()
   const tMainMenuGuest = useTranslations('mainMenu.guest')
   const tMainMenuHost = useTranslations('mainMenu.host')
   const tMainMenu = useTranslations('mainMenu')
@@ -33,6 +34,8 @@ export function MainMenuInternal(): ReactElement {
       <FlexBox flex-direction="row" align-items="center" gap={2}>
         {isMounted && (
           <>
+            {/* TODO: Add language switcher */}
+            {/* <LanguageSwitcher currentLocale={locale as Locale} /> */}
             {!currentUser && (
               <ButtonWrapper
                 size="md"

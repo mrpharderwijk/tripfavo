@@ -1,26 +1,29 @@
 import { ReactElement } from 'react'
 
-import { Locales } from '@/i18n/routing'
+import { defaultLocale, Locale } from '@/i18n/config'
 
 type LocalizedPriceProps = {
   price: string | number
-  locale: Locales
+  locale: Locale
   minFractionDigits?: number
   maxFractionDigits?: number
 }
 
-const localeToCurrency: Record<Locales, { currency: string; rate?: number }> = {
-  'en-US': {
-    currency: 'USD',
-    rate: 1.142906,
-  },
-  'fr-FR': {
-    currency: 'EUR',
-  },
-  'nl-NL': {
-    currency: 'EUR',
-  },
-}
+const localeToCurrencyMap: Record<Locale, { currency: string; rate: number }> =
+  {
+    en: {
+      currency: 'USD',
+      rate: 1.142906,
+    },
+    fr: {
+      currency: 'EUR',
+      rate: 1,
+    },
+    nl: {
+      currency: 'EUR',
+      rate: 1,
+    },
+  }
 
 export function LocalizedPrice({
   price,
@@ -28,8 +31,8 @@ export function LocalizedPrice({
   minFractionDigits = 2,
   maxFractionDigits = 2,
 }: LocalizedPriceProps): ReactElement {
-  const rate = localeToCurrency[locale]?.rate ?? 1
-  const currency = localeToCurrency[locale]?.currency ?? 'EUR'
+  const rate = localeToCurrencyMap[locale ?? defaultLocale].rate
+  const currency = localeToCurrencyMap[locale ?? defaultLocale].currency
   const priceInBaseCurrency = Number(price) * rate
 
   const localizedPrice = new Intl.NumberFormat(locale, {
