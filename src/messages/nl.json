@@ -2,7 +2,7 @@
   "mainMenu": {
     "host": {
       "myListings": "Mijn advertenties",
-      "myReservations": "Mijn reserveringen",
+      "myBookings": "Mijn boekingen",
       "myGuests": "Mijn gasten",
       "myReviews": "Mijn beoordelingen",
       "mySettings": "Mijn instellingen",
@@ -11,7 +11,7 @@
     "guest": {
       "dashboard": "Dashboard",
       "myFavorites": "Mijn favorieten",
-      "myBookings": "Mijn reserveringen",
+      "myBookings": "Mijn boekingen",
       "switchToHost": "Hostmodus"
     },
     "logout": "Uitloggen",
@@ -174,7 +174,7 @@
       "locationForm": {
         "heading": {
           "title": "Waar is je woning gelegen?",
-          "subtitle": "Je adres wordt alleen gedeeld met gasten na het maken van een reservering."
+          "subtitle": "Je adres wordt alleen gedeeld met gasten na het maken van een boeking."
         }
       },
       "neighbourhoodDescriptionForm": {
@@ -271,15 +271,15 @@
       "selectDates": "Voeg datums toe om de prijzen te bekijken"
     },
     "reservation": {
-      "heading": "Reserveringsverzoek"
+      "heading": "Boekingsverzoek"
     }
   },
   "guest": {
     "heading": "Plan je volgende reis",
-    "reservations": {
-      "heading": "Mijn reserveringen",
+    "bookings": {
+      "heading": "Mijn boekingen",
       "noResults": {
-        "text": "Je hebt nog geen reserveringen. Wanneer je een reservering aanvraagt, verschijnt deze hier.",
+        "text": "Je hebt nog geen boekingen. Wanneer je een boeking aanvraagt, verschijnt deze hier.",
         "button": "Nu boeken"
       },
       "status": {

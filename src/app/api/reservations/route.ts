@@ -1,3 +1,3 @@
-import { POST } from '@/features/reservations/server/api/reservations.api'
+import { POST } from '@/features/bookings/server/api/bookings.api'
 
 export { POST }

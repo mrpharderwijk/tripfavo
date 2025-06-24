@@ -2,7 +2,7 @@
   "mainMenu": {
     "host": {
       "myListings": "Mes annonces",
-      "myReservations": "Mes réservations",
+      "myBookings": "Mes réservations",
       "myGuests": "Mes invités",
       "myReviews": "Mes avis",
       "mySettings": "Mes paramètres",
@@ -275,7 +275,7 @@
   },
   "guest": {
     "heading": "Planifiez votre prochain voyage",
-    "reservations": {
+    "bookings": {
       "heading": "Mes réservations",
       "noResults": {
         "text": "Vous n'avez pas encore de réservations. Vos demandes apparaîtront ici.",

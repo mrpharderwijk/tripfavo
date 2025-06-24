@@ -18,13 +18,12 @@ type HostSidebarProps = {
 
 export function HostSidebar({ heading }: HostSidebarProps): ReactElement {
   const pathname = usePathname()
-  const tMainMenuHost = useTranslations('mainMenu.host')
   const tHost = useTranslations('host')
 
   return (
     <AppShellSidebar heading={heading ?? tHost('heading')}>
       <FlexBox tag="nav" flex-direction="col">
-        <FlexBox tag="ul" flex-direction="col" gap={2} width="full">
+        <FlexBox tag="ul" flex-direction="col" gap={2} fullWidth>
           <FlexBoxItem tag="li">
             <ButtonWrapper
               icon={House}
@@ -35,12 +34,16 @@ export function HostSidebar({ heading }: HostSidebarProps): ReactElement {
                   : 'sidebar-menu-item-active'
               }
               renderRoot={({ buttonContent }) => (
-                <Link href={getRoutePathByRouteName('hostListings')}>
+                <Link
+                  className="w-full"
+                  href={getRoutePathByRouteName('hostListings')}
+                >
                   {buttonContent}
                 </Link>
               )}
+              fullWidth
             >
-              {tMainMenuHost('myListings')}
+              {tHost('mainMenu.myListings')}
             </ButtonWrapper>
           </FlexBoxItem>
 
@@ -49,25 +52,23 @@ export function HostSidebar({ heading }: HostSidebarProps): ReactElement {
               icon={CalendarDays}
               size="lg"
               variant={
-                !isCurrentRoute(pathname, 'hostReservations')
+                !isCurrentRoute(pathname, 'hostBookings')
                   ? 'sidebar-menu-item'
                   : 'sidebar-menu-item-active'
               }
               renderRoot={({ buttonContent }) => (
-                <Link href={getRoutePathByRouteName('hostReservations')}>
+                <Link
+                  className="w-full"
+                  href={getRoutePathByRouteName('hostBookings')}
+                >
                   {buttonContent}
                 </Link>
               )}
+              fullWidth
             >
-              {tMainMenuHost('myReservations')}
+              {tHost('mainMenu.myBookings')}
             </ButtonWrapper>
           </FlexBoxItem>
-
-          {/* <FlexBoxItem tag="li">
-            <Button icon={UserIcon} size="lg" variant="sidebar-menu-item">
-              Personal information
-            </Button>
-          </FlexBoxItem> */}
         </FlexBox>
       </FlexBox>
     </AppShellSidebar>

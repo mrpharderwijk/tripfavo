@@ -104,7 +104,15 @@ export async function getHostListing(
       select: hostListingSelect,
     })
 
-    return { data: listing ?? null }
+    const safeListing = listing
+      ? {
+          ...listing,
+          createdAt: listing.createdAt.toISOString(),
+          updatedAt: listing.updatedAt.toISOString(),
+        }
+      : null
+
+    return { data: safeListing }
   } catch (error: any) {
     return { error: 'INTERNAL_SERVER_ERROR' }
   }
@@ -126,7 +134,13 @@ export async function getHostListings(): Promise<
       select: hostListingSelect,
     })
 
-    return { data: listings ?? null }
+    const safeListings = listings.map((listing) => ({
+      ...listing,
+      createdAt: listing.createdAt.toISOString(),
+      updatedAt: listing.updatedAt.toISOString(),
+    }))
+
+    return { data: safeListings ?? null }
   } catch (error: any) {
     return { error: 'INTERNAL_SERVER_ERROR' }
   }

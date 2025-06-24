@@ -10,7 +10,11 @@ import {
   ListingLocation,
 } from '@prisma/client'
 
-export type HostListing = Omit<Listing, 'userId'> & {
+export type HostListing = Omit<
+  Listing,
+  'userId' | 'createdAt' | 'updatedAt'
+> & {
+  id?: string
   location: Omit<
     ListingLocation,
     'listingId' | 'createdAt' | 'updatedAt'
@@ -35,4 +39,6 @@ export type HostListing = Omit<Listing, 'userId'> & {
         'listingId' | 'userId' | 'createdAt' | 'updatedAt'
       >[]
     | null
+  createdAt: string
+  updatedAt: string
 }

@@ -5,7 +5,6 @@ import { ReactElement } from 'react'
 import { ListingStatus } from '@prisma/client'
 
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
-import { Button } from '@/components/molecules/buttons/button'
 import { ListingList } from '@/features/host/components/listing-list/listing-list'
 import { HostListing } from '@/features/host/types/host-listing'
 
@@ -40,14 +39,6 @@ export function HostListingsOverview({
     <FlexBox flex-direction="col" gap={6}>
       <ListingList heading="Published listings" items={publishedListings} />
       <ListingList heading="Pending listings" items={pendingListings} />
-
-      <Button
-        variant="secondary"
-        rounded="lg"
-        onClick={handleOnClickAddListing}
-      >
-        Add listing
-      </Button>
     </FlexBox>
   )
 }

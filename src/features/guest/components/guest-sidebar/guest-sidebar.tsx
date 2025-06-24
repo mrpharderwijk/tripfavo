@@ -18,7 +18,6 @@ type GuestSidebarProps = {
 
 export function GuestSidebar({ heading }: GuestSidebarProps): ReactElement {
   const pathname = usePathname()
-  const tMainMenuGuest = useTranslations('mainMenu.guest')
   const tGuest = useTranslations('guest')
 
   return (
@@ -30,17 +29,20 @@ export function GuestSidebar({ heading }: GuestSidebarProps): ReactElement {
               icon={CalendarDays}
               size="lg"
               variant={
-                !isCurrentRoute(pathname, 'guestReservations')
+                !isCurrentRoute(pathname, 'guestBookings')
                   ? 'sidebar-menu-item'
                   : 'sidebar-menu-item-active'
               }
               renderRoot={({ buttonContent }) => (
-                <Link href={getRoutePathByRouteName('guestReservations')}>
+                <Link
+                  className="w-full"
+                  href={getRoutePathByRouteName('guestBookings')}
+                >
                   {buttonContent}
                 </Link>
               )}
             >
-              {tMainMenuGuest('myBookings')}
+              {tGuest('mainMenu.myBookings')}
             </ButtonWrapper>
           </FlexBoxItem>
 
@@ -54,20 +56,17 @@ export function GuestSidebar({ heading }: GuestSidebarProps): ReactElement {
                   : 'sidebar-menu-item-active'
               }
               renderRoot={({ buttonContent }) => (
-                <Link href={getRoutePathByRouteName('guestFavorites')}>
+                <Link
+                  className="w-full"
+                  href={getRoutePathByRouteName('guestFavorites')}
+                >
                   {buttonContent}
                 </Link>
               )}
             >
-              {tMainMenuGuest('myFavorites')}
+              {tGuest('mainMenu.myFavorites')}
             </ButtonWrapper>
           </FlexBoxItem>
-
-          {/* <FlexBoxItem tag="li">
-            <Button icon={UserIcon} size="lg" variant="sidebar-menu-item">
-              Personal information
-            </Button>
-          </FlexBoxItem> */}
         </FlexBox>
       </FlexBox>
     </AppShellSidebar>

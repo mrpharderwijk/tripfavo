@@ -2,7 +2,7 @@
 
 import { useLocale } from 'next-intl'
 import { ReactElement } from 'react'
-import { ReservationStatus } from '@prisma/client'
+import { BookingStatus } from '@prisma/client'
 
 import { ListMediaItem } from '@/components/organisms/list-media-item/list-media-item'
 import { ListingMediaItemStatus } from '@/components/organisms/list-media-item/list-media-item-status'
@@ -14,16 +14,16 @@ type ReservationItemProps = {
   subtitle: string
 }
 
-const reservationItemStatusMap = {
-  [ReservationStatus.CANCELLED]: {
+const bookingItemStatusMap = {
+  [BookingStatus.CANCELLED]: {
     type: ListingMediaItemStatus.DANGER,
     label: 'Cancelled by host',
   },
-  [ReservationStatus.PENDING]: {
+  [BookingStatus.PENDING]: {
     type: ListingMediaItemStatus.WARNING,
     label: 'Waiting for host',
   },
-  [ReservationStatus.CONFIRMED]: {
+  [BookingStatus.CONFIRMED]: {
     type: ListingMediaItemStatus.SUCCESS,
     label: 'Confirmed by host',
   },

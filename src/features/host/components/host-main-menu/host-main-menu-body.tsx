@@ -1,12 +1,11 @@
 'use client'
 
-import { CalendarDays, Globe, House } from 'lucide-react'
+import { CalendarDays, House } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { ReactElement } from 'react'
 
-import { Button } from '@/components/molecules/buttons/button'
 import { ButtonWrapper } from '@/components/molecules/buttons/button-wrapper/button-wrapper'
 import { useMainMenuContext } from '@/features/nav-bar/components/main-menu/main-menu-context-provider'
 import { useAppContext } from '@/providers/app-context-provider/app-context-provider'
@@ -16,8 +15,8 @@ export function HostMainMenuBody(): ReactElement {
   const pathname = usePathname()
   const { currentUser } = useAppContext()
   const { closeMainMenu, handleOnClickLanguage } = useMainMenuContext()
-  const tMainMenuHost = useTranslations('mainMenu.host')
-  const tMainMenu = useTranslations('mainMenu')
+  const tHost = useTranslations('host')
+  const tCommon = useTranslations('common')
 
   return (
     <>
@@ -32,12 +31,15 @@ export function HostMainMenuBody(): ReactElement {
           }
           onClick={closeMainMenu}
           renderRoot={({ buttonContent }) => (
-            <Link href={getRoutePathByRouteName('hostListings')}>
+            <Link
+              className="w-full"
+              href={getRoutePathByRouteName('hostListings')}
+            >
               {buttonContent}
             </Link>
           )}
         >
-          {tMainMenuHost('myListings')}
+          {tHost('mainMenu.myListings')}
         </ButtonWrapper>
       )}
 
@@ -46,22 +48,25 @@ export function HostMainMenuBody(): ReactElement {
           icon={CalendarDays}
           size="lg"
           variant={
-            !isCurrentRoute(pathname, 'hostReservations')
+            !isCurrentRoute(pathname, 'hostBookings')
               ? 'sidebar-menu-item'
               : 'sidebar-menu-item-active'
           }
           onClick={closeMainMenu}
           renderRoot={({ buttonContent }) => (
-            <Link href={getRoutePathByRouteName('hostReservations')}>
+            <Link
+              className="w-full"
+              href={getRoutePathByRouteName('hostBookings')}
+            >
               {buttonContent}
             </Link>
           )}
         >
-          {tMainMenuHost('myReservations')}
+          {tHost('mainMenu.myBookings')}
         </ButtonWrapper>
       )}
 
-      <Button
+      {/* <Button
         icon={Globe}
         size="lg"
         variant={
@@ -71,8 +76,8 @@ export function HostMainMenuBody(): ReactElement {
         }
         onClick={handleOnClickLanguage}
       >
-        {tMainMenu('language')}
-      </Button>
+        {tCommon('mainMenu.language')}
+      </Button> */}
     </>
   )
 }

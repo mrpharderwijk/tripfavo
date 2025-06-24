@@ -14,7 +14,7 @@ import { getRoutePathByRouteName } from '@/utils/get-route'
 
 export function MainMenuFooterDefault(): ReactElement {
   const { currentUser } = useAppContext()
-  const tMainMenu = useTranslations('mainMenu')
+  const tCommon = useTranslations('common')
   const { handleOnClickLogout } = useMainMenuContext()
 
   return (
@@ -26,12 +26,15 @@ export function MainMenuFooterDefault(): ReactElement {
             size="lg"
             variant="sidebar-menu-item-active"
             renderRoot={({ buttonContent }) => (
-              <Link href={getRoutePathByRouteName('account')}>
+              <Link
+                className="w-full"
+                href={getRoutePathByRouteName('account')}
+              >
                 {buttonContent}
               </Link>
             )}
           >
-            {tMainMenu('account')}
+            {tCommon('mainMenu.account')}
           </ButtonWrapper>
 
           <Button
@@ -39,8 +42,9 @@ export function MainMenuFooterDefault(): ReactElement {
             size="lg"
             variant="sidebar-menu-item-active"
             onClick={handleOnClickLogout}
+            fullWidth
           >
-            {tMainMenu('logout')}
+            {tCommon('mainMenu.logout')}
           </Button>
         </>
       )}
@@ -52,24 +56,24 @@ export function MainMenuFooterDefault(): ReactElement {
             size="lg"
             variant="sidebar-menu-item-active"
             renderRoot={({ buttonContent }) => (
-              <Link href={getRoutePathByRouteName('login')}>
+              <Link className="w-full" href={getRoutePathByRouteName('login')}>
                 {buttonContent}
               </Link>
             )}
           >
-            {tMainMenu('login')}
+            {tCommon('mainMenu.login')}
           </ButtonWrapper>
           <ButtonWrapper
             icon={User}
             size="lg"
             variant="sidebar-menu-item-active"
             renderRoot={({ buttonContent }) => (
-              <Link href={getRoutePathByRouteName('signUp')}>
+              <Link className="w-full" href={getRoutePathByRouteName('signUp')}>
                 {buttonContent}
               </Link>
             )}
           >
-            {tMainMenu('signUp')}
+            {tCommon('mainMenu.signUp')}
           </ButtonWrapper>
         </>
       )}

@@ -1,25 +1,13 @@
 {
-  "mainMenu": {
-    "host": {
-      "myListings": "My listings",
-      "myReservations": "My reservations",
-      "myGuests": "My guests",
-      "myReviews": "My reviews",
-      "mySettings": "My settings",
-      "switchToGuest": "Switch to guest"
-    },
-    "guest": {
-      "dashboard": "Dashboard",
-      "myFavorites": "My favorites",
-      "myBookings": "My reservations",
-      "switchToHost": "Switch to host"
-    },
-    "logout": "Logout",
-    "login": "Login",
-    "signUp": "Sign up",
-    "language": "Change language",
-    "account": "Account",
-    "hostJoin": "Become a host"
+  "account": {
+    "heading": "Account settings",
+    "sidebar": {
+      "personalInfo": "Personal information",
+      "paymentMethods": "Payment methods",
+      "security": "Security",
+      "notifications": "Notifications",
+      "language": "Language"
+    }
   },
   "auth": {
     "verifyEmail": {
@@ -107,25 +95,163 @@
       }
     }
   },
-  "personal-info": {
-    "heading": "Personal information",
-    "legal-name": {
-      "label": "Legal name",
-      "formIntro": "Please fill in your legal name. This is the same name as stated in your passport or ID card."
-    }
+  "common": {
+    "amenities": {
+      "wifi": "WiFi",
+      "swimmingPool": "Swimming pool",
+      "hotTub": "Hot tub",
+      "gym": "Gym",
+      "parking": "Parking",
+      "airConditioning": "Air Conditioning",
+      "heating": "Heating",
+      "kitchen": "Kitchen",
+      "washer": "Washer",
+      "dryer": "Dryer",
+      "tv": "TV",
+      "freeParking": "Free Parking",
+      "seaView": "Sea View",
+      "mountainView": "Mountain View",
+      "garden": "Garden",
+      "bbqGrill": "BBQ Grill",
+      "playground": "Playground",
+      "beachAccess": "Beach Access",
+      "fireplace": "Fireplace",
+      "workspace": "Workspace",
+      "petFriendly": "Pet Friendly",
+      "securitySystem": "Security System",
+      "firstAidKit": "First Aid Kit",
+      "fireExtinguisher": "Fire Extinguisher",
+      "smokeAlarm": "Smoke Alarm",
+      "elevator": "Elevator",
+      "balcony": "Balcony",
+      "breakfastIncluded": "Breakfast Included",
+      "dishwasher": "Dishwasher",
+      "babyEquipment": "Baby Equipment",
+      "tennisCourt": "Tennis Court"
+    },
+    "forms": {
+      "firstName": {
+        "label": "First name",
+        "placeholder": "John"
+      },
+      "middleName": {
+        "label": "Middle name",
+        "placeholder": "Doe"
+      },
+      "lastName": {
+        "label": "Last name",
+        "placeholder": "Doe"
+      },
+      "email": {
+        "label": "Email address",
+        "placeholder": "johndoe@example.com"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "********",
+        "error": {
+          "required": "Password is required",
+          "minlength": "Password must be at least 8 characters long",
+          "uppercase": "Password must contain at least one uppercase letter",
+          "lowercase": "Password must contain at least one lowercase letter",
+          "digit": "Password must contain at least one number"
+        }
+      },
+      "passwordConfirm": {
+        "label": "Confirm password",
+        "placeholder": "********"
+      },
+      "required": "Please fill in your {field}",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "save": "Save",
+      "saveAndContinue": "Save and continue",
+      "saveAndExit": "Save & exit",
+      "error": {
+        "unknown": "An unknown error occurred. Please contact customer support.",
+        "network": "Network error. Please check your connection and try again."
+      }
+    },
+    "mainMenu": {
+      "logout": "Logout",
+      "login": "Login",
+      "signUp": "Sign up",
+      "language": "Change language",
+      "account": "Account",
+      "hostJoin": "Become a host"
+    },
+    "dates": "Dates",
+    "noDates": "No dates selected",
+    "close": "Close",
+    "back": "Back",
+    "previous": "Previous",
+    "next": "Next",
+    "confirm": "Confirm",
+    "upload": "Upload",
+    "uploadClick": "Click to upload",
+    "guestCount": "{amount, plural, =1 {1 guest} other {# guests}}",
+    "roomAmount": "{amount, plural, =1 {1 room} other {# rooms}}",
+    "bedroomAmount": "{amount, plural, =1 {1 bedroom} other {# bedrooms}}",
+    "bathroomAmount": "{amount, plural, =1 {1 bathroom} other {# bathrooms}}",
+    "bedAmount": "{amount, plural, =1 {1 bed} other {# beds}}",
+    "kitchenAmount": "{amount, plural, =1 {1 kitchen} other {# kitchens}}",
+    "livingRoomAmount": "{amount, plural, =1 {1 living room} other {# living rooms}}"
   },
-  "account": {
-    "heading": "Account settings",
-    "sidebar": {
-      "personalInfo": "Personal information",
-      "paymentMethods": "Payment methods",
-      "security": "Security",
-      "notifications": "Notifications",
-      "language": "Language"
+  "guest": {
+    "heading": "Plan your next trip",
+    "bookings": {
+      "heading": "My bookings",
+      "noResults": {
+        "text": "You don't have any bookings yet. When you request a booking, it will appear here.",
+        "button": "Book now"
+      },
+      "pendingHeading": "Pending bookings",
+      "confirmedHeading": "Confirmed bookings",
+      "cancelledHeading": "Cancelled bookings",
+      "status": {
+        "cancelled": "Cancelled by host",
+        "review": "Waiting for host",
+        "confirmed": "Confirmed by host"
+      }
+    },
+    "favorites": {
+      "heading": "My favorites",
+      "noResults": {
+        "text": "You haven't added any properties to your favorites yet. When you add a property to your favorites, it will appear here.",
+        "button": "Find your next favorite"
+      }
+    },
+    "mainMenu": {
+      "dashboard": "Dashboard",
+      "myFavorites": "My favorites",
+      "myBookings": "My bookings",
+      "switchToHost": "Switch to host"
     }
   },
   "host": {
     "heading": "Host your property",
+    "bookings": {
+      "heading": "My bookings",
+      "pendingHeading": "Pending bookings",
+      "confirmedHeading": "Confirmed bookings",
+      "cancelledHeading": "Cancelled bookings",
+      "noResults": {
+        "text": "You don't have any bookings yet. When a guest requests a booking, it will appear here."
+      },
+      "status": {
+        "cancelled": "Cancelled by you",
+        "review": "Waiting for you",
+        "confirmed": "Confirmed by you"
+      }
+    },
+    "mainMenu": {
+      "myListings": "My listings",
+      "myBookings": "My bookings",
+      "myGuests": "My guests",
+      "myReviews": "My reviews",
+      "mySettings": "My settings",
+      "switchToGuest": "Switch to guest"
+    },
     "listing": {
       "amenitiesForm": {
         "heading": {
@@ -238,17 +364,6 @@
         "published": "Published"
       },
       "yourListing": "Your property in"
-    },
-    "reservations": {
-      "heading": "My reservations",
-      "pendingHeading": "Pending reservations",
-      "confirmedHeading": "Confirmed reservations",
-      "cancelledHeading": "Cancelled reservations",
-      "status": {
-        "cancelled": "Cancelled by you",
-        "review": "Waiting for you",
-        "confirmed": "Confirmed by you"
-      }
     }
   },
   "listing": {
@@ -297,124 +412,21 @@
       "heading": "Reservation request"
     }
   },
-  "guest": {
-    "heading": "Plan your next trip",
-    "reservations": {
-      "heading": "My reservations",
-      "noResults": {
-        "text": "You don't have any reservations yet. When you request a reservation, it will appear here.",
-        "button": "Book now"
-      },
-      "pendingHeading": "Pending reservations",
-      "confirmedHeading": "Confirmed reservations",
-      "cancelledHeading": "Cancelled reservations",
-      "status": {
-        "cancelled": "Cancelled by host",
-        "review": "Waiting for host",
-        "confirmed": "Confirmed by host"
-      }
-    },
-    "favorites": {
-      "heading": "My favorites",
-      "noResults": {
-        "text": "You haven't added any properties to your favorites yet. When you add a property to your favorites, it will appear here.",
-        "button": "Find your next favorite"
+  "listingDetail": {
+    "bottomBar": {
+      "selectDates": "Select dates to view the prices",
+      "button": {
+        "labelNonSelected": "Check availability",
+        "labelSelected": "Reserve now"
       }
     }
   },
-  "common": {
-    "forms": {
-      "firstName": {
-        "label": "First name",
-        "placeholder": "John"
-      },
-      "middleName": {
-        "label": "Middle name",
-        "placeholder": "Doe"
-      },
-      "lastName": {
-        "label": "Last name",
-        "placeholder": "Doe"
-      },
-      "email": {
-        "label": "Email address",
-        "placeholder": "johndoe@example.com"
-      },
-      "password": {
-        "label": "Password",
-        "placeholder": "********",
-        "error": {
-          "required": "Password is required",
-          "minlength": "Password must be at least 8 characters long",
-          "uppercase": "Password must contain at least one uppercase letter",
-          "lowercase": "Password must contain at least one lowercase letter",
-          "digit": "Password must contain at least one number"
-        }
-      },
-      "passwordConfirm": {
-        "label": "Confirm password",
-        "placeholder": "********"
-      },
-      "required": "Please fill in your {field}",
-      "cancel": "Cancel",
-      "edit": "Edit",
-      "save": "Save",
-      "saveAndContinue": "Save and continue",
-      "saveAndExit": "Save & exit",
-      "error": {
-        "unknown": "An unknown error occurred. Please contact customer support.",
-        "network": "Network error. Please check your connection and try again."
-      }
-    },
-    "amenities": {
-      "wifi": "WiFi",
-      "swimmingPool": "Swimming pool",
-      "hotTub": "Hot tub",
-      "gym": "Gym",
-      "parking": "Parking",
-      "airConditioning": "Air Conditioning",
-      "heating": "Heating",
-      "kitchen": "Kitchen",
-      "washer": "Washer",
-      "dryer": "Dryer",
-      "tv": "TV",
-      "freeParking": "Free Parking",
-      "seaView": "Sea View",
-      "mountainView": "Mountain View",
-      "garden": "Garden",
-      "bbqGrill": "BBQ Grill",
-      "playground": "Playground",
-      "beachAccess": "Beach Access",
-      "fireplace": "Fireplace",
-      "workspace": "Workspace",
-      "petFriendly": "Pet Friendly",
-      "securitySystem": "Security System",
-      "firstAidKit": "First Aid Kit",
-      "fireExtinguisher": "Fire Extinguisher",
-      "smokeAlarm": "Smoke Alarm",
-      "elevator": "Elevator",
-      "balcony": "Balcony",
-      "breakfastIncluded": "Breakfast Included",
-      "dishwasher": "Dishwasher",
-      "babyEquipment": "Baby Equipment",
-      "tennisCourt": "Tennis Court"
-    },
-    "dates": "Dates",
-    "noDates": "No dates selected",
-    "close": "Close",
-    "back": "Back",
-    "previous": "Previous",
-    "next": "Next",
-    "confirm": "Confirm",
-    "upload": "Upload",
-    "uploadClick": "Click to upload",
-    "guestCount": "{amount, plural, =1 {1 guest} other {# guests}}",
-    "roomAmount": "{amount, plural, =1 {1 room} other {# rooms}}",
-    "bedroomAmount": "{amount, plural, =1 {1 bedroom} other {# bedrooms}}",
-    "bathroomAmount": "{amount, plural, =1 {1 bathroom} other {# bathrooms}}",
-    "bedAmount": "{amount, plural, =1 {1 bed} other {# beds}}",
-    "kitchenAmount": "{amount, plural, =1 {1 kitchen} other {# kitchens}}",
-    "livingRoomAmount": "{amount, plural, =1 {1 living room} other {# living rooms}}"
+  "personal-info": {
+    "heading": "Personal information",
+    "legal-name": {
+      "label": "Legal name",
+      "formIntro": "Please fill in your legal name. This is the same name as stated in your passport or ID card."
+    }
   },
   "reservationDetail": {
     "summary": {
@@ -479,15 +491,6 @@
     "bottomBar": {
       "button": {
         "label": "Confirm reservation"
-      }
-    }
-  },
-  "listingDetail": {
-    "bottomBar": {
-      "selectDates": "Select dates to view the prices",
-      "button": {
-        "labelNonSelected": "Check availability",
-        "labelSelected": "Reserve now"
       }
     }
   }

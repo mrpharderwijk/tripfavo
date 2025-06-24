@@ -87,7 +87,7 @@ export function UserMenuInternal(): ReactElement {
           <>
             <UserMenuItem onClick={() => {}} label="My trips" />
             <UserMenuItem onClick={() => {}} label="My favorites" />
-            <UserMenuItem onClick={() => {}} label="My reservations" />
+            <UserMenuItem onClick={() => {}} label="My bookings" />
             <UserMenuItem onClick={() => {}} label="My properties" />
             <UserMenuItem
               onClick={() => {

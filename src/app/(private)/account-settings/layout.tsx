@@ -12,7 +12,7 @@ export default async function DashboardLayout({
 
   return (
     <AppShell
-      navbar={<NavBar narrow fixed={false} />}
+      navbar={<NavBar fixed={false} />}
       sidebar={<AccountSidebar heading={tAccount('heading')} />}
     >
       {children}

@@ -11,7 +11,7 @@ export default async function FavoritesPage(): Promise<ReactElement> {
 
   return (
     <AppShell
-      navbar={<NavBar narrow fixed={false} />}
+      navbar={<NavBar fixed={false} />}
       sidebar={<GuestSidebar heading={tGuestFavorites('heading')} />}
     >
       <GuestFavoritesPage />

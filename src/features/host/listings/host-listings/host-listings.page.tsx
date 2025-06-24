@@ -10,14 +10,14 @@ import { getHostListings } from '@/features/host/server/actions/get-host-listing
 import { isActionError } from '@/server/utils/error'
 
 export async function HostListingsPage(): Promise<ReactElement> {
-  const tMainMenuHost = await getTranslations('mainMenu.host')
+  const tHost = await getTranslations('host')
   const result = await getHostListings()
   const listings = isActionError(result) ? [] : (result?.data ?? [])
 
   return (
     <AppShellBody>
       <Heading tag="h2" like="h4" color="primary" font-weight="bold">
-        {tMainMenuHost('myListings')}
+        {tHost('mainMenu.myListings')}
       </Heading>
 
       <FlexBox flex-direction="col" gap={6}>

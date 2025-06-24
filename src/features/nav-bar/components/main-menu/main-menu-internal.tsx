@@ -3,7 +3,7 @@
 import { AlignJustify } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useLocale, useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl'
 import { ReactElement } from 'react'
 
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
@@ -20,10 +20,9 @@ import { getRoutePathByRouteName } from '@/utils/get-route'
 export function MainMenuInternal(): ReactElement {
   const { userMode, setUserMode, isMounted, currentUser } = useAppContext()
   const { toggleMainMenu, isOpen, subMenuRef } = useMainMenuContext()
-  const locale = useLocale()
-  const tMainMenuGuest = useTranslations('mainMenu.guest')
-  const tMainMenuHost = useTranslations('mainMenu.host')
-  const tMainMenu = useTranslations('mainMenu')
+  const tGuestMainMenu = useTranslations('guest.mainMenu')
+  const tHostMainMenu = useTranslations('host.mainMenu')
+  const tCommonMainMenu = useTranslations('common.mainMenu')
 
   const hostRoutePath = getRoutePathByRouteName('host')
   const guestRoutePath = getRoutePathByRouteName('guest')
@@ -45,7 +44,7 @@ export function MainMenuInternal(): ReactElement {
                   <Link href={hostRoutePath}>{buttonContent}</Link>
                 )}
               >
-                {tMainMenu('hostJoin')}
+                {tCommonMainMenu('hostJoin')}
               </ButtonWrapper>
             )}
             {currentUser && userMode === UserMode.GUEST && (
@@ -60,7 +59,7 @@ export function MainMenuInternal(): ReactElement {
                   <Link href={hostRoutePath}>{buttonContent}</Link>
                 )}
               >
-                {tMainMenuGuest('switchToHost')}
+                {tGuestMainMenu('switchToHost')}
               </ButtonWrapper>
             )}
             {currentUser && userMode === UserMode.HOST && (
@@ -75,7 +74,7 @@ export function MainMenuInternal(): ReactElement {
                   <Link href={guestRoutePath}>{buttonContent}</Link>
                 )}
               >
-                {tMainMenuHost('switchToGuest')}
+                {tHostMainMenu('switchToGuest')}
               </ButtonWrapper>
             )}
 

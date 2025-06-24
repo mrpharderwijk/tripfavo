@@ -11,7 +11,12 @@ export type FlexBoxItemProps = PropsWithChildren<
 
 export function FlexBoxItem({
   children,
+  display = 'flex',
   ...props
 }: FlexBoxItemProps): ReactElement {
-  return <Box {...props}>{children}</Box>
+  return (
+    <Box {...props} display={display}>
+      {children}
+    </Box>
+  )
 }

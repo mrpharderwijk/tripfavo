@@ -32,7 +32,7 @@ model User {
   Authenticator Authenticator[]
 
   listings      Listing[]
-  reservations  Reservation[]
+  bookings      Booking[]
   listingImages ListingImage[]
   favorites     GuestFavorite[]
   status        UserStatus?
@@ -146,7 +146,7 @@ model Listing {
   userId String @db.ObjectId
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  reservations   Reservation[]
+  bookings       Booking[]
   location       ListingLocation?
   floorPlan      ListingFloorPlan?
   images         ListingImage[]
@@ -328,13 +328,13 @@ enum AmenityType {
   BABY_EQUIPMENT
 }
 
-model Reservation {
-  id           String                   @id @default(auto()) @map("_id") @db.ObjectId
+model Booking {
+  id           String               @id @default(auto()) @map("_id") @db.ObjectId
   startDate    DateTime
   endDate      DateTime
-  priceDetails ReservationPriceDetail[]
-  guestsAmount ReservationGuestsAmount?
-  status       ReservationStatus        @default(PENDING)
+  priceDetails BookingPriceDetail[]
+  guestsAmount BookingGuestsAmount?
+  status       BookingStatus        @default(PENDING)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -346,7 +346,7 @@ model Reservation {
   listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
 }
 
-model ReservationGuestsAmount {
+model BookingGuestsAmount {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   adults    Int?
   children  Int?
@@ -355,11 +355,11 @@ model ReservationGuestsAmount {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  reservationId String      @unique @db.ObjectId
-  reservation   Reservation @relation(fields: [reservationId], references: [id], onDelete: Cascade)
+  bookingId String  @unique @db.ObjectId
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
 }
 
-model ReservationPriceDetail {
+model BookingPriceDetail {
   id    String     @id @default(auto()) @map("_id") @db.ObjectId
   type  PriceType?
   price Float      @default(0)
@@ -367,11 +367,11 @@ model ReservationPriceDetail {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  reservationId String      @db.ObjectId
-  reservation   Reservation @relation(fields: [reservationId], references: [id], onDelete: Cascade)
+  bookingId String  @db.ObjectId
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
 }
 
-enum ReservationStatus {
+enum BookingStatus {
   PENDING
   CONFIRMED
   CANCELLED

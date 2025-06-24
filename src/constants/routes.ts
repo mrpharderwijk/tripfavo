@@ -41,8 +41,8 @@ export const routes: RoutesObject = {
         protected: true,
         default: true,
       },
-      hostReservations: {
-        path: '/reservations',
+      hostBookings: {
+        path: '/bookings',
         protected: true,
       },
       structure: {
@@ -67,8 +67,8 @@ export const routes: RoutesObject = {
     path: '/guest',
     protected: true,
     children: {
-      guestReservations: {
-        path: '/reservations',
+      guestBookings: {
+        path: '/bookings',
         protected: true,
         default: true,
       },

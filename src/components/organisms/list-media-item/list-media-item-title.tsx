@@ -10,7 +10,13 @@ export function ListMediaItemTitle({
   title,
 }: ListMediaItemTitleProps): ReactElement {
   return (
-    <Body size="base-lgt" color="primary" font-weight="semibold">
+    <Body
+      size="base-mdt"
+      size-md="base-lgt"
+      color="primary"
+      font-weight="semibold"
+      text-overflow="ellipsis"
+    >
       {!!title && title}
     </Body>
   )

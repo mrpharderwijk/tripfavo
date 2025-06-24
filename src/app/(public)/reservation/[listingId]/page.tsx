@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation'
 import { ReactElement } from 'react'
 
+import { BookingDetailPage } from '@/features/bookings/booking-detail/booking-detail.page'
 import { getPublishedListing } from '@/features/listings/server/actions/get-listings'
-import { ReservationDetailPage } from '@/features/reservations/reservation-detail/reservation-detail.page'
 import { isActionError } from '@/server/utils/error'
 
 type ReservationPageProps = {
@@ -24,5 +24,5 @@ export default async function ReservationPage({
     notFound()
   }
 
-  return <ReservationDetailPage listing={listing} />
+  return <BookingDetailPage listing={listing} />
 }
