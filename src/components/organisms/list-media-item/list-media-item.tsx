@@ -5,11 +5,11 @@ import { ReactElement } from 'react'
 import { Box } from '@/components/atoms/layout/box/box'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
-import { Body } from '@/components/atoms/typography/body/body'
 import {
   ListingMediaItemStatus,
   ListMediaItemStatus,
 } from '@/components/organisms/list-media-item/list-media-item-status'
+import { ListMediaItemSubTitle } from '@/components/organisms/list-media-item/list-media-item-subtitle'
 import { ListMediaItemTitle } from '@/components/organisms/list-media-item/list-media-item-title'
 
 type ListMediaItemProps = {
@@ -79,26 +79,7 @@ export function ListMediaItem({
             justify-content="center"
           >
             <ListMediaItemTitle title={title} />
-            {/* <ListMediaItemSubTitle subtitle={subtitle} /> */}
-
-            <FlexBoxItem flex-direction="row" gap={2} fullWidth>
-              <FlexBoxItem flex-direction="col" flex-basis="1/2" gap={1}>
-                <Body size="base-xs" color="secondary">
-                  Check in
-                </Body>
-                <Body size="base-xs" color="primary" font-weight="semibold">
-                  22 September 2025
-                </Body>
-              </FlexBoxItem>
-              <FlexBoxItem flex-direction="col" flex-basis="1/2" gap={1}>
-                <Body size="base-xs" color="secondary">
-                  Check Out
-                </Body>
-                <Body size="base-xs" color="primary" font-weight="semibold">
-                  31 September 2025
-                </Body>
-              </FlexBoxItem>
-            </FlexBoxItem>
+            <ListMediaItemSubTitle subtitle={subtitle} />
           </FlexBox>
         </FlexBox>
       </Link>

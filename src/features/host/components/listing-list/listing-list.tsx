@@ -6,11 +6,11 @@ import { Heading } from '@/components/atoms/typography/heading/heading'
 import { DATE_FORMAT_DB } from '@/constants/dates'
 import { SortEnum } from '@/features/host/bookings/host-bookings/components/host-bookings-overview/host-bookings-overview'
 import { ListingItem } from '@/features/host/components/listing-list/listing-list-item'
-import { HostListing } from '@/features/host/types/host-listing'
+import { SafeHostListing } from '@/features/host/listings/types/safe-host-listing'
 
 type ListingListProps = {
   heading: string
-  items?: HostListing[]
+  items?: SafeHostListing[]
   sort?: SortEnum
 }
 

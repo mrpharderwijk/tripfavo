@@ -363,13 +363,13 @@
   --font-sans: var(--font-primary), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
-  --breakpoint-xs: 20rem;
-  --breakpoint-sm: 26rem;
-  --breakpoint-md: 46.5rem;
-  --breakpoint-lg: 59.375rem;
-  --breakpoint-xl: 64rem;
-  --breakpoint-2xl: 100rem;
-  --breakpoint-3xl: 120rem;
+  --breakpoint-xs: 20rem; /* 320px */
+  --breakpoint-sm: 28rem; /* 450px */
+  --breakpoint-md: 46.5rem; /* 744px */
+  --breakpoint-lg: 59.375rem; /* 950px */
+  --breakpoint-xl: 64rem; /* 1024px */
+  --breakpoint-2xl: 100rem; /* 1600px */
+  --breakpoint-3xl: 120rem; /* 1920px */
 
   --animate-dot-loader: dotLoader 0.6s ease-in-out infinite;
   @keyframes dotLoader {

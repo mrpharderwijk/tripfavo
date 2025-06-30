@@ -3,7 +3,7 @@ import { vi } from 'vitest'
 import useSWR from 'swr'
 
 import { useListing } from './use-listing'
-import { HostListing } from '@/features/host/types/host-listing'
+import { HostListing } from '@/features/host/listings/types/host-listing'
 
 vi.mock('swr')
 const useSWRMock = vi.mocked(useSWR)
@@ -16,6 +16,7 @@ const mockListing: HostListing = {
   structure: 'Test structure',
   privacyType: 'ENTIRE_PLACE',
   status: 'DRAFT',
+  host: null,
   createdAt: new Date('2023-01-01'),
   updatedAt: new Date('2023-01-01'),
   location: null,

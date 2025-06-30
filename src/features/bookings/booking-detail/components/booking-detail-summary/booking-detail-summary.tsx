@@ -8,7 +8,7 @@ import { BookingDetailSummaryDates } from '@/features/bookings/booking-detail/co
 import { BookingDetailSummaryGuests } from '@/features/bookings/booking-detail/components/booking-detail-summary/booking-detail-summary-guests'
 
 export function BookingDetailSummary(): ReactElement {
-  const tBookingDetailSummary = useTranslations('reservationDetail.summary')
+  const tBookingDetailSummary = useTranslations('bookingDetail.summary')
 
   return (
     <FlexBox flex-direction="col">

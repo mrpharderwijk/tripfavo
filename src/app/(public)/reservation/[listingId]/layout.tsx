@@ -1,3 +1,4 @@
+import { getTranslations } from 'next-intl/server'
 import { PropsWithChildren, ReactElement } from 'react'
 
 import { Heading } from '@/components/atoms/typography/heading/heading'
@@ -6,15 +7,16 @@ import { AppShell } from '@/components/molecules/layout/app-shell/app-shell'
 import { BackButton } from '@/features/nav-bar/components/back-button/back-button'
 import { NavBar } from '@/features/nav-bar/nav-bar'
 
-type ReservationDetailLayoutProps = PropsWithChildren<{
+type BookingDetailLayoutProps = PropsWithChildren<{
   params: Promise<{ listingId: string }>
 }>
 
-export default async function ReservationDetailLayout({
+export default async function BookingDetailLayout({
   children,
   params,
-}: ReservationDetailLayoutProps): Promise<ReactElement> {
+}: BookingDetailLayoutProps): Promise<ReactElement> {
   const { listingId } = await params
+  const tBookingDetail = await getTranslations('bookingDetail')
 
   return (
     <AppShell
@@ -25,7 +27,7 @@ export default async function ReservationDetailLayout({
            * TODO: Add reservation title
            */}
           <Heading tag="h1" like="h4-semibold">
-            Reservation
+            {tBookingDetail('heading')}
           </Heading>
           <div />
         </NavBar>

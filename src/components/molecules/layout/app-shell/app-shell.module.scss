@@ -1,21 +1,79 @@
 .appShell {
-  display: grid;
-  grid-template-areas: 
-    "nav nav"
-    "content content"
-    "content content";
   width: 100vw;
   height: 100dvh;
-  grid-template-rows: 64px 1fr 1fr;
-  grid-template-columns: 30% 70%;
 
-  @media (min-width: 46.5rem) {
-    grid-template-rows: 97px 1fr 1fr;
-    grid-template-areas: 
-    "nav nav"
-    "sidebar content"
-    "sidebar content";
+  .appShellSidebar {
+    display: none;
   }
+
+  &--sidebar {
+    display: grid;
+    grid-template-areas: 
+      "nav nav"
+      "content content"
+      "content content";
+    grid-template-rows: 64px 1fr 1fr;
+    grid-template-columns: 35% 65%;
+  
+    @media (min-width: 46.5rem) {
+      grid-template-rows: 97px 1fr 1fr;
+      grid-template-areas: 
+      "nav nav"
+      "sidebar content"
+      "sidebar content";
+    }
+
+    .appShellNavbar {
+      grid-area: nav;
+    }
+
+    .appShellSidebar {
+      grid-area: sidebar;
+      border-right: 1px solid var(--color-deco);
+      display: none;
+    
+      @media (min-width: 46.5rem) { // breakpoint-md
+        display: block;
+      }
+    
+      &--hidden {
+        display: none;
+      }
+    }
+    
+    .appShellMain {
+      grid-area: content;
+      overflow-y: scroll;
+    }
+    
+    .appShellBottomBar {
+      grid-area: footer;
+    }
+  }
+
+  &--bottomBar {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+
+    .appShellNavbar {
+      flex: 0 1 auto;
+      width: 100vw;
+    }
+
+    .appShellMain {
+      flex: 1 1 auto;
+      width: 100vw;
+      overflow-y: scroll;
+    }
+
+    .appShellBottomBar {
+      flex: 0 1 auto;
+      width: 100vw;
+    }
+  }
+ 
 
   &--fullWidth {
     grid-template-areas: 
@@ -25,25 +83,5 @@
   }
 }
 
-.appShellNavbar {
-  grid-area: nav;
-}
 
-.appShellSidebar {
-  grid-area: sidebar;
-  border-right: 1px solid var(--color-deco);
-  display: none;
 
-  @media (min-width: 46.5rem) {
-    display: block;
-  }
-
-  &--hidden {
-    display: none;
-  }
-}
-
-.appShellMain {
-  grid-area: content;
-  overflow-y: scroll;
-}

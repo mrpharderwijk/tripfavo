@@ -8,8 +8,8 @@ export type DbBooking = Prisma.BookingGetPayload<{
 
 export type SafeBooking = {
   id: string
-  startDate: Date
-  endDate: Date
+  startDate: string
+  endDate: string
   status: BookingStatus
   guestsAmount: {
     adults: number
@@ -17,6 +17,19 @@ export type SafeBooking = {
     infants: number
     pets: number
   }
+  guest: {
+    id: string
+    name: {
+      firstName: string
+      middleName: string
+      lastName: string
+    } | null
+    profileImage: {
+      url: string
+      fileName: string
+    } | null
+    createdAt: string
+  } | null
   listing: {
     id: string
     title: string
@@ -29,11 +42,23 @@ export type SafeBooking = {
       city: string
       country: string
     }
+    host: {
+      id: string
+      name: {
+        firstName: string
+        middleName: string
+        lastName: string
+      } | null
+      profileImage: {
+        url: string
+        fileName: string
+      }
+    }
   }
   priceDetails: {
     id: string
-    createdAt: Date
-    updatedAt: Date
+    createdAt: string
+    updatedAt: string
     price: number
     type: PriceType
   }[]

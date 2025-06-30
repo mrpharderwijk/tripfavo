@@ -6,7 +6,7 @@ import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { Heading } from '@/components/atoms/typography/heading/heading'
 import { AppShellBody } from '@/components/molecules/layout/app-shell/app-shell-body'
 import { HostListingsOverview } from '@/features/host/listings/host-listings/components/host-listings-overview/host-listings-overview'
-import { getHostListings } from '@/features/host/server/actions/get-host-listings'
+import { getHostListings } from '@/features/host/listings/server/actions/get-host-listings'
 import { isActionError } from '@/server/utils/error'
 
 export async function HostListingsPage(): Promise<ReactElement> {

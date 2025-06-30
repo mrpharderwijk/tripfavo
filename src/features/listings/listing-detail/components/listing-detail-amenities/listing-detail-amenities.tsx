@@ -69,13 +69,13 @@ export function ListingDetailAmenities(): ReactElement {
 
       <ModalDialog
         isVisible={!!currentOpenDialog}
-        onClose={() => closeDialog('amenities-show-all')}
+        onClose={closeDialog}
         header={<>{tListingAmenities('showAll.dialog.header')}</>}
         footer={
           <Button
             variant="quaternary"
             size="xl"
-            onClick={() => closeDialog('amenities-show-all')}
+            onClick={closeDialog}
             fullWidth
           >
             {tCommon('close')}

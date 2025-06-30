@@ -16,7 +16,7 @@ import {
 
 type DialogContextState = {
   openDialog: (dialogId: string) => void
-  closeDialog: (id: string) => void
+  closeDialog: () => void
   currentOpenDialog: string | null
 }
 
@@ -28,7 +28,11 @@ export function DialogContextProvider({
   const [state, dispatch] = useReducer(dialogReducer, initialState)
 
   function openDialog(dialogId: string): void {
-    dispatch({ type: DIALOG_TYPE.OpenDialog, payload: dialogId ?? null })
+    if (!dialogId) {
+      return
+    }
+
+    dispatch({ type: DIALOG_TYPE.OpenDialog, payload: dialogId })
   }
 
   function closeDialog(): void {

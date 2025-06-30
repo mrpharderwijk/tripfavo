@@ -3,7 +3,7 @@ import { ReactElement } from 'react'
 
 import { AppShell } from '@/components/molecules/layout/app-shell/app-shell'
 import { GuestSidebar } from '@/features/guest/components/guest-sidebar/guest-sidebar'
-import { GuestFavoritesPage } from '@/features/guest/favorites/guest-favorites.page'
+import { GuestFavoritesPage } from '@/features/guest/favorites/guest-favorites/guest-favorites.page'
 import { NavBar } from '@/features/nav-bar/nav-bar'
 
 export default async function FavoritesPage(): Promise<ReactElement> {

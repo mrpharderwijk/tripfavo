@@ -1,13 +1,11 @@
 'use client'
 
-import { format } from 'date-fns'
 import { useLocale } from 'next-intl'
-import { ReactElement, useMemo } from 'react'
+import { ReactElement } from 'react'
 import { BookingStatus } from '@prisma/client'
 
 import { BookingCard } from '@/features/bookings/bookings-list/booking-card'
 import { BookingCardStatusEnum } from '@/features/bookings/bookings-list/booking-card-status'
-import { localeToDateFnsLocale } from '@/utils/locale-to-date-fns-locale'
 
 type BookingsListItemProps = {
   id: string
@@ -15,8 +13,9 @@ type BookingsListItemProps = {
   urlBasePath: string
   image: { url: string; fileName: string } | null
   status: BookingStatus
-  startDate: Date
-  endDate: Date
+  startDate: string
+  endDate: string
+  location: { city: string; country: string }
 }
 
 const bookingsListItemStatusMap = {
@@ -32,27 +31,22 @@ export function BookingsListItem({
   title,
   status,
   startDate,
+  location,
   endDate,
 }: BookingsListItemProps): ReactElement {
   const locale = useLocale()
-  const subtitle = useMemo(() => {
-    const startDateFormatted = format(startDate, 'dd-MM-yyyy', {
-      locale: localeToDateFnsLocale(locale),
-    })
-    const endDateFormatted = format(endDate, 'dd-MM-yyyy', {
-      locale: localeToDateFnsLocale(locale),
-    })
-
-    return `${startDateFormatted} - ${endDateFormatted}`
-  }, [startDate, endDate, locale])
 
   return (
     <BookingCard
       href={`${urlBasePath}${id ? `/${id}` : ''}`}
-      status={bookingsListItemStatusMap[status]}
-      image={image}
+      image={image ?? null}
       title={title}
-      subtitle={subtitle}
+      location={`${location.city}, ${location.country}`}
+      checkInDate={startDate}
+      checkOutDate={endDate}
+      totalPrice={'$ 300'}
+      status={bookingsListItemStatusMap[status]}
+      nights={3}
     />
   )
 }

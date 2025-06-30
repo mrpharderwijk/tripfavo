@@ -3,7 +3,7 @@ import { ReactElement } from 'react'
 
 import { AppShell } from '@/components/molecules/layout/app-shell/app-shell'
 import { GuestBookingDetailPage } from '@/features/guest/bookings/guest-booking-detail/guest-booking-detail.page'
-import { getGuestBookingDetail } from '@/features/guest/server/actions/get-guest-bookings'
+import { getGuestBookingDetail } from '@/features/guest/bookings/server/actions/get-guest-bookings'
 import { BackButton } from '@/features/nav-bar/components/back-button/back-button'
 import { NavBar } from '@/features/nav-bar/nav-bar'
 import { isActionError } from '@/server/utils/error'

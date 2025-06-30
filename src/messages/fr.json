@@ -389,7 +389,8 @@
     "kitchenAmount": "{amount, plural, =1 {1 cuisine} other {# cuisines}}",
     "livingRoomAmount": "{amount, plural, =1 {1 salon} other {# salons}}"
   },
-  "reservationDetail": {
+  "bookingDetail": {
+    "heading": "Réservation",
     "summary": {
       "heading": "Résumé",
       "dates": {

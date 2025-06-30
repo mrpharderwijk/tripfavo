@@ -1,4 +1,4 @@
-// This is your Prisma schema file,
+// This is your Prisma schema file for PostgreSQL,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
@@ -9,12 +9,12 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("PRISMA_DB_URL")
 }
 
 model User {
-  id             String            @id @default(auto()) @map("_id") @db.ObjectId
+  id             String            @id @default(cuid())
   name           Name?
   email          String?           @unique
   emailVerified  DateTime?
@@ -40,11 +40,11 @@ model User {
 }
 
 model Session {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  id           String   @id @default(cuid())
   sessionToken String   @unique
   expires      DateTime
 
-  userId String @db.ObjectId
+  userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
@@ -52,17 +52,17 @@ model Session {
 }
 
 model Account {
-  id                String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId            String  @db.ObjectId
+  id                String  @id @default(cuid())
+  userId            String
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.String
-  access_token      String? @db.String
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.String
+  id_token          String?
   session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -72,8 +72,8 @@ model Account {
 
 // Optional for WebAuthn support
 model Authenticator {
-  credentialID         String  @id @map("_id")
-  userId               String  @db.ObjectId
+  credentialID         String  @id
+  userId               String
   providerAccountId    String
   credentialPublicKey  String
   counter              Int
@@ -87,7 +87,7 @@ model Authenticator {
 }
 
 model UserStatus {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+  id String @id @default(cuid())
 
   verified   Boolean   @default(false)
   verifiedAt DateTime?
@@ -98,21 +98,21 @@ model UserStatus {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  userId String @unique @db.ObjectId
+  userId String @unique
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model UserVerifyToken {
-  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  id      String   @id @default(cuid())
   token   String   @unique
   expires DateTime
 
-  userId String @unique @db.ObjectId
+  userId String @unique
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model UserProfileImage {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(cuid())
   url       String
   fileHash  String
   fileKey   String   @unique
@@ -122,7 +122,7 @@ model UserProfileImage {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  userId String @unique @db.ObjectId
+  userId String @unique
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
@@ -133,7 +133,7 @@ enum UserRole {
 }
 
 model Listing {
-  id                       String        @id @default(auto()) @map("_id") @db.ObjectId
+  id                       String        @id @default(cuid())
   title                    String?
   description              String?
   neighbourhoodDescription String?
@@ -143,8 +143,8 @@ model Listing {
   createdAt                DateTime      @default(now())
   updatedAt                DateTime      @updatedAt
 
-  userId String @db.ObjectId
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  hostId String
+  host   User   @relation(fields: [hostId], references: [id], onDelete: Cascade)
 
   bookings       Booking[]
   location       ListingLocation?
@@ -163,7 +163,7 @@ enum ListingStatus {
 }
 
 model ListingLocation {
-  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  id             String   @id @default(cuid())
   country        String
   province       String
   city           String
@@ -177,12 +177,12 @@ model ListingLocation {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
-  listingId String  @unique @db.ObjectId
+  listingId String  @unique
   listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
 }
 
 model ListingFloorPlan {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          String   @id @default(cuid())
   rooms       Int?
   bathrooms   Int?
   bedrooms    Int?
@@ -192,12 +192,12 @@ model ListingFloorPlan {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  listingId String  @unique @db.ObjectId
+  listingId String  @unique
   listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
 }
 
 model ListingGuestsAmount {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(cuid())
   maxGuests Int?
   adults    Int?
   children  Int?
@@ -206,12 +206,12 @@ model ListingGuestsAmount {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  listingId String  @unique @db.ObjectId
+  listingId String  @unique
   listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
 }
 
 model ListingImage {
-  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  id       String    @id @default(cuid())
   fileHash String
   fileKey  String    @unique
   fileName String
@@ -224,32 +224,32 @@ model ListingImage {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  listingId String  @db.ObjectId
+  listingId String
   listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
 
-  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String? @db.ObjectId
+  hostId String?
+  host   User?   @relation(fields: [hostId], references: [id], onDelete: Cascade)
 }
 
 model ListingAmenity {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+  id String @id @default(cuid())
 
   type    AmenityType?
   amenity Amenity?     @relation(fields: [type], references: [type], onDelete: Cascade)
 
   listing   Listing? @relation(fields: [listingId], references: [id], onDelete: Cascade)
-  listingId String?  @db.ObjectId
+  listingId String?
 }
 
 model ListingPriceDetail {
-  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  id        String     @id @default(cuid())
   type      PriceType?
   price     Float?
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
 
   listing   Listing? @relation(fields: [listingId], references: [id], onDelete: Cascade)
-  listingId String?  @db.ObjectId
+  listingId String?
 }
 
 enum PriceType {
@@ -288,7 +288,7 @@ enum RoomType {
 }
 
 model Amenity {
-  id             String           @id @default(auto()) @map("_id") @db.ObjectId
+  id             String           @id @default(cuid())
   type           AmenityType      @unique
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
@@ -329,7 +329,7 @@ enum AmenityType {
 }
 
 model Booking {
-  id           String               @id @default(auto()) @map("_id") @db.ObjectId
+  id           String               @id @default(cuid())
   startDate    DateTime
   endDate      DateTime
   priceDetails BookingPriceDetail[]
@@ -339,15 +339,15 @@ model Booking {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  userId String @db.ObjectId
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  guestId String
+  guest   User   @relation(fields: [guestId], references: [id], onDelete: Cascade)
 
-  listingId String  @db.ObjectId
+  listingId String
   listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
 }
 
 model BookingGuestsAmount {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(cuid())
   adults    Int?
   children  Int?
   infants   Int?
@@ -355,19 +355,19 @@ model BookingGuestsAmount {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  bookingId String  @unique @db.ObjectId
+  bookingId String  @unique
   booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
 }
 
 model BookingPriceDetail {
-  id    String     @id @default(auto()) @map("_id") @db.ObjectId
+  id    String     @id @default(cuid())
   type  PriceType?
   price Float      @default(0)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  bookingId String  @db.ObjectId
+  bookingId String
   booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
 }
 
@@ -378,24 +378,24 @@ enum BookingStatus {
 }
 
 model GuestFavorite {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+  id String @id @default(cuid())
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  userId String @db.ObjectId
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  guestId String
+  guest   User   @relation(fields: [guestId], references: [id], onDelete: Cascade)
 
-  listingId String  @db.ObjectId
+  listingId String
   listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
 }
 
 model Name {
-  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  id         String  @id @default(cuid())
   firstName  String
   middleName String?
   lastName   String
-  userId     String  @unique @db.ObjectId
+  userId     String  @unique
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

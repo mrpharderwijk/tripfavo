@@ -1,11 +1,13 @@
 'use client'
 
-import { ReactElement, Suspense } from 'react'
+import { ReactElement } from 'react'
 
-import { DotLoader } from '@/components/atoms/dot-loader/dot-loader'
-import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
+import { Divider } from '@/components/atoms/layout/divider/divider'
+import { AppShellBody } from '@/components/molecules/layout/app-shell/app-shell-body'
 import { SafeBooking } from '@/features/bookings/types/booking'
 import { GuestBookingDetailListing } from '@/features/guest/bookings/guest-booking-detail/components/guest-booking-detail-listing/guest-booking-detail-listing'
+import { GuestBookingDetailPriceBreakdown } from '@/features/guest/bookings/guest-booking-detail/components/guest-booking-detail-price-breakdown/guest-booking-detail-price-breakdown'
+import { GuestBookingDetailSummary } from '@/features/guest/bookings/guest-booking-detail/components/guest-booking-detail-summary/guest-booking-detail-summary'
 import { GuestBookingDetailContextProvider } from '@/features/guest/bookings/guest-booking-detail/providers/guest-booking-detail-context-provider'
 
 type GuestBookingDetailPageProps = {
@@ -16,12 +18,16 @@ export function GuestBookingDetailPage({
   booking,
 }: GuestBookingDetailPageProps): ReactElement {
   return (
-    <GuestBookingDetailContextProvider booking={booking}>
-      <FlexBox flex-direction="col" gap={6} padding-x={6} padding-top={6}>
-        <Suspense fallback={<DotLoader />}>
-          <GuestBookingDetailListing />
-        </Suspense>
-      </FlexBox>
-    </GuestBookingDetailContextProvider>
+    <AppShellBody>
+      <GuestBookingDetailContextProvider booking={booking}>
+        <GuestBookingDetailListing />
+        <Divider />
+
+        <GuestBookingDetailSummary />
+        <Divider />
+
+        <GuestBookingDetailPriceBreakdown />
+      </GuestBookingDetailContextProvider>
+    </AppShellBody>
   )
 }

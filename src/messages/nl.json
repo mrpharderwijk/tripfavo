@@ -390,7 +390,8 @@
     "kitchenAmount": "{amount, plural, =1 {1 keuken} other {# keukens}}",
     "livingRoomAmount": "{amount, plural, =1 {1 woonkamer} other {# woonkamers}}"
   },
-  "reservationDetail": {
+  "bookingDetail": {
+    "heading": "Boekingsverzoek",
     "summary": {
       "heading": "Samenvatting",
       "dates": {

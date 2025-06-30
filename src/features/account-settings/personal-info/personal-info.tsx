@@ -57,7 +57,7 @@ export function PersonalInfo(): ReactElement {
       })
 
       setProfileImage(response.data.profileImage.url)
-      closeDialog('profile-image')
+      closeDialog()
       setProfileImageUploading(false)
     } catch (error: any) {
       setProfileImageUploading(false)
@@ -93,7 +93,7 @@ export function PersonalInfo(): ReactElement {
         <ModalDialog
           isVisible={currentOpenDialog === 'profile-image'}
           header={<>Upload/edit your profile image</>}
-          onClose={() => closeDialog('profile-image')}
+          onClose={closeDialog}
         >
           <UploadDropzone
             endpoint="profileImageUploader"

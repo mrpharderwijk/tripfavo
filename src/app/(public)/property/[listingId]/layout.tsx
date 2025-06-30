@@ -24,14 +24,5 @@ export default async function ListingDetailLayout({
       {children}
       <Footer />
     </AppShell>
-    //   <FlexBox flex-direction="col" fullHeight>
-    //     <FlexBoxItem flex="initial">
-
-    //     </FlexBoxItem>
-
-    //     <FlexBoxItem tag="main" padding-b={32} flex="auto" min-height="full">
-
-    //     </FlexBoxItem>
-    //   </FlexBox>
   )
 }

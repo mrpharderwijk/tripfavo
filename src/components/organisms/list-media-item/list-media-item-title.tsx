@@ -12,9 +12,9 @@ export function ListMediaItemTitle({
   return (
     <Body
       size="base-mdt"
-      size-md="base-lgt"
+      size-sm="base-lgt"
       color="primary"
-      font-weight="semibold"
+      font-weight="bold"
       text-overflow="ellipsis"
     >
       {!!title && title}

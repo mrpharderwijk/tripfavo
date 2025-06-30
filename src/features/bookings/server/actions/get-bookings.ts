@@ -17,9 +17,10 @@ export const bookingSelect = {
       pets: true,
     },
   },
-  user: {
+  guest: {
     select: {
       id: true,
+      email: true,
       name: true,
       profileImage: {
         select: {
@@ -27,6 +28,7 @@ export const bookingSelect = {
           fileName: true,
         },
       },
+      createdAt: true,
     },
   },
   listing: {
@@ -44,6 +46,24 @@ export const bookingSelect = {
         select: {
           city: true,
           country: true,
+          streetName: true,
+          houseNumber: true,
+          postalCode: true,
+          latitude: true,
+          longitude: true,
+        },
+      },
+      host: {
+        select: {
+          id: true,
+          email: true,
+          name: true,
+          profileImage: {
+            select: {
+              url: true,
+              fileName: true,
+            },
+          },
         },
       },
     },
@@ -62,7 +82,7 @@ export const bookingSelect = {
 }
 
 export async function getBookings(): Promise<
-  ServerActionResponse<SafeBooking[] | null>
+  ServerActionResponse<SafeBooking[]>
 > {
   const session = await getSession()
   if (!session?.user?.id) {
@@ -72,12 +92,15 @@ export async function getBookings(): Promise<
   try {
     const bookings: DbBooking[] = await prisma.booking.findMany({
       where: {
-        userId: session.user.id,
+        guestId: session.user.id,
       },
       select: bookingSelect,
     })
 
-    const safeBooking = mapToSafeBooking(bookings)
+    const safeBooking =
+      bookings
+        ?.map((booking) => mapToSafeBooking(booking))
+        .filter((booking): booking is SafeBooking => booking !== null) ?? []
 
     return { data: safeBooking }
   } catch (error) {

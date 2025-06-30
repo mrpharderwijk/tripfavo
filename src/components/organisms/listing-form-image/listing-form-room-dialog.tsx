@@ -15,7 +15,7 @@ import { ModalDialog } from '@/components/molecules/modal-dialog/modal-dialog'
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { roomTypes } from '@/constants/room-types'
-import { useHostContext } from '@/features/host/providers/host-context-provider'
+import { useHostContext } from '@/features/host/listings/providers/host-context-provider'
 import { cn } from '@/utils/class-names'
 
 type ListingFormRoomDialogProps = {

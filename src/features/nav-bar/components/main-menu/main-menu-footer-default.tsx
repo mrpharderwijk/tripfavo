@@ -15,7 +15,7 @@ import { getRoutePathByRouteName } from '@/utils/get-route'
 export function MainMenuFooterDefault(): ReactElement {
   const { currentUser } = useAppContext()
   const tCommon = useTranslations('common')
-  const { handleOnClickLogout } = useMainMenuContext()
+  const { handleOnClickLogout, toggleMainMenu } = useMainMenuContext()
 
   return (
     <>
@@ -29,6 +29,7 @@ export function MainMenuFooterDefault(): ReactElement {
               <Link
                 className="w-full"
                 href={getRoutePathByRouteName('account')}
+                onClick={toggleMainMenu}
               >
                 {buttonContent}
               </Link>
@@ -56,7 +57,11 @@ export function MainMenuFooterDefault(): ReactElement {
             size="lg"
             variant="sidebar-menu-item-active"
             renderRoot={({ buttonContent }) => (
-              <Link className="w-full" href={getRoutePathByRouteName('login')}>
+              <Link
+                className="w-full"
+                href={getRoutePathByRouteName('login')}
+                onClick={toggleMainMenu}
+              >
                 {buttonContent}
               </Link>
             )}
@@ -68,7 +73,11 @@ export function MainMenuFooterDefault(): ReactElement {
             size="lg"
             variant="sidebar-menu-item-active"
             renderRoot={({ buttonContent }) => (
-              <Link className="w-full" href={getRoutePathByRouteName('signUp')}>
+              <Link
+                className="w-full"
+                href={getRoutePathByRouteName('signUp')}
+                onClick={toggleMainMenu}
+              >
                 {buttonContent}
               </Link>
             )}

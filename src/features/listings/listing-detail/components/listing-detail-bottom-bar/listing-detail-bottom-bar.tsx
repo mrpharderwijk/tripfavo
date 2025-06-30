@@ -60,7 +60,7 @@ export function ListingDetailBottomBar({
         gap={4}
         gap-md={10}
       >
-        <FlexBoxItem flex="auto">
+        <FlexBoxItem flex="auto" flex-direction="col" gap={1}>
           {!selectedDateRange?.from && !selectedDateRange?.to && (
             <Body color="secondary" size="base-mdt" font-weight="semibold">
               {tListingDetailBottomBar('selectDates')}

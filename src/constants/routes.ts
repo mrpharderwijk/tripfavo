@@ -26,11 +26,6 @@ export const routes: RoutesObject = {
   },
   property: {
     path: '/property',
-    localizedPaths: {
-      en: '/property',
-      nl: '/verhuur',
-      fr: '/propriete',
-    },
   },
   host: {
     path: '/host',

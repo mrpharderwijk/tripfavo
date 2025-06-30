@@ -52,7 +52,7 @@ export function BookingDetailSummaryGuests(): ReactElement {
     router.replace(
       `/booking/${listing.id}?startDate=${startDate}&endDate=${endDate}&adults=${updatedGuestsAmount.adults}&children=${updatedGuestsAmount.children}&infants=${updatedGuestsAmount.infants}&pets=${updatedGuestsAmount.pets}`,
     )
-    closeDialog('booking-detail-summary-guests')
+    closeDialog()
   }
 
   return (
@@ -63,7 +63,7 @@ export function BookingDetailSummaryGuests(): ReactElement {
           <Button
             variant="primary-link"
             size="lg"
-            onClick={() => openDialog('reservation-detail-summary-guests')}
+            onClick={() => openDialog('booking-detail-summary-guests')}
           >
             {tCommon('forms.edit')}
           </Button>
@@ -88,8 +88,8 @@ export function BookingDetailSummaryGuests(): ReactElement {
         </Body>
       </LineAction>
       <ModalDialog
-        isVisible={currentOpenDialog === 'reservation-detail-summary-guests'}
-        onClose={() => closeDialog('reservation-detail-summary-guests')}
+        isVisible={currentOpenDialog === 'booking-detail-summary-guests'}
+        onClose={closeDialog}
         showHeaderCloseButton
         closeOnEscape
         closeOnOutsideClick
@@ -129,7 +129,7 @@ export function BookingDetailSummaryGuests(): ReactElement {
                 })
               }}
               editable={false}
-              min={listing.guestsAmount?.adults === 0 ? 0 : 1}
+              min={listing.guestsAmount?.adults === 0 ? 1 : 1}
               max={listing.guestsAmount?.adults ?? undefined}
             />
           </FlexBoxItem>
@@ -167,6 +167,7 @@ export function BookingDetailSummaryGuests(): ReactElement {
               editable={false}
               min={0}
               max={listing.guestsAmount?.children ?? undefined}
+              disabled={listing.guestsAmount?.children === 0}
             />
           </FlexBoxItem>
         </FlexBox>
@@ -203,6 +204,7 @@ export function BookingDetailSummaryGuests(): ReactElement {
               editable={false}
               min={0}
               max={listing.guestsAmount?.infants ?? undefined}
+              disabled={listing.guestsAmount?.infants === 0}
             />
           </FlexBoxItem>
         </FlexBox>

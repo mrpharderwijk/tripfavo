@@ -17,7 +17,6 @@ export default async function ListingPage({
   const listing = isActionError(listingResponse)
     ? null
     : (listingResponse?.data ?? null)
-
   if (!listing) {
     notFound()
   }

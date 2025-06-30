@@ -14,6 +14,7 @@ import { useHostBookingDetailContext } from '@/features/host/bookings/host-booki
 import { getCleaningFee } from '@/features/listings/utils/get-cleaning-fee'
 import { getDeposit } from '@/features/listings/utils/get-deposit'
 import { Locale } from '@/i18n/config'
+import { parseDbDateStringToDate } from '@/utils/date/date-string-to-date'
 import { calculateTotalPriceIncludingCleaningFee } from '@/utils/pricing/calculate-total-price'
 import { calculateTotalPricePerNight } from '@/utils/pricing/calculate-total-price-per-night'
 
@@ -21,12 +22,12 @@ export function HostBookingDetailPriceBreakdown(): ReactElement {
   const locale = useLocale()
   const { booking } = useHostBookingDetailContext()
   const tBookingDetailPriceBreakdown = useTranslations(
-    'reservationDetail.priceBreakdown',
+    'bookingDetail.priceBreakdown',
   )
-
+  console.log(booking)
   const totalPricePerNight = calculateTotalPricePerNight({
-    startDate: booking?.startDate,
-    endDate: booking?.endDate,
+    startDate: parseDbDateStringToDate(booking?.startDate ?? ''),
+    endDate: parseDbDateStringToDate(booking?.endDate ?? ''),
     datePrices,
   })
 
@@ -34,8 +35,8 @@ export function HostBookingDetailPriceBreakdown(): ReactElement {
   const deposit = getDeposit(booking?.priceDetails)
   const totalPrice = calculateTotalPriceIncludingCleaningFee({
     priceDetails: booking?.priceDetails,
-    startDate: booking?.startDate,
-    endDate: booking?.endDate,
+    startDate: parseDbDateStringToDate(booking?.startDate ?? ''),
+    endDate: parseDbDateStringToDate(booking?.endDate ?? ''),
     datePrices,
   })
 

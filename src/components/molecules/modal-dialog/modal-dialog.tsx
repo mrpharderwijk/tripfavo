@@ -66,7 +66,7 @@ export function ModalDialog({
             fixed
             flex
             focus:outline-none
-            h-full
+            h-dvh
             inset-0
             items-end
             justify-center
@@ -82,14 +82,18 @@ export function ModalDialog({
               bg-bg-primary
               flex
               flex-col
-              h-full
+              max-h-4/6
               mx-auto
               p-0
-              relative
-              md:rounded-3xl
+              absolute
+              bottom-0
+              rounded-tl-3xl
+              rounded-tr-3xl
               w-full
-              sm:w-5/6
+              md:relative
+              md:max-h-5/6
               md:w-4/6
+              md:rounded-3xl
               lg:w-3/6
               xl:w-2/5
             `}

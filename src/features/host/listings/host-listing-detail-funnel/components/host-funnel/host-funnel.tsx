@@ -8,7 +8,7 @@ import { Container } from '@/components/atoms/layout/container/container'
 import {
   HOST_STEP,
   useHostContext,
-} from '@/features/host/providers/host-context-provider'
+} from '@/features/host/listings/providers/host-context-provider'
 import { useListing } from '@/hooks/use-listing/use-listing'
 
 export function HostFunnel(): ReactElement {

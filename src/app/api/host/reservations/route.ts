@@ -1,3 +1,3 @@
-import { GET } from '@/features/host/server/api/bookings/bookings.api'
+import { GET } from '@/features/host/bookings/server/api/bookings.api'
 
 export { GET }

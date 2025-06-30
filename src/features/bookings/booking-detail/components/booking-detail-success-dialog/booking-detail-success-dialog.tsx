@@ -23,7 +23,7 @@ export function BookingDetailSuccessDialog(): ReactElement {
 
   function handleOnCloseModalSuccess(): void {
     router.push(`/property/${listing.id}`)
-    closeDialog('booking-success')
+    closeDialog()
   }
 
   return (

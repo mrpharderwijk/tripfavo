@@ -49,7 +49,7 @@ export function BookingDetailSummaryDates(): ReactElement {
     router.replace(
       `/booking/${listing.id}?startDate=${startDate}&endDate=${endDate}&adults=${totalGuestsAmount.adults}&children=${totalGuestsAmount.children}&infants=${totalGuestsAmount.infants}&pets=${totalGuestsAmount.pets}`,
     )
-    closeDialog('booking-detail-summary-dates')
+    closeDialog()
   }
 
   return (
@@ -80,7 +80,7 @@ export function BookingDetailSummaryDates(): ReactElement {
 
       <ModalDialog
         isVisible={currentOpenDialog === 'booking-detail-summary-dates'}
-        onClose={() => closeDialog('booking-detail-summary-dates')}
+        onClose={closeDialog}
         showHeaderCloseButton
         closeOnEscape
         closeOnOutsideClick

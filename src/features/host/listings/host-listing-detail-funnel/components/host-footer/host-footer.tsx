@@ -6,7 +6,7 @@ import { ReactElement } from 'react'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { BottomBar } from '@/components/molecules/bottom-bar/bottom-bar'
 import { Button } from '@/components/molecules/buttons/button'
-import { useHostContext } from '@/features/host/providers/host-context-provider'
+import { useHostContext } from '@/features/host/listings/providers/host-context-provider'
 
 export function HostFooter(): ReactElement {
   const tCommon = useTranslations('common')

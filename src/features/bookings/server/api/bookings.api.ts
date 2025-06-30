@@ -73,7 +73,7 @@ export async function POST(
     await prisma.booking.create({
       data: {
         listingId,
-        userId,
+        guestId: userId,
         startDate,
         endDate,
         guestsAmount: {
@@ -125,7 +125,7 @@ export async function POST(
 
     const host = await prisma.user.findUnique({
       where: {
-        id: listing?.user?.id,
+        id: listing?.host.id,
       },
       select: {
         email: true,

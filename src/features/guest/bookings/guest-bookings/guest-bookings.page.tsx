@@ -8,7 +8,7 @@ import { Heading } from '@/components/atoms/typography/heading/heading'
 import { AppShellBody } from '@/components/molecules/layout/app-shell/app-shell-body'
 import { BookingsContextProvider } from '@/features/bookings/providers/bookings-context-provider'
 import { GuestBookingsOverview } from '@/features/guest/bookings/guest-bookings/components/guest-bookings-overview/guest-bookings-overview'
-import { getGuestBookings } from '@/features/guest/server/actions/get-guest-bookings'
+import { getGuestBookings } from '@/features/guest/bookings/server/actions/get-guest-bookings'
 import { isActionError } from '@/server/utils/error'
 
 export async function GuestBookingsPage(): Promise<ReactElement> {

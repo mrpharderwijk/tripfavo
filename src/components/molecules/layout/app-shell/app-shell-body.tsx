@@ -18,8 +18,9 @@ export function AppShellBody({
         flex-direction="col"
         padding-x={4}
         padding-y={6}
-        padding-x-md={20}
+        padding-x-md={5}
         padding-y-md={10}
+        padding-x-lg={10}
         gap={6}
         fullHeight
       >

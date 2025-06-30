@@ -19,6 +19,7 @@ export function ModalHeader({ children }: ModalHeaderProps): ReactElement {
         min-h-12
         md:min-h-16
         px-6
+        py-6
       `}
     >
       {children}

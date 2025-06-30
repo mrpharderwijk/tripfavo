@@ -45,15 +45,21 @@ export function ListingDetailPage({
               <ListingDetailTitle />
               <ListingDetailSubtitle />
             </FlexBox>
+            <Divider />
 
             {/* <ListingDetailFloorPlan /> */}
             <ListingDetailHostInfo />
+            <Divider />
+
             <ListingDetailAbout />
             <Divider />
+
             <ListingDetailLocation />
             <Divider />
+
             <ListingDetailAmenities />
             <Divider />
+
             <div ref={datePickerRef}>
               <ListingDetailDatePicker />
             </div>

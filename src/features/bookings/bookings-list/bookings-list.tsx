@@ -2,7 +2,6 @@ import { ReactElement } from 'react'
 
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { Heading } from '@/components/atoms/typography/heading/heading'
-import { AppShellContainerItem } from '@/components/molecules/layout/app-shell/app-shell-container-item'
 import { BookingsListItem } from '@/features/bookings/bookings-list/bookings-list-item'
 import { useBookingsContext } from '@/features/bookings/providers/bookings-context-provider'
 
@@ -22,29 +21,31 @@ export function BookingsList({
   }
 
   return (
-    <AppShellContainerItem fullWidthMobile>
-      <FlexBox flex-direction="col" gap={4}>
-        {heading && (
-          <Heading tag="h3" like="h6" color="primary" font-weight="bold">
-            {heading}
-          </Heading>
-        )}
+    <FlexBox flex-direction="col" gap={4}>
+      {heading && (
+        <Heading tag="h3" like="h6" color="primary" font-weight="bold">
+          {heading}
+        </Heading>
+      )}
 
-        <FlexBox flex-direction="col" gap={0} gap-md={2}>
-          {bookings.map((item) => (
-            <BookingsListItem
-              key={item.id}
-              urlBasePath={urlBasePath}
-              id={item.id}
-              image={item.listing.images[0]}
-              title={item.listing.title}
-              status={item.status}
-              startDate={item.startDate}
-              endDate={item.endDate}
-            />
-          ))}
-        </FlexBox>
+      <FlexBox flex-direction="col" gap={0} gap-md={2} fullWidth>
+        {bookings.map((item) => (
+          <BookingsListItem
+            key={item.id}
+            urlBasePath={urlBasePath}
+            id={item.id}
+            image={
+              item.listing.images.find((image) => image.isMain) ??
+              item.listing.images[0]
+            }
+            location={item.listing.location}
+            title={item.listing.title}
+            status={item.status}
+            startDate={item.startDate}
+            endDate={item.endDate}
+          />
+        ))}
       </FlexBox>
-    </AppShellContainerItem>
+    </FlexBox>
   )
 }

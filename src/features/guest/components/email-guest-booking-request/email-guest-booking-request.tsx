@@ -1,4 +1,5 @@
 import { format, parseISO } from 'date-fns'
+import { getTranslations } from 'next-intl/server'
 import { ReactElement } from 'react'
 import {
   Column,
@@ -6,7 +7,6 @@ import {
   Heading,
   Hr,
   Img,
-  Link,
   Row,
   Section,
   Text,
@@ -35,14 +35,29 @@ export type EmailGuestBookingRequestProps = {
   guest: PublicGuestUser
 }
 
-export function EmailGuestBookingRequest({
+export async function EmailGuestBookingRequest({
   startDate,
   endDate,
   listing,
   guestsAmount,
   locale,
-}: EmailGuestBookingRequestProps): ReactElement {
-  const previewText = `Your booking for ${listing?.location?.city ?? 'unknown city'}`
+}: EmailGuestBookingRequestProps): Promise<ReactElement> {
+  const tBookingDetailSummary = await getTranslations('bookingDetail.summary')
+  const tBookingDetailSummaryDates = await getTranslations(
+    'bookingDetail.summary.dates',
+  )
+  const tBookingDetailSummaryGuests = await getTranslations(
+    'bookingDetail.summary.guests',
+  )
+  const tGuestBookingEmailBookingRequest = await getTranslations(
+    'guest.bookings.email.bookingRequest',
+  )
+  const tBookingDetailPriceBreakdown = await getTranslations(
+    'bookingDetail.priceBreakdown',
+  )
+  const previewText = tGuestBookingEmailBookingRequest('previewText', {
+    listingName: `<b>${listing?.location?.streetName ?? 'unknown city'} ${listing?.location?.houseNumber ?? ''}</b>`,
+  })
   const parsedStartDate = parseISO(startDate)
   const parsedEndDate = parseISO(endDate)
   const formattedStartDate = format(parsedStartDate, 'dd-MM-yyyy', {
@@ -69,12 +84,11 @@ export function EmailGuestBookingRequest({
     <RootLayout previewText={previewText}>
       <Section className="px-[24px]">
         <Container className="py-[16px]">
-          <Heading>Reservation request</Heading>
+          <Heading>{tGuestBookingEmailBookingRequest('heading')}</Heading>
           <Text>
-            Your reservation request for{' '}
-            <i>{listing?.location?.city ?? 'unknown city'}</i> has been sent to
-            the host. The host will review your reservation and get back to you
-            as soon as possible.
+            {tGuestBookingEmailBookingRequest('description', {
+              listingName: `<b>${listing?.location?.streetName ?? 'unknown city'} ${listing?.location?.houseNumber ?? ''}</b>`,
+            })}
           </Text>
         </Container>
       </Section>
@@ -110,14 +124,14 @@ export function EmailGuestBookingRequest({
           <Row className="pt-[24px]">
             <Column align="left">
               <Heading as="h2" className="my-[0px]">
-                Summary
+                {tBookingDetailSummary('heading')}
               </Heading>
             </Column>
           </Row>
           <Row className="py-[24px]">
             <Column align="left">
               <Text className="text-md text-[#222222] font-[800] my-[0px]">
-                Dates
+                {tBookingDetailSummaryDates('label')}
               </Text>
               <Text className="text-md text-[#222222] my-[0px]">
                 {formattedStartDate} - {formattedEndDate}
@@ -130,13 +144,24 @@ export function EmailGuestBookingRequest({
           <Row className="py-[24px]">
             <Column align="left">
               <Text className="text-md text-[#222222] font-[800] my-[0px]">
-                Guests
+                {tBookingDetailSummaryGuests('label')}
               </Text>
               <Text className="text-md text-[#222222] my-[0px]">
-                {guestsAmount?.adults ?? 0} adults,{' '}
-                {guestsAmount?.children ?? 0} children,{' '}
-                {guestsAmount?.infants ?? 0} infants, {guestsAmount?.pets ?? 0}{' '}
-                pets
+                {tBookingDetailSummaryGuests('value.adultsAmount', {
+                  amount: guestsAmount?.adults ?? 1,
+                })}
+                ,{' '}
+                {tBookingDetailSummaryGuests('value.childrenAmount', {
+                  amount: guestsAmount?.children ?? 0,
+                })}
+                ,{' '}
+                {tBookingDetailSummaryGuests('value.infantsAmount', {
+                  amount: guestsAmount?.infants ?? 0,
+                })}
+                ,{' '}
+                {tBookingDetailSummaryGuests('value.petsAmount', {
+                  amount: guestsAmount?.pets ?? 0,
+                })}
               </Text>
             </Column>
           </Row>
@@ -146,7 +171,7 @@ export function EmailGuestBookingRequest({
           <Row className="py-[24px]">
             <Column align="left">
               <Heading as="h2" className="my-[0px]">
-                Price details
+                {tBookingDetailPriceBreakdown('heading')}
               </Heading>
             </Column>
           </Row>
@@ -154,7 +179,14 @@ export function EmailGuestBookingRequest({
             <Row className="py-[0px]">
               <Column align="left">
                 <Text className="text-md text-[#222222] my-[0px]">
-                  {pricePerNight} x {nightAmount} nights
+                  <LocalizedPrice
+                    price={pricePerNight}
+                    locale={locale as Locale}
+                  />{' '}
+                  x{' '}
+                  {tBookingDetailPriceBreakdown('nightAmount', {
+                    amount: nightAmount,
+                  })}
                 </Text>
               </Column>
               <Column align="right">
@@ -168,7 +200,7 @@ export function EmailGuestBookingRequest({
           <Row className="py-[8px]">
             <Column align="left">
               <Text className="text-md text-[#222222] my-[0px]">
-                Cleaning fee
+                {tBookingDetailPriceBreakdown('cleaningFee')}
               </Text>
             </Column>
             <Column align="right">
@@ -180,7 +212,9 @@ export function EmailGuestBookingRequest({
 
           <Row className="py-[0px]">
             <Column align="left">
-              <Text className="text-md text-[#222222] my-[0px]">Deposit</Text>
+              <Text className="text-md text-[#222222] my-[0px]">
+                {tBookingDetailPriceBreakdown('deposit')}
+              </Text>
             </Column>
             <Column align="right">
               <Text className="text-md text-[#222222] my-[0px]">
@@ -194,7 +228,7 @@ export function EmailGuestBookingRequest({
           <Row className="py-[0px]">
             <Column align="left">
               <Text className="text-md text-[#222222] font-[800] my-[0px]">
-                Total price
+                {tBookingDetailPriceBreakdown('total')}
               </Text>
             </Column>
             <Column align="right">
@@ -224,10 +258,13 @@ export function EmailGuestBookingRequest({
 
       <Section className="px-[24px]">
         <Container className="py-[16px]">
-          <Heading as="h2">What's next?</Heading>
+          <Heading as="h2">
+            {tGuestBookingEmailBookingRequest('whatsNext.heading')}
+          </Heading>
           <Text>
-            You can check the status of your reservation at any time in your{' '}
-            <Link href={`/guest/bookings`}>bookings</Link> page.
+            {tGuestBookingEmailBookingRequest('whatsNext.description', {
+              bookingsPage: `<Link href={'/guest/bookings'}>bookings</Link>`,
+            })}
           </Text>
         </Container>
       </Section>
@@ -235,22 +272,24 @@ export function EmailGuestBookingRequest({
       {[
         {
           number: 1,
-          title:
-            'The host of the property will review your reservation request',
-          description:
-            'In order to accept your reservation request, the host will need to review your request and confirm the reservation.',
+          title: tGuestBookingEmailBookingRequest('whatsNext.step1.title'),
+          description: tGuestBookingEmailBookingRequest(
+            'whatsNext.step1.description',
+          ),
         },
         {
           number: 2,
-          title: 'The host accepts your reservation',
-          description:
-            'Once the host accepts your reservation, you will receive a confirmation email and you can start preparing for your stay.',
+          title: tGuestBookingEmailBookingRequest('whatsNext.step2.title'),
+          description: tGuestBookingEmailBookingRequest(
+            'whatsNext.step2.description',
+          ),
         },
         {
           number: 3,
-          title: 'After the host accepts your reservation',
-          description:
-            'When your reservation is confirmed, you can communicate with the host by clicking on your reservation and using the chat.',
+          title: tGuestBookingEmailBookingRequest('whatsNext.step3.title'),
+          description: tGuestBookingEmailBookingRequest(
+            'whatsNext.step3.description',
+          ),
         },
       ].map((feature) => (
         <Section className="px-[24px]">

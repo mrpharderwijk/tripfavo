@@ -6,7 +6,7 @@ import { useEscapeKey } from './use-escape-key'
 describe('useEscapeKey', () => {
   it('calls the handler when the escape key is pressed', async () => {
     // Arrange
-    const handler = jest.fn()
+    const handler = vi.fn()
     renderHook(() => useEscapeKey(handler, true))
 
     // Act
@@ -19,7 +19,7 @@ describe('useEscapeKey', () => {
 
   it('does not call the handler when isActive is set to false', async () => {
     // Arrange
-    const handler = jest.fn()
+    const handler = vi.fn()
     renderHook(() => useEscapeKey(handler, false))
 
     // Act

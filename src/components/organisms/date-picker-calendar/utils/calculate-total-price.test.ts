@@ -55,7 +55,11 @@ describe('calculateTotalPrice', () => {
     },
   ])('returns $expected when $description', ({ range, expected }) => {
     // Arrange & Act
-    const result = calculateTotalPrice(range, mockPriceDates)
+    const result = calculateTotalPrice({
+      startDate: range?.from,
+      endDate: range?.to,
+      datePrices: mockPriceDates,
+    })
 
     // Assert
     expect(result).toBe(expected)

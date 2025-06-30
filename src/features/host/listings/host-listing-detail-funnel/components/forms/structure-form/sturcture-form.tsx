@@ -20,8 +20,8 @@ import { categories } from '@/constants/categories'
 import {
   HOST_STEP,
   useHostContext,
-} from '@/features/host/providers/host-context-provider'
-import { ComponentStepProps } from '@/features/host/types/component-step-props'
+} from '@/features/host/listings/providers/host-context-provider'
+import { ComponentStepProps } from '@/features/host/listings/types/component-step-props'
 import { cn } from '@/utils/class-names'
 
 export const StructureFormSchema = z.object({

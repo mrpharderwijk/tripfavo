@@ -9,7 +9,8 @@ import { useBookingDetailContext } from '@/features/bookings/booking-detail/prov
 
 export function BookingDetailListing(): ReactElement {
   const { listing } = useBookingDetailContext()
-  const mainImage = listing.images[0]
+  const mainImage =
+    listing.images.find((image) => image.isMain) ?? listing.images[0]
 
   return (
     <FlexBox

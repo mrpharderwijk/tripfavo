@@ -6,13 +6,16 @@ import { ListingStatus } from '@prisma/client'
 
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { ListingList } from '@/features/host/components/listing-list/listing-list'
-import { HostListing } from '@/features/host/types/host-listing'
+import { HostListingsNoResults } from '@/features/host/listings/host-listings/components/host-listings-no-results/host-listings-no-results'
+import { SafeHostListing } from '@/features/host/listings/types/safe-host-listing'
+
+type HostListingOverviewProps = {
+  listings: SafeHostListing[]
+}
 
 export function HostListingsOverview({
   listings,
-}: {
-  listings: HostListing[]
-}): ReactElement {
+}: HostListingOverviewProps): ReactElement {
   const router = useRouter()
   const pendingListings = listings?.filter(
     (listing) => listing.status === ListingStatus.DRAFT,
@@ -37,8 +40,14 @@ export function HostListingsOverview({
 
   return (
     <FlexBox flex-direction="col" gap={6}>
-      <ListingList heading="Published listings" items={publishedListings} />
-      <ListingList heading="Pending listings" items={pendingListings} />
+      {!listings?.length && <HostListingsNoResults />}
+
+      {!!listings?.length && (
+        <>
+          <ListingList heading="Published listings" items={publishedListings} />
+          <ListingList heading="Pending listings" items={pendingListings} />
+        </>
+      )}
     </FlexBox>
   )
 }

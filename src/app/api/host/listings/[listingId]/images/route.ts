@@ -1,6 +1,6 @@
 import {
   GET,
   POST,
-} from '@/features/host/server/api/listings/listing-images.api'
+} from '@/features/host/listings/server/api/listing-images.api'
 
 export { GET, POST }

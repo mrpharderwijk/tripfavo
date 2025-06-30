@@ -19,9 +19,11 @@ export type PublicListingGuestsAmount = Omit<
   ListingGuestsAmount,
   'id' | 'listingId' | 'createdAt' | 'updatedAt'
 >
-export type PublicListingHost = Pick<User, 'id' | 'createdAt'> & {
+export type PublicListingHost = Pick<User, 'id'> & {
   name: Pick<Name, 'firstName'> | null
   profileImage: string | null
+  createdAt: string
+  updatedAt: string
 }
 export type PublicListingImage = Pick<
   ListingImage,
@@ -36,7 +38,7 @@ export type PublicListingPriceDetail = Pick<
   'id' | 'type' | 'price'
 >
 
-export type PublicListing = Omit<Listing, 'userId'> & {
+export type PublicListing = Omit<Listing, 'hostId'> & {
   amenities: PublicListingAmenity[]
   floorPlan: PublicListingFloorPlan | null
   guestsAmount: PublicListingGuestsAmount | null

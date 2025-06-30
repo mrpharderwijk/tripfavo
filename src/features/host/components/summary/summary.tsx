@@ -6,7 +6,7 @@ import { ReactElement } from 'react'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
 import { Body } from '@/components/atoms/typography/body/body'
-import { ComponentStepProps } from '@/features/host/types/component-step-props'
+import { ComponentStepProps } from '@/features/host/listings/types/component-step-props'
 
 type SummaryProps = {
   title: string

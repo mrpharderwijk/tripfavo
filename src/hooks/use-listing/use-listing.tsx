@@ -2,7 +2,7 @@
 
 import useSWR from 'swr'
 
-import { HostListing } from '@/features/host/types/host-listing'
+import { HostListing } from '@/features/host/listings/types/host-listing'
 
 type UseListingReturnType = {
   listing: HostListing | undefined

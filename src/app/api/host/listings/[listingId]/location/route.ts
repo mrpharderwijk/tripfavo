@@ -1,3 +1,3 @@
-import { POST } from '@/features/host/server/api/listings/listing-location.api'
+import { POST } from '@/features/host/listings/server/api/listing-location.api'
 
 export { POST }

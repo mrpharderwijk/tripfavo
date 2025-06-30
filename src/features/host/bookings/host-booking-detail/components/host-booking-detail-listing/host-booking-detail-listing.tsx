@@ -11,7 +11,9 @@ import { useHostBookingDetailContext } from '@/features/host/bookings/host-booki
 
 export function HostBookingDetailListing(): ReactElement {
   const { booking } = useHostBookingDetailContext()
-  const mainImage = booking?.listing?.images[0] ?? { url: '' }
+  const mainImage =
+    booking?.listing.images.find((image) => image.isMain) ??
+    booking?.listing.images[0]
 
   return (
     <FlexBox
@@ -23,8 +25,8 @@ export function HostBookingDetailListing(): ReactElement {
       <FlexBoxItem flex="initial">
         <Image
           className="rounded-lg aspect-square object-cover"
-          src={mainImage.url}
-          alt={mainImage.url}
+          src={mainImage?.url ?? ''}
+          alt={mainImage?.fileName ?? ''}
           width={105}
           height={105}
         />

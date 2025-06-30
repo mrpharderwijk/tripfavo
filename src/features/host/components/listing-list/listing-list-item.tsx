@@ -7,10 +7,10 @@ import { ListingStatus } from '@prisma/client'
 
 import { ListMediaItem } from '@/components/organisms/list-media-item/list-media-item'
 import { ListingMediaItemStatus } from '@/components/organisms/list-media-item/list-media-item-status'
-import { HostListing } from '@/features/host/types/host-listing'
+import { SafeHostListing } from '@/features/host/listings/types/safe-host-listing'
 import { localeToDateFnsLocale } from '@/utils/locale-to-date-fns-locale'
 
-type ListingItemProps = HostListing
+type ListingItemProps = SafeHostListing
 
 const listingMediaItemStatusMap = {
   [ListingStatus.DRAFT]: ListingMediaItemStatus.DANGER,
@@ -28,9 +28,10 @@ export function ListingItem({
 }: ListingItemProps): ReactElement {
   const locale = useLocale()
   const tHost = useTranslations('host')
-  const tHostListingStatus = useTranslations('host.listing.status')
+  const tHostListing = useTranslations('host.listing')
   const featuredImage =
     images?.find((image) => image.isMain) ?? images?.[0] ?? null
+
   const listingMediaItemTitle = useMemo(() => {
     if (title) {
       return title
@@ -51,12 +52,14 @@ export function ListingItem({
       locale: localeToDateFnsLocale(locale),
     })
 
-    return `${startDate} - ${endDate}`
-  }, [createdAt, locale])
+    return tHostListing('overview.createdAt', {
+      date: `${startDate} - ${endDate}`,
+    })
+  }, [createdAt, locale, tHostListing])
 
   return (
     <ListMediaItem
-      href={`/host/${id}`}
+      href={`/host/listings/${id}`}
       status={listingMediaItemStatusMap[status]}
       image={featuredImage ?? { url: '', fileName: '' }}
       title={listingMediaItemTitle}

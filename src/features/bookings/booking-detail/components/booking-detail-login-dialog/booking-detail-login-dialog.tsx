@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { ReactElement } from 'react'
 
@@ -10,7 +11,6 @@ import { ButtonWrapper } from '@/components/molecules/buttons/button-wrapper/but
 import { ModalDialog } from '@/components/molecules/modal-dialog/modal-dialog'
 import { useBookingDetailContext } from '@/features/bookings/booking-detail/providers/booking-detail-context-provider'
 import { useDialogContext } from '@/features/nav-bar/providers/dialog-context-provider'
-import { Link } from '@/i18n/navigation'
 import { getRoutePathByRouteName } from '@/utils/get-route'
 
 /**
@@ -23,7 +23,7 @@ export function BookingDetailLoginDialog(): ReactElement {
 
   function handleOnCloseModalSuccess(): void {
     router.push(`/property/${listing.id}`)
-    closeDialog('booking-login')
+    closeDialog()
   }
 
   return (

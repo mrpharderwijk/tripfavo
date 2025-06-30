@@ -14,8 +14,8 @@ type HostBookingItemProps = {
   title: string
   image: { url: string; fileName: string } | null
   status: BookingStatus
-  startDate: Date
-  endDate: Date
+  startDate: string
+  endDate: string
 }
 
 const bookingItemStatusMap = {

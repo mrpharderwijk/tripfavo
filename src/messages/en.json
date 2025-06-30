@@ -212,6 +212,38 @@
         "cancelled": "Cancelled by host",
         "review": "Waiting for host",
         "confirmed": "Confirmed by host"
+      },
+      "email": {
+        "bookingRequest": {
+          "subject": "Booking request",
+          "previewText": "New booking request",
+          "body": "A new booking request has been made for your property.",
+          "heading": "Booking request",
+          "description": "Your booking request for {listingName} has been sent to the host. The host will review your reservation and get back to you as soon as possible.",
+          "whatsNext": {
+            "heading": "What's next?",
+            "description": "You can check the status of your reservation at any time in your {bookingsPage} page.",
+            "step1": {
+              "title": "The host of the property will review your reservation request",
+              "description": "In order to accept your reservation request, the host will need to review your request and confirm the reservation."
+            },
+            "step2": {
+              "title": "The host accepts your reservation",
+              "description": "Once the host accepts your reservation, you will receive a confirmation email and you can start preparing for your stay."
+            },
+            "step3": {
+              "title": "After the host accepts your reservation",
+              "description": "When your reservation is confirmed, you can communicate with the host by clicking on your reservation and using the chat."
+            }
+          }
+        },
+        "bookingApproval": {
+          "subject": "Booking approval",
+          "previewText": "Your booking has been approved by {hostName}!",
+          "body": "Your booking has been approved by the host.",
+          "heading": "Booking approved!",
+          "description": "Your booking for {listingName} has been approved by the host. You can now communicate with the host by clicking the booking and using the chat."
+        }
       }
     },
     "favorites": {
@@ -230,6 +262,12 @@
   },
   "host": {
     "heading": "Host your property",
+    "listings": {
+      "noResults": {
+        "text": "You don't have any listings yet. When you add a listing, it will appear here.",
+        "button": "Add listing"
+      }
+    },
     "bookings": {
       "heading": "My bookings",
       "pendingHeading": "Pending bookings",
@@ -242,6 +280,37 @@
         "cancelled": "Cancelled by you",
         "review": "Waiting for you",
         "confirmed": "Confirmed by you"
+      },
+      "bookingDetail": {
+        "heading": "Booking details"
+      },
+      "email": {
+        "bookingRequest": {
+          "subject": "Booking request",
+          "previewText": "New booking request",
+          "body": "A new booking request has been made for your property.",
+          "heading": "Booking request by",
+          "description": "A new booking request has been made for {listingName}. The guest has received a confirmation email of their reservation request. Until that time the reservation is pending. We kindly ask you to review the reservation request <b>within 48 hours or we will automatically accept it</b>..",
+          "whatsNext": {
+            "heading": "What's next?",
+            "description": "You can check the status of your reservation at any time in your {bookingsPage} page.",
+            "step1": {
+              "title": "You will need to review the reservation request",
+              "description": "In order to accept your reservation request, you will need to review the reservation request and confirm the reservation."
+            },
+            "step2": {
+              "title": "When you accept the reservation",
+              "description": "Once you accepts the reservation, you can communicate with the guest by clicking the reservation and using the chat."
+            }
+          }
+        },
+        "bookingApproval": {
+          "subject": "Booking approval",
+          "previewText": "You approved the booking of {guestName}!",
+          "body": "Your booking has been approved by the host.",
+          "heading": "Booking approved!",
+          "description": "You approved a booking for {listingName}. The guest has received a confirmation email of their approved booking. You can now communicate with the guest by clicking the booking and using the chat."
+        }
       }
     },
     "mainMenu": {
@@ -363,7 +432,10 @@
         "review": "In Review",
         "published": "Published"
       },
-      "yourListing": "Your property in"
+      "yourListing": "Your property in",
+      "overview": {
+        "createdAt": "Created on {date}"
+      }
     }
   },
   "listing": {
@@ -428,7 +500,8 @@
       "formIntro": "Please fill in your legal name. This is the same name as stated in your passport or ID card."
     }
   },
-  "reservationDetail": {
+  "bookingDetail": {
+    "heading": "Booking reservation",
     "summary": {
       "heading": "Summary",
       "dates": {

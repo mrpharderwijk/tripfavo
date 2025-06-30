@@ -8,6 +8,7 @@ import { LocalizedBookingDates } from '@/components/molecules/localized-booking-
 import { LineAction } from '@/components/organisms/line-action/line-action'
 import { useHostBookingDetailContext } from '@/features/host/bookings/host-booking-detail/providers/host-booking-detail-context-provider'
 import { Locale } from '@/i18n/config'
+import { parseDbDateStringToDate } from '@/utils/date/date-string-to-date'
 
 export function HostBookingDetailSummaryDates(): ReactElement {
   const { booking } = useHostBookingDetailContext()
@@ -23,8 +24,8 @@ export function HostBookingDetailSummaryDates(): ReactElement {
         <Body size="base-md" color="primary">
           {!!booking?.startDate && !!booking?.endDate && (
             <LocalizedBookingDates
-              startDate={booking?.startDate}
-              endDate={booking?.endDate}
+              startDate={parseDbDateStringToDate(booking?.startDate ?? '')}
+              endDate={parseDbDateStringToDate(booking?.endDate ?? '')}
               locale={locale as Locale}
             />
           )}

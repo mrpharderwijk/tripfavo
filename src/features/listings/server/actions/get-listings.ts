@@ -3,7 +3,6 @@ import { ListingStatus } from '@prisma/client'
 import { PublicListing } from '@/features/listings/types/public-listing'
 import { prisma } from '@/lib/prisma/db'
 import { ServerActionResponse } from '@/server/utils/error'
-import { isMongoObjectId } from '@/utils/is-mongo-object-id'
 
 export const publicListingAmenitySelect = {
   select: {
@@ -65,6 +64,7 @@ export const publicListingUserSelect = {
     },
     profileImage: true,
     createdAt: true,
+    updatedAt: true,
   },
 }
 
@@ -76,6 +76,7 @@ export const publicListingSelect = {
   floorPlan: publicListingFloorPlanSelect,
   guestsAmount: publicListingGuestsAmountSelect,
   id: true,
+  host: publicListingUserSelect,
   images: publicListingImageSelect,
   location: publicListingLocationSelect,
   priceDetails: true,
@@ -84,13 +85,13 @@ export const publicListingSelect = {
   structure: true,
   title: true,
   updatedAt: true,
-  user: publicListingUserSelect,
 }
 
 export async function getPublishedListing(
   listingId: string,
 ): Promise<ServerActionResponse<PublicListing | null>> {
-  if (!listingId || !isMongoObjectId(listingId)) {
+  console.log('listingId ----> ', listingId)
+  if (!listingId) {
     return { error: 'BAD_REQUEST' }
   }
 
@@ -99,18 +100,19 @@ export async function getPublishedListing(
       where: { id: listingId },
       select: publicListingSelect,
     })
+    console.log('listing ----> ', listing)
     if (!listing) {
       return { error: 'NOT_FOUND' }
     }
-
-    const { user, ...listingWithoutUser } = listing
+    const { host, ...listingWithoutUser } = listing
     const listingWithHost: PublicListing = {
       ...listingWithoutUser,
       host: {
-        id: user.id,
-        name: user.name,
-        profileImage: user.profileImage?.url ?? null,
-        createdAt: user.createdAt,
+        id: host.id,
+        name: host.name,
+        profileImage: host.profileImage?.url ?? null,
+        createdAt: host.createdAt.toISOString(),
+        updatedAt: host.updatedAt.toISOString(),
       },
     }
 
@@ -135,14 +137,15 @@ export async function getPublishedListings(): Promise<
     })
 
     const listingsWithHost = listings.map((listing) => {
-      const { user, ...listingWithoutUser } = listing
+      const { host, ...listingWithoutUser } = listing
       return {
         ...listingWithoutUser,
         host: {
-          id: user.id,
-          name: user.name,
-          profileImage: user.profileImage?.url ?? null,
-          createdAt: user.createdAt,
+          id: host.id,
+          name: host.name,
+          profileImage: host.profileImage?.url ?? null,
+          createdAt: host.createdAt.toISOString(),
+          updatedAt: host.updatedAt.toISOString(),
         },
       }
     })
