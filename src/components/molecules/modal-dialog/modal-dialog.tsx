@@ -1,6 +1,12 @@
 'use client'
 
-import { PropsWithChildren, ReactElement, RefObject, useRef } from 'react'
+import {
+  PropsWithChildren,
+  ReactElement,
+  ReactNode,
+  RefObject,
+  useRef,
+} from 'react'
 import { useOnClickOutside } from 'usehooks-ts'
 
 import { ModalCloseButton } from './components/modal-close-button/modal-close-button'
@@ -8,7 +14,9 @@ import { ModalFooter } from './components/modal-footer/modal-footer'
 import { ModalHeader } from './components/modal-header/modal-header'
 import { ModalImage } from './components/modal-image/modal-image'
 
+import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { Portal } from '@/components/atoms/portal/portal'
+import { useDialogContext } from '@/features/nav-bar/providers/dialog-context-provider'
 import { useDisableBodyScrolling } from '@/hooks/use-disable-body-scrolling/use-disable-body-scrolling'
 import { useEscapeKey } from '@/hooks/use-escape-key/use-escape-key'
 import { useFocusTrap } from '@/hooks/use-focus-trap/use-focus-trap'
@@ -18,9 +26,9 @@ export type ModalDialogProps = PropsWithChildren<{
   closeOnOutsideClick?: boolean
   isVisible?: boolean
   footer?: ReactElement
-  header?: ReactElement
+  header?: ReactNode
   image?: ReactElement
-  onClose: () => void
+  onClose?: () => void
   showHeaderCloseButton?: boolean
 }>
 
@@ -35,11 +43,13 @@ export function ModalDialog({
   onClose,
   showHeaderCloseButton = true,
 }: ModalDialogProps): ReactElement | null {
+  const { closeDialog: closeDialogFromContext } = useDialogContext()
   const modalDialogRef = useRef<HTMLDivElement>(null)
 
   function closeDialog(): void {
     if (modalDialogRef.current) {
-      onClose()
+      onClose?.()
+      closeDialogFromContext()
     }
   }
 
@@ -111,7 +121,14 @@ export function ModalDialog({
                 </ModalHeader>
               )}
 
-              <div className="p-6 overflow-scroll flex-auto">{children}</div>
+              <FlexBox
+                flex-direction="col"
+                overflow-y="scroll"
+                padding={6}
+                gap={6}
+              >
+                {children}
+              </FlexBox>
 
               {!!footer && <ModalFooter>{footer}</ModalFooter>}
             </div>
@@ -134,7 +151,7 @@ export function ModalFocusTrapWithWrapper({
 
   return (
     <div
-      className="flex flex-shrink flex-grow basis-2/3 flex-col overflow-auto"
+      className="flex flex-shrink flex-grow basis-2/3 flex-col gap-6 overflow-auto"
       ref={wrapRef}
     >
       {children}

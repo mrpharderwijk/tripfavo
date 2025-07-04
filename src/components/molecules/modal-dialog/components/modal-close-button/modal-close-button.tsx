@@ -13,13 +13,13 @@ export function ModalCloseButton({
   closeDialog,
 }: ModalCloseButtonProps): ReactElement {
   return (
-    <div className="left-4 top-3 absolute flex items-center justify-center">
+    <div className="right-6 top-5 absolute flex items-center justify-center">
       <Button
         icon={IoMdClose}
         variant="quaternary"
-        size="xs"
+        size="sm"
         onClick={closeDialog}
-      ></Button>
+      />
     </div>
   )
 }

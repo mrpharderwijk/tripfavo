@@ -1,7 +1,7 @@
 import { ReactElement } from 'react'
 
-import { LoginForm } from '@/features/auth/credentials-login/components/login-form'
+import { CredentialsLoginPage } from '@/features/auth/credentials-login/credentials-login.page'
 
 export default function LoginPage(): ReactElement {
-  return <LoginForm />
+  return <CredentialsLoginPage />
 }

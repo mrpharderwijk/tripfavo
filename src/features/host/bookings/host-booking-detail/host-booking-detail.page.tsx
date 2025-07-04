@@ -8,8 +8,8 @@ import { AppShellBody } from '@/components/molecules/layout/app-shell/app-shell-
 import { SafeBooking } from '@/features/bookings/types/booking'
 import { HostBookingDetailBookerInfo } from '@/features/host/bookings/host-booking-detail/components/host-booking-detail-booker-info/host-booking-detail-booker-info'
 import { HostBookingDetailBottomBar } from '@/features/host/bookings/host-booking-detail/components/host-booking-detail-bottom-bar/host-booking-detail-bottom-bar'
-import { HostBookingDetailListing } from '@/features/host/bookings/host-booking-detail/components/host-booking-detail-listing/host-booking-detail-listing'
 import { HostBookingDetailPriceBreakdown } from '@/features/host/bookings/host-booking-detail/components/host-booking-detail-price-breakdown/host-booking-detail-price-breakdown'
+import { HostBookingDetailProperty } from '@/features/host/bookings/host-booking-detail/components/host-booking-detail-property/host-booking-detail-property'
 import { HostBookingDetailSummary } from '@/features/host/bookings/host-booking-detail/components/host-booking-detail-summary/host-booking-detail-summary'
 import { HostBookingDetailContextProvider } from '@/features/host/bookings/host-booking-detail/providers/host-booking-detail-context-provider'
 import { BackButton } from '@/features/nav-bar/components/back-button/back-button'
@@ -41,7 +41,7 @@ export default async function HostBookingDetailPage({
         bottomBar={<HostBookingDetailBottomBar />}
       >
         <AppShellBody>
-          <HostBookingDetailListing />
+          <HostBookingDetailProperty />
           <Divider />
 
           <HostBookingDetailBookerInfo />

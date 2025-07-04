@@ -44,17 +44,20 @@ export function PersonalInfo(): ReactElement {
   ): Promise<void> {
     try {
       const file = res[0]
-      const response = await axios.post(`/api/user/profile-image`, {
-        image: {
-          url: file.ufsUrl,
-          fileHash: file.fileHash,
-          fileKey: file.key,
-          fileName: file.name,
-          fileType: file.type,
-          size: file.size,
-          alt: '',
+      const response = await axios.post(
+        `/api/user/${currentUser?.id}/profile-image`,
+        {
+          image: {
+            url: file.ufsUrl,
+            fileHash: file.fileHash,
+            fileKey: file.key,
+            fileName: file.name,
+            fileType: file.type,
+            size: file.size,
+            alt: '',
+          },
         },
-      })
+      )
 
       setProfileImage(response.data.profileImage.url)
       closeDialog()
@@ -77,13 +80,18 @@ export function PersonalInfo(): ReactElement {
     <>
       <div className="flex flex-col gap-2 items-center justify-center w-full border-b border-deco pb-6">
         {profileImageUploading && <DotLoader />}
-        <Image
-          className="aspect-square rounded-full object-cover"
-          src={profileImage ?? '/placeholder.png'}
-          alt="User Image"
-          width={100}
-          height={100}
-        />
+        <button
+          className="rounded-full hover:cursor-pointer"
+          onClick={() => openDialog('profile-image')}
+        >
+          <Image
+            className="aspect-square rounded-full object-cover"
+            src={profileImage ?? '/placeholder.png'}
+            alt="User Image"
+            width={100}
+            height={100}
+          />
+        </button>
         <Button
           variant="primary-link"
           onClick={() => openDialog('profile-image')}

@@ -21,7 +21,7 @@ export function MainMenuContainer({
         {/* Header */}
         {!!header && (
           <header className="flex flex-row items-start justify-between pt-2 px-6 flex-initial">
-            {header}
+            <div className="min-h-10">{header}</div>
           </header>
         )}
 

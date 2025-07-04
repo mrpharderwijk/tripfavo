@@ -1,4 +1,8 @@
+'use client'
+
 import axios from 'axios'
+import { useRouter } from 'next/navigation'
+import { signIn } from 'next-auth/react'
 import { useState } from 'react'
 import {
   Control,
@@ -64,6 +68,7 @@ export function useSignUpForm(): UseSignUpFormReturnType {
   const { enableAppLoading, disableAppLoading } = useAppContext()
   const [error, setError] = useState<string | null>(null)
   const [registerSuccess, setRegisterSuccess] = useState<boolean>(false)
+  const router = useRouter()
 
   const {
     control,
@@ -94,11 +99,18 @@ export function useSignUpForm(): UseSignUpFormReturnType {
     setError(null)
 
     try {
-      await axios.post('/api/auth/register', {
+      const registerResponse = await axios.post('/api/auth/register', {
         ...data,
         email: data.email.toLowerCase(),
       })
-      setRegisterSuccess(true)
+      if (registerResponse.status === 200) {
+        setRegisterSuccess(true)
+        const callback = await signIn('credentials', {
+          ...data,
+          redirect: false,
+        })
+        router.refresh()
+      }
     } catch (error: any) {
       setError(error.response?.data?.error || 'Something went wrong')
       setRegisterSuccess(false)

@@ -1,3 +1,5 @@
+import { UserRole } from '@prisma/client'
+
 import { getSession } from '@/features/auth/server/actions/get-current-user'
 
 /**
@@ -13,7 +15,7 @@ export async function isUserValid(userId: string): Promise<boolean> {
 
   // When the logged in user is not the same as the userId, check its role
   if (session.user.id !== userId) {
-    return session?.user?.role?.includes('ADMIN') ?? false
+    return session?.user?.role?.includes(UserRole.ADMIN) ?? false
   }
 
   return session.user.id === userId

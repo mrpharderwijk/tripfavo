@@ -12,8 +12,8 @@ import { BookingCardStatusEnum } from '@/features/bookings/bookings-list/booking
 
 interface BookingCardProps {
   id: string
-  listingImage: string
-  listingTitle: string
+  propertyImage: string
+  propertyTitle: string
   location: string
   guestName: string
   checkinDate: string
@@ -25,8 +25,8 @@ interface BookingCardProps {
 
 export function BookingCard({
   id,
-  listingImage,
-  listingTitle,
+  propertyImage,
+  propertyTitle,
   location,
   guestName,
   checkinDate,
@@ -47,7 +47,7 @@ export function BookingCard({
             height={32}
             height-md="auto"
           >
-            <PropertyImage src={listingImage} alt={listingTitle} />
+            <PropertyImage src={propertyImage} alt={propertyTitle} />
           </FlexBoxItem>
 
           <FlexBoxItem flex={1} padding={4} padding-md={6} fullWidth>
@@ -73,7 +73,7 @@ export function BookingCard({
                       font-weight="semibold"
                       text-overflow="truncate"
                     >
-                      {listingTitle}
+                      {propertyTitle}
                     </Heading>
                     <FlexBox align-items="center">
                       <MapPin className="w-4 h-4 mr-1 flex-shrink-0 text-gray-600 text-text-secondary" />

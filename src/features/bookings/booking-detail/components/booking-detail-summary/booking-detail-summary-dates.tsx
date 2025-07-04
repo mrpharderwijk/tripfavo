@@ -22,7 +22,7 @@ import { Locale } from '@/i18n/config'
 
 export function BookingDetailSummaryDates(): ReactElement {
   const { openDialog, closeDialog, currentOpenDialog } = useDialogContext()
-  const { selectedDates, updateSelectedDates, listing, totalGuestsAmount } =
+  const { selectedDates, updateSelectedDates, property, totalGuestsAmount } =
     useBookingDetailContext()
   const [updatedSelectedDates, setUpdatedSelectedDates] = useState<
     DateRange | undefined
@@ -47,7 +47,7 @@ export function BookingDetailSummaryDates(): ReactElement {
     const endDate = format(updatedSelectedDates?.to, DATE_FORMAT_SEARCH_PARAMS)
 
     router.replace(
-      `/booking/${listing.id}?startDate=${startDate}&endDate=${endDate}&adults=${totalGuestsAmount.adults}&children=${totalGuestsAmount.children}&infants=${totalGuestsAmount.infants}&pets=${totalGuestsAmount.pets}`,
+      `/booking/${property.id}?startDate=${startDate}&endDate=${endDate}&adults=${totalGuestsAmount.adults}&children=${totalGuestsAmount.children}&infants=${totalGuestsAmount.infants}&pets=${totalGuestsAmount.pets}`,
     )
     closeDialog()
   }

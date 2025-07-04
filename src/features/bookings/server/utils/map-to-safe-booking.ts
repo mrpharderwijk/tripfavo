@@ -35,30 +35,30 @@ export function mapToSafeBooking(booking: DbBooking): SafeBooking | null {
           createdAt: booking.guest.createdAt.toISOString(),
         }
       : null,
-    listing: {
-      id: booking.listing.id,
-      title: booking.listing.title ?? '',
-      images: booking.listing.images.map((img) => ({
+    property: {
+      id: booking.property.id,
+      title: booking.property.title ?? '',
+      images: booking.property.images.map((img) => ({
         fileName: img.fileName ?? '',
         url: img.url ?? '',
         isMain: img.isMain ?? false,
       })),
       location: {
-        city: booking.listing.location?.city ?? '',
-        country: booking.listing.location?.country ?? '',
+        city: booking.property.location?.city ?? '',
+        country: booking.property.location?.country ?? '',
       },
       host: {
-        id: booking.listing.host.id,
-        name: booking.listing.host.name
+        id: booking.property.host.id,
+        name: booking.property.host.name
           ? {
-              firstName: booking.listing.host.name.firstName ?? '',
-              middleName: booking.listing.host.name.middleName ?? '',
-              lastName: booking.listing.host.name.lastName ?? '',
+              firstName: booking.property.host.name.firstName ?? '',
+              middleName: booking.property.host.name.middleName ?? '',
+              lastName: booking.property.host.name.lastName ?? '',
             }
           : null,
         profileImage: {
-          url: booking.listing.host.profileImage?.url ?? '',
-          fileName: booking.listing.host.profileImage?.fileName ?? '',
+          url: booking.property.host.profileImage?.url ?? '',
+          fileName: booking.property.host.profileImage?.fileName ?? '',
         },
       },
     },

@@ -11,15 +11,15 @@ import { Body } from '@/components/atoms/typography/body/body'
 import { Heading } from '@/components/atoms/typography/heading/heading'
 import { datePrices } from '@/data/date-prices'
 import { useBookingDetailContext } from '@/features/bookings/booking-detail/providers/booking-detail-context-provider'
-import { getCleaningFee } from '@/features/listings/utils/get-cleaning-fee'
-import { getDeposit } from '@/features/listings/utils/get-deposit'
+import { getCleaningFee } from '@/features/properties/utils/get-cleaning-fee'
+import { getDeposit } from '@/features/properties/utils/get-deposit'
 import { Locale } from '@/i18n/config'
 import { calculateTotalPriceIncludingCleaningFee } from '@/utils/pricing/calculate-total-price'
 import { calculateTotalPricePerNight } from '@/utils/pricing/calculate-total-price-per-night'
 
 export function BookingDetailPriceBreakdown(): ReactElement {
   const locale = useLocale()
-  const { listing, selectedDates } = useBookingDetailContext()
+  const { property, selectedDates } = useBookingDetailContext()
   const tBookingDetailPriceBreakdown = useTranslations(
     'bookingDetail.priceBreakdown',
   )
@@ -30,10 +30,10 @@ export function BookingDetailPriceBreakdown(): ReactElement {
     datePrices,
   })
 
-  const cleaningFee = getCleaningFee(listing.priceDetails)
-  const deposit = getDeposit(listing.priceDetails)
+  const cleaningFee = getCleaningFee(property.priceDetails)
+  const deposit = getDeposit(property.priceDetails)
   const totalPrice = calculateTotalPriceIncludingCleaningFee({
-    priceDetails: listing.priceDetails,
+    priceDetails: property.priceDetails,
     startDate: selectedDates?.from,
     endDate: selectedDates?.to,
     datePrices,

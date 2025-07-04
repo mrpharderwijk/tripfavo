@@ -51,7 +51,7 @@ export function LegalNameForm(): ReactElement {
     setIsLoading(true)
 
     try {
-      await fetch('/api/user', {
+      await fetch(`/api/user/${currentUser?.id}`, {
         method: 'POST',
         body: JSON.stringify(data),
       })

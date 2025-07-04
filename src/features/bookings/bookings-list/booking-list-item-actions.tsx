@@ -8,6 +8,7 @@ import { Button } from '@/components/molecules/buttons/button'
 import { DropDownMenu } from '@/components/organisms/drop-down-menu/drop-down-menu'
 import { DropDownMenuItem } from '@/components/organisms/drop-down-menu/drop-down-menu-item'
 import { useDropDownContext } from '@/features/nav-bar/providers/drop-down-context-provider'
+import { useAppContext } from '@/providers/app-context-provider/app-context-provider'
 
 type BookingListItemActionsProps = {
   id: string
@@ -16,13 +17,14 @@ type BookingListItemActionsProps = {
 export function BookingListItemActions({
   id,
 }: BookingListItemActionsProps): ReactElement {
+  const { currentUser } = useAppContext()
   const router = useRouter()
   const { currentOpenDropDown, closeDropDown, toggleDropDown } =
     useDropDownContext()
 
   function handleOnClickActions(e: MouseEvent<HTMLButtonElement>): void {
     e.stopPropagation()
-    toggleDropDown(`listing-item-actions-${id}`)
+    toggleDropDown(`property-item-actions-${id}`)
   }
 
   async function handleOnClickDelete(
@@ -31,11 +33,11 @@ export function BookingListItemActions({
     e.stopPropagation()
 
     try {
-      await axios.delete(`/api/host/listings/${id}`)
+      await axios.delete(`/api/host/${currentUser?.id}/properties/${id}`)
     } catch (error) {
       console.error(error)
     } finally {
-      closeDropDown(`listing-item-actions-${id}`)
+      closeDropDown(`property-item-actions-${id}`)
       router.refresh()
     }
   }
@@ -44,7 +46,7 @@ export function BookingListItemActions({
     <div className="absolute top-0 right-0 z-20">
       <DropDownMenu
         size="sm"
-        id={`listing-item-actions-${id}`}
+        id={`property-item-actions-${id}`}
         trigger={
           <Button
             variant="primary"
@@ -53,7 +55,7 @@ export function BookingListItemActions({
             onClick={handleOnClickActions}
           />
         }
-        isOpen={currentOpenDropDown === `listing-item-actions-${id}`}
+        isOpen={currentOpenDropDown === `property-item-actions-${id}`}
       >
         <DropDownMenuItem label="Delete" onClick={handleOnClickDelete} />
       </DropDownMenu>

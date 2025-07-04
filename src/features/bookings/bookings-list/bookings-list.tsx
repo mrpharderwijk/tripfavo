@@ -35,11 +35,11 @@ export function BookingsList({
             urlBasePath={urlBasePath}
             id={item.id}
             image={
-              item.listing.images.find((image) => image.isMain) ??
-              item.listing.images[0]
+              item.property.images.find((image) => image.isMain) ??
+              item.property.images[0]
             }
-            location={item.listing.location}
-            title={item.listing.title}
+            location={item.property.location}
+            title={item.property.title}
             status={item.status}
             startDate={item.startDate}
             endDate={item.endDate}

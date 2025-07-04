@@ -6,18 +6,18 @@ import { ReactElement } from 'react'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
 import { Body } from '@/components/atoms/typography/body/body'
-import { ComponentStepProps } from '@/features/host/listings/types/component-step-props'
+import { ComponentStepProps } from '@/features/host/properties/types/component-step-props'
 
 type SummaryProps = {
   title: string
   description: string
 }
 
-export function Summary({ listing }: ComponentStepProps): ReactElement {
-  console.log('listing: ', listing)
-  const tStructureSummary = useTranslations('host.listing.structure.summary')
+export function Summary({ property }: ComponentStepProps): ReactElement {
+  console.log('property: ', property)
+  const tStructureSummary = useTranslations('host.property.structure.summary')
 
-  const structure = listing?.structure
+  const structure = property?.structure
 
   return (
     <FlexBox

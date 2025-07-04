@@ -6,15 +6,18 @@ import { DotLoader } from '@/components/atoms/dot-loader/dot-loader'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { Heading } from '@/components/atoms/typography/heading/heading'
 import { AppShellBody } from '@/components/molecules/layout/app-shell/app-shell-body'
+import { getSession } from '@/features/auth/server/actions/get-current-user'
 import { BookingsContextProvider } from '@/features/bookings/providers/bookings-context-provider'
 import { GuestBookingsOverview } from '@/features/guest/bookings/guest-bookings/components/guest-bookings-overview/guest-bookings-overview'
 import { getGuestBookings } from '@/features/guest/bookings/server/actions/get-guest-bookings'
 import { isActionError } from '@/server/utils/error'
 
 export async function GuestBookingsPage(): Promise<ReactElement> {
+  const session = await getSession()
+
   const [tGuestBookings, guestBookingsResponse] = await Promise.all([
     getTranslations('guest.bookings'),
-    getGuestBookings(),
+    getGuestBookings({ userId: session?.user?.id }),
   ])
   const bookings = isActionError(guestBookingsResponse)
     ? null

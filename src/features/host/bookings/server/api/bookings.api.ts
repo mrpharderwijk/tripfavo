@@ -1,24 +1,31 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
-import { getSession } from '@/features/auth/server/actions/get-current-user'
-import { bookingSelect } from '@/features/bookings/server/actions/get-bookings'
 import { mapToSafeBooking } from '@/features/bookings/server/utils/map-to-safe-booking'
 import { SafeBooking } from '@/features/bookings/types/booking'
+import { BookingsParams } from '@/features/bookings/types/bookings-params'
+import { bookingSelect } from '@/features/guest/bookings/server/actions/get-guest-bookings'
 import { prisma } from '@/lib/prisma/db'
+import { isUserValid } from '@/server/utils/is-valid-user'
 
-export async function GET(): Promise<
-  NextResponse<SafeBooking[] | { error: string }>
-> {
-  const session = await getSession()
-  if (!session?.user?.id) {
+export async function GET(
+  request: NextRequest,
+  { params }: BookingsParams,
+): Promise<NextResponse<SafeBooking[] | { error: string }>> {
+  const { bookingId, userId } = await params
+  if (!bookingId || !userId) {
+    return NextResponse.json({ error: 'BAD_REQUEST' }, { status: 400 })
+  }
+
+  const isValidUser = await isUserValid(userId)
+  if (!isValidUser) {
     return NextResponse.json({ error: 'UNAUTHORIZED' }, { status: 401 })
   }
 
   try {
     const bookings = await prisma.booking.findMany({
       where: {
-        listing: {
-          hostId: session.user.id,
+        property: {
+          hostId: userId,
         },
       },
       select: bookingSelect,

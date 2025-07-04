@@ -5,10 +5,10 @@ import {
   EmailHostBookingRequest,
   EmailHostBookingRequestProps,
 } from '@/features/host/components/email-host-booking-request/email-host-booking-request'
-import { PublicListing } from '@/features/listings/types/public-listing'
+import { PublicProperty } from '@/features/properties/types/public-property'
 import { defaultLocale } from '@/i18n/config'
 
-export default async function GuestReservationRequestSendEmailTemplate(
+export default async function GuestBookingRequestSendEmailTemplate(
   props: EmailHostBookingRequestProps,
 ): Promise<ReactElement> {
   const startDate = '2025-06-20T22:00:00.000Z'
@@ -19,7 +19,7 @@ export default async function GuestReservationRequestSendEmailTemplate(
     infants: 2,
     pets: 1,
   }
-  const listing = {
+  const property = {
     id: '1',
     title: 'Lorem ipsum dolor sit amet',
     city: 'Amsterdam',
@@ -89,7 +89,7 @@ export default async function GuestReservationRequestSendEmailTemplate(
       startDate={startDate}
       endDate={endDate}
       guestsAmount={guestsAmount}
-      listing={listing as unknown as PublicListing}
+      property={property as unknown as PublicProperty}
       guest={guest}
       locale={locale}
     />

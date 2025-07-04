@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { ReactElement } from 'react'
 
 import { Heading } from '@/components/atoms/typography/heading/heading'
@@ -13,16 +14,16 @@ import { useDialogContext } from '@/features/nav-bar/providers/dialog-context-pr
 import { Link } from '@/i18n/navigation'
 import { getRoutePathByRouteName } from '@/utils/get-route'
 
-/**
- * TODO: Add translations
- */
 export function BookingDetailSuccessDialog(): ReactElement {
-  const { listing } = useBookingDetailContext()
+  const { property } = useBookingDetailContext()
   const { currentOpenDialog, closeDialog } = useDialogContext()
   const router = useRouter()
+  const tBookingDetailSuccessDialog = useTranslations(
+    'bookingDetail.successDialog',
+  )
 
   function handleOnCloseModalSuccess(): void {
-    router.push(`/property/${listing.id}`)
+    router.push(`/property/${property.id}`)
     closeDialog()
   }
 
@@ -33,7 +34,7 @@ export function BookingDetailSuccessDialog(): ReactElement {
       closeOnEscape={false}
       closeOnOutsideClick={false}
       showHeaderCloseButton={false}
-      header={<>Booking successful</>}
+      header={tBookingDetailSuccessDialog('heading')}
       footer={
         <>
           <Button
@@ -41,7 +42,7 @@ export function BookingDetailSuccessDialog(): ReactElement {
             size="lg"
             onClick={handleOnCloseModalSuccess}
           >
-            Close
+            {tBookingDetailSuccessDialog('button.close')}
           </Button>
           <ButtonWrapper
             variant="secondary"
@@ -53,18 +54,16 @@ export function BookingDetailSuccessDialog(): ReactElement {
               </Link>
             )}
           >
-            My Bookings
+            {tBookingDetailSuccessDialog('button.myBookings')}
           </ButtonWrapper>
         </>
       }
     >
       <Heading tag="h3" like="h2-semibold">
-        Your reservation has been send to the host
+        {tBookingDetailSuccessDialog('heading')}
       </Heading>
       <Text font-size="base-mdt">
-        You will receive a confirmation email with the complete summary details
-        of your reservation. The host will review your request within 48 hours.
-        You can check the status of your reservation in your account.
+        {tBookingDetailSuccessDialog('subtitle')}
       </Text>
     </ModalDialog>
   )

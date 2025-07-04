@@ -6,20 +6,23 @@ import { ReactElement } from 'react'
 import { Divider } from '@/components/atoms/layout/divider/divider'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { BookingDetailBottomBar } from '@/features/bookings/booking-detail/components/booking-detail-bottom-bar/booking-detail-bottom-bar'
-import { BookingDetailListing } from '@/features/bookings/booking-detail/components/booking-detail-listing/booking-detail-listing'
+import { BookingDetailHostInfo } from '@/features/bookings/booking-detail/components/booking-detail-host-info/booking-detail-host-info'
+import { BookingDetailHostSelfDialog } from '@/features/bookings/booking-detail/components/booking-detail-host-self-dialog/booking-detail-host-self-dialog'
 import { BookingDetailLoginDialog } from '@/features/bookings/booking-detail/components/booking-detail-login-dialog/booking-detail-login-dialog'
 import { BookingDetailPriceBreakdown } from '@/features/bookings/booking-detail/components/booking-detail-price-breakdown/booking-detail-price-breakdown'
+import { BookingDetailProperty } from '@/features/bookings/booking-detail/components/booking-detail-property/booking-detail-property'
+import { BookingDetailSignUpDialog } from '@/features/bookings/booking-detail/components/booking-detail-sign-up-dialog/booking-detail-sign-up-dialog'
 import { BookingDetailSuccessDialog } from '@/features/bookings/booking-detail/components/booking-detail-success-dialog/booking-detail-success-dialog'
 import { BookingDetailSummary } from '@/features/bookings/booking-detail/components/booking-detail-summary/booking-detail-summary'
 import { BookingDetailContextProvider } from '@/features/bookings/booking-detail/providers/booking-detail-context-provider'
-import { PublicListing } from '@/features/listings/types/public-listing'
+import { PublicProperty } from '@/features/properties/types/public-property'
 
 type BookingDetailPageProps = {
-  listing: PublicListing
+  property: PublicProperty
 }
 
 export function BookingDetailPage({
-  listing,
+  property,
 }: BookingDetailPageProps): ReactElement {
   const searchParams = useSearchParams()
   const startDate = searchParams.get('startDate')
@@ -31,7 +34,7 @@ export function BookingDetailPage({
 
   return (
     <BookingDetailContextProvider
-      listing={listing}
+      property={property}
       startDate={startDate}
       endDate={endDate}
       guestsAmount={{
@@ -42,7 +45,10 @@ export function BookingDetailPage({
       }}
     >
       <FlexBox flex-direction="col" gap={6} padding-x={6} padding-top={6}>
-        <BookingDetailListing />
+        <BookingDetailProperty />
+        <Divider />
+
+        <BookingDetailHostInfo />
         <Divider />
 
         <BookingDetailSummary />
@@ -55,9 +61,14 @@ export function BookingDetailPage({
         {/* <BookingDetailCancellationDetails /> */}
 
         <BookingDetailBottomBar />
-
         <BookingDetailSuccessDialog />
+
+        {/* Login or Sign up */}
         <BookingDetailLoginDialog />
+        <BookingDetailSignUpDialog />
+
+        {/* Booking host self */}
+        <BookingDetailHostSelfDialog />
       </FlexBox>
     </BookingDetailContextProvider>
   )

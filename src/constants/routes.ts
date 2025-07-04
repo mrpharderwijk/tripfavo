@@ -31,8 +31,8 @@ export const routes: RoutesObject = {
     path: '/host',
     protected: true,
     children: {
-      hostListings: {
-        path: '/listings',
+      hostProperties: {
+        path: '/properties',
         protected: true,
         default: true,
       },
@@ -41,19 +41,19 @@ export const routes: RoutesObject = {
         protected: true,
       },
       structure: {
-        path: '/:listingId/structure',
+        path: '/:propertyId/structure',
         protected: true,
       },
       floorPlan: {
-        path: '/:listingId/floor-plan',
+        path: '/:propertyId/floor-plan',
         protected: true,
       },
       location: {
-        path: '/:listingId/location',
+        path: '/:propertyId/location',
         protected: true,
       },
       privacyType: {
-        path: '/:listingId/privacy-type',
+        path: '/:propertyId/privacy-type',
         protected: true,
       },
     },
@@ -79,6 +79,17 @@ export const routes: RoutesObject = {
     children: {
       personalInfo: {
         path: '/personal-info',
+        protected: true,
+        default: true,
+      },
+    },
+  },
+  admin: {
+    path: '/admin',
+    protected: true,
+    children: {
+      users: {
+        path: '/users',
         protected: true,
         default: true,
       },

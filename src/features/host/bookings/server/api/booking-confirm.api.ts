@@ -2,11 +2,11 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { calculateTotalPrice } from '@/components/organisms/date-picker-calendar/utils/calculate-total-price'
 import { GuestsAmount } from '@/features/bookings/booking-detail/providers/booking-detail-context-provider'
-import { bookingSelect } from '@/features/bookings/server/actions/get-bookings'
 import { BookingsParams } from '@/features/bookings/types/bookings-params'
+import { bookingSelect } from '@/features/guest/bookings/server/actions/get-guest-bookings'
 import { EmailGuestBookingApproval } from '@/features/guest/components/email-guest-booking-approval/email-guest-booking-approval'
 import { EmailHostBookingApproval } from '@/features/host/components/email-host-booking-approval.tsx/email-host-booking-approval'
-import { SafeHostListing } from '@/features/host/listings/types/safe-host-listing'
+import { SafeHostProperty } from '@/features/host/properties/types/safe-host-property'
 import { Locale } from '@/i18n/config'
 import { prisma } from '@/lib/prisma/db'
 import { resend } from '@/lib/resend/resend'
@@ -31,7 +31,7 @@ export async function PATCH(
     const booking = await prisma.booking.findUnique({
       where: {
         id: bookingId,
-        listing: {
+        property: {
           hostId: userId,
         },
       },
@@ -66,11 +66,11 @@ export async function PATCH(
       to: [
         `${process.env.NEXT_PUBLIC_ENV === 'LOCAL' ? process.env.NEXT_PUBLIC_LOCAL_HOST_EMAIL : booking?.guest?.email}`,
       ],
-      subject: `Booking approved for ${booking?.listing?.location?.city}`,
+      subject: `Booking approved for ${booking?.property?.location?.city}`,
       react: EmailGuestBookingApproval({
         startDate: booking?.startDate.toISOString(),
         endDate: booking?.endDate.toISOString(),
-        listing: booking?.listing as SafeHostListing,
+        property: booking?.property as SafeHostProperty,
         guestsAmount: booking?.guestsAmount as GuestsAmount,
         totalPrice: calculatedTotalPrice,
         datePrices: mapPricesToDatePrices(booking?.priceDetails),
@@ -88,13 +88,13 @@ export async function PATCH(
     const { data: hostData, error: hostError } = await resend.emails.send({
       from: 'TripFavo <noreply@rocketsciencebv.nl>',
       to: [
-        `${process.env.NEXT_PUBLIC_ENV === 'LOCAL' ? process.env.NEXT_PUBLIC_LOCAL_HOST_EMAIL : booking?.listing?.host?.email}`,
+        `${process.env.NEXT_PUBLIC_ENV === 'LOCAL' ? process.env.NEXT_PUBLIC_LOCAL_HOST_EMAIL : booking?.property?.host?.email}`,
       ],
-      subject: `Booking approved for ${booking.listing?.location?.streetName} ${booking.listing?.location?.houseNumber}`,
+      subject: `Booking approved for ${booking.property?.location?.streetName} ${booking.property?.location?.houseNumber}`,
       react: EmailHostBookingApproval({
         startDate: booking?.startDate.toISOString(),
         endDate: booking?.endDate.toISOString(),
-        listing: booking?.listing as SafeHostListing,
+        property: booking?.property as SafeHostProperty,
         guestsAmount: booking?.guestsAmount as GuestsAmount,
         totalPrice: calculatedTotalPrice,
         datePrices: mapPricesToDatePrices(booking?.priceDetails),

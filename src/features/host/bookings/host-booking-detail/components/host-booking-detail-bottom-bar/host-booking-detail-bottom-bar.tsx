@@ -2,6 +2,7 @@
 
 import axios from 'axios'
 import { ReactElement } from 'react'
+import { BookingStatus } from '@prisma/client'
 
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { Body } from '@/components/atoms/typography/body/body'
@@ -27,7 +28,7 @@ export function HostBookingDetailBottomBar(): ReactElement {
   async function handleConfirmApproveBooking(): Promise<void> {
     try {
       const response = await axios.patch(
-        `/api/host/${booking?.listing.host.id}/bookings/${booking?.id}`,
+        `/api/host/${booking?.property.host.id}/bookings/${booking?.id}`,
       )
       closeDialog()
     } catch (error) {
@@ -48,14 +49,16 @@ export function HostBookingDetailBottomBar(): ReactElement {
         Cancel booking
       </Button>
 
-      <Button
-        variant="secondary"
-        size="lg"
-        fullWidth
-        onClick={handleApproveBooking}
-      >
-        Approve booking
-      </Button>
+      {booking?.status === BookingStatus.PENDING && (
+        <Button
+          variant="secondary"
+          size="lg"
+          fullWidth
+          onClick={handleApproveBooking}
+        >
+          Approve booking
+        </Button>
+      )}
 
       <ModalDialog
         isVisible={

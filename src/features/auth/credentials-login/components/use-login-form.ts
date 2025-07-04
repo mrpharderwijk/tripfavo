@@ -31,7 +31,13 @@ type UseLoginFormReturnType = {
   error: string | null
 }
 
-export function useLoginForm(): UseLoginFormReturnType {
+type UseLoginFormProps = {
+  callbackUrl?: string
+}
+
+export function useLoginForm({
+  callbackUrl,
+}: UseLoginFormProps): UseLoginFormReturnType {
   const router = useRouter()
   const { enableAppLoading, disableAppLoading } = useAppContext()
   const [isLoading, setIsLoading] = useState<boolean>(false)

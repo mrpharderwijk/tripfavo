@@ -11,7 +11,7 @@ import {
 import { DateRange } from 'react-day-picker'
 
 import { DATE_FORMAT_SEARCH_PARAMS } from '@/constants/dates'
-import { PublicListing } from '@/features/listings/types/public-listing'
+import { PublicProperty } from '@/features/properties/types/public-property'
 
 export type TotalPricePerNight = {
   nightAmount: number
@@ -20,7 +20,7 @@ export type TotalPricePerNight = {
 }
 
 type BookingDetailContextType = {
-  listing: PublicListing
+  property: PublicProperty
   totalGuestsAmount: GuestsAmount
   updateGuestsAmount: (newGuestsAmount: GuestsAmount) => void
   selectedDates?: DateRange
@@ -41,7 +41,7 @@ export type GuestsAmount = {
 }
 
 type BookingDetailContextProviderProps = PropsWithChildren<{
-  listing: PublicListing
+  property: PublicProperty
   startDate: string | null
   endDate: string | null
   guestsAmount: GuestsAmount
@@ -49,7 +49,7 @@ type BookingDetailContextProviderProps = PropsWithChildren<{
 
 export function BookingDetailContextProvider({
   children,
-  listing,
+  property,
   startDate,
   endDate,
   guestsAmount,
@@ -85,7 +85,7 @@ export function BookingDetailContextProvider({
   return (
     <BookingDetailContext.Provider
       value={{
-        listing,
+        property,
         totalGuestsAmount,
         updateGuestsAmount,
         selectedDates,

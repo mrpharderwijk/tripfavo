@@ -18,7 +18,7 @@ export async function getGuestFavorites(): Promise<
       },
       select: {
         id: true,
-        listing: {
+        property: {
           select: {
             id: true,
             title: true,

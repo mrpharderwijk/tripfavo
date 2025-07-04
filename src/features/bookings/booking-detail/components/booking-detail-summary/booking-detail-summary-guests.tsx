@@ -29,7 +29,7 @@ export function BookingDetailSummaryGuests(): ReactElement {
   const infants = searchParams.get('infants')
   const pets = searchParams.get('pets')
   const { openDialog, closeDialog, currentOpenDialog } = useDialogContext()
-  const { listing, totalGuestsAmount, updateGuestsAmount } =
+  const { property, totalGuestsAmount, updateGuestsAmount } =
     useBookingDetailContext()
   const [updatedGuestsAmount, setUpdatedGuestsAmount] = useState<GuestsAmount>({
     ...totalGuestsAmount,
@@ -42,6 +42,13 @@ export function BookingDetailSummaryGuests(): ReactElement {
   const tBookingDetailSummaryGuests = useTranslations(
     'bookingDetail.summary.guests',
   )
+  const defineMaxGuests =
+    (property.guestsAmount?.maxGuests ?? 0) -
+    (updatedGuestsAmount.adults ?? 0) -
+    (updatedGuestsAmount.children ?? 0) -
+    (updatedGuestsAmount.infants ?? 0) -
+    (updatedGuestsAmount.pets ?? 0)
+  const hasReachedMaxGuests = defineMaxGuests <= 0
 
   function handleOnClickConfirm(): void {
     updateGuestsAmount({
@@ -50,7 +57,7 @@ export function BookingDetailSummaryGuests(): ReactElement {
     })
 
     router.replace(
-      `/booking/${listing.id}?startDate=${startDate}&endDate=${endDate}&adults=${updatedGuestsAmount.adults}&children=${updatedGuestsAmount.children}&infants=${updatedGuestsAmount.infants}&pets=${updatedGuestsAmount.pets}`,
+      `/booking/${property.id}?startDate=${startDate}&endDate=${endDate}&adults=${updatedGuestsAmount.adults}&children=${updatedGuestsAmount.children}&infants=${updatedGuestsAmount.infants}&pets=${updatedGuestsAmount.pets}`,
     )
     closeDialog()
   }
@@ -129,8 +136,12 @@ export function BookingDetailSummaryGuests(): ReactElement {
                 })
               }}
               editable={false}
-              min={listing.guestsAmount?.adults === 0 ? 1 : 1}
-              max={listing.guestsAmount?.adults ?? undefined}
+              min={property.guestsAmount?.adults === 0 ? 1 : 1}
+              max={
+                hasReachedMaxGuests
+                  ? updatedGuestsAmount.adults
+                  : (property.guestsAmount?.adults ?? undefined)
+              }
             />
           </FlexBoxItem>
         </FlexBox>
@@ -141,7 +152,7 @@ export function BookingDetailSummaryGuests(): ReactElement {
               size="base-lgt"
               font-weight="semibold"
               color={
-                listing.guestsAmount?.children === 0
+                property.guestsAmount?.children === 0
                   ? 'primary-disabled'
                   : 'primary'
               }
@@ -149,7 +160,7 @@ export function BookingDetailSummaryGuests(): ReactElement {
               {tBookingDetailSummaryGuests('dialog.children.label')}
             </Body>
             <Body size="base-mdt" color="secondary" font-weight="medium">
-              {listing.guestsAmount?.children === 0
+              {property.guestsAmount?.children === 0
                 ? tBookingDetailSummaryGuests('dialog.children.notAllowed')
                 : tBookingDetailSummaryGuests('dialog.children.description')}
             </Body>
@@ -166,8 +177,12 @@ export function BookingDetailSummaryGuests(): ReactElement {
               }}
               editable={false}
               min={0}
-              max={listing.guestsAmount?.children ?? undefined}
-              disabled={listing.guestsAmount?.children === 0}
+              max={
+                hasReachedMaxGuests
+                  ? updatedGuestsAmount.children
+                  : (property.guestsAmount?.children ?? undefined)
+              }
+              disabled={property.guestsAmount?.children === 0}
             />
           </FlexBoxItem>
         </FlexBox>
@@ -178,7 +193,7 @@ export function BookingDetailSummaryGuests(): ReactElement {
               size="base-lgt"
               font-weight="semibold"
               color={
-                listing.guestsAmount?.infants === 0
+                property.guestsAmount?.infants === 0
                   ? 'secondary-disabled'
                   : 'primary'
               }
@@ -186,7 +201,7 @@ export function BookingDetailSummaryGuests(): ReactElement {
               {tBookingDetailSummaryGuests('dialog.infants.label')}
             </Body>
             <Body size="base-mdt" color="secondary" font-weight="medium">
-              {listing.guestsAmount?.infants === 0
+              {property.guestsAmount?.infants === 0
                 ? tBookingDetailSummaryGuests('dialog.infants.notAllowed')
                 : tBookingDetailSummaryGuests('dialog.infants.description')}
             </Body>
@@ -203,8 +218,12 @@ export function BookingDetailSummaryGuests(): ReactElement {
               }}
               editable={false}
               min={0}
-              max={listing.guestsAmount?.infants ?? undefined}
-              disabled={listing.guestsAmount?.infants === 0}
+              max={
+                hasReachedMaxGuests
+                  ? updatedGuestsAmount.infants
+                  : (property.guestsAmount?.infants ?? undefined)
+              }
+              disabled={property.guestsAmount?.infants === 0}
             />
           </FlexBoxItem>
         </FlexBox>
@@ -215,7 +234,7 @@ export function BookingDetailSummaryGuests(): ReactElement {
               size="base-lgt"
               font-weight="semibold"
               color={
-                listing.guestsAmount?.pets === 0
+                property.guestsAmount?.pets === 0
                   ? 'primary-disabled'
                   : 'primary'
               }
@@ -223,7 +242,7 @@ export function BookingDetailSummaryGuests(): ReactElement {
               {tBookingDetailSummaryGuests('dialog.pets.label')}
             </Body>
             <Body size="base-mdt" color="secondary" font-weight="medium">
-              {listing.guestsAmount?.pets === 0
+              {property.guestsAmount?.pets === 0
                 ? tBookingDetailSummaryGuests('dialog.pets.notAllowed')
                 : tBookingDetailSummaryGuests('dialog.pets.description')}
             </Body>
@@ -240,8 +259,12 @@ export function BookingDetailSummaryGuests(): ReactElement {
               }}
               editable={false}
               min={0}
-              max={listing.guestsAmount?.pets ?? undefined}
-              disabled={listing.guestsAmount?.pets === 0}
+              max={
+                hasReachedMaxGuests
+                  ? updatedGuestsAmount.pets
+                  : (property.guestsAmount?.pets ?? undefined)
+              }
+              disabled={property.guestsAmount?.pets === 0}
             />
           </FlexBoxItem>
         </FlexBox>

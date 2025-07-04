@@ -5,7 +5,7 @@ import {
   EmailGuestBookingRequest,
   EmailGuestBookingRequestProps,
 } from '@/features/guest/components/email-guest-booking-request/email-guest-booking-request'
-import { PublicListing } from '@/features/listings/types/public-listing'
+import { PublicProperty } from '@/features/properties/types/public-property'
 import { defaultLocale } from '@/i18n/config'
 
 export default async function GuestBookingRequestSendEmailTemplate(
@@ -19,7 +19,7 @@ export default async function GuestBookingRequestSendEmailTemplate(
     infants: 2,
     pets: 1,
   }
-  const listing = {
+  const property = {
     id: '1',
     title: 'Lorem ipsum dolor sit amet',
     city: 'Amsterdam',
@@ -84,7 +84,7 @@ export default async function GuestBookingRequestSendEmailTemplate(
       startDate={startDate}
       endDate={endDate}
       guestsAmount={guestsAmount}
-      listing={listing as unknown as PublicListing}
+      property={property as unknown as PublicProperty}
       locale={locale}
     />
   )

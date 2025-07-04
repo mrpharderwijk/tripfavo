@@ -18,13 +18,13 @@ export async function GuestFavoritesPage(): Promise<ReactElement> {
       <Suspense fallback={<DotLoader />}>
         {!favorites?.length && <FavoritesNoResults />}
         {!!favorites?.length &&
-          favorites.map(({ id, listing }) => (
+          favorites.map(({ id, property }) => (
             <FavoritesItem
               key={id}
               id={id}
-              image={listing?.images[0] ?? null}
-              title={listing?.title ?? ''}
-              subtitle={`${listing?.location?.city}, ${listing?.location?.country}`}
+              image={property?.images[0] ?? null}
+              title={property?.title ?? ''}
+              subtitle={`${property?.location?.city}, ${property?.location?.country}`}
             />
           ))}
       </Suspense>

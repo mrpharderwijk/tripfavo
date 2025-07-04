@@ -5,15 +5,17 @@ import { Suspense } from 'react'
 import { DotLoader } from '@/components/atoms/dot-loader/dot-loader'
 import { Heading } from '@/components/atoms/typography/heading/heading'
 import { AppShellBody } from '@/components/molecules/layout/app-shell/app-shell-body'
+import { getSession } from '@/features/auth/server/actions/get-current-user'
 import { BookingsContextProvider } from '@/features/bookings/providers/bookings-context-provider'
 import { HostBookingsOverview } from '@/features/host/bookings/host-bookings/components/host-bookings-overview/host-bookings-overview'
 import { getHostBookings } from '@/features/host/bookings/server/actions/get-host-bookings'
 import { isActionError } from '@/server/utils/error'
 
 export async function HostBookingsPage(): Promise<ReactElement> {
+  const session = await getSession()
   const [tHostBookings, hostBookingsResponse] = await Promise.all([
     getTranslations('host.bookings'),
-    getHostBookings(),
+    getHostBookings({ userId: session?.user?.id }),
   ])
   const bookings = isActionError(hostBookingsResponse)
     ? null

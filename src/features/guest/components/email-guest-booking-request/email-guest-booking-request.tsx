@@ -17,9 +17,9 @@ import { datePrices } from '@/data/date-prices'
 import RootLayout from '@/emails/layout/root-layout'
 import { GuestsAmount } from '@/features/guest/bookings/guest-booking-detail/providers/guest-booking-detail-context-provider'
 import { PublicGuestUser } from '@/features/guest/types/guest-user'
-import { PublicListing } from '@/features/listings/types/public-listing'
-import { getCleaningFee } from '@/features/listings/utils/get-cleaning-fee'
-import { getDeposit } from '@/features/listings/utils/get-deposit'
+import { PublicProperty } from '@/features/properties/types/public-property'
+import { getCleaningFee } from '@/features/properties/utils/get-cleaning-fee'
+import { getDeposit } from '@/features/properties/utils/get-deposit'
 import { Locale } from '@/i18n/config'
 import { localeToDateFnsLocale } from '@/utils/locale-to-date-fns-locale'
 import { calculateTotalPriceIncludingCleaningFee } from '@/utils/pricing/calculate-total-price'
@@ -28,7 +28,7 @@ import { calculateTotalPricePerNight } from '@/utils/pricing/calculate-total-pri
 export type EmailGuestBookingRequestProps = {
   startDate: string
   endDate: string
-  listing: PublicListing
+  property: PublicProperty
   guestsAmount: GuestsAmount
   totalPrice: number
   locale: Locale
@@ -38,7 +38,7 @@ export type EmailGuestBookingRequestProps = {
 export async function EmailGuestBookingRequest({
   startDate,
   endDate,
-  listing,
+  property,
   guestsAmount,
   locale,
 }: EmailGuestBookingRequestProps): Promise<ReactElement> {
@@ -56,7 +56,7 @@ export async function EmailGuestBookingRequest({
     'bookingDetail.priceBreakdown',
   )
   const previewText = tGuestBookingEmailBookingRequest('previewText', {
-    listingName: `<b>${listing?.location?.streetName ?? 'unknown city'} ${listing?.location?.houseNumber ?? ''}</b>`,
+    propertyName: `<b>${property?.location?.streetName ?? 'unknown city'} ${property?.location?.houseNumber ?? ''}</b>`,
   })
   const parsedStartDate = parseISO(startDate)
   const parsedEndDate = parseISO(endDate)
@@ -71,10 +71,10 @@ export async function EmailGuestBookingRequest({
     endDate: parsedEndDate,
     datePrices: datePrices,
   })
-  const cleaningFee = getCleaningFee(listing.priceDetails)
-  const deposit = getDeposit(listing.priceDetails)
+  const cleaningFee = getCleaningFee(property.priceDetails)
+  const deposit = getDeposit(property.priceDetails)
   const totalPrice = calculateTotalPriceIncludingCleaningFee({
-    priceDetails: listing.priceDetails,
+    priceDetails: property.priceDetails,
     startDate: parsedStartDate,
     endDate: parsedEndDate,
     datePrices,
@@ -87,7 +87,7 @@ export async function EmailGuestBookingRequest({
           <Heading>{tGuestBookingEmailBookingRequest('heading')}</Heading>
           <Text>
             {tGuestBookingEmailBookingRequest('description', {
-              listingName: `<b>${listing?.location?.streetName ?? 'unknown city'} ${listing?.location?.houseNumber ?? ''}</b>`,
+              propertyName: `<b>${property?.location?.streetName ?? 'unknown city'} ${property?.location?.houseNumber ?? ''}</b>`,
             })}
           </Text>
         </Container>
@@ -99,8 +99,8 @@ export async function EmailGuestBookingRequest({
             <Column align="left" className="h-[105px] w-[105px]">
               <Img
                 className="rounded-2xl aspect-square object-cover"
-                src={listing?.images[0]?.url ?? ''}
-                alt={listing?.title ?? ''}
+                src={property?.images[0]?.url ?? ''}
+                alt={property?.title ?? ''}
                 width={105}
                 height={105}
               />
@@ -111,10 +111,10 @@ export async function EmailGuestBookingRequest({
               className="pl-[16px] h-[40px] w-auto"
             >
               <Text className="mt-[24px] mb-[8px] text-lg font-[800]">
-                {listing?.title}
+                {property?.title}
               </Text>
               <Text className="text-md my-[0px] text-gray-500">
-                {listing?.location?.city}
+                {property?.location?.city}
               </Text>
             </Column>
           </Row>

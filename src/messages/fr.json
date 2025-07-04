@@ -1,7 +1,7 @@
 {
   "mainMenu": {
     "host": {
-      "myListings": "Mes annonces",
+      "myProperties": "Mes annonces",
       "myBookings": "Mes réservations",
       "myGuests": "Mes invités",
       "myReviews": "Mes avis",
@@ -113,7 +113,7 @@
   },
   "host": {
     "heading": "Hébergez votre propriété",
-    "listing": {
+    "property": {
       "amenitiesForm": {
         "heading": {
           "title": "Sélectionnez les équipements",
@@ -224,10 +224,10 @@
         "inReview": "En révision",
         "published": "Publié"
       },
-      "yourListing": "Votre propriété à"
+      "yourProperty": "Votre propriété à"
     }
   },
-  "listing": {
+  "property": {
     "amenities": {
       "heading": "Ce que propose ce lieu",
       "showAll": {
@@ -456,7 +456,7 @@
       }
     }
   },
-  "listingDetail": {
+  "propertyDetail": {
     "bottomBar": {
       "selectDates": "Sélectionnez des dates pour voir les prix",
       "button": {

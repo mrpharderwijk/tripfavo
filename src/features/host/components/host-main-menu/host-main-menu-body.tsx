@@ -1,6 +1,6 @@
 'use client'
 
-import { CalendarDays, House } from 'lucide-react'
+import { House, Ticket } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
@@ -25,7 +25,7 @@ export function HostMainMenuBody(): ReactElement {
           icon={House}
           size="lg"
           variant={
-            !isCurrentRoute(pathname, 'hostListings')
+            !isCurrentRoute(pathname, 'hostProperties')
               ? 'sidebar-menu-item'
               : 'sidebar-menu-item-active'
           }
@@ -33,19 +33,19 @@ export function HostMainMenuBody(): ReactElement {
           renderRoot={({ buttonContent }) => (
             <Link
               className="w-full"
-              href={getRoutePathByRouteName('hostListings')}
+              href={getRoutePathByRouteName('hostProperties')}
             >
               {buttonContent}
             </Link>
           )}
         >
-          {tHost('mainMenu.myListings')}
+          {tHost('mainMenu.myProperties')}
         </ButtonWrapper>
       )}
 
       {currentUser && (
         <ButtonWrapper
-          icon={CalendarDays}
+          icon={Ticket}
           size="lg"
           variant={
             !isCurrentRoute(pathname, 'hostBookings')

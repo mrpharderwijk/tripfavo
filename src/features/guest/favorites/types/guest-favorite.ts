@@ -1,7 +1,7 @@
 export type GuestFavorite = {
   id: string
   createdAt: Date
-  listing: {
+  property: {
     id: string
     title: string | null
     images: {

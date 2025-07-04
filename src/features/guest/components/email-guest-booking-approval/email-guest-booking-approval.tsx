@@ -18,10 +18,10 @@ import { DatePrice } from '@/components/organisms/date-picker-calendar/providers
 import RootLayout from '@/emails/layout/root-layout'
 import { GuestsAmount } from '@/features/guest/bookings/guest-booking-detail/providers/guest-booking-detail-context-provider'
 import { PublicGuestUser } from '@/features/guest/types/guest-user'
-import { SafeHostListing } from '@/features/host/listings/types/safe-host-listing'
-import { PublicListingPriceDetail } from '@/features/listings/types/public-listing'
-import { getCleaningFee } from '@/features/listings/utils/get-cleaning-fee'
-import { getDeposit } from '@/features/listings/utils/get-deposit'
+import { SafeHostProperty } from '@/features/host/properties/types/safe-host-property'
+import { PublicPropertyPriceDetail } from '@/features/properties/types/public-property'
+import { getCleaningFee } from '@/features/properties/utils/get-cleaning-fee'
+import { getDeposit } from '@/features/properties/utils/get-deposit'
 import { Locale } from '@/i18n/config'
 import { calculateTotalPriceIncludingCleaningFee } from '@/utils/pricing/calculate-total-price'
 import { calculateTotalPricePerNight } from '@/utils/pricing/calculate-total-price-per-night'
@@ -29,19 +29,19 @@ import { calculateTotalPricePerNight } from '@/utils/pricing/calculate-total-pri
 export type EmailGuestBookingApprovalProps = {
   startDate: string
   endDate: string
-  listing: SafeHostListing
+  property: SafeHostProperty
   guestsAmount: GuestsAmount
   totalPrice: number
   locale: Locale
   guest: PublicGuestUser
   datePrices: DatePrice[]
-  priceDetails: PublicListingPriceDetail[]
+  priceDetails: PublicPropertyPriceDetail[]
 }
 
 export async function EmailGuestBookingApproval({
   startDate,
   endDate,
-  listing,
+  property,
   guestsAmount,
   locale,
   datePrices,
@@ -65,7 +65,7 @@ export async function EmailGuestBookingApproval({
    * Preview text
    */
   const previewText = tGuestBookingEmailBookingApproval('previewText', {
-    hostName: listing?.host?.name?.firstName ?? 'the host',
+    hostName: property?.host?.name?.firstName ?? 'the host',
   })
 
   /**
@@ -94,7 +94,7 @@ export async function EmailGuestBookingApproval({
   /**
    * Images
    */
-  const mainImageUrl = listing.images?.find((image) => image.isMain)?.url ?? ''
+  const mainImageUrl = property.images?.find((image) => image.isMain)?.url ?? ''
 
   return (
     <RootLayout previewText={previewText}>
@@ -103,7 +103,7 @@ export async function EmailGuestBookingApproval({
           <Heading>{tGuestBookingEmailBookingApproval('heading')}</Heading>
           <Text>
             {tGuestBookingEmailBookingApproval('description', {
-              listingName: `<b>${listing?.location?.streetName ?? 'unknown city'} ${listing?.location?.houseNumber ?? ''}</b>`,
+              propertyName: `<b>${property?.location?.streetName ?? 'unknown city'} ${property?.location?.houseNumber ?? ''}</b>`,
             })}
           </Text>
         </Container>
@@ -116,7 +116,7 @@ export async function EmailGuestBookingApproval({
               <Img
                 className="rounded-2xl aspect-square object-cover"
                 src={mainImageUrl}
-                alt={listing?.title ?? ''}
+                alt={property?.title ?? ''}
                 width={105}
                 height={105}
               />
@@ -127,10 +127,10 @@ export async function EmailGuestBookingApproval({
               className="pl-[16px] h-[40px] w-auto"
             >
               <Text className="mt-[24px] mb-[8px] text-lg font-[800]">
-                {listing?.title}
+                {property?.title}
               </Text>
               <Text className="text-md my-[0px] text-gray-500">
-                {listing?.location?.city}
+                {property?.location?.city}
               </Text>
             </Column>
           </Row>

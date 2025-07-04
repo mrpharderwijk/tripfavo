@@ -28,8 +28,8 @@ export function BookingsList({
         <HostBookingListItem
           key={item.id}
           id={item.id}
-          image={item.listing.images[0]}
-          title={item.listing.title}
+          image={item.property.images[0]}
+          title={item.property.title}
           status={item.status}
           startDate={item.startDate}
           endDate={item.endDate}

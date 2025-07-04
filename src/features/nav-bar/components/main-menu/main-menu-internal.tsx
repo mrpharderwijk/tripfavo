@@ -101,6 +101,7 @@ export function MainMenuInternal(): ReactElement {
         )}
         <Button
           size="md"
+          rounded
           icon={AlignJustify}
           variant="quaternary"
           onClick={toggleMainMenu}

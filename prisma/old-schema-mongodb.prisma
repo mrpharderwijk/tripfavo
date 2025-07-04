@@ -31,7 +31,7 @@ model User {
   // Optional for WebAuthn support
   Authenticator Authenticator[]
 
-  listings      Listing[]
+  properties    Listing[]
   bookings      Booking[]
   listingImages ListingImage[]
   favorites     GuestFavorite[]

@@ -25,7 +25,6 @@ export async function POST(
     const existingUser = await prisma.user.findUnique({
       where: { email },
     })
-    console.log('----> existingUser: ', existingUser)
     if (existingUser) {
       return NextResponse.json(
         { error: 'EMAIL_ALREADY_EXISTS' },
@@ -48,8 +47,6 @@ export async function POST(
         hashedPassword,
       },
     })
-
-    console.log('----> user: ', user)
 
     return NextResponse.json(user.id)
   } catch (error) {

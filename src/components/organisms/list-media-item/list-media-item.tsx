@@ -6,15 +6,15 @@ import { Box } from '@/components/atoms/layout/box/box'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
 import {
-  ListingMediaItemStatus,
   ListMediaItemStatus,
+  PropertyMediaItemStatus,
 } from '@/components/organisms/list-media-item/list-media-item-status'
 import { ListMediaItemSubTitle } from '@/components/organisms/list-media-item/list-media-item-subtitle'
 import { ListMediaItemTitle } from '@/components/organisms/list-media-item/list-media-item-title'
 
 type ListMediaItemProps = {
   href: string
-  status?: ListingMediaItemStatus
+  status?: PropertyMediaItemStatus
   image: {
     url: string
     fileName: string

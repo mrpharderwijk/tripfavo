@@ -1,7 +1,7 @@
 {
   "mainMenu": {
     "host": {
-      "myListings": "Mijn advertenties",
+      "myProperties": "Mijn advertenties",
       "myBookings": "Mijn boekingen",
       "myGuests": "Mijn gasten",
       "myReviews": "Mijn beoordelingen",
@@ -113,7 +113,7 @@
   },
   "host": {
     "heading": "Host je woning",
-    "listing": {
+    "property": {
       "amenitiesForm": {
         "heading": {
           "title": "Selecteer de voorzieningen van je woning",
@@ -225,10 +225,10 @@
         "inReview": "In beoordeling",
         "published": "Gepubliceerd"
       },
-      "yourListing": "Je woning in"
+      "yourProperty": "Je woning in"
     }
   },
-  "listing": {
+  "property": {
     "amenities": {
       "heading": "Wat je woning biedt",
       "showAll": {
@@ -457,7 +457,7 @@
       }
     }
   },
-  "listingDetail": {
+  "propertyDetail": {
     "bottomBar": {
       "selectDates": "Selecteer data om de prijzen te bekijken",
       "button": {

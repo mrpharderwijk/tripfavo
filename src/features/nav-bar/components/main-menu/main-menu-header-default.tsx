@@ -9,11 +9,13 @@ export function MainMenuHeaderDefault(): ReactElement {
   const { closeMainMenu } = useMainMenuContext()
 
   return (
-    <Button
-      icon={XIcon}
-      size="sm"
-      variant="quaternary"
-      onClick={closeMainMenu}
-    />
+    <div className="absolute left-4 top-4">
+      <Button
+        icon={XIcon}
+        size="sm"
+        variant="quaternary"
+        onClick={closeMainMenu}
+      />
+    </div>
   )
 }

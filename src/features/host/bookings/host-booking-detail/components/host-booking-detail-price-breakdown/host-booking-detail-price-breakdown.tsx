@@ -11,8 +11,8 @@ import { Body } from '@/components/atoms/typography/body/body'
 import { Heading } from '@/components/atoms/typography/heading/heading'
 import { datePrices } from '@/data/date-prices'
 import { useHostBookingDetailContext } from '@/features/host/bookings/host-booking-detail/providers/host-booking-detail-context-provider'
-import { getCleaningFee } from '@/features/listings/utils/get-cleaning-fee'
-import { getDeposit } from '@/features/listings/utils/get-deposit'
+import { getCleaningFee } from '@/features/properties/utils/get-cleaning-fee'
+import { getDeposit } from '@/features/properties/utils/get-deposit'
 import { Locale } from '@/i18n/config'
 import { parseDbDateStringToDate } from '@/utils/date/date-string-to-date'
 import { calculateTotalPriceIncludingCleaningFee } from '@/utils/pricing/calculate-total-price'
@@ -24,7 +24,6 @@ export function HostBookingDetailPriceBreakdown(): ReactElement {
   const tBookingDetailPriceBreakdown = useTranslations(
     'bookingDetail.priceBreakdown',
   )
-  console.log(booking)
   const totalPricePerNight = calculateTotalPricePerNight({
     startDate: parseDbDateStringToDate(booking?.startDate ?? ''),
     endDate: parseDbDateStringToDate(booking?.endDate ?? ''),

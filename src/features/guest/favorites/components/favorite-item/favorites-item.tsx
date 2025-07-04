@@ -5,9 +5,9 @@ import { ReactElement } from 'react'
 import { BookingStatus } from '@prisma/client'
 
 import { ListMediaItem } from '@/components/organisms/list-media-item/list-media-item'
-import { ListingMediaItemStatus } from '@/components/organisms/list-media-item/list-media-item-status'
+import { PropertyMediaItemStatus } from '@/components/organisms/list-media-item/list-media-item-status'
 
-type ReservationItemProps = {
+type BookingItemProps = {
   id: string
   title: string
   image: { url: string; fileName: string } | null
@@ -16,15 +16,15 @@ type ReservationItemProps = {
 
 const bookingItemStatusMap = {
   [BookingStatus.CANCELLED]: {
-    type: ListingMediaItemStatus.DANGER,
+    type: PropertyMediaItemStatus.DANGER,
     label: 'Cancelled by host',
   },
   [BookingStatus.PENDING]: {
-    type: ListingMediaItemStatus.WARNING,
+    type: PropertyMediaItemStatus.WARNING,
     label: 'Waiting for host',
   },
   [BookingStatus.CONFIRMED]: {
-    type: ListingMediaItemStatus.SUCCESS,
+    type: PropertyMediaItemStatus.SUCCESS,
     label: 'Confirmed by host',
   },
 }
@@ -34,7 +34,7 @@ export function FavoritesItem({
   image,
   title,
   subtitle,
-}: ReservationItemProps): ReactElement {
+}: BookingItemProps): ReactElement {
   const locale = useLocale()
 
   return (

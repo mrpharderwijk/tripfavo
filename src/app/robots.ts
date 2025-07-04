@@ -9,8 +9,9 @@ export default function robots(): MetadataRoute.Robots {
         '/account-settings/',
         '/host/',
         '/guest/',
-        '/reservation/',
+        '/bookings/',
         '/api/',
+        '/admin/',
       ],
     },
   }

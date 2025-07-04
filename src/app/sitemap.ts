@@ -5,7 +5,7 @@
 import { MetadataRoute } from 'next'
 import { cookies } from 'next/headers'
 
-import { getPublishedListings } from '@/features/listings/server/actions/get-listings'
+import { getPublishedProperties } from '@/features/properties/server/actions/get-properties'
 import { isActionError } from '@/server/utils/error'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -23,11 +23,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]
 
-  // Get all published listings
-  const listingsResponse = await getPublishedListings()
-  const listings = isActionError(listingsResponse)
+  // Get all published properties
+  const propertiesResponse = await getPublishedProperties()
+  const properties = isActionError(propertiesResponse)
     ? []
-    : (listingsResponse?.data ?? [])
+    : (propertiesResponse?.data ?? [])
 
   // Generate sitemap entries for base routes
   const baseSitemapEntries = baseRoutes.map((route) => ({
@@ -37,13 +37,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: route.priority,
   }))
 
-  // Generate sitemap entries for listings
-  const listingSitemapEntries = listings.map((listing) => ({
-    url: `${baseUrl}/property/${listing.id}`,
-    lastModified: listing.updatedAt,
+  // Generate sitemap entries for properties
+  const propertySitemapEntries = properties.map((property) => ({
+    url: `${baseUrl}/property/${property.id}`,
+    lastModified: property.updatedAt,
     changeFrequency: 'weekly' as const,
     priority: 0.8,
   }))
 
-  return [...baseSitemapEntries, ...listingSitemapEntries]
+  return [...baseSitemapEntries, ...propertySitemapEntries]
 }

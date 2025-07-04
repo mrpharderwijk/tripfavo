@@ -6,7 +6,7 @@ import { ReactElement, useMemo } from 'react'
 import { BookingStatus } from '@prisma/client'
 
 import { ListMediaItem } from '@/components/organisms/list-media-item/list-media-item'
-import { ListingMediaItemStatus } from '@/components/organisms/list-media-item/list-media-item-status'
+import { PropertyMediaItemStatus } from '@/components/organisms/list-media-item/list-media-item-status'
 import { localeToDateFnsLocale } from '@/utils/locale-to-date-fns-locale'
 
 type HostBookingItemProps = {
@@ -19,9 +19,9 @@ type HostBookingItemProps = {
 }
 
 const bookingItemStatusMap = {
-  [BookingStatus.CANCELLED]: ListingMediaItemStatus.DANGER,
-  [BookingStatus.PENDING]: ListingMediaItemStatus.WARNING,
-  [BookingStatus.CONFIRMED]: ListingMediaItemStatus.SUCCESS,
+  [BookingStatus.CANCELLED]: PropertyMediaItemStatus.DANGER,
+  [BookingStatus.PENDING]: PropertyMediaItemStatus.WARNING,
+  [BookingStatus.CONFIRMED]: PropertyMediaItemStatus.SUCCESS,
 }
 
 export function HostBookingListItem({

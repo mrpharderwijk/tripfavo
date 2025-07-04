@@ -1,6 +1,6 @@
 import { BookingStatus, PriceType, Prisma } from '@prisma/client'
 
-import { bookingSelect } from '@/features/bookings/server/actions/get-bookings'
+import { bookingSelect } from '@/features/guest/bookings/server/actions/get-guest-bookings'
 
 export type DbBooking = Prisma.BookingGetPayload<{
   select: typeof bookingSelect
@@ -30,7 +30,7 @@ export type SafeBooking = {
     } | null
     createdAt: string
   } | null
-  listing: {
+  property: {
     id: string
     title: string
     images: {

@@ -128,8 +128,8 @@ export const buttonContentLabelClassNames = cva('flex-initial', {
 export const buttonContentIconClassNames = cva('', {
   variants: {
     size: {
-      xs: 'w-3 h-3',
-      sm: 'w-3 h-3',
+      xs: 'w-4 h-4',
+      sm: 'w-4 h-4',
       md: 'w-4 h-4',
       lg: 'w-5 h-5',
       xl: 'w-6 h-6',
