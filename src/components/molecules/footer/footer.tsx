@@ -43,7 +43,7 @@ export const Footer = (): ReactElement => {
         {/* <FooterDisclaimer title="Disclaimer">
           The TripFavo Newsroom is aimed at journalists. All Homes and Experiences referenced on the
           TripFavo Newsroom are intended purely to inspire and illustrate. TripFavo does not
-          recommend or endorse specific Home or Experience listings on the TripFavo platform.
+          recommend or endorse specific Home or Experience properties on the TripFavo platform.
         </FooterDisclaimer> */}
 
         <FooterCopyright />

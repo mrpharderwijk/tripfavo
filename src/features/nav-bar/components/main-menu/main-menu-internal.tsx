@@ -3,9 +3,10 @@
 import { AlignJustify } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useLocale, useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl'
 import { ReactElement } from 'react'
 
+import { Display } from '@/components/atoms/display/display'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { Button } from '@/components/molecules/buttons/button'
 import { ButtonWrapper } from '@/components/molecules/buttons/button-wrapper/button-wrapper'
@@ -20,10 +21,9 @@ import { getRoutePathByRouteName } from '@/utils/get-route'
 export function MainMenuInternal(): ReactElement {
   const { userMode, setUserMode, isMounted, currentUser } = useAppContext()
   const { toggleMainMenu, isOpen, subMenuRef } = useMainMenuContext()
-  const locale = useLocale()
-  const tMainMenuGuest = useTranslations('mainMenu.guest')
-  const tMainMenuHost = useTranslations('mainMenu.host')
-  const tMainMenu = useTranslations('mainMenu')
+  const tGuestMainMenu = useTranslations('guest.mainMenu')
+  const tHostMainMenu = useTranslations('host.mainMenu')
+  const tCommonMainMenu = useTranslations('common.mainMenu')
 
   const hostRoutePath = getRoutePathByRouteName('host')
   const guestRoutePath = getRoutePathByRouteName('guest')
@@ -36,48 +36,51 @@ export function MainMenuInternal(): ReactElement {
           <>
             {/* TODO: Add language switcher */}
             {/* <LanguageSwitcher currentLocale={locale as Locale} /> */}
-            {!currentUser && (
-              <ButtonWrapper
-                size="md"
-                variant="quaternary-inverse"
-                rounded
-                renderRoot={({ buttonContent }) => (
-                  <Link href={hostRoutePath}>{buttonContent}</Link>
-                )}
-              >
-                {tMainMenu('hostJoin')}
-              </ButtonWrapper>
-            )}
-            {currentUser && userMode === UserMode.GUEST && (
-              <ButtonWrapper
-                size="md"
-                variant="quaternary-inverse"
-                rounded
-                onClick={() => {
-                  setUserMode(UserMode.HOST)
-                }}
-                renderRoot={({ buttonContent }) => (
-                  <Link href={hostRoutePath}>{buttonContent}</Link>
-                )}
-              >
-                {tMainMenuGuest('switchToHost')}
-              </ButtonWrapper>
-            )}
-            {currentUser && userMode === UserMode.HOST && (
-              <ButtonWrapper
-                size="md"
-                variant="quaternary-inverse"
-                rounded
-                onClick={() => {
-                  setUserMode(UserMode.GUEST)
-                }}
-                renderRoot={({ buttonContent }) => (
-                  <Link href={guestRoutePath}>{buttonContent}</Link>
-                )}
-              >
-                {tMainMenuHost('switchToGuest')}
-              </ButtonWrapper>
-            )}
+            <Display show-sm show-md show-lg show-xl>
+              {!currentUser && (
+                <ButtonWrapper
+                  size="md"
+                  variant="quaternary-inverse"
+                  rounded
+                  renderRoot={({ buttonContent }) => (
+                    <Link href={hostRoutePath}>{buttonContent}</Link>
+                  )}
+                >
+                  {tCommonMainMenu('hostJoin')}
+                </ButtonWrapper>
+              )}
+
+              {currentUser && userMode === UserMode.GUEST && (
+                <ButtonWrapper
+                  size="md"
+                  variant="quaternary-inverse"
+                  rounded
+                  onClick={() => {
+                    setUserMode(UserMode.HOST)
+                  }}
+                  renderRoot={({ buttonContent }) => (
+                    <Link href={hostRoutePath}>{buttonContent}</Link>
+                  )}
+                >
+                  {tGuestMainMenu('switchToHost')}
+                </ButtonWrapper>
+              )}
+              {currentUser && userMode === UserMode.HOST && (
+                <ButtonWrapper
+                  size="md"
+                  variant="quaternary-inverse"
+                  rounded
+                  onClick={() => {
+                    setUserMode(UserMode.GUEST)
+                  }}
+                  renderRoot={({ buttonContent }) => (
+                    <Link href={guestRoutePath}>{buttonContent}</Link>
+                  )}
+                >
+                  {tHostMainMenu('switchToGuest')}
+                </ButtonWrapper>
+              )}
+            </Display>
 
             {currentUser && (
               <ButtonWrapper
@@ -102,6 +105,7 @@ export function MainMenuInternal(): ReactElement {
         )}
         <Button
           size="md"
+          rounded
           icon={AlignJustify}
           variant="quaternary"
           onClick={toggleMainMenu}

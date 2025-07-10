@@ -3,25 +3,25 @@ import { render, screen } from '@testing-library/react'
 import { LocalizedPrice } from './localized-price'
 
 describe('LocalizedPrice', () => {
-  it('formats price in EUR for fr-FR locale', () => {
+  it('formats price in EUR for fr locale', () => {
     // Arrange & Act
-    render(<LocalizedPrice price={100} locale="fr-FR" />)
+    render(<LocalizedPrice price={100} locale="fr" />)
 
     // Assert
     expect(screen.getByText('100,00 €')).toBeInTheDocument()
   })
 
-  it('formats price in EUR for nl-NL locale', () => {
+  it('formats price in EUR for nl locale', () => {
     // Arrange & Act
-    render(<LocalizedPrice price={100} locale="nl-NL" />)
+    render(<LocalizedPrice price={100} locale="nl" />)
 
     // Assert
     expect(screen.getByText('€ 100,00')).toBeInTheDocument()
   })
 
-  it('formats price in USD with conversion rate for en-US locale', () => {
+  it('formats price in USD with conversion rate for en locale', () => {
     // Arrange & Act
-    render(<LocalizedPrice price={100} locale="en-US" />)
+    render(<LocalizedPrice price={100} locale="en" />)
 
     // Assert
     // 100 * 1.142906 ≈ 114.29
@@ -30,7 +30,7 @@ describe('LocalizedPrice', () => {
 
   it('handles string price input', () => {
     // Arrange & Act
-    render(<LocalizedPrice price="50.5" locale="fr-FR" />)
+    render(<LocalizedPrice price="50.5" locale="fr" />)
 
     // Assert
     expect(screen.getByText('50,50 €')).toBeInTheDocument()
@@ -41,7 +41,7 @@ describe('LocalizedPrice', () => {
     render(
       <LocalizedPrice
         price={100.123}
-        locale="fr-FR"
+        locale="fr"
         minFractionDigits={1}
         maxFractionDigits={3}
       />,

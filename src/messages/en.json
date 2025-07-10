@@ -1,25 +1,13 @@
 {
-  "mainMenu": {
-    "host": {
-      "myListings": "My listings",
-      "myReservations": "My reservations",
-      "myGuests": "My guests",
-      "myReviews": "My reviews",
-      "mySettings": "My settings",
-      "switchToGuest": "Switch to guest"
-    },
-    "guest": {
-      "dashboard": "Dashboard",
-      "myFavorites": "My favorites",
-      "myBookings": "My reservations",
-      "switchToHost": "Switch to host"
-    },
-    "logout": "Logout",
-    "login": "Login",
-    "signUp": "Sign up",
-    "language": "Change language",
-    "account": "Account",
-    "hostJoin": "Become a host"
+  "account": {
+    "heading": "Account settings",
+    "sidebar": {
+      "personalInfo": "Personal information",
+      "paymentMethods": "Payment methods",
+      "security": "Security",
+      "notifications": "Notifications",
+      "language": "Language"
+    }
   },
   "auth": {
     "verifyEmail": {
@@ -69,9 +57,8 @@
       "title": "Welcome back!",
       "submit": "Continue",
       "submitting": "Sending...",
-      "register": {
-        "text": "Don't have an account?",
-        "label": "Sign up"
+      "signUp": {
+        "text": "Don't have an account? <link>Sign up</link>"
       },
       "error": {
         "invalidCredentials": "Invalid credentials",
@@ -81,15 +68,32 @@
         "configurationError": "Configuration error. Please contact support",
         "signinError": "Sign in failed. Please try again"
       },
+      "successDialog": {
+        "heading": "Login successful",
+        "title": "Welcome to the club!",
+        "subtitle": "You are now logged in. You can now close this modal and continue.",
+        "button": {
+          "continue": "Continue"
+        }
+      }
+    },
+    "signUpDialog": {
+      "heading": "Sign up for an account",
+      "form": {
+        "submit": "Continue"
+      },
+      "signUp": {
+        "title": "Welcome to TripFavo"
+      },
+      "footer": {
+        "text": "Already have an account? <link>Log in</link>"
+      },
       "success": {
-        "heading": "Check your email",
-        "title": "Magic link sent!",
-        "description": "We've sent a magic link to {email}. Click the link in the email to sign in to your account.",
-        "checkSpam": "Don't see the email? Check your spam folder.",
-        "openEmail": "Open email app",
-        "backToLogin": "Back to login",
-        "noEmail": "Didn't receive the email?",
-        "resend": "Resend"
+        "title": "Welcome to the club!",
+        "subtitle": "Your account has been created and you are now logged in. You can now close this modal and continue.",
+        "button": {
+          "continue": "Continue"
+        }
       }
     },
     "signUpForm": {
@@ -97,36 +101,245 @@
       "title": "Welcome to TripFavo",
       "submit": "Continue",
       "login": {
-        "text": "Already have an account?",
-        "label": "Log in"
+        "text": "Already have an account? <link>Log in</link>"
       },
-      "success": {
-        "heading": "Welcome to the club!",
-        "description": "Your account has been created successfully.",
-        "link": "Please <link>log in</link> to continue."
+      "successDialog": {
+        "heading": "Sign up successful",
+        "title": "Welcome to the club!",
+        "subtitle": "Your account has been created and you are now logged in. You can now close this modal and continue.",
+        "button": {
+          "continue": "Continue"
+        }
       }
     }
   },
-  "personal-info": {
-    "heading": "Personal information",
-    "legal-name": {
-      "label": "Legal name",
-      "formIntro": "Please fill in your legal name. This is the same name as stated in your passport or ID card."
-    }
+  "common": {
+    "amenities": {
+      "wifi": "WiFi",
+      "swimmingPool": "Swimming pool",
+      "hotTub": "Hot tub",
+      "gym": "Gym",
+      "parking": "Parking",
+      "airConditioning": "Air Conditioning",
+      "heating": "Heating",
+      "kitchen": "Kitchen",
+      "washer": "Washer",
+      "dryer": "Dryer",
+      "tv": "TV",
+      "freeParking": "Free Parking",
+      "seaView": "Sea View",
+      "mountainView": "Mountain View",
+      "garden": "Garden",
+      "bbqGrill": "BBQ Grill",
+      "playground": "Playground",
+      "beachAccess": "Beach Access",
+      "fireplace": "Fireplace",
+      "workspace": "Workspace",
+      "petFriendly": "Pet Friendly",
+      "securitySystem": "Security System",
+      "firstAidKit": "First Aid Kit",
+      "fireExtinguisher": "Fire Extinguisher",
+      "smokeAlarm": "Smoke Alarm",
+      "elevator": "Elevator",
+      "balcony": "Balcony",
+      "breakfastIncluded": "Breakfast Included",
+      "dishwasher": "Dishwasher",
+      "babyEquipment": "Baby Equipment",
+      "tennisCourt": "Tennis Court"
+    },
+    "forms": {
+      "firstName": {
+        "label": "First name",
+        "placeholder": "John"
+      },
+      "middleName": {
+        "label": "Middle name",
+        "placeholder": "Doe"
+      },
+      "lastName": {
+        "label": "Last name",
+        "placeholder": "Doe"
+      },
+      "email": {
+        "label": "Email address",
+        "placeholder": "johndoe@example.com"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "********",
+        "error": {
+          "required": "Password is required",
+          "minlength": "Password must be at least 8 characters long",
+          "uppercase": "Password must contain at least one uppercase letter",
+          "lowercase": "Password must contain at least one lowercase letter",
+          "digit": "Password must contain at least one number"
+        }
+      },
+      "passwordConfirm": {
+        "label": "Confirm password",
+        "placeholder": "********"
+      },
+      "required": "Please fill in your {field}",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "save": "Save",
+      "saveAndContinue": "Save and continue",
+      "saveAndExit": "Save & exit",
+      "error": {
+        "unknown": "An unknown error occurred. Please contact customer support.",
+        "network": "Network error. Please check your connection and try again."
+      }
+    },
+    "mainMenu": {
+      "logout": "Logout",
+      "login": "Login",
+      "signUp": "Sign up",
+      "language": "Change language",
+      "account": "Account",
+      "hostJoin": "Become a host"
+    },
+    "dates": "Dates",
+    "noDates": "No dates selected",
+    "close": "Close",
+    "back": "Back",
+    "previous": "Previous",
+    "next": "Next",
+    "confirm": "Confirm",
+    "upload": "Upload",
+    "uploadClick": "Click to upload",
+    "guestCount": "{amount, plural, =1 {1 guest} other {# guests}}",
+    "roomAmount": "{amount, plural, =1 {1 room} other {# rooms}}",
+    "bedroomAmount": "{amount, plural, =1 {1 bedroom} other {# bedrooms}}",
+    "bathroomAmount": "{amount, plural, =1 {1 bathroom} other {# bathrooms}}",
+    "bedAmount": "{amount, plural, =1 {1 bed} other {# beds}}",
+    "kitchenAmount": "{amount, plural, =1 {1 kitchen} other {# kitchens}}",
+    "livingRoomAmount": "{amount, plural, =1 {1 living room} other {# living rooms}}"
   },
-  "account": {
-    "heading": "Account settings",
-    "sidebar": {
-      "personalInfo": "Personal information",
-      "paymentMethods": "Payment methods",
-      "security": "Security",
-      "notifications": "Notifications",
-      "language": "Language"
+  "guest": {
+    "heading": "Plan your next trip",
+    "bookings": {
+      "heading": "My bookings",
+      "noResults": {
+        "text": "You don't have any bookings yet. When you request a booking, it will appear here.",
+        "button": "Book now"
+      },
+      "pendingHeading": "Pending bookings",
+      "confirmedHeading": "Confirmed bookings",
+      "cancelledHeading": "Cancelled bookings",
+      "status": {
+        "cancelled": "Cancelled by host",
+        "review": "Waiting for host",
+        "confirmed": "Confirmed by host"
+      },
+      "email": {
+        "bookingRequest": {
+          "subject": "Booking request",
+          "previewText": "New booking request",
+          "body": "A new booking request has been made for your property.",
+          "heading": "Booking request",
+          "description": "Your booking request for {propertyName} has been sent to the host. The host will review your booking request and get back to you as soon as possible.",
+          "whatsNext": {
+            "heading": "What's next?",
+            "description": "You can check the status of your booking at any time in your {bookingsPage} page.",
+            "step1": {
+              "title": "The host of the property will review your booking request",
+              "description": "In order to accept your booking request, the host will need to review your request and confirm the booking."
+            },
+            "step2": {
+              "title": "The host accepts your booking",
+              "description": "Once the host accepts your booking, you will receive a confirmation email and you can start preparing for your stay."
+            },
+            "step3": {
+              "title": "After the host has accepted your booking",
+              "description": "When your booking is confirmed, you can communicate with the host by clicking on your booking and using the chat."
+            }
+          }
+        },
+        "bookingApproval": {
+          "subject": "Booking approval",
+          "previewText": "Your booking has been approved by {hostName}!",
+          "body": "Your booking has been approved by the host.",
+          "heading": "Booking approved!",
+          "description": "Your booking for {propertyName} has been approved by the host. You can now communicate with the host by clicking the booking and using the chat."
+        }
+      }
+    },
+    "favorites": {
+      "heading": "My favorites",
+      "noResults": {
+        "text": "You haven't added any properties to your favorites yet. When you add a property to your favorites, it will appear here.",
+        "button": "Find your next favorite"
+      }
+    },
+    "mainMenu": {
+      "dashboard": "Dashboard",
+      "myFavorites": "My favorites",
+      "myBookings": "My bookings",
+      "switchToHost": "Switch to host"
     }
   },
   "host": {
     "heading": "Host your property",
-    "listing": {
+    "properties": {
+      "noResults": {
+        "text": "You don't have any properties yet. When you add a property, it will appear here.",
+        "button": "Add property"
+      }
+    },
+    "bookings": {
+      "heading": "My bookings",
+      "pendingHeading": "Pending bookings",
+      "confirmedHeading": "Confirmed bookings",
+      "cancelledHeading": "Cancelled bookings",
+      "noResults": {
+        "text": "You don't have any bookings yet. When a guest requests a booking, it will appear here."
+      },
+      "status": {
+        "cancelled": "Cancelled by you",
+        "review": "Waiting for you",
+        "confirmed": "Confirmed by you"
+      },
+      "bookingDetail": {
+        "heading": "Booking details"
+      },
+      "email": {
+        "bookingRequest": {
+          "subject": "Booking request",
+          "previewText": "New booking request",
+          "body": "A new booking request has been made for your property.",
+          "heading": "Booking request by",
+          "description": "A new booking request has been made for {propertyName}. The guest has received a confirmation email of their booking request. Until that time the booking is pending. We kindly ask you to review the booking request <b>within 48 hours or we will automatically accept it</b>..",
+          "whatsNext": {
+            "heading": "What's next?",
+            "description": "You can check the status of your booking at any time in your {bookingsPage} page.",
+            "step1": {
+              "title": "You will need to review the booking request",
+              "description": "In order to accept your booking request, you will need to review the booking request and confirm the booking."
+            },
+            "step2": {
+              "title": "When you accept the booking",
+              "description": "Once you accepts the booking, you can communicate with the guest by clicking the booking and using the chat."
+            }
+          }
+        },
+        "bookingApproval": {
+          "subject": "Booking approval",
+          "previewText": "You approved the booking of {guestName}!",
+          "body": "Your booking has been approved by the host.",
+          "heading": "Booking approved!",
+          "description": "You approved a booking for {propertyName}. The guest has received a confirmation email of their approved booking. You can now communicate with the guest by clicking the booking and using the chat."
+        }
+      }
+    },
+    "mainMenu": {
+      "myProperties": "My properties",
+      "myBookings": "My bookings",
+      "myGuests": "My guests",
+      "myReviews": "My reviews",
+      "mySettings": "My settings",
+      "switchToGuest": "Switch to guest"
+    },
+    "property": {
       "amenitiesForm": {
         "heading": {
           "title": "Select the amenities of your property",
@@ -187,7 +400,7 @@
       "locationForm": {
         "heading": {
           "title": "Where's your place located?",
-          "subtitle": "Your address is only shared with guests after they've made a reservation."
+          "subtitle": "Your address is only shared with guests after they've made a booking."
         }
       },
       "neighbourhoodDescriptionForm": {
@@ -237,21 +450,13 @@
         "review": "In Review",
         "published": "Published"
       },
-      "yourListing": "Your property in"
-    },
-    "reservations": {
-      "heading": "My reservations",
-      "pendingHeading": "Pending reservations",
-      "confirmedHeading": "Confirmed reservations",
-      "cancelledHeading": "Cancelled reservations",
-      "status": {
-        "cancelled": "Cancelled by you",
-        "review": "Waiting for you",
-        "confirmed": "Confirmed by you"
+      "yourProperty": "Your property in",
+      "overview": {
+        "createdAt": "Created on {date}"
       }
     }
   },
-  "listing": {
+  "property": {
     "amenities": {
       "heading": "What this place offers",
       "showAll": {
@@ -293,130 +498,32 @@
       },
       "selectDates": "Add dates to view the prices"
     },
-    "reservation": {
-      "heading": "Reservation request"
+    "booking": {
+      "heading": "Booking request"
     }
   },
-  "guest": {
-    "heading": "Plan your next trip",
-    "reservations": {
-      "heading": "My reservations",
-      "noResults": {
-        "text": "You don't have any reservations yet. When you request a reservation, it will appear here.",
-        "button": "Book now"
+  "propertyDetail": {
+    "bottomBar": {
+      "selectDates": "Select dates to view the prices",
+      "button": {
+        "labelNonSelected": "Check availability",
+        "labelSelected": "Reserve now"
       },
-      "pendingHeading": "Pending reservations",
-      "confirmedHeading": "Confirmed reservations",
-      "cancelledHeading": "Cancelled reservations",
-      "status": {
-        "cancelled": "Cancelled by host",
-        "review": "Waiting for host",
-        "confirmed": "Confirmed by host"
-      }
-    },
-    "favorites": {
-      "heading": "My favorites",
-      "noResults": {
-        "text": "You haven't added any properties to your favorites yet. When you add a property to your favorites, it will appear here.",
-        "button": "Find your next favorite"
-      }
+      "perNight": "per night"
     }
   },
-  "common": {
-    "forms": {
-      "firstName": {
-        "label": "First name",
-        "placeholder": "John"
-      },
-      "middleName": {
-        "label": "Middle name",
-        "placeholder": "Doe"
-      },
-      "lastName": {
-        "label": "Last name",
-        "placeholder": "Doe"
-      },
-      "email": {
-        "label": "Email address",
-        "placeholder": "johndoe@example.com"
-      },
-      "password": {
-        "label": "Password",
-        "placeholder": "********",
-        "error": {
-          "required": "Password is required",
-          "minlength": "Password must be at least 8 characters long",
-          "uppercase": "Password must contain at least one uppercase letter",
-          "lowercase": "Password must contain at least one lowercase letter",
-          "digit": "Password must contain at least one number"
-        }
-      },
-      "passwordConfirm": {
-        "label": "Confirm password",
-        "placeholder": "********"
-      },
-      "required": "Please fill in your {field}",
-      "cancel": "Cancel",
-      "edit": "Edit",
-      "save": "Save",
-      "saveAndContinue": "Save and continue",
-      "saveAndExit": "Save & exit",
-      "error": {
-        "unknown": "An unknown error occurred. Please contact customer support.",
-        "network": "Network error. Please check your connection and try again."
-      }
-    },
-    "amenities": {
-      "wifi": "WiFi",
-      "swimmingPool": "Swimming pool",
-      "hotTub": "Hot tub",
-      "gym": "Gym",
-      "parking": "Parking",
-      "airConditioning": "Air Conditioning",
-      "heating": "Heating",
-      "kitchen": "Kitchen",
-      "washer": "Washer",
-      "dryer": "Dryer",
-      "tv": "TV",
-      "freeParking": "Free Parking",
-      "seaView": "Sea View",
-      "mountainView": "Mountain View",
-      "garden": "Garden",
-      "bbqGrill": "BBQ Grill",
-      "playground": "Playground",
-      "beachAccess": "Beach Access",
-      "fireplace": "Fireplace",
-      "workspace": "Workspace",
-      "petFriendly": "Pet Friendly",
-      "securitySystem": "Security System",
-      "firstAidKit": "First Aid Kit",
-      "fireExtinguisher": "Fire Extinguisher",
-      "smokeAlarm": "Smoke Alarm",
-      "elevator": "Elevator",
-      "balcony": "Balcony",
-      "breakfastIncluded": "Breakfast Included",
-      "dishwasher": "Dishwasher",
-      "babyEquipment": "Baby Equipment",
-      "tennisCourt": "Tennis Court"
-    },
-    "dates": "Dates",
-    "noDates": "No dates selected",
-    "close": "Close",
-    "back": "Back",
-    "previous": "Previous",
-    "next": "Next",
-    "confirm": "Confirm",
-    "upload": "Upload",
-    "uploadClick": "Click to upload",
-    "guestCount": "{amount, plural, =1 {1 guest} other {# guests}}",
-    "roomAmount": "{amount, plural, =1 {1 room} other {# rooms}}",
-    "bedroomAmount": "{amount, plural, =1 {1 bedroom} other {# bedrooms}}",
-    "bathroomAmount": "{amount, plural, =1 {1 bathroom} other {# bathrooms}}",
-    "bedAmount": "{amount, plural, =1 {1 bed} other {# beds}}",
-    "kitchenAmount": "{amount, plural, =1 {1 kitchen} other {# kitchens}}",
-    "livingRoomAmount": "{amount, plural, =1 {1 living room} other {# living rooms}}"
+  "personal-info": {
+    "heading": "Personal information",
+    "legal-name": {
+      "label": "Legal name",
+      "formIntro": "Please fill in your legal name. This is the same name as stated in your passport or ID card."
+    }
   },
-  "reservationDetail": {
+  "bookingDetail": {
+    "heading": "Booking reservation",
+    "host": {
+      "label": "Hosted by {name}"
+    },
     "summary": {
       "heading": "Summary",
       "dates": {
@@ -478,16 +585,49 @@
     },
     "bottomBar": {
       "button": {
-        "label": "Confirm reservation"
+        "label": "Confirm booking"
       }
-    }
-  },
-  "listingDetail": {
-    "bottomBar": {
-      "selectDates": "Select dates to view the prices",
+    },
+    "loginDialog": {
+      "heading": "Login to book this property",
+      "subtitle": "You need to be logged in to place a booking. If you don't have an account, you can create one by <link>signing up</link>."
+    },
+    "loginSuccessDialog": {
+      "heading": "Login successful",
+      "title": "Welcome to the club!",
+      "subtitle": "You are now logged in. You can now close this modal and continue.",
       "button": {
-        "labelNonSelected": "Check availability",
-        "labelSelected": "Reserve now"
+        "continue": "Continue"
+      }
+    },
+    "signUpDialog": {
+      "heading": "Sign up to book this property",
+      "subtitle": "You need to have an account to place a booking. If you already have an account, you can book by <link>logging in</link>."
+    },
+    "signUpSuccessDialog": {
+      "heading": "Sign up successful",
+      "title": "Welcome to the club!",
+      "subtitle": "Your account has been created and you are now logged in. You can now close this modal and continue.",
+      "button": {
+        "continue": "Continue",
+        "close": "Close"
+      }
+    },
+    "successDialog": {
+      "heading": "Booking request sent",
+      "title": "Booking request successful",
+      "subtitle": "Your booking request has been sent to the host. The host will review your request and get back to you within 48 hours.",
+      "button": {
+        "close": "Close",
+        "myBookings": "My bookings"
+      }
+    },
+    "hostSelfDialog": {
+      "heading": "Booking not allowed",
+      "title": "You are the host of this property",
+      "subtitle": "You are not allowed to request a booking for your own property.",
+      "button": {
+        "close": "Close"
       }
     }
   }

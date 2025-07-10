@@ -26,39 +26,34 @@ export const routes: RoutesObject = {
   },
   property: {
     path: '/property',
-    localizedPaths: {
-      en: '/property',
-      nl: '/verhuur',
-      fr: '/propriete',
-    },
   },
   host: {
     path: '/host',
     protected: true,
     children: {
-      hostListings: {
-        path: '/listings',
+      hostProperties: {
+        path: '/properties',
         protected: true,
         default: true,
       },
-      hostReservations: {
-        path: '/reservations',
+      hostBookings: {
+        path: '/bookings',
         protected: true,
       },
       structure: {
-        path: '/:listingId/structure',
+        path: '/:propertyId/structure',
         protected: true,
       },
       floorPlan: {
-        path: '/:listingId/floor-plan',
+        path: '/:propertyId/floor-plan',
         protected: true,
       },
       location: {
-        path: '/:listingId/location',
+        path: '/:propertyId/location',
         protected: true,
       },
       privacyType: {
-        path: '/:listingId/privacy-type',
+        path: '/:propertyId/privacy-type',
         protected: true,
       },
     },
@@ -67,14 +62,10 @@ export const routes: RoutesObject = {
     path: '/guest',
     protected: true,
     children: {
-      guestOverview: {
-        path: '/overview',
+      guestBookings: {
+        path: '/bookings',
         protected: true,
         default: true,
-      },
-      guestReservations: {
-        path: '/reservations',
-        protected: true,
       },
       guestFavorites: {
         path: '/favorites',
@@ -88,6 +79,17 @@ export const routes: RoutesObject = {
     children: {
       personalInfo: {
         path: '/personal-info',
+        protected: true,
+        default: true,
+      },
+    },
+  },
+  admin: {
+    path: '/admin',
+    protected: true,
+    children: {
+      users: {
+        path: '/users',
         protected: true,
         default: true,
       },

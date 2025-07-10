@@ -34,10 +34,14 @@ export function AccountSidebar({ heading }: AccountSidebarProps): ReactElement {
                   : 'sidebar-menu-item-active'
               }
               renderRoot={({ buttonContent }) => (
-                <Link href={getRoutePathByRouteName('personalInfo')}>
+                <Link
+                  className="w-full"
+                  href={getRoutePathByRouteName('personalInfo')}
+                >
                   {buttonContent}
                 </Link>
               )}
+              fullWidth
             >
               {tAccount('sidebar.personalInfo')}
             </ButtonWrapper>

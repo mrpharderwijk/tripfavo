@@ -4,7 +4,12 @@ import Credentials from 'next-auth/providers/credentials'
 
 import { verifyPassword } from './password'
 
+import {
+  mapSafeUserDbToSafeUser,
+  SafeUserDb,
+} from '@/features/auth/prisma/safe-user'
 import { prisma } from '@/lib/prisma/db'
+import { SafeUser } from '@/types'
 
 class InvalidSignInError extends CredentialsSignin {
   code = 'INVALID_CREDENTIALS'
@@ -24,7 +29,7 @@ export const authConfig = {
       },
       async authorize(
         credentials: Partial<Record<'email' | 'password', unknown>>,
-      ): Promise<User> {
+      ): Promise<User | null> {
         const { email, password } = credentials || {}
 
         if (!credentials || !email || !password) {
@@ -33,9 +38,32 @@ export const authConfig = {
 
         const user = await prisma.user.findUnique({
           where: { email: (email as string).toLowerCase() },
-          include: {
-            status: true,
-            profileImage: true,
+          select: {
+            id: true,
+            email: true,
+            status: {
+              select: {
+                blocked: true,
+                blockedAt: true,
+              },
+            },
+            profileImage: {
+              select: {
+                url: true,
+              },
+            },
+            role: true,
+            hashedPassword: true,
+            name: {
+              select: {
+                firstName: true,
+                middleName: true,
+                lastName: true,
+              },
+            },
+            createdAt: true,
+            updatedAt: true,
+            emailVerified: true,
           },
         })
 
@@ -50,23 +78,29 @@ export const authConfig = {
           )
 
           if (!isPasswordValid) {
-            console.log('Invalid password')
             throw new InvalidSignInError()
           }
-
-          return user
+          console.log('user ------> ', user)
+          const authorizedUser = mapSafeUserDbToSafeUser(user)
+          return authorizedUser as User
         } catch (error) {
-          console.error('Password verification error:', error)
           throw new InvalidSignInError()
         }
       },
     }),
   ],
   callbacks: {
-    async jwt({ token, user }: { token: JWT; user: User }): Promise<JWT> {
+    async jwt({
+      token,
+      user,
+    }: {
+      token: JWT
+      user: any
+    }): Promise<JWT & { user?: SafeUserDb }> {
       if (user) {
         // User is available during sign-in
         token.id = user.id
+        token.user = user as SafeUserDb
       }
       return token
     },
@@ -79,6 +113,7 @@ export const authConfig = {
     }): Promise<Session> {
       if (token.id && session.user) {
         session.user.id = token.id as string
+        session.user = token.user as SafeUser
       }
       return session
     },

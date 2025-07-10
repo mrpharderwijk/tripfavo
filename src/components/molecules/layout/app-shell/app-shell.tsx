@@ -8,20 +8,28 @@ import { cn } from '@/utils/class-names'
 type AppShellProps = PropsWithChildren<{
   navbar?: ReactElement
   sidebar?: ReactElement
+  bottomBar?: ReactElement
+  fixedNavbar?: boolean
+  footer?: ReactElement
 }>
 
 export function AppShell({
   children,
   navbar,
   sidebar,
+  bottomBar,
+  footer,
 }: AppShellProps): ReactElement {
   return (
     <div
-      className={cn(css.appShell, {
+      className={cn(css.appShell, 'min-w-xs', {
+        [css['appShell--bottomBar']]: bottomBar,
+        [css['appShell--footer']]: footer,
         [css['appShell--fullWidth']]: !sidebar,
+        [css['appShell--sidebar']]: sidebar,
       })}
     >
-      <div className={css.appShellNavbar}>{navbar}</div>
+      <header className={css.appShellNavbar}>{navbar}</header>
       <div
         className={cn(css.appShellSidebar, {
           [css['appShellSidebar--hidden']]: !sidebar,
@@ -29,16 +37,23 @@ export function AppShell({
       >
         <FlexBox
           flex-direction="col"
-          padding-x-md={6}
-          padding-y-md={5}
-          padding-x-lg={18}
-          padding-y-lg={10}
+          padding-x={5}
+          padding-y={5}
+          padding-left-lg={10}
+          padding-right-lg={10}
+          padding-left-xl={20}
           gap={6}
         >
           {sidebar}
         </FlexBox>
       </div>
-      <main className={css.appShellMain}>{children}</main>
+
+      <main className={css.appShellMain}>
+        {children}
+        {footer && <footer className={css.appShellMainFooter}>{footer}</footer>}
+      </main>
+
+      <div className={css.appShellBottomBar}>{bottomBar}</div>
     </div>
   )
 }

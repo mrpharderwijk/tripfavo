@@ -52,7 +52,7 @@ export function AppContextProvider({
 
   const [loading, setLoading] = useState<boolean>(false)
   const [loadingMessage, setLoadingMessage] = useState<string | null>(
-    'Creating your listing',
+    'Creating your property',
   )
   const [isRouterLoading, startTransition] = useTransition()
 

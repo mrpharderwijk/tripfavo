@@ -1,10 +1,10 @@
 import { PriceType } from '@prisma/client'
 
 import { DatePrice } from '@/components/organisms/date-picker-calendar/providers/date-picker-calendar-context-provider'
-import { PublicListing } from '@/features/listings/types/public-listing'
+import { PublicProperty } from '@/features/properties/types/public-property'
 
 export function getCalendarPrices(
-  priceDetails: PublicListing['priceDetails'],
+  priceDetails: PublicProperty['priceDetails'],
 ): DatePrice[] {
   return [
     ...getHighSeasonPrice(priceDetails),
@@ -14,7 +14,7 @@ export function getCalendarPrices(
 }
 
 function getHighSeasonPrice(
-  priceDetails: PublicListing['priceDetails'],
+  priceDetails: PublicProperty['priceDetails'],
 ): DatePrice[] {
   return [
     // High Season
@@ -29,7 +29,7 @@ function getHighSeasonPrice(
 }
 
 function getMidSeasonPrice(
-  priceDetails: PublicListing['priceDetails'],
+  priceDetails: PublicProperty['priceDetails'],
 ): DatePrice[] {
   return [
     // Mid Season
@@ -58,7 +58,7 @@ function getMidSeasonPrice(
 }
 
 function getLowSeasonPrice(
-  priceDetails: PublicListing['priceDetails'],
+  priceDetails: PublicProperty['priceDetails'],
 ): DatePrice[] {
   return [
     // Low season

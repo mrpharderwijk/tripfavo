@@ -4,7 +4,7 @@
 // eslint-disable-next-line unused-imports/no-unused-imports
 import { UserRole, UserStatus } from '@prisma/client'
 
-import { SafeUserDb } from '@/features/auth/prisma/safe-user'
+import { SafeUser } from '@/types'
 
 /**
  * Extends the `Session` type from `next-auth` to include
@@ -18,8 +18,8 @@ declare module 'next-auth' {
     expires: string
     id: string
     sessionToken: string
-    user: SafeUserDb
+    user: SafeUser
   }
 
-  interface User extends SafeUserDb {}
+  interface User extends SafeUser {}
 }

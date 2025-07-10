@@ -10,6 +10,7 @@ import {
   heightVariants,
   leftVariants,
   maxWidthVariants,
+  overflowVariants,
   rightVariants,
   topVariants,
   widthVariants,
@@ -61,5 +62,6 @@ export const flexBoxClassNames = cva('', {
     ...leftVariants,
     ...bottomVariants,
     ...topVariants,
+    ...overflowVariants,
   },
 })

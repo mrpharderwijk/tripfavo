@@ -4,11 +4,11 @@ import { FooterListItem } from './footer-list-item'
 
 import { Body } from '@/components/atoms/typography/body/body'
 
-jest.mock('@/components/atoms/typography/body/body')
-const BodyMock = jest.mocked(Body)
+vi.mock('@/components/atoms/typography/body/body')
+const BodyMock = vi.mocked(Body)
 
 describe('FooterListItem', () => {
-  beforeEach(jest.clearAllMocks)
+  beforeEach(vi.clearAllMocks)
 
   it('renders the component', () => {
     // Arrange

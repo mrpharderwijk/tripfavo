@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import { Button } from './button'
-import { ButtonContent } from './components'
+import { ButtonContent } from './components/button-content/button-content'
 
 vi.mock('./components', () => ({
   ButtonContent: vi.fn(({ children }) => <div>{children}</div>),
@@ -43,12 +43,12 @@ describe('Button', () => {
       },
       {
         description: 'not called',
-        props: { onClickMock: jest.fn(), disabled: true },
+        props: { onClickMock: vi.fn(), disabled: true },
         expected: false,
       },
     ])('$description', async ({ expected, props }) => {
       // Arrange
-      const onClickMock = jest.fn()
+      const onClickMock = vi.fn()
       render(
         <Button {...props} onClick={onClickMock}>
           Click Me
@@ -77,7 +77,7 @@ describe('Button', () => {
 
   it('renders with loading state', () => {
     // Arrange & Act
-    render(<Button isLoading>Click Me</Button>)
+    render(<Button loading>Click Me</Button>)
 
     // Assert
     expect(ButtonContentMock).toHaveBeenCalledWith(

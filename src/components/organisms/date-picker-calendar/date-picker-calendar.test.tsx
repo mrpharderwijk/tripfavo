@@ -33,7 +33,7 @@ const selectedMock: DateRange = {
   to: new Date('2023-07-05'),
 }
 const onSelectMock = vi.fn()
-const localeMock = 'en-US'
+const localeMock = 'en'
 
 describe('DatePickerCalendar', () => {
   beforeEach(vi.clearAllMocks)

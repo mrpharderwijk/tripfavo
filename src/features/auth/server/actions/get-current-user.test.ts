@@ -28,13 +28,35 @@ const userMock = {
 
 const sessionMock: Session = {
   user: {
+    id: '1',
     email: 'test@example.com',
+    name: {
+      firstName: 'John',
+      lastName: 'Doe',
+      middleName: null,
+    },
+    emailVerified: new Date('2023-01-01'),
+    role: [UserRole.GUEST],
+    createdAt: new Date('2023-01-01'),
+    updatedAt: new Date('2023-01-01'),
+    status: {
+      blocked: false,
+      blockedAt: null,
+    },
+    profileImage: {
+      url: 'http://example.com/image.jpg',
+    },
   },
   expires: new Date().toISOString(),
+  id: 'session-id',
+  sessionToken: 'session-token',
 }
 
-vi.mock('@/lib/auth/auth')
-const authMock = vi.mocked(auth).mockResolvedValue(sessionMock)
+vi.mock('@/lib/auth/auth', () => ({
+  auth: vi.fn() as any,
+}))
+
+const authMock = vi.mocked(auth) as any
 
 vi.mock('@/lib/prisma/db')
 const prismaMock = vi.mocked(prisma.user.findUnique).mockResolvedValue(userMock)
@@ -43,23 +65,26 @@ describe('getCurrentUser', () => {
   beforeEach(vi.clearAllMocks)
 
   it('should return null if no session exists', async () => {
-    vi.mocked(auth).mockResolvedValueOnce(null as unknown as Session)
+    authMock.mockResolvedValueOnce(null)
     const result = await getCurrentUser()
     expect(result).toBeNull()
   })
 
   it('should return null if no user email in session', async () => {
+    authMock.mockResolvedValueOnce(sessionMock)
     const result = await getCurrentUser()
     expect(result).toBeNull()
   })
 
   it('should return null if user not found in database', async () => {
+    authMock.mockResolvedValueOnce(sessionMock)
     vi.mocked(prisma.user.findUnique).mockResolvedValueOnce(null)
     const result = await getCurrentUser()
     expect(result).toBeNull()
   })
 
   it('should return formatted user data if user exists', async () => {
+    authMock.mockResolvedValueOnce(sessionMock)
     const result = await getCurrentUser()
 
     expect(result).toEqual({
@@ -72,6 +97,7 @@ describe('getCurrentUser', () => {
   })
 
   it('should handle database errors gracefully', async () => {
+    authMock.mockResolvedValueOnce(sessionMock)
     vi.mocked(prisma.user.findUnique).mockRejectedValueOnce(
       new Error('DB Error'),
     )
@@ -82,6 +108,7 @@ describe('getCurrentUser', () => {
 
 describe('getSession', () => {
   it('should return auth session', async () => {
+    authMock.mockResolvedValueOnce(sessionMock)
     const result = await getSession()
     expect(result).toEqual(sessionMock)
     expect(auth).toHaveBeenCalled()

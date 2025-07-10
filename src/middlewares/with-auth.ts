@@ -5,6 +5,7 @@ import {
   NextResponse,
 } from 'next/server'
 import { getLocale } from 'next-intl/server'
+import { UserRole } from '@prisma/client'
 
 import { routes } from '@/constants/routes'
 import { auth } from '@/lib/auth/auth'
@@ -32,7 +33,7 @@ function containsGuestOnly(value: string): boolean {
   return regex.test(value)
 }
 
-function containsHostWithListingIdOnly(value: string): boolean {
+function containsHostWithPropertyIdOnly(value: string): boolean {
   const regex = /^(\/[a-zA-Z]{2})?\/host\/[0-9]+$/
   return regex.test(value)
 }
@@ -44,9 +45,20 @@ function containsProtectedRoute(value: string): boolean {
   return !!currentRouteObject?.protected
 }
 
+function containsAdmin(value: string): boolean {
+  const regex = /^(\/[a-zA-Z]{2})?\/admin(\/.*)?$/
+  return regex.test(value)
+}
+
+function containsAdminOnly(value: string): boolean {
+  const regex = /^(\/[a-zA-Z]{2})?\/admin$/
+  return regex.test(value)
+}
+
 export const withAuth: MiddlewareFactory = (next: NextMiddleware) => {
   return async (request: NextRequest, _next: NextFetchEvent) => {
     const session = await auth()
+    const isAdmin = session?.user?.role?.includes(UserRole.ADMIN)
     const { nextUrl } = request
     const locale = await getLocale()
 
@@ -57,6 +69,28 @@ export const withAuth: MiddlewareFactory = (next: NextMiddleware) => {
         const url = `${routes.auth?.path}${routes.auth?.children?.login.path}?callbackUrl=${encodeURIComponent(nextUrl.pathname)}`
         return NextResponse.redirect(new URL(url, request.url))
       }
+    }
+
+    if (session && containsAdmin(nextUrl.pathname)) {
+      if (!isAdmin) {
+        return NextResponse.redirect(new URL(routes.home.path, request.url))
+      }
+
+      if (isAdmin && !containsAdminOnly(nextUrl.pathname)) {
+        return next(request, _next)
+      }
+    }
+
+    if (
+      session &&
+      isAdmin &&
+      (!containsAdmin(nextUrl.pathname) || containsAdminOnly(nextUrl.pathname))
+    ) {
+      const defaultRoute = routes.admin?.children
+        ? Object.values(routes.admin.children).find((child) => !!child.default)
+        : undefined
+      const url = `${routes.admin.path}${defaultRoute?.path}`
+      return NextResponse.redirect(new URL(url, request.url))
     }
 
     // Handle auth pages when logged in

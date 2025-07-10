@@ -1,14 +1,20 @@
 import { NextResponse } from 'next/server'
 import { UTApi } from 'uploadthing/server'
 
-import { getSession } from '@/features/auth/server/actions/get-current-user'
 import { prisma } from '@/lib/prisma/db'
+import { isUserValid } from '@/server/utils/is-valid-user'
 
 export async function POST(
   request: Request,
+  { params }: { params: { userId: string } },
 ): Promise<NextResponse<string | { error: string }>> {
-  const session = await getSession()
-  if (!session?.user?.id) {
+  const { userId } = await params
+  if (!userId) {
+    return NextResponse.json({ error: 'BAD_REQUEST' }, { status: 400 })
+  }
+
+  const isValidUser = await isUserValid(userId)
+  if (!isValidUser) {
     return NextResponse.json({ error: 'UNAUTHORIZED' }, { status: 401 })
   }
 
@@ -18,16 +24,18 @@ export async function POST(
   }
 
   try {
+    // Delete old profile image
     const userProfileImage = await prisma.userProfileImage.findUnique({
       where: {
-        userId: session.user.id,
+        userId,
       },
     })
     const utapi = new UTApi()
     await utapi.deleteFiles([userProfileImage?.fileKey ?? ''])
 
+    // Update profile image
     const user = await prisma.user.update({
-      where: { id: session.user.id },
+      where: { id: userId },
       data: {
         profileImage: {
           upsert: {

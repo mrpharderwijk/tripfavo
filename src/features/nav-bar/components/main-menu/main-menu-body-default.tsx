@@ -1,12 +1,11 @@
 'use client'
 
-import { Globe, Heart, Ticket } from 'lucide-react'
+import { Heart, Ticket } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { ReactElement } from 'react'
 
-import { Button } from '@/components/molecules/buttons/button'
 import { ButtonWrapper } from '@/components/molecules/buttons/button-wrapper/button-wrapper'
 import { useMainMenuContext } from '@/features/nav-bar/components/main-menu/main-menu-context-provider'
 import { useAppContext } from '@/providers/app-context-provider/app-context-provider'
@@ -15,8 +14,7 @@ import { getRoutePathByRouteName, isCurrentRoute } from '@/utils/get-route'
 export function MainMenuBodyDefault(): ReactElement {
   const pathname = usePathname()
   const { currentUser } = useAppContext()
-  const tMainMenuGuest = useTranslations('mainMenu.guest')
-  const tMainMenu = useTranslations('mainMenu')
+  const tGuest = useTranslations('guest')
   const { handleOnClickLanguage, closeMainMenu } = useMainMenuContext()
 
   return (
@@ -32,45 +30,40 @@ export function MainMenuBodyDefault(): ReactElement {
           }
           onClick={closeMainMenu}
           renderRoot={({ buttonContent }) => (
-            <Link href={getRoutePathByRouteName('guestFavorites')}>
+            <Link
+              className="w-full"
+              href={getRoutePathByRouteName('guestFavorites')}
+            >
               {buttonContent}
             </Link>
           )}
         >
-          {tMainMenuGuest('myFavorites')}
+          {tGuest('mainMenu.myFavorites')}
         </ButtonWrapper>
       )}
+
       {currentUser && (
         <ButtonWrapper
           icon={Ticket}
           size="lg"
           variant={
-            !isCurrentRoute(pathname, 'guestReservations')
+            !isCurrentRoute(pathname, 'guestBookings')
               ? 'sidebar-menu-item'
               : 'sidebar-menu-item-active'
           }
           onClick={closeMainMenu}
           renderRoot={({ buttonContent }) => (
-            <Link href={getRoutePathByRouteName('guestReservations')}>
+            <Link
+              className="w-full"
+              href={getRoutePathByRouteName('guestBookings')}
+            >
               {buttonContent}
             </Link>
           )}
         >
-          {tMainMenuGuest('myBookings')}
+          {tGuest('mainMenu.myBookings')}
         </ButtonWrapper>
       )}
-      <Button
-        icon={Globe}
-        size="lg"
-        variant={
-          !isCurrentRoute(pathname, 'language')
-            ? 'sidebar-menu-item'
-            : 'sidebar-menu-item-active'
-        }
-        onClick={handleOnClickLanguage}
-      >
-        {tMainMenu('language')}
-      </Button>
     </>
   )
 }

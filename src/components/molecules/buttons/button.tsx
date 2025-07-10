@@ -48,7 +48,7 @@ export function Button({
   ...rest
 }: ButtonProps): ReactElement {
   const iconOnly = Boolean(!children && (Icon || avatar))
-  const isRounded = rounded || iconOnly || avatar
+  const isRounded = rounded || avatar
   const buttonClassName = cn(
     buttonClassNames({
       avatar,

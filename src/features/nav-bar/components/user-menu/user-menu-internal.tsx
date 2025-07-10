@@ -31,9 +31,9 @@ export function UserMenuInternal(): ReactElement {
     closeDropDown('user-menu')
   }
 
-  function onClickMenuItemLogout(): void {
+  async function onClickMenuItemLogout(): Promise<void> {
+    await signOut()
     closeDropDown('user-menu')
-    signOut()
   }
 
   function handleOnClick(routeName: string): void {
@@ -87,7 +87,7 @@ export function UserMenuInternal(): ReactElement {
           <>
             <UserMenuItem onClick={() => {}} label="My trips" />
             <UserMenuItem onClick={() => {}} label="My favorites" />
-            <UserMenuItem onClick={() => {}} label="My reservations" />
+            <UserMenuItem onClick={() => {}} label="My bookings" />
             <UserMenuItem onClick={() => {}} label="My properties" />
             <UserMenuItem
               onClick={() => {

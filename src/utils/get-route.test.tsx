@@ -37,7 +37,7 @@ describe('getRoutePathByRouteName', () => {
     {
       routeName: 'host',
       exact: false,
-      expected: `${routes?.host?.path}${routes?.host?.children?.hostListings?.path}`,
+      expected: `${routes?.host?.path}${routes?.host?.children?.hostProperties?.path}`,
     },
     {
       routeName: 'structure',

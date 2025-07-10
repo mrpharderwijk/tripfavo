@@ -6,15 +6,17 @@ import { flexBoxClassNames } from '@/components/atoms/layout/flex-box/flex-box.c
 
 type BottomBarProps = PropsWithChildren<{
   'bg-color'?: VariantProps<typeof flexBoxClassNames>['bg-color']
+  fixed?: boolean
 }>
 
 export function BottomBar({
   children,
   'bg-color': bgColor = 'primary',
+  fixed = true,
 }: BottomBarProps): ReactElement {
   return (
     <FlexBox
-      position="fixed"
+      position={fixed ? 'fixed' : 'relative'}
       right={0}
       bottom={0}
       left={0}
@@ -25,11 +27,13 @@ export function BottomBar({
       z-index={40}
     >
       <FlexBox
-        flex-direction="row"
+        flex-direction="col"
+        flex-direction-sm="row"
         align-items="center"
         padding-x={6}
         padding-x-md={12}
         padding-y={4}
+        gap={2}
       >
         {children}
       </FlexBox>

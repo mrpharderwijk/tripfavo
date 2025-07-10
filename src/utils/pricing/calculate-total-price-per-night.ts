@@ -1,5 +1,5 @@
 import { DatePrice } from '@/components/organisms/date-picker-calendar/providers/date-picker-calendar-context-provider'
-import { TotalPricePerNight } from '@/features/reservations/reservation-detail/providers/reservation-detail-context-provider'
+import { TotalPricePerNight } from '@/features/bookings/booking-detail/providers/booking-detail-context-provider'
 
 type CalculateTotalPricePerNightParams = {
   startDate?: Date

@@ -6,32 +6,45 @@ import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { ReactElement } from 'react'
 
+import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { Button } from '@/components/molecules/buttons/button'
 import { ButtonWrapper } from '@/components/molecules/buttons/button-wrapper/button-wrapper'
 import { useMainMenuContext } from '@/features/nav-bar/components/main-menu/main-menu-context-provider'
+import { useDialogContext } from '@/features/nav-bar/providers/dialog-context-provider'
 import { useAppContext } from '@/providers/app-context-provider/app-context-provider'
 import { getRoutePathByRouteName } from '@/utils/get-route'
 
 export function MainMenuFooterDefault(): ReactElement {
   const { currentUser } = useAppContext()
-  const tMainMenu = useTranslations('mainMenu')
-  const { handleOnClickLogout } = useMainMenuContext()
+  const tCommon = useTranslations('common')
+  const { handleOnClickLogout, toggleMainMenu } = useMainMenuContext()
+  const { openDialog } = useDialogContext()
+
+  function onClickAuthButton(dialogId: string): void {
+    openDialog(dialogId)
+    toggleMainMenu()
+  }
 
   return (
     <>
       {currentUser && (
-        <>
+        <FlexBox flex-direction="col" gap={2} fullWidth>
           <ButtonWrapper
             icon={User}
             size="lg"
             variant="sidebar-menu-item-active"
             renderRoot={({ buttonContent }) => (
-              <Link href={getRoutePathByRouteName('account')}>
+              <Link
+                className="w-full"
+                href={getRoutePathByRouteName('account')}
+                onClick={toggleMainMenu}
+              >
                 {buttonContent}
               </Link>
             )}
+            fullWidth
           >
-            {tMainMenu('account')}
+            {tCommon('mainMenu.account')}
           </ButtonWrapper>
 
           <Button
@@ -39,39 +52,32 @@ export function MainMenuFooterDefault(): ReactElement {
             size="lg"
             variant="sidebar-menu-item-active"
             onClick={handleOnClickLogout}
+            fullWidth
           >
-            {tMainMenu('logout')}
+            {tCommon('mainMenu.logout')}
           </Button>
-        </>
+        </FlexBox>
       )}
 
       {!currentUser && (
-        <>
-          <ButtonWrapper
+        <FlexBox flex-direction="col" gap={2} fullWidth>
+          <Button
             icon={LogIn}
             size="lg"
             variant="sidebar-menu-item-active"
-            renderRoot={({ buttonContent }) => (
-              <Link href={getRoutePathByRouteName('login')}>
-                {buttonContent}
-              </Link>
-            )}
+            onClick={() => onClickAuthButton('login')}
           >
-            {tMainMenu('login')}
-          </ButtonWrapper>
-          <ButtonWrapper
+            {tCommon('mainMenu.login')}
+          </Button>
+          <Button
             icon={User}
             size="lg"
             variant="sidebar-menu-item-active"
-            renderRoot={({ buttonContent }) => (
-              <Link href={getRoutePathByRouteName('signUp')}>
-                {buttonContent}
-              </Link>
-            )}
+            onClick={() => onClickAuthButton('sign-up')}
           >
-            {tMainMenu('signUp')}
-          </ButtonWrapper>
-        </>
+            {tCommon('mainMenu.signUp')}
+          </Button>
+        </FlexBox>
       )}
     </>
   )

@@ -4,17 +4,17 @@ import { renderHook } from '@testing-library/react'
 
 import { useFocusTrap } from './use-focus-trap'
 
-jest.mock('focus-trap', () => ({
-  createFocusTrap: jest.fn(),
+vi.mock('focus-trap', () => ({
+  createFocusTrap: vi.fn(),
 }))
-const createFocusTrapMock = jest.mocked(createFocusTrap)
+const createFocusTrapMock = vi.mocked(createFocusTrap)
 
 describe('useFocusTrap', () => {
-  const activateMock = jest.fn()
-  const deactivateMock = jest.fn()
+  const activateMock = vi.fn()
+  const deactivateMock = vi.fn()
 
   beforeEach(() => {
-    jest.clearAllMocks()
+    vi.clearAllMocks()
 
     createFocusTrapMock.mockReturnValue({
       active: false,

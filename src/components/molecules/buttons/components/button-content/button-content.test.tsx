@@ -27,7 +27,7 @@ describe('ButtonContent', () => {
   ])('$case', ({ isLoading }) => {
     // Arrange & Act
     const { queryByTestId } = render(
-      <ButtonContent isLoading={isLoading}>
+      <ButtonContent loading={isLoading}>
         Just a button content
       </ButtonContent>,
     )

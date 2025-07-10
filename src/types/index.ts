@@ -32,7 +32,12 @@ export type PropsWithTestId<T = unknown> = T & {
 
 export type SafeUser = Omit<
   User,
-  'createdAt' | 'updatedAt' | 'emailVerified' | 'hashedPassword'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'emailVerified'
+  | 'hashedPassword'
+  | 'name'
+  | 'role'
 > & {
   createdAt: string
   updatedAt: string

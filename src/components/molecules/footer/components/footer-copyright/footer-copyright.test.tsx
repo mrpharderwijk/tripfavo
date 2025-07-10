@@ -5,16 +5,16 @@ import { FooterCopyright } from './footer-copyright'
 import { Box } from '@/components/atoms/layout/box/box'
 import { Body } from '@/components/atoms/typography/body/body'
 
-jest.mock('@/components/atoms/layout/box/box', () => ({
-  Box: jest.fn(({ children }) => <>{children}</>),
+vi.mock('@/components/atoms/layout/box/box', () => ({
+  Box: vi.fn(({ children }) => <>{children}</>),
 }))
-const BoxMock = jest.mocked(Box)
+const BoxMock = vi.mocked(Box)
 
-jest.mock('@/components/atoms/typography/body/body')
-const BodyMock = jest.mocked(Body)
+vi.mock('@/components/atoms/typography/body/body')
+const BodyMock = vi.mocked(Body)
 
 describe('FooterCopyright', () => {
-  beforeEach(jest.clearAllMocks)
+  beforeEach(vi.clearAllMocks)
 
   it('renders the component', () => {
     // Arrange

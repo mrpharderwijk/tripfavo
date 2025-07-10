@@ -1,4 +1,8 @@
+'use client'
+
 import axios from 'axios'
+import { useRouter } from 'next/navigation'
+import { signIn } from 'next-auth/react'
 import { useState } from 'react'
 import {
   Control,
@@ -11,7 +15,7 @@ import {
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { useAppContext } from '@/providers/app-context-provider/app-context-provider'
+import { useSignUpDialogContext } from '@/features/auth/sign-up/sign-up-dialog/providers/sign-up-dialog-context-provider'
 
 const passwordSchema = z
   .string()
@@ -56,14 +60,13 @@ type UseSignUpFormReturnType = {
   errors: FieldErrors<z.infer<typeof SignUpFormSchema>>
   reset: UseFormReset<z.infer<typeof SignUpFormSchema>>
   error: string | null
-  registerSuccess: boolean
 }
 
 export function useSignUpForm(): UseSignUpFormReturnType {
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const { enableAppLoading, disableAppLoading } = useAppContext()
   const [error, setError] = useState<string | null>(null)
-  const [registerSuccess, setRegisterSuccess] = useState<boolean>(false)
+  const { setSignUpSuccess } = useSignUpDialogContext()
+  const router = useRouter()
 
   const {
     control,
@@ -90,22 +93,28 @@ export function useSignUpForm(): UseSignUpFormReturnType {
     }
 
     setIsLoading(true)
-    enableAppLoading()
     setError(null)
-
     try {
-      await axios.post('/api/auth/register', {
+      const registerResponse = await axios.post('/api/auth/register', {
         ...data,
         email: data.email.toLowerCase(),
+        redirect: false,
       })
-      setRegisterSuccess(true)
+      if (registerResponse.status === 200) {
+        const callback = await signIn('credentials', {
+          ...data,
+          redirect: false,
+        })
+
+        if (callback?.ok) {
+          setSignUpSuccess(true)
+          router.refresh()
+        }
+      }
     } catch (error: any) {
       setError(error.response?.data?.error || 'Something went wrong')
-      setRegisterSuccess(false)
-      disableAppLoading()
     } finally {
       setIsLoading(false)
-      disableAppLoading()
     }
   }
 
@@ -117,6 +126,5 @@ export function useSignUpForm(): UseSignUpFormReturnType {
     errors,
     reset,
     error,
-    registerSuccess,
   }
 }

@@ -1,11 +1,11 @@
 import { DatePrice } from '@/components/organisms/date-picker-calendar/providers/date-picker-calendar-context-provider'
 import { calculateTotalPrice } from '@/components/organisms/date-picker-calendar/utils/calculate-total-price'
-import { PublicListingPriceDetail } from '@/features/listings/types/public-listing'
-import { getCleaningFee } from '@/features/listings/utils/get-cleaning-fee'
-import { getDeposit } from '@/features/listings/utils/get-deposit'
+import { PublicPropertyPriceDetail } from '@/features/properties/types/public-property'
+import { getCleaningFee } from '@/features/properties/utils/get-cleaning-fee'
+import { getDeposit } from '@/features/properties/utils/get-deposit'
 
 export type CalculateTotalPriceIncludingCleaningFeeParams = {
-  priceDetails?: PublicListingPriceDetail[]
+  priceDetails?: PublicPropertyPriceDetail[]
   startDate?: Date
   endDate?: Date
   datePrices: DatePrice[]
