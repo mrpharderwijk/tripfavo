@@ -5,7 +5,7 @@ import { ReactElement } from 'react'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { Body } from '@/components/atoms/typography/body/body'
 import { Heading } from '@/components/atoms/typography/heading/heading'
-import { LoginForm } from '@/features/auth/credentials-login/components/login-form'
+import { LoginForm } from '@/features/auth/login/components/login-form'
 import { getRoutePathByRouteName } from '@/utils/get-route'
 
 export async function CredentialsLoginPage(): Promise<ReactElement> {
@@ -24,7 +24,7 @@ export async function CredentialsLoginPage(): Promise<ReactElement> {
         flex-direction="row"
         align-items="center"
         justify-content="center"
-        padding-y={5}
+        padding-y={6}
         border-b={1}
         border-color="secondary-disabled"
       >
@@ -33,7 +33,7 @@ export async function CredentialsLoginPage(): Promise<ReactElement> {
         </Heading>
       </FlexBox>
 
-      <FlexBox flex-direction="col" gap={6} padding={8}>
+      <FlexBox flex-direction="col" gap={6} padding={6}>
         <Heading tag="h2" like="h5" color="primary" font-weight="semibold">
           {tLoginForm('title')}
         </Heading>
@@ -42,20 +42,22 @@ export async function CredentialsLoginPage(): Promise<ReactElement> {
 
         <FlexBox align-items="center" justify-content="center" gap={2}>
           <Body size="base-md" text-color="primary">
-            {tLoginForm('register.text')}
+            {tLoginForm.rich('signUp.text', {
+              link: (chunks) => (
+                <NextLink href={getRoutePathByRouteName('signUp')} passHref>
+                  <Body
+                    tag="span"
+                    font-size="base-md"
+                    text-color="primary"
+                    text-decoration="underline"
+                    font-weight="bold"
+                  >
+                    {chunks}
+                  </Body>
+                </NextLink>
+              ),
+            })}
           </Body>
-
-          <NextLink href={getRoutePathByRouteName('signUp')} passHref>
-            <Body
-              tag="span"
-              font-size="base-md"
-              text-color="primary"
-              text-decoration="underline"
-              font-weight="bold"
-            >
-              {tLoginForm('register.label')}
-            </Body>
-          </NextLink>
         </FlexBox>
       </FlexBox>
     </FlexBox>

@@ -20,11 +20,9 @@ export function BookingDetailHostSelfDialog(): ReactElement {
       isVisible={currentOpenDialog === 'booking-detail-host-self'}
       header={tBookingDetailHostSelfDialog('heading')}
       footer={
-        <>
-          <Button variant="secondary" size="lg" onClick={closeDialog}>
-            {tBookingDetailHostSelfDialog('button.close')}
-          </Button>
-        </>
+        <Button variant="secondary" size="lg" onClick={closeDialog}>
+          {tBookingDetailHostSelfDialog('button.close')}
+        </Button>
       }
     >
       <Heading tag="h3" like="h2-semibold">

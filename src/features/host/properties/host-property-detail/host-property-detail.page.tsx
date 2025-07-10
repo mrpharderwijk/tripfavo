@@ -9,7 +9,7 @@ export function HostPropertyDetailPage(): ReactElement {
   return (
     <AppShell
       navbar={
-        <NavBar narrow fixed={false}>
+        <NavBar narrow position="relative">
           <BackButton routePath={`/host/properties`} />
         </NavBar>
       }

@@ -8,11 +8,9 @@ import { Body } from '@/components/atoms/typography/body/body'
 import { Button } from '@/components/molecules/buttons/button'
 import { HeadingGroup } from '@/components/molecules/heading/heading'
 import { ModalDialog } from '@/components/molecules/modal-dialog/modal-dialog'
-import { LoginForm } from '@/features/auth/login/components/login-form'
-import { BookingDetailLoginSuccessDialog } from '@/features/bookings/booking-detail/components/booking-detail-login-dialog/booking-detail-login-success-dialog'
 import { useDialogContext } from '@/features/nav-bar/providers/dialog-context-provider'
 
-type BookingDetailLoginDialogProps = {
+type BookingDetailLoginSuccessDialogProps = {
   onSuccessCallback?: () => void
 }
 
@@ -21,49 +19,47 @@ type BookingDetailLoginDialogProps = {
  * @param param0
  * @returns
  */
-export function BookingDetailLoginDialog({
+export function BookingDetailLoginSuccessDialog({
   onSuccessCallback,
-}: BookingDetailLoginDialogProps): ReactElement {
+}: BookingDetailLoginSuccessDialogProps): ReactElement {
   const tLoginForm = useTranslations('auth.loginForm')
-  const tBookingDetailLoginDialog = useTranslations('bookingDetail.loginDialog')
+  const tBookingDetailLoginSuccessDialog = useTranslations(
+    'bookingDetail.loginSuccessDialog',
+  )
   const { currentOpenDialog, openDialog } = useDialogContext()
-  const headingGroupSubtitle = tBookingDetailLoginDialog.rich('subtitle', {
-    link: (chunks) => (
-      <Button variant="primary-link" onClick={handleOnOpenSignUpDialog}>
-        {chunks}
-      </Button>
-    ),
-  })
-
-  function handleOnOpenSignUpDialog(): void {
-    openDialog('booking-detail-sign-up')
-  }
-
-  function handleOnClickConfirm(): void {
-    onSuccessCallback?.()
-  }
+  const headingGroupSubtitle = tBookingDetailLoginSuccessDialog.rich(
+    'subtitle',
+    {
+      link: (chunks) => (
+        <Button
+          variant="primary-link"
+          onClick={() => openDialog('booking-login')}
+        >
+          {chunks}
+        </Button>
+      ),
+    },
+  )
 
   return (
     <>
       <ModalDialog
-        isVisible={currentOpenDialog === 'booking-detail-login'}
-        header={<>{tLoginForm('heading')}</>}
+        isVisible={currentOpenDialog === 'booking-detail-login-success'}
+        header={tLoginForm('heading')}
       >
         <HeadingGroup
-          title={tBookingDetailLoginDialog('heading')}
+          title={tBookingDetailLoginSuccessDialog('heading')}
           subtitle={headingGroupSubtitle}
         />
 
         <FlexBox flex-direction="col" gap={6}>
-          <LoginForm />
-
           <FlexBox align-items="center" justify-content="center" gap={2}>
             <Body size="base-md" text-color="primary">
               {tLoginForm.rich('signUp.text', {
                 link: (chunks) => (
                   <Button
                     variant="primary-link"
-                    onClick={handleOnOpenSignUpDialog}
+                    onClick={() => openDialog('booking-detail-sign-up')}
                   >
                     <Body
                       tag="span"
@@ -81,9 +77,6 @@ export function BookingDetailLoginDialog({
           </FlexBox>
         </FlexBox>
       </ModalDialog>
-      <BookingDetailLoginSuccessDialog
-        onSuccessCallback={handleOnClickConfirm}
-      />
     </>
   )
 }

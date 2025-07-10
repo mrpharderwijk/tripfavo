@@ -1,13 +1,27 @@
 import { cva } from 'class-variance-authority'
 
-export const navBarClassNames = cva(
-  'bg-primary border-b border-deco bg-bg-primary',
-  {
-    variants: {
-      fixed: {
-        true: 'fixed w-full z-50 shadow-sm top-0 left-0 right-0',
-        false: '',
-      },
+import {
+  backgroundColorVariants,
+  bottomVariants,
+  leftVariants,
+  positionVariants,
+  rightVariants,
+  topVariants,
+  zIndexVariants,
+} from '@/utils/variants'
+
+export const navBarClassNames = cva('w-full', {
+  variants: {
+    ...positionVariants,
+    ...topVariants,
+    ...leftVariants,
+    ...rightVariants,
+    ...bottomVariants,
+    ...zIndexVariants,
+    ...backgroundColorVariants,
+    border: {
+      true: 'border-b border-deco',
+      false: '',
     },
   },
-)
+})

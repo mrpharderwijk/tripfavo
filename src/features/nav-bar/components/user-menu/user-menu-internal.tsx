@@ -31,9 +31,9 @@ export function UserMenuInternal(): ReactElement {
     closeDropDown('user-menu')
   }
 
-  function onClickMenuItemLogout(): void {
+  async function onClickMenuItemLogout(): Promise<void> {
+    await signOut()
     closeDropDown('user-menu')
-    signOut()
   }
 
   function handleOnClick(routeName: string): void {

@@ -2,7 +2,6 @@ import { getTranslations } from 'next-intl/server'
 import { PropsWithChildren, ReactElement } from 'react'
 
 import { Heading } from '@/components/atoms/typography/heading/heading'
-import { Footer } from '@/components/molecules/footer/footer'
 import { AppShell } from '@/components/molecules/layout/app-shell/app-shell'
 import { BackButton } from '@/features/nav-bar/components/back-button/back-button'
 import { NavBar } from '@/features/nav-bar/nav-bar'
@@ -21,9 +20,8 @@ export default async function BookingDetailLayout({
   return (
     <AppShell
       navbar={
-        <NavBar narrow fixed={false}>
+        <NavBar narrow position="relative">
           <BackButton routePath={`/property/${propertyId}`} />
-
           <Heading tag="h1" like="h4-semibold">
             {tBookingDetail('heading')}
           </Heading>
@@ -32,7 +30,6 @@ export default async function BookingDetailLayout({
       }
     >
       {children}
-      <Footer />
     </AppShell>
   )
 }

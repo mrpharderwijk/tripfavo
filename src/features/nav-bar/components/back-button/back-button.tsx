@@ -22,7 +22,7 @@ export function BackButton({
   return (
     <Link
       href={routePath ?? '#'}
-      className="cursor-pointer"
+      className="cursor-pointer w-10 h-10 grid place-items-center bg-bg-primary rounded-full"
       onClick={handleOnClick}
     >
       <ArrowLeft />

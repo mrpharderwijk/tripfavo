@@ -34,7 +34,7 @@ export default async function BookingDetailNextPage({
   return (
     <AppShell
       navbar={
-        <NavBar fixed={false}>
+        <NavBar position="relative">
           <BackButton routePath={`/guest/bookings`} />
         </NavBar>
       }

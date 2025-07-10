@@ -56,7 +56,7 @@ export function PropertyFormRoomDialog({
 
   return (
     <ModalDialog
-      header={<>{tImagesFormRoomDialog('header')}</>}
+      header={tImagesFormRoomDialog('header')}
       footer={
         <Button
           variant="primary-inverse"

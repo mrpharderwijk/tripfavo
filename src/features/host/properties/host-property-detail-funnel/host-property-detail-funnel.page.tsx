@@ -37,7 +37,7 @@ export function HostPropertyDetailFunnelPage(): ReactElement {
    */
   return (
     <>
-      <NavBar fixed={false}>
+      <NavBar position="relative">
         <Branding disableLink />
         <Button variant="outline" size="md" rounded onClick={handleOnClickSave}>
           {tCommon('forms.saveAndExit')}

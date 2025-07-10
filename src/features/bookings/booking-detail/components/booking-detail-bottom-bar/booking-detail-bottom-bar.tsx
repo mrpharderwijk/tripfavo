@@ -8,6 +8,7 @@ import { PriceType } from '@prisma/client'
 import { BottomBar } from '@/components/molecules/bottom-bar/bottom-bar'
 import { Button } from '@/components/molecules/buttons/button'
 import { datePrices } from '@/data/date-prices'
+import { BookingDetailHostSelfDialog } from '@/features/bookings/booking-detail/components/booking-detail-host-self-dialog/booking-detail-host-self-dialog'
 import { useBookingDetailContext } from '@/features/bookings/booking-detail/providers/booking-detail-context-provider'
 import { useDialogContext } from '@/features/nav-bar/providers/dialog-context-provider'
 import { getCleaningFee } from '@/features/properties/utils/get-cleaning-fee'
@@ -35,7 +36,7 @@ export function BookingDetailBottomBar(): ReactElement {
 
   async function handleOnClickConfirm(): Promise<void> {
     if (!currentUser) {
-      openDialog('booking-login')
+      openDialog('login')
       return
     }
 
@@ -90,7 +91,7 @@ export function BookingDetailBottomBar(): ReactElement {
         ],
       })
 
-      openDialog('booking-success')
+      openDialog('booking-detail-success')
     } catch (error) {
       console.error(error)
     } finally {
@@ -110,6 +111,9 @@ export function BookingDetailBottomBar(): ReactElement {
       >
         {tBookingDetailBottomBar('button.label')}
       </Button>
+
+      {/* Booking host self */}
+      <BookingDetailHostSelfDialog />
     </BottomBar>
   )
 }

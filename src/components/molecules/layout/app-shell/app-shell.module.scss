@@ -6,6 +6,16 @@
     display: none;
   }
 
+  &--footer {
+    .appShellMain {
+      padding-bottom: 100px;
+
+      .appShellMainFooter {
+        margin-top: 32px
+      }
+    }
+  }
+
   &--sidebar {
     display: grid;
     grid-template-areas: 
@@ -73,8 +83,14 @@
       width: 100vw;
     }
   }
- 
 
+  &--footer {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+  }
+ 
   &--fullWidth {
     grid-template-areas: 
     "nav nav"

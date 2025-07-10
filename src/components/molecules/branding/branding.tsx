@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { MouseEvent, ReactElement } from 'react'
 
-import { Display } from '@/components/atoms/display/display'
 import { Box } from '@/components/atoms/layout/box/box'
 import { SvgTripfavoDark } from '@/components/atoms/logo/svgr'
 import { Body } from '@/components/atoms/typography/body/body'
@@ -39,16 +38,14 @@ export function Branding({ disableLink = false }: BrandingProps): ReactElement {
           gap={1}
         >
           <SvgTripfavoDark />
-          <Display show-lg show-xl show-2xl show-3xl>
-            <Body
-              tag="span"
-              size="title-sm"
-              font-weight="extrabold"
-              color="purple"
-            >
-              tripfavo
-            </Body>
-          </Display>
+          <Body
+            tag="span"
+            size="title-sm"
+            font-weight="extrabold"
+            color="purple"
+          >
+            tripfavo
+          </Body>
         </Box>
       </Link>
     </Box>

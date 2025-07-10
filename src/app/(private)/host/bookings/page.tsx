@@ -12,7 +12,7 @@ export default async function HostBookingsNextPage(): Promise<ReactElement> {
 
   return (
     <AppShell
-      navbar={<NavBar body={<HostMainMenuBody />} fixed={false} />}
+      navbar={<NavBar body={<HostMainMenuBody />} position="relative" />}
       sidebar={<HostSidebar heading={tHost('heading')} />}
     >
       <HostBookingsPage />

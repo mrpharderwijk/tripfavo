@@ -1,19 +1,15 @@
 import { PropsWithChildren, ReactElement } from 'react'
 
 import { Container } from '@/components/atoms/layout/container/container'
-import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
+import { AppShell } from '@/components/molecules/layout/app-shell/app-shell'
 import { NavBar } from '@/features/nav-bar/nav-bar'
 
 export default async function AuthLayout({
   children,
 }: PropsWithChildren): Promise<ReactElement> {
   return (
-    <FlexBox flex-direction="col" fullHeight>
-      <FlexBoxItem flex="initial">
-        <NavBar />
-      </FlexBoxItem>
-
+    <AppShell navbar={<NavBar />}>
       <FlexBoxItem
         tag="main"
         margin-top={20}
@@ -26,6 +22,6 @@ export default async function AuthLayout({
           {children}
         </Container>
       </FlexBoxItem>
-    </FlexBox>
+    </AppShell>
   )
 }

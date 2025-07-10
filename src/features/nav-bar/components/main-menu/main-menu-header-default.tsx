@@ -9,7 +9,7 @@ export function MainMenuHeaderDefault(): ReactElement {
   const { closeMainMenu } = useMainMenuContext()
 
   return (
-    <div className="absolute left-4 top-4">
+    <div className="absolute right-4 top-4">
       <Button
         icon={XIcon}
         size="sm"

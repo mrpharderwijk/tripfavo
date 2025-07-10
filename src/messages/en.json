@@ -57,9 +57,8 @@
       "title": "Welcome back!",
       "submit": "Continue",
       "submitting": "Sending...",
-      "register": {
-        "text": "Don't have an account?",
-        "label": "Sign up"
+      "signUp": {
+        "text": "Don't have an account? <link>Sign up</link>"
       },
       "error": {
         "invalidCredentials": "Invalid credentials",
@@ -69,15 +68,32 @@
         "configurationError": "Configuration error. Please contact support",
         "signinError": "Sign in failed. Please try again"
       },
+      "successDialog": {
+        "heading": "Login successful",
+        "title": "Welcome to the club!",
+        "subtitle": "You are now logged in. You can now close this modal and continue.",
+        "button": {
+          "continue": "Continue"
+        }
+      }
+    },
+    "signUpDialog": {
+      "heading": "Sign up for an account",
+      "form": {
+        "submit": "Continue"
+      },
+      "signUp": {
+        "title": "Welcome to TripFavo"
+      },
+      "footer": {
+        "text": "Already have an account? <link>Log in</link>"
+      },
       "success": {
-        "heading": "Check your email",
-        "title": "Magic link sent!",
-        "description": "We've sent a magic link to {email}. Click the link in the email to sign in to your account.",
-        "checkSpam": "Don't see the email? Check your spam folder.",
-        "openEmail": "Open email app",
-        "backToLogin": "Back to login",
-        "noEmail": "Didn't receive the email?",
-        "resend": "Resend"
+        "title": "Welcome to the club!",
+        "subtitle": "Your account has been created and you are now logged in. You can now close this modal and continue.",
+        "button": {
+          "continue": "Continue"
+        }
       }
     },
     "signUpForm": {
@@ -85,13 +101,15 @@
       "title": "Welcome to TripFavo",
       "submit": "Continue",
       "login": {
-        "text": "Already have an account?",
-        "label": "Log in"
+        "text": "Already have an account? <link>Log in</link>"
       },
-      "success": {
-        "heading": "Welcome to the club!",
-        "description": "Your account has been created successfully.",
-        "link": "Please <link>log in</link> to continue."
+      "successDialog": {
+        "heading": "Sign up successful",
+        "title": "Welcome to the club!",
+        "subtitle": "Your account has been created and you are now logged in. You can now close this modal and continue.",
+        "button": {
+          "continue": "Continue"
+        }
       }
     }
   },
@@ -574,14 +592,31 @@
       "heading": "Login to book this property",
       "subtitle": "You need to be logged in to place a booking. If you don't have an account, you can create one by <link>signing up</link>."
     },
+    "loginSuccessDialog": {
+      "heading": "Login successful",
+      "title": "Welcome to the club!",
+      "subtitle": "You are now logged in. You can now close this modal and continue.",
+      "button": {
+        "continue": "Continue"
+      }
+    },
     "signUpDialog": {
       "heading": "Sign up to book this property",
       "subtitle": "You need to have an account to place a booking. If you already have an account, you can book by <link>logging in</link>."
     },
+    "signUpSuccessDialog": {
+      "heading": "Sign up successful",
+      "title": "Welcome to the club!",
+      "subtitle": "Your account has been created and you are now logged in. You can now close this modal and continue.",
+      "button": {
+        "continue": "Continue",
+        "close": "Close"
+      }
+    },
     "successDialog": {
       "heading": "Booking request sent",
-      "title": "Your booking has been sent to the host",
-      "subtitle": "The host will review your request and get back to you as soon as possible.",
+      "title": "Booking request successful",
+      "subtitle": "Your booking request has been sent to the host. The host will review your request and get back to you within 48 hours.",
       "button": {
         "close": "Close",
         "myBookings": "My bookings"

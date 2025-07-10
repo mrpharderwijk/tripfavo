@@ -14,6 +14,7 @@ import {
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
+import { useDialogContext } from '@/features/nav-bar/providers/dialog-context-provider'
 import { useAppContext } from '@/providers/app-context-provider/app-context-provider'
 
 export const LoginFormSchema = z.object({
@@ -31,17 +32,12 @@ type UseLoginFormReturnType = {
   error: string | null
 }
 
-type UseLoginFormProps = {
-  callbackUrl?: string
-}
-
-export function useLoginForm({
-  callbackUrl,
-}: UseLoginFormProps): UseLoginFormReturnType {
-  const router = useRouter()
+export function useLoginForm(): UseLoginFormReturnType {
   const { enableAppLoading, disableAppLoading } = useAppContext()
+  const { openDialog } = useDialogContext()
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
+  const router = useRouter()
 
   const {
     control,
@@ -63,7 +59,6 @@ export function useLoginForm({
     }
 
     setIsLoading(true)
-    enableAppLoading()
     setError(null)
 
     try {
@@ -78,18 +73,15 @@ export function useLoginForm({
         }
         setValue('password', '')
       }
-
+      console.log('callback ----> ', callback)
       if (callback?.ok && !callback?.error) {
         router.refresh()
-        reset()
+        openDialog('login-success')
       }
-
-      disableAppLoading()
     } catch (error: unknown) {
       setError('UNEXPECTED_ERROR')
     } finally {
       setIsLoading(false)
-      disableAppLoading()
     }
   }
 

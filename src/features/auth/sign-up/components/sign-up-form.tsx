@@ -1,6 +1,5 @@
 'use client'
 
-import NextLink from 'next/link'
 import { useTranslations } from 'next-intl'
 import { ReactElement, useState } from 'react'
 import { Controller } from 'react-hook-form'
@@ -8,24 +7,18 @@ import { Controller } from 'react-hook-form'
 import { Input } from '@/components/atoms/forms/input/input'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
-import { Body } from '@/components/atoms/typography/body/body'
-import { Heading } from '@/components/atoms/typography/heading/heading'
 import { Button } from '@/components/molecules/buttons/button'
 import { InputPassword } from '@/components/molecules/input-password/input-password'
 import { useSignUpForm } from '@/features/auth/sign-up/components/use-sign-up-form'
-import { getRoutePathByRouteName } from '@/utils/get-route'
+
+type SignUpFormProps = {
+  onSuccessCallback?: () => void
+}
 
 export function SignUpForm(): ReactElement {
-  const {
-    control,
-    onSubmit,
-    handleSubmit,
-    errors,
-    isLoading,
-    error,
-    registerSuccess,
-  } = useSignUpForm()
-  const tSignUpForm = useTranslations('auth.signUpForm')
+  const { control, onSubmit, handleSubmit, errors, isLoading, error } =
+    useSignUpForm()
+  const tSignUpForm = useTranslations('auth.signUpDialog.form')
   const tCommon = useTranslations('common')
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false)
 
@@ -33,7 +26,7 @@ export function SignUpForm(): ReactElement {
     setPasswordVisible(value)
   }
 
-  return !registerSuccess ? (
+  return (
     <form noValidate onSubmit={handleSubmit(onSubmit)}>
       <FlexBox flex-direction="col" gap={8}>
         {error && <div className="text-sm text-red-500 mb-2">{error}</div>}
@@ -176,6 +169,7 @@ export function SignUpForm(): ReactElement {
             variant="secondary"
             size="xl"
             type="submit"
+            loading={isLoading}
             disabled={isLoading}
             fullWidth
           >
@@ -184,33 +178,5 @@ export function SignUpForm(): ReactElement {
         </FlexBox>
       </FlexBox>
     </form>
-  ) : (
-    <>
-      <Heading tag="h2" like="h5" color="primary" font-weight="semibold">
-        {tSignUpForm('success.heading')}
-      </Heading>
-
-      <Body size="base-md" text-color="primary">
-        {tSignUpForm('success.description')}
-      </Body>
-
-      <Body size="base-md" text-color="primary">
-        {tSignUpForm.rich('success.link', {
-          link: (chunks) => (
-            <NextLink href={getRoutePathByRouteName('login')} passHref>
-              <Body
-                tag="span"
-                size="base-md"
-                text-color="primary"
-                text-decoration="underline"
-                font-weight="bold"
-              >
-                {chunks}
-              </Body>
-            </NextLink>
-          ),
-        })}
-      </Body>
-    </>
   )
 }

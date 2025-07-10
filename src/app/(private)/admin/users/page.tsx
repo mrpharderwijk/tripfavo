@@ -11,7 +11,7 @@ export default async function AdminUsersNextPage(): Promise<ReactElement> {
 
   return (
     <AppShell
-      navbar={<NavBar fixed={false} />}
+      navbar={<NavBar position="relative" />}
       sidebar={<GuestSidebar heading={tAdmin('heading')} />}
     >
       <AdminUsersPage />

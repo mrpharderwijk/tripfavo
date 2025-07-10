@@ -15,7 +15,6 @@ export function MainMenuBodyDefault(): ReactElement {
   const pathname = usePathname()
   const { currentUser } = useAppContext()
   const tGuest = useTranslations('guest')
-  const tCommon = useTranslations('common')
   const { handleOnClickLanguage, closeMainMenu } = useMainMenuContext()
 
   return (
@@ -42,6 +41,7 @@ export function MainMenuBodyDefault(): ReactElement {
           {tGuest('mainMenu.myFavorites')}
         </ButtonWrapper>
       )}
+
       {currentUser && (
         <ButtonWrapper
           icon={Ticket}
@@ -64,19 +64,6 @@ export function MainMenuBodyDefault(): ReactElement {
           {tGuest('mainMenu.myBookings')}
         </ButtonWrapper>
       )}
-
-      {/* <Button
-        icon={Globe}
-        size="lg"
-        variant={
-          !isCurrentRoute(pathname, 'language')
-            ? 'sidebar-menu-item'
-            : 'sidebar-menu-item-active'
-        }
-        onClick={handleOnClickLanguage}
-      >
-        {tCommon('mainMenu.language')}
-      </Button> */}
     </>
   )
 }

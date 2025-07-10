@@ -30,7 +30,7 @@ export default async function HostBookingDetailPage({
     <HostBookingDetailContextProvider booking={booking}>
       <AppShell
         navbar={
-          <NavBar narrow fixed={false}>
+          <NavBar narrow position="relative">
             <BackButton routePath={`/host/bookings`} />
             <Heading tag="h1" like="h4-semibold">
               {tHostBookingDetail('heading')}
