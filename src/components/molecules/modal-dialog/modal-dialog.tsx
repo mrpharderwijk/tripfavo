@@ -17,7 +17,6 @@ import { ModalImage } from './components/modal-image/modal-image'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { Portal } from '@/components/atoms/portal/portal'
 import { useDialogContext } from '@/features/nav-bar/providers/dialog-context-provider'
-import { useDisableBodyScrolling } from '@/hooks/use-disable-body-scrolling/use-disable-body-scrolling'
 import { useEscapeKey } from '@/hooks/use-escape-key/use-escape-key'
 import { useFocusTrap } from '@/hooks/use-focus-trap/use-focus-trap'
 
@@ -60,7 +59,6 @@ export function ModalDialog({
     closeDialog()
   }
 
-  useDisableBodyScrolling({ disabled: isVisible })
   useEscapeKey(closeDialog, closeOnEscape)
   useOnClickOutside(
     modalDialogRef as RefObject<HTMLElement>,
@@ -83,7 +81,7 @@ export function ModalDialog({
             sm:items-center
             p-0
             md:p-10
-            z-50
+            z-100
             outline-none
           "
         >

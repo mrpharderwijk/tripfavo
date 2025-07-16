@@ -1,9 +1,10 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import Image from 'next/image'
+import Link from 'next/link'
 import { PropsWithChildren, ReactElement } from 'react'
 
-import { Button } from '@/components/molecules/buttons/button'
+import { ButtonWrapper } from '@/components/molecules/buttons/button-wrapper/button-wrapper'
 import { Footer } from '@/components/molecules/footer/footer'
 import { AppShell } from '@/components/molecules/layout/app-shell/app-shell'
 import { BackButton } from '@/features/nav-bar/components/back-button/back-button'
@@ -20,12 +21,7 @@ export default function PropertyDetailLayout({
   params,
 }: PropertyDetailLayoutProps): ReactElement {
   const { currentUser } = useAppContext()
-  const router = useRouter()
-
-  function onClickAvatarButton(): void {
-    const routePath = getRoutePathByRouteName('account-settings')
-    router.push(routePath)
-  }
+  const accountRoutePath = getRoutePathByRouteName('account')
 
   return (
     <AppShell
@@ -39,7 +35,23 @@ export default function PropertyDetailLayout({
           <BackButton routePath="/" />
           <div />
           {currentUser && (
-            <Button avatar size="md" onClick={onClickAvatarButton} />
+            <ButtonWrapper
+              avatar
+              rounded
+              renderRoot={({ buttonContent }) => (
+                <Link href={accountRoutePath}>{buttonContent}</Link>
+              )}
+            >
+              {currentUser?.profileImage?.url && (
+                <Image
+                  className="rounded-full object-cover aspect-square"
+                  src={currentUser?.profileImage?.url ?? ''}
+                  alt="Profile"
+                  width={40}
+                  height={32}
+                />
+              )}
+            </ButtonWrapper>
           )}
         </NavBar>
       }
