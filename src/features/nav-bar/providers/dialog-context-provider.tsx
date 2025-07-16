@@ -13,6 +13,7 @@ import {
   dialogReducer,
   initialState,
 } from '@/features/nav-bar/providers/dialog-context-reducer'
+import { useDisableBodyScrolling } from '@/hooks/use-disable-body-scrolling/use-disable-body-scrolling'
 
 type DialogContextState = {
   openDialog: (dialogId: string) => void
@@ -26,6 +27,9 @@ export function DialogContextProvider({
   children,
 }: PropsWithChildren): ReactElement {
   const [state, dispatch] = useReducer(dialogReducer, initialState)
+
+  // Centralized scroll lock
+  useDisableBodyScrolling({ disabled: !!state.currentOpenDialog })
 
   function openDialog(dialogId: string): void {
     if (!dialogId) {

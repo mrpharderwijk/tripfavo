@@ -19,10 +19,18 @@ export function Container({
   fullWidth,
   narrow,
   fullHeight = false,
+  center = false,
   ...props
 }: ContainerProps): ReactElement {
   const containerClassName = cn(
-    containerClassNames({ padding, fullWidth, fullHeight, narrow, ...props }),
+    containerClassNames({
+      padding,
+      fullWidth,
+      fullHeight,
+      narrow,
+      center,
+      ...props,
+    }),
   )
   const Tag = tag
 

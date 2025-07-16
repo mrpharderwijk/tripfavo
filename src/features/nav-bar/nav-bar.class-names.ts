@@ -10,7 +10,7 @@ import {
   zIndexVariants,
 } from '@/utils/variants'
 
-export const navBarClassNames = cva('w-full', {
+export const navBarContainerClassNames = cva('w-full', {
   variants: {
     ...positionVariants,
     ...topVariants,
@@ -21,6 +21,19 @@ export const navBarClassNames = cva('w-full', {
     ...backgroundColorVariants,
     border: {
       true: 'border-b border-deco',
+      false: '',
+    },
+  },
+})
+
+export const navBarClassNames = cva('w-full relative z-10', {
+  variants: {
+    border: {
+      true: 'border-b border-deco',
+      false: '',
+    },
+    subnav: {
+      true: 'shadow-sm',
       false: '',
     },
   },

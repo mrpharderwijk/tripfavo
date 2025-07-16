@@ -300,7 +300,18 @@
         "confirmed": "Confirmed by you"
       },
       "bookingDetail": {
-        "heading": "Booking details"
+        "heading": "Booking details",
+        "decline": "Decline booking",
+        "approve": "Approve booking",
+        "approveDialog": {
+          "heading": "Confirm booking",
+          "description": "Are you sure you want to approve this booking?",
+          "close": "Close",
+          "confirm": "Approve booking"
+        },
+        "bookerInfo": {
+          "heading": "Booking by"
+        }
       },
       "email": {
         "bookingRequest": {

@@ -150,6 +150,7 @@ export async function getPublishedProperties(): Promise<
 
     return { data: propertiesWithHost ?? null }
   } catch (error: unknown) {
+    console.error('Error in getPublishedProperties:', error)
     return { error: 'INTERNAL_SERVER_ERROR' }
   }
 }
