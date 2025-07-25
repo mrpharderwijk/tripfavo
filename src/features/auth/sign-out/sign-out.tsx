@@ -3,9 +3,12 @@
 import { signOut } from 'next-auth/react'
 import { PropsWithChildren, ReactNode } from 'react'
 
-export function SignOut({ children }: PropsWithChildren): ReactNode {
+export async function SignOut({
+  children,
+}: PropsWithChildren): Promise<ReactNode> {
   try {
-    signOut({ redirectTo: '/' })
+    await signOut()
+    console.log('signOut')
   } catch (error) {
     console.log(error)
   }

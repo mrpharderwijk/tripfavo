@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { ReactElement } from 'react'
 
+import { Divider } from '@/components/atoms/layout/divider/divider'
 import { ButtonWrapper } from '@/components/molecules/buttons/button-wrapper/button-wrapper'
 import { useMainMenuContext } from '@/features/nav-bar/components/main-menu/main-menu-context-provider'
 import { useAppContext } from '@/providers/app-context-provider/app-context-provider'
@@ -15,10 +16,31 @@ export function MainMenuBodyDefault(): ReactElement {
   const pathname = usePathname()
   const { currentUser } = useAppContext()
   const tGuest = useTranslations('guest')
+  const tCommon = useTranslations('common')
   const { handleOnClickLanguage, closeMainMenu } = useMainMenuContext()
 
   return (
     <>
+      <ButtonWrapper
+        data-testid="main-menu-home"
+        icon={Heart}
+        size="lg"
+        variant={
+          !isCurrentRoute(pathname, 'home')
+            ? 'sidebar-menu-item'
+            : 'sidebar-menu-item-active'
+        }
+        onClick={closeMainMenu}
+        renderRoot={({ buttonContent }) => (
+          <Link className="w-full" href="/">
+            {buttonContent}
+          </Link>
+        )}
+      >
+        {tCommon('mainMenu.home')}
+      </ButtonWrapper>
+      <Divider />
+
       {currentUser && (
         <ButtonWrapper
           icon={Heart}
@@ -41,7 +63,6 @@ export function MainMenuBodyDefault(): ReactElement {
           {tGuest('mainMenu.myFavorites')}
         </ButtonWrapper>
       )}
-
       {currentUser && (
         <ButtonWrapper
           icon={Ticket}

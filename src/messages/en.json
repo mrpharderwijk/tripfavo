@@ -191,6 +191,7 @@
       }
     },
     "mainMenu": {
+      "home": "Home",
       "logout": "Logout",
       "login": "Login",
       "signUp": "Sign up",

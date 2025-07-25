@@ -28,7 +28,7 @@ export function BookingsList({
         </Heading>
       )}
 
-      <FlexBox flex-direction="col" gap={0} gap-md={2} fullWidth>
+      <FlexBox flex-direction="col" gap={4} gap-md={2} fullWidth>
         {bookings.map((item) => (
           <BookingsListItem
             key={item.id}

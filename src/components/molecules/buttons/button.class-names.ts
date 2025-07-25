@@ -17,9 +17,9 @@ export const quaternaryInverseButtonThemeClassNames =
 export const outlineButtonThemeClassNames =
   'border-1 border-border-tertiary hover:border-border-tertiary-hover focus:border-border-tertiary-hover focus-visible:border-border-tertiary-hover disabled:border-border-secondary-disabled hover:disabled:border-border-secondary-disabled'
 export const sidebarMenuItemButtonThemeClassNames =
-  'bg-bg-primary hover:bg-bg-secondary focus:bg-bg-secondary focus-visible:bg-bg-secondary disabled:bg-bg-primary-disabled'
+  'xxxxxxxx bg-bg-secondary hover:bg-bg-secondary focus:bg-bg-secondary focus-visible:bg-bg-secondary disabled:bg-bg-primary-disabled'
 export const sidebarMenuItemActiveButtonThemeClassNames =
-  'bg-bg-quaternary hover:bg-bg-secondary focus:bg-bg-secondary focus-visible:bg-bg-secondary disabled:bg-bg-quaternary-disabled'
+  'bg-bg-quaternary hover:bg-bg-primary focus:bg-bg-primary focus-visible:bg-bg-primary disabled:bg-bg-quaternary-disabled'
 
 type ButtonVariant =
   | 'primary'

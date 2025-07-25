@@ -32,7 +32,7 @@ export function MainMenuFooterDefault(): ReactElement {
           <ButtonWrapper
             icon={User}
             size="lg"
-            variant="sidebar-menu-item-active"
+            variant="sidebar-menu-item"
             renderRoot={({ buttonContent }) => (
               <Link
                 className="w-full"
@@ -50,7 +50,7 @@ export function MainMenuFooterDefault(): ReactElement {
           <Button
             icon={LogOut}
             size="lg"
-            variant="sidebar-menu-item-active"
+            variant="sidebar-menu-item"
             onClick={handleOnClickLogout}
             fullWidth
           >
