@@ -40,7 +40,7 @@
     "./src/types/vitest.d.ts",
     "next-env.d.ts",
     ".next/types/**/*.ts"
-  ],
+, "src/features/host/components/email-host-booking-approval"  ],
   "exclude": [
     "node_modules",
     ".next"

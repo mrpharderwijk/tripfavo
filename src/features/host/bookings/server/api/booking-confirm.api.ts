@@ -5,7 +5,7 @@ import { GuestsAmount } from '@/features/bookings/booking-detail/providers/booki
 import { BookingsParams } from '@/features/bookings/types/bookings-params'
 import { bookingSelect } from '@/features/guest/bookings/server/actions/get-guest-bookings'
 import { EmailGuestBookingApproval } from '@/features/guest/components/email-guest-booking-approval/email-guest-booking-approval'
-import { EmailHostBookingApproval } from '@/features/host/components/email-host-booking-approval.tsx/email-host-booking-approval'
+import { EmailHostBookingApproval } from '@/features/host/components/email-host-booking-approval/email-host-booking-approval'
 import { SafeHostProperty } from '@/features/host/properties/types/safe-host-property'
 import { Locale } from '@/i18n/config'
 import { prisma } from '@/lib/prisma/db'

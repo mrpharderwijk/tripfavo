@@ -19,6 +19,10 @@ export const containerClassNames = cva('mx-auto', {
       md: 'max-w-[623px] px-4',
       lg: 'max-w-[1280px]',
     },
+    center: {
+      true: 'flex justify-center',
+      false: undefined,
+    },
   },
   defaultVariants: {
     fullWidth: false,

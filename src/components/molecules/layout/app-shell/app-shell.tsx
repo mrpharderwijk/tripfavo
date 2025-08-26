@@ -53,7 +53,7 @@ export function AppShell({
         {footer && <footer className={css.appShellMainFooter}>{footer}</footer>}
       </main>
 
-      <div className={css.appShellBottomBar}>{bottomBar}</div>
+      {!!bottomBar && <div className={css.appShellBottomBar}>{bottomBar}</div>}
     </div>
   )
 }

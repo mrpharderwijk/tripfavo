@@ -1,3 +1,4 @@
+'use client'
 import { VariantProps } from 'class-variance-authority'
 import { AlertCircle } from 'lucide-react'
 import {

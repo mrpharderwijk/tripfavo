@@ -37,6 +37,7 @@ import {
 import { snapVariants } from '@/utils/variants/position/snap'
 import { snapAlignVariants } from '@/utils/variants/position/snap-align'
 import { snapTypeVariants } from '@/utils/variants/position/snap-type'
+import { shadowVariants } from '@/utils/variants/shadow/shadow'
 import {
   fullHeightVariants,
   fullWidthVariants,
@@ -104,6 +105,7 @@ export const boxClassnames = cva('', {
     ...backgroundColorVariants,
     ...fullHeightVariants,
     ...fullWidthVariants,
+    ...shadowVariants,
 
     spread: {
       true: 'left-0 right-0 top-0 bottom-0',

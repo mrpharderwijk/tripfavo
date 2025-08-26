@@ -1,6 +1,8 @@
 'use client'
 
 import axios from 'axios'
+import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { ReactElement } from 'react'
 import { BookingStatus } from '@prisma/client'
 
@@ -16,6 +18,8 @@ import { useDialogContext } from '@/features/nav-bar/providers/dialog-context-pr
 export function HostBookingDetailBottomBar(): ReactElement {
   const { booking } = useHostBookingDetailContext()
   const { openDialog, closeDialog, currentOpenDialog } = useDialogContext()
+  const tHostBookingDetail = useTranslations('host.bookings.bookingDetail')
+  const router = useRouter()
 
   function handleCancelBooking(): void {
     openDialog('booking-cancel')
@@ -31,6 +35,7 @@ export function HostBookingDetailBottomBar(): ReactElement {
         `/api/host/${booking?.property.host.id}/bookings/${booking?.id}`,
       )
       closeDialog()
+      router.refresh()
     } catch (error) {
       console.error(error)
     } finally {
@@ -46,7 +51,7 @@ export function HostBookingDetailBottomBar(): ReactElement {
         fullWidth
         onClick={handleCancelBooking}
       >
-        Cancel booking
+        {tHostBookingDetail('decline')}
       </Button>
 
       {booking?.status === BookingStatus.PENDING && (
@@ -56,7 +61,7 @@ export function HostBookingDetailBottomBar(): ReactElement {
           fullWidth
           onClick={handleApproveBooking}
         >
-          Approve booking
+          {tHostBookingDetail('approve')}
         </Button>
       )}
 
@@ -67,26 +72,26 @@ export function HostBookingDetailBottomBar(): ReactElement {
         onClose={closeDialog}
         header={
           <Heading tag="h2" like="h4-semibold">
-            Confirm booking
+            {tHostBookingDetail('approveDialog.heading')}
           </Heading>
         }
         footer={
           <FlexBox flex-direction="row" gap={6} align-items="center">
             <Button variant="primary-link" size="md" onClick={closeDialog}>
-              close
+              {tHostBookingDetail('approveDialog.close')}
             </Button>
             <Button
               variant="secondary"
               size="md"
               onClick={handleConfirmApproveBooking}
             >
-              Approve booking
+              {tHostBookingDetail('approveDialog.confirm')}
             </Button>
           </FlexBox>
         }
       >
         <Body size="base-lg" color="primary" text-align="center">
-          Are you sure you want to approve this booking?
+          {tHostBookingDetail('approveDialog.description')}
         </Body>
       </ModalDialog>
     </BottomBar>

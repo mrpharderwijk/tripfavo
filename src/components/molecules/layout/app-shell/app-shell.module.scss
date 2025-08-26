@@ -1,19 +1,12 @@
 .appShell {
   width: 100vw;
   height: 100dvh;
+  display: flex;
+  flex-direction: column;
+
 
   .appShellSidebar {
     display: none;
-  }
-
-  &--footer {
-    .appShellMain {
-      padding-bottom: 100px;
-
-      .appShellMainFooter {
-        margin-top: 32px
-      }
-    }
   }
 
   &--sidebar {
@@ -89,6 +82,14 @@
     flex-direction: column;
     align-items: start;
     justify-content: center;
+
+    .appShellMain {
+      padding-bottom: 100px;
+
+      .appShellMainFooter {
+        margin-top: 32px
+      }
+    }
   }
  
   &--fullWidth {
@@ -96,6 +97,10 @@
     "nav nav"
     "content content"
     "content content";
+
+    .appShellMain {
+      flex: 1 1 auto;
+    }
   }
 }
 

@@ -28,6 +28,7 @@ import { outlineOffsetVariants } from '@/utils/variants/outline/outline-offset'
 import { outlineWidthVariants } from '@/utils/variants/outline/outline-width'
 import { paddingVariants } from '@/utils/variants/padding/padding'
 import { positionVariants } from '@/utils/variants/position/position'
+import { shadowVariants } from '@/utils/variants/shadow/shadow'
 import { maxHeightVariants } from '@/utils/variants/sizing/max-height'
 import { minHeightVariants } from '@/utils/variants/sizing/min-height'
 import { minWidthVariants } from '@/utils/variants/sizing/min-width'
@@ -63,5 +64,6 @@ export const flexBoxClassNames = cva('', {
     ...bottomVariants,
     ...topVariants,
     ...overflowVariants,
+    ...shadowVariants,
   },
 })

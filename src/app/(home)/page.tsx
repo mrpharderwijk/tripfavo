@@ -8,29 +8,43 @@ import { getPublishedProperties } from '@/features/properties/server/actions/get
 import { isActionError } from '@/server/utils/error'
 
 export default async function Home(): Promise<ReactElement> {
-  const propertiesResponse = await getPublishedProperties()
-  const properties = isActionError(propertiesResponse)
-    ? []
-    : (propertiesResponse?.data ?? [])
+  try {
+    const propertiesResponse = await getPublishedProperties()
+    const properties = isActionError(propertiesResponse)
+      ? []
+      : (propertiesResponse?.data ?? [])
 
-  return (
-    <FlexBox
-      flex-direction="row"
-      align-items="start"
-      justify-content="start"
-      flex-wrap="wrap"
-      gap={6}
-      fullHeight
-    >
-      <Suspense
-        fallback={
-          <Grid place-items="center" fullWidth fullHeight>
-            <DotLoader size="lg" />
-          </Grid>
-        }
+    return (
+      <FlexBox
+        flex-direction="row"
+        align-items="start"
+        justify-content="start"
+        flex-wrap="wrap"
+        gap={6}
+        fullHeight
       >
-        <PropertiesList properties={properties} />
-      </Suspense>
-    </FlexBox>
-  )
+        <Suspense
+          fallback={
+            <Grid place-items="center" fullWidth fullHeight>
+              <DotLoader size="lg" />
+            </Grid>
+          }
+        >
+          <PropertiesList properties={properties} />
+        </Suspense>
+      </FlexBox>
+    )
+  } catch (error) {
+    console.error('Error loading properties:', error)
+    return (
+      <FlexBox
+        flex-direction="row"
+        align-items="center"
+        justify-content="center"
+        fullHeight
+      >
+        <div>Error loading properties. Please try again later.</div>
+      </FlexBox>
+    )
+  }
 }
