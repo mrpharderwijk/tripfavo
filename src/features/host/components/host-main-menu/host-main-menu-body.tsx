@@ -1,6 +1,6 @@
 'use client'
 
-import { House, Ticket } from 'lucide-react'
+import { Home, House, Ticket } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
@@ -20,6 +20,25 @@ export function HostMainMenuBody(): ReactElement {
 
   return (
     <>
+      <ButtonWrapper
+        data-testid="main-menu-home"
+        icon={Home}
+        size="lg"
+        variant={
+          !isCurrentRoute(pathname, 'home')
+            ? 'sidebar-menu-item'
+            : 'sidebar-menu-item-active'
+        }
+        onClick={closeMainMenu}
+        renderRoot={({ buttonContent }) => (
+          <Link className="w-full" href="/">
+            {buttonContent}
+          </Link>
+        )}
+      >
+        {tCommon('mainMenu.home')}
+      </ButtonWrapper>
+
       {currentUser && (
         <ButtonWrapper
           icon={House}

@@ -37,7 +37,7 @@ export function NavBar({
   right,
   bottom,
   'bg-color': bgColor = 'primary',
-  'z-index': zIndex = 90,
+  'z-index': zIndex = 40,
   border = true,
   subnav,
 }: NavBarProps): ReactElement {

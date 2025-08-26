@@ -73,7 +73,7 @@ export function useLoginForm(): UseLoginFormReturnType {
         }
         setValue('password', '')
       }
-      console.log('callback ----> ', callback)
+
       if (callback?.ok && !callback?.error) {
         router.refresh()
         openDialog('login-success')

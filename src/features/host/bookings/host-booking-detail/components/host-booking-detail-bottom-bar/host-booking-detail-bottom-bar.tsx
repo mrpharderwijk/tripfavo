@@ -94,6 +94,36 @@ export function HostBookingDetailBottomBar(): ReactElement {
           {tHostBookingDetail('approveDialog.description')}
         </Body>
       </ModalDialog>
+
+      <ModalDialog
+        isVisible={
+          !!currentOpenDialog && currentOpenDialog === 'booking-cancel'
+        }
+        onClose={closeDialog}
+        header={
+          <Heading tag="h2" like="h4-semibold">
+            Cancel booking
+          </Heading>
+        }
+        footer={
+          <FlexBox flex-direction="row" gap={6} align-items="center">
+            <Button variant="primary-link" size="md" onClick={closeDialog}>
+              close
+            </Button>
+            <Button
+              variant="secondary"
+              size="md"
+              onClick={handleConfirmApproveBooking}
+            >
+              Cancel booking
+            </Button>
+          </FlexBox>
+        }
+      >
+        <Body size="base-lg" color="primary" text-align="center">
+          Are you sure you want to cancel this booking?
+        </Body>
+      </ModalDialog>
     </BottomBar>
   )
 }

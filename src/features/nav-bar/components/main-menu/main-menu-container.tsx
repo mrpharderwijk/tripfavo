@@ -2,6 +2,8 @@
 
 import { ReactElement } from 'react'
 
+import { Divider } from '@/components/atoms/layout/divider/divider'
+import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
 import { useMainMenuContext } from '@/features/nav-bar/components/main-menu/main-menu-context-provider'
 import { WithRef } from '@/types/with-ref'
 
@@ -26,13 +28,16 @@ export function MainMenuContainer({
         )}
 
         {/* Body */}
-        <div className="flex flex-col px-4 flex-auto">
-          <div className="flex flex-col gap-4">{body}</div>
-        </div>
+        <FlexBoxItem flex-direction="col" padding-x={4} flex-auto>
+          <FlexBoxItem flex-direction="col" gap={3}>
+            {body}
+          </FlexBoxItem>
+        </FlexBoxItem>
 
         {/* Footer */}
         {!!footer && (
-          <footer className="flex flex-row gap-4 px-4 flex-initial">
+          <footer className="flex flex-col gap-4 px-4 flex-initial">
+            <Divider />
             {footer}
           </footer>
         )}

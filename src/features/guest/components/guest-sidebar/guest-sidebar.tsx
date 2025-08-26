@@ -1,6 +1,6 @@
 'use client'
 
-import { CalendarDays, Home } from 'lucide-react'
+import { CalendarDays, Heart } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
@@ -23,7 +23,7 @@ export function GuestSidebar({ heading }: GuestSidebarProps): ReactElement {
   return (
     <AppShellSidebar heading={heading ?? tGuest('heading')}>
       <FlexBox tag="nav" flex-direction="col">
-        <FlexBox tag="ul" flex-direction="col" gap={2} width="full">
+        <FlexBox tag="ul" flex-direction="col" gap={3} width="full">
           <FlexBoxItem tag="li">
             <ButtonWrapper
               icon={CalendarDays}
@@ -48,7 +48,7 @@ export function GuestSidebar({ heading }: GuestSidebarProps): ReactElement {
 
           <FlexBoxItem tag="li">
             <ButtonWrapper
-              icon={Home}
+              icon={Heart}
               size="lg"
               variant={
                 !isCurrentRoute(pathname, 'guestFavorites')

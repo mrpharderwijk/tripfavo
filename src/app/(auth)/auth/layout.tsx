@@ -11,7 +11,6 @@ export default async function AuthLayout({
   return (
     <AppShell navbar={<NavBar />}>
       <FlexBoxItem
-        tag="main"
         margin-top={20}
         padding-top={12}
         padding-bottom={32}

@@ -94,6 +94,7 @@ export function LoginForm(): ReactElement {
               size="xl"
               type="submit"
               disabled={isLoading}
+              loading={isLoading}
               fullWidth
             >
               {tLoginForm('submit')}
