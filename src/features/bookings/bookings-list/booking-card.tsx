@@ -128,8 +128,7 @@ export function BookingCard({
                   Check in
                 </Body>
                 <Body size="base-sm" color="primary" font-weight="bold">
-                  {/* {startDateFormatted}  */}
-                  31 September 2025
+                  {startDateFormatted}
                 </Body>
               </FlexBoxItem>
               <FlexBoxItem flex-direction="col" flex-basis="1/2" gap={1}>
@@ -147,8 +146,7 @@ export function BookingCard({
                   font-weight="bold"
                   text-align="right"
                 >
-                  {/* {endDateFormatted}  */}
-                  31 September 2025
+                  {endDateFormatted}
                 </Body>
               </FlexBoxItem>
             </FlexBoxItem>

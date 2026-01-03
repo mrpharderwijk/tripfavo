@@ -21,7 +21,7 @@ export const textColorVariants = {
     white: 'text-text-white',
     gray: 'text-text-gray',
     blue: 'text-mykonos',
-    'grey-700': 'text-text-grey-700',
+    'gray-700': 'text-text-grey-700',
     purple: 'text-text-purple',
   },
   'text-color-sm': {
@@ -46,7 +46,7 @@ export const textColorVariants = {
     white: 'sm:text-text-white',
     gray: 'sm:text-text-gray',
     blue: 'sm:text-mykonos',
-    'grey-700': 'sm:text-text-grey-700',
+    'gray-700': 'sm:text-text-grey-700',
   },
   'text-color-md': {
     primary: 'md:text-text-primary',
@@ -70,7 +70,7 @@ export const textColorVariants = {
     white: 'md:text-text-white',
     gray: 'md:text-text-gray',
     blue: 'md:text-mykonos',
-    'grey-700': 'md:text-text-grey-700',
+    'gray-700': 'md:text-text-grey-700',
   },
   'text-color-lg': {
     primary: 'lg:text-text-primary',
@@ -94,7 +94,7 @@ export const textColorVariants = {
     white: 'lg:text-text-white',
     gray: 'lg:text-text-gray',
     blue: 'lg:text-mykonos',
-    'grey-700': 'lg:text-text-grey-700',
+    'gray-700': 'lg:text-text-grey-700',
   },
   'text-color-xl': {
     primary: 'xl:text-text-primary',
@@ -118,6 +118,6 @@ export const textColorVariants = {
     white: 'xl:text-text-white',
     gray: 'xl:text-text-gray',
     blue: 'xl:text-mykonos',
-    'grey-700': 'xl:text-text-grey-700',
+    'gray-700': 'xl:text-text-grey-700',
   },
 }

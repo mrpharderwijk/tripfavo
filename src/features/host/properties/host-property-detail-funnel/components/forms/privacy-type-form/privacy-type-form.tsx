@@ -151,7 +151,7 @@ export function PrivacyTypeForm({
                                   size="base-md"
                                   font-weight="normal"
                                   text-align="left"
-                                  color="grey-700"
+                                  color="gray-700"
                                 >
                                   {description}
                                 </Body>

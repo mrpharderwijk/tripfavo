@@ -11,11 +11,11 @@ import {
 import { textAreaClassNames } from '@/components/atoms/forms/text-area/text-area.class-names'
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
-import { WithRef } from '@/types/with-ref'
+import { PropsWithRef } from '@/types/props-with-ref'
 import { cn } from '@/utils/class-names'
 
 type TextAreaProps = TextareaHTMLAttributes<HTMLTextAreaElement> &
-  WithRef<HTMLTextAreaElement> &
+  PropsWithRef<HTMLTextAreaElement> &
   VariantProps<typeof textAreaClassNames> & {
     id: string
     label: string

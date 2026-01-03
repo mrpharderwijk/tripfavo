@@ -4,9 +4,9 @@ import { ReactElement } from 'react'
 import HostBookingDetailPage from '@/features/host/bookings/host-booking-detail/host-booking-detail.page'
 import { getHostBooking } from '@/features/host/bookings/server/actions/get-host-bookings'
 import { isActionError } from '@/server/utils/error'
-import { WithParams } from '@/types/with-params'
+import { PropsWithParams } from '@/types/props-with-params'
 
-type HostBookingDetailNextPageProps = WithParams
+type HostBookingDetailNextPageProps = PropsWithParams
 
 export default async function HostBookingDetailNextPage({
   params,

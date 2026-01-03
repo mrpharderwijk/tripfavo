@@ -8,9 +8,9 @@ import { getGuestBookingDetail } from '@/features/guest/bookings/server/actions/
 import { BackButton } from '@/features/nav-bar/components/back-button/back-button'
 import { NavBar } from '@/features/nav-bar/nav-bar'
 import { isActionError } from '@/server/utils/error'
-import { WithParams } from '@/types/with-params'
+import { PropsWithParams } from '@/types/props-with-params'
 
-type BookingDetailNextPageProps = WithParams<{
+type BookingDetailNextPageProps = PropsWithParams<{
   bookingId: string
 }>
 

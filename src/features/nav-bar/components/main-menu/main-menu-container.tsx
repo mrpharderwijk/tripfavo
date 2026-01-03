@@ -5,9 +5,9 @@ import { ReactElement } from 'react'
 import { Divider } from '@/components/atoms/layout/divider/divider'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
 import { useMainMenuContext } from '@/features/nav-bar/components/main-menu/main-menu-context-provider'
-import { WithRef } from '@/types/with-ref'
+import { PropsWithRef } from '@/types/props-with-ref'
 
-type MainMenuContainerProps = WithRef<HTMLDivElement>
+type MainMenuContainerProps = PropsWithRef<HTMLDivElement>
 
 export function MainMenuContainer({
   ref,

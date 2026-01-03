@@ -3,11 +3,11 @@ import { ChangeEvent, InputHTMLAttributes, ReactElement, useState } from 'react'
 
 import { FlexBox } from '@/components/atoms/layout/flex-box/flex-box'
 import { FlexBoxItem } from '@/components/atoms/layout/flex-box/flex-box-item/flex-box-item'
-import { WithRef } from '@/types/with-ref'
+import { PropsWithRef } from '@/types/props-with-ref'
 import { cn } from '@/utils/class-names'
 
 export type InputProps = InputHTMLAttributes<HTMLInputElement> &
-  WithRef<HTMLInputElement> & {
+  PropsWithRef<HTMLInputElement> & {
     id: string
     label: string
     formatPrice?: boolean
