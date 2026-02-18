@@ -1,5 +1,4 @@
 import type { Linter } from 'eslint'
-import prettier from 'eslint-config-prettier'
 import eslintPluginPrettier from 'eslint-plugin-prettier'
 import eslintPluginSimpleImportSort from 'eslint-plugin-simple-import-sort'
 import eslintPluginUnusedImports from 'eslint-plugin-unused-imports'
@@ -26,7 +25,6 @@ const customGlobals = {
 export default [
   eslintJs.configs.recommended,
   customGlobals,
-  // prettier,
   {
     ignores: ['**/dist', '**/*.config.mjs', '**/generated', '.next', 'node_modules', '.react-email', '.husky', '.vscode', 'analyze', '**/components/ui', '**/*.test.ts', '**/*.test.tsx'],
   },

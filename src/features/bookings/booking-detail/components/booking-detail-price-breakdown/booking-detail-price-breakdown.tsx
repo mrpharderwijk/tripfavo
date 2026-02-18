@@ -14,6 +14,7 @@ import { useBookingDetailContext } from '@/features/bookings/booking-detail/prov
 import { getCleaningFee } from '@/features/properties/utils/get-cleaning-fee'
 import { getDeposit } from '@/features/properties/utils/get-deposit'
 import { Locale } from '@/i18n/config'
+import { formatSelectedDates } from '@/utils/date/format-selected-dates'
 import { calculateTotalPriceIncludingCleaningFee } from '@/utils/pricing/calculate-total-price'
 import { calculateTotalPricePerNight } from '@/utils/pricing/calculate-total-price-per-night'
 
@@ -23,10 +24,10 @@ export function BookingDetailPriceBreakdown(): ReactElement {
   const tBookingDetailPriceBreakdown = useTranslations(
     'bookingDetail.priceBreakdown',
   )
-
+  const formattedSelectedDates = formatSelectedDates({ selectedDates })
   const totalPricePerNight = calculateTotalPricePerNight({
-    startDate: selectedDates?.from,
-    endDate: selectedDates?.to,
+    startDate: formattedSelectedDates?.from,
+    endDate: formattedSelectedDates?.to,
     datePrices,
   })
 
@@ -34,8 +35,8 @@ export function BookingDetailPriceBreakdown(): ReactElement {
   const deposit = getDeposit(property.priceDetails)
   const totalPrice = calculateTotalPriceIncludingCleaningFee({
     priceDetails: property.priceDetails,
-    startDate: selectedDates?.from,
-    endDate: selectedDates?.to,
+    startDate: formattedSelectedDates?.from,
+    endDate: formattedSelectedDates?.to,
     datePrices,
   })
 

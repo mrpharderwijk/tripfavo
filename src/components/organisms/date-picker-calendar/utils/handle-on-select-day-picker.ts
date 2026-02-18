@@ -1,14 +1,21 @@
 import { isAfter, isBefore } from 'date-fns'
 import { Dispatch, SetStateAction } from 'react'
-import { DateRange } from 'react-day-picker'
 
 import { updateSelectedValue } from '@/components/organisms/date-picker-calendar/utils/update-selected-value'
+import { DateRangeView } from '@/features/bookings/booking-detail/providers/booking-detail-context-provider'
+import { formatSelectedDates } from '@/utils/date/format-selected-dates'
 
-export function handleOnSelectDayPicker(
-  date: DateRange | undefined,
-  setSelected: Dispatch<SetStateAction<DateRange | undefined>>,
-  disabledDates?: Date[],
-): void {
+export type HandleOnSelectDayPickerParams = {
+  date: DateRangeView | undefined
+  setSelected: Dispatch<SetStateAction<DateRangeView | undefined>>
+  disabledDates?: Date[]
+}
+
+export function handleOnSelectDayPicker({
+  date,
+  setSelected,
+  disabledDates,
+}: HandleOnSelectDayPickerParams): void {
   if (!date) {
     setSelected(undefined)
     return
@@ -17,10 +24,12 @@ export function handleOnSelectDayPicker(
   // If selecting a range, check if any dates in between are disabled
   if (date.from && date.to) {
     // Check if any disabled dates are between the range
+    const formattedDates = formatSelectedDates({ selectedDates: date })
     if (
       disabledDates?.some(
         (disabledDate) =>
-          isAfter(disabledDate, date.from!) && isBefore(disabledDate, date.to!),
+          isAfter(disabledDate, formattedDates.from!) &&
+          isBefore(disabledDate, formattedDates.to!),
       )
     ) {
       setSelected((prevValue) => updateSelectedValue(prevValue, date))

@@ -35,7 +35,7 @@ export type PublicPropertyLocation = Omit<
 >
 export type PublicPropertyPriceDetail = Pick<
   PropertyPriceDetail,
-  'id' | 'type' | 'price'
+  'type' | 'price'
 >
 
 export type PublicProperty = Omit<Property, 'hostId'> & {

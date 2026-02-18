@@ -1,6 +1,5 @@
 'use client'
 
-import { format } from 'date-fns'
 import { useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
 import { ReactElement, useState } from 'react'
@@ -15,17 +14,23 @@ import { ModalDialog } from '@/components/molecules/modal-dialog/modal-dialog'
 import { DatePickerCalendar } from '@/components/organisms/date-picker-calendar/date-picker-calendar'
 import { handleOnSelectDayPicker } from '@/components/organisms/date-picker-calendar/utils/handle-on-select-day-picker'
 import { LineAction } from '@/components/organisms/line-action/line-action'
-import { DATE_FORMAT_SEARCH_PARAMS } from '@/constants/dates'
-import { useBookingDetailContext } from '@/features/bookings/booking-detail/providers/booking-detail-context-provider'
+import {
+  DateRangeView,
+  useBookingDetailContext,
+} from '@/features/bookings/booking-detail/providers/booking-detail-context-provider'
 import { useDialogContext } from '@/features/nav-bar/providers/dialog-context-provider'
 import { Locale } from '@/i18n/config'
+import {
+  formatDateRangeToDateRangeView,
+  formatSelectedDates,
+} from '@/utils/date/format-selected-dates'
 
 export function BookingDetailSummaryDates(): ReactElement {
   const { openDialog, closeDialog, currentOpenDialog } = useDialogContext()
   const { selectedDates, updateSelectedDates, property, totalGuestsAmount } =
     useBookingDetailContext()
   const [updatedSelectedDates, setUpdatedSelectedDates] = useState<
-    DateRange | undefined
+    DateRangeView | undefined
   >(selectedDates)
   const router = useRouter()
   const locale = useLocale()
@@ -34,22 +39,33 @@ export function BookingDetailSummaryDates(): ReactElement {
     'bookingDetail.summary.dates',
   )
 
+  const formattedSelectedDates = formatSelectedDates({ selectedDates })
+
   function handleOnClickConfirm(): void {
     if (!updatedSelectedDates?.from || !updatedSelectedDates?.to) {
       return
     }
 
     updateSelectedDates(updatedSelectedDates)
-    const startDate = format(
-      updatedSelectedDates?.from,
-      DATE_FORMAT_SEARCH_PARAMS,
-    )
-    const endDate = format(updatedSelectedDates?.to, DATE_FORMAT_SEARCH_PARAMS)
-
     router.replace(
-      `/booking/${property.id}?startDate=${startDate}&endDate=${endDate}&adults=${totalGuestsAmount.adults}&children=${totalGuestsAmount.children}&infants=${totalGuestsAmount.infants}&pets=${totalGuestsAmount.pets}`,
+      `/booking/${property.id}?startDate=${updatedSelectedDates?.from}&endDate=${updatedSelectedDates?.to}&adults=${totalGuestsAmount.adults}&children=${totalGuestsAmount.children}&infants=${totalGuestsAmount.infants}&pets=${totalGuestsAmount.pets}`,
     )
     closeDialog()
+  }
+
+  function handleOnDatePickerSelect(date: DateRange | undefined): void {
+    if (!date) {
+      setUpdatedSelectedDates(undefined)
+      updateSelectedDates(undefined)
+      return
+    }
+
+    updateSelectedDates(formatDateRangeToDateRangeView({ dateRange: date }))
+    handleOnSelectDayPicker({
+      date: formatDateRangeToDateRangeView({ dateRange: date }),
+      setSelected: setUpdatedSelectedDates,
+      disabledDates: [],
+    })
   }
 
   return (
@@ -69,8 +85,8 @@ export function BookingDetailSummaryDates(): ReactElement {
         <Body size="base-md" color="primary">
           {!!selectedDates?.from && !!selectedDates?.to && (
             <LocalizedBookingDates
-              startDate={selectedDates?.from}
-              endDate={selectedDates?.to}
+              startDate={formattedSelectedDates?.from}
+              endDate={formattedSelectedDates?.to}
               locale={locale as Locale}
             />
           )}
@@ -99,8 +115,7 @@ export function BookingDetailSummaryDates(): ReactElement {
               disabled={
                 !updatedSelectedDates?.from ||
                 !updatedSelectedDates?.to ||
-                updatedSelectedDates?.from?.toISOString() ===
-                  updatedSelectedDates?.to?.toISOString()
+                updatedSelectedDates?.from === updatedSelectedDates?.to
               }
             >
               {tBookingDetailSummaryDates('dialog.button.confirm')}
@@ -111,8 +126,8 @@ export function BookingDetailSummaryDates(): ReactElement {
         <FlexBox flex-direction="col" gap={6}>
           <Body size="base-lgt" color="primary">
             <LocalizedBookingDates
-              startDate={updatedSelectedDates?.from}
-              endDate={updatedSelectedDates?.to}
+              startDate={formattedSelectedDates?.from}
+              endDate={formattedSelectedDates?.to}
               locale={locale as Locale}
             />
           </Body>
@@ -121,10 +136,8 @@ export function BookingDetailSummaryDates(): ReactElement {
             disabledDates={[]}
             priceDates={[]}
             locale={locale as Locale}
-            selected={updatedSelectedDates}
-            onSelect={(date) =>
-              handleOnSelectDayPicker(date, setUpdatedSelectedDates)
-            }
+            selected={formattedSelectedDates}
+            onSelect={(date) => handleOnDatePickerSelect(date)}
           />
         </FlexBox>
       </ModalDialog>

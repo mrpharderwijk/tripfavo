@@ -1,5 +1,8 @@
+import { isValid } from 'date-fns'
 import { NextRequest, NextResponse } from 'next/server'
+import { PriceType } from '@prisma/client'
 
+import { datePrices } from '@/data/date-prices'
 import { GuestsAmount } from '@/features/bookings/booking-detail/providers/booking-detail-context-provider'
 import { BookingsParams } from '@/features/bookings/types/bookings-params'
 import { EmailGuestBookingRequest } from '@/features/guest/components/email-guest-booking-request/email-guest-booking-request'
@@ -12,11 +15,18 @@ import {
   PublicProperty,
   PublicPropertyPriceDetail,
 } from '@/features/properties/types/public-property'
+import { getCleaningFee } from '@/features/properties/utils/get-cleaning-fee'
+import { getDeposit } from '@/features/properties/utils/get-deposit'
+import { getHighSeasonPrice } from '@/features/properties/utils/get-high-season-price'
+import { getLowSeasonPrice } from '@/features/properties/utils/get-low-season-price'
+import { getMidSeasonPrice } from '@/features/properties/utils/get-mid-season-price'
 import { Locale } from '@/i18n/config'
 import { prisma } from '@/lib/prisma/db'
 import { resend } from '@/lib/resend/resend'
 import { isActionError } from '@/server/utils/error'
 import { isUserValid } from '@/server/utils/is-valid-user'
+import { formatSelectedDates } from '@/utils/date/format-selected-dates'
+import { calculateTotalPriceIncludingCleaningFee } from '@/utils/pricing/calculate-total-price'
 
 export async function POST(
   request: NextRequest,
@@ -58,9 +68,7 @@ export async function POST(
     !userId ||
     !guestsAmount ||
     !guestsAmount.adults ||
-    !totalPrice ||
-    !locale ||
-    !priceDetails
+    !locale
   ) {
     return NextResponse.json({ message: 'BAD_REQUEST' }, { status: 400 })
   }
@@ -73,17 +81,73 @@ export async function POST(
       select: publicPropertySelect,
     })
 
-    if (property?.host?.id && userId === property?.host?.id) {
+    if (!property || (property?.host?.id && userId === property?.host?.id)) {
       return NextResponse.json({ error: 'BAD_REQUEST' }, { status: 400 })
     }
+
+    const { from: fromDate, to: toDate } = formatSelectedDates({
+      selectedDates: { from: startDate, to: endDate },
+    })
+
+    if (!fromDate || !toDate || !isValid(fromDate) || !isValid(toDate)) {
+      console.log('fromDate: ', fromDate)
+      return NextResponse.json({ error: 'BAD_REQUEST' }, { status: 400 })
+    }
+
+    const priceDetails = [
+      {
+        type: PriceType.CLEANING_FEE,
+        price: getCleaningFee(property.priceDetails),
+      },
+      {
+        type: PriceType.DEPOSIT,
+        price: getDeposit(property.priceDetails),
+      },
+      {
+        type: PriceType.HIGH_SEASON,
+        price: getHighSeasonPrice(property.priceDetails),
+      },
+      {
+        type: PriceType.LOW_SEASON,
+        price: getLowSeasonPrice(property.priceDetails),
+      },
+      {
+        type: PriceType.MID_SEASON,
+        price: getMidSeasonPrice(property.priceDetails),
+      },
+    ]
+
+    const totalPrice = calculateTotalPriceIncludingCleaningFee({
+      priceDetails,
+      startDate: fromDate,
+      endDate: toDate,
+      datePrices: datePrices,
+    })
+
+    console.log(
+      'priceDetails -----> : ',
+      priceDetails
+        .filter(
+          (
+            priceDetail,
+          ): priceDetail is typeof priceDetail & {
+            type: NonNullable<typeof priceDetail.type>
+            price: NonNullable<typeof priceDetail.price>
+          } => priceDetail.type !== null && priceDetail.price !== null,
+        )
+        .map((priceDetail) => ({
+          type: priceDetail.type,
+          price: priceDetail.price,
+        })),
+    )
 
     // Then create new PropertyAmenity records for each amenity
     await prisma.booking.create({
       data: {
         propertyId,
         guestId: userId,
-        startDate,
-        endDate,
+        startDate: fromDate as Date,
+        endDate: toDate as Date,
         guestsAmount: {
           create: {
             adults: guestsAmount.adults,

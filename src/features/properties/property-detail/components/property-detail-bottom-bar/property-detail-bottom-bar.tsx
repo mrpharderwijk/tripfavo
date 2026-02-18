@@ -1,6 +1,5 @@
 'use client'
 
-import { format } from 'date-fns'
 import { useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
 import { ReactElement, RefObject } from 'react'
@@ -13,9 +12,10 @@ import { BottomBar } from '@/components/molecules/bottom-bar/bottom-bar'
 import { Button } from '@/components/molecules/buttons/button'
 import { LocalizedBookingDates } from '@/components/molecules/localized-booking-dates/localized-booking-dates'
 import { calculatePricePerNight } from '@/components/organisms/date-picker-calendar/utils/calculate-price-per-night'
-import { DATE_FORMAT_SEARCH_PARAMS } from '@/constants/dates'
 import { usePropertyDetailContext } from '@/features/properties/property-detail/providers/property-detail-context-provider'
 import { Locale } from '@/i18n/config'
+import { formatDateStringToDateObject } from '@/utils/date/format-date-string-to-date-object'
+import { formatSelectedDates } from '@/utils/date/format-selected-dates'
 
 type PropertyDetailBottomBarProps = {
   datePickerRef: RefObject<HTMLDivElement | null>
@@ -41,11 +41,8 @@ export function PropertyDetailBottomBar({
       return
     }
 
-    const startDate = format(selectedDateRange?.from, DATE_FORMAT_SEARCH_PARAMS)
-    const endDate = format(selectedDateRange?.to, DATE_FORMAT_SEARCH_PARAMS)
-
     router.push(
-      `/booking/${property.id}?startDate=${startDate}&endDate=${endDate}`,
+      `/booking/${property.id}?startDate=${selectedDateRange.from}&endDate=${selectedDateRange.to}`,
     )
   }
 
@@ -71,7 +68,7 @@ export function PropertyDetailBottomBar({
             <Body color="primary" size="base-lgt" font-weight="semibold">
               <LocalizedPrice
                 price={calculatePricePerNight(
-                  selectedDateRange,
+                  formatSelectedDates({ selectedDates: selectedDateRange }),
                   calendarPrices,
                 )}
                 locale={locale as Locale}
@@ -85,8 +82,12 @@ export function PropertyDetailBottomBar({
           {selectedDateRange && (
             <Body color="primary" size="base-mdt">
               <LocalizedBookingDates
-                startDate={selectedDateRange?.from}
-                endDate={selectedDateRange?.to}
+                startDate={formatDateStringToDateObject({
+                  dateString: selectedDateRange?.from,
+                })}
+                endDate={formatDateStringToDateObject({
+                  dateString: selectedDateRange?.to,
+                })}
                 locale={locale as Locale}
               />
             </Body>

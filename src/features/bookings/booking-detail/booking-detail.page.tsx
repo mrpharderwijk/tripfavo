@@ -1,6 +1,5 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation'
 import { ReactElement } from 'react'
 
 import { Divider } from '@/components/atoms/layout/divider/divider'
@@ -16,29 +15,33 @@ import { PublicProperty } from '@/features/properties/types/public-property'
 
 type BookingDetailPageProps = {
   property: PublicProperty
+  startDate: string
+  endDate: string
+  adultsAmount: number
+  childrenAmount?: number
+  infantsAmount?: number
+  petsAmount?: number
 }
 
 export function BookingDetailPage({
   property,
+  startDate,
+  endDate,
+  adultsAmount = 1,
+  childrenAmount = 0,
+  infantsAmount = 0,
+  petsAmount = 0,
 }: BookingDetailPageProps): ReactElement {
-  const searchParams = useSearchParams()
-  const startDate = searchParams.get('startDate')
-  const endDate = searchParams.get('endDate')
-  const adultsAmount = searchParams.get('adults')
-  const childrenAmount = searchParams.get('children')
-  const infantsAmount = searchParams.get('infants')
-  const petsAmount = searchParams.get('pets')
-
   return (
     <BookingDetailContextProvider
       property={property}
       startDate={startDate}
       endDate={endDate}
       guestsAmount={{
-        adults: Number(adultsAmount ?? 1),
-        children: Number(childrenAmount ?? 0),
-        infants: Number(infantsAmount ?? 0),
-        pets: Number(petsAmount ?? 0),
+        adults: adultsAmount,
+        children: childrenAmount,
+        infants: infantsAmount,
+        pets: petsAmount,
       }}
     >
       <FlexBox

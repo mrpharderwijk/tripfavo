@@ -10,17 +10,17 @@ import {
   useMemo,
   useState,
 } from 'react'
-import { DateRange } from 'react-day-picker'
 
 import { DatePrice } from '@/components/organisms/date-picker-calendar/providers/date-picker-calendar-context-provider'
 import { getCalendarPrices } from '@/components/organisms/date-picker-calendar/utils/get-calendar-prices'
+import { DateRangeView } from '@/features/bookings/booking-detail/providers/booking-detail-context-provider'
 import { PublicProperty } from '@/features/properties/types/public-property'
 
 type PropertyDetailContextType = {
   calendarPrices: DatePrice[]
   property: PublicProperty
-  selectedDateRange: DateRange | undefined
-  setSelectedDateRange: Dispatch<SetStateAction<DateRange | undefined>>
+  selectedDateRange: DateRangeView | undefined
+  setSelectedDateRange: Dispatch<SetStateAction<DateRangeView | undefined>>
 }
 
 const PropertyDetailContext = createContext<PropertyDetailContextType | null>(
@@ -36,7 +36,7 @@ export function PropertyDetailContextProvider({
   property,
 }: PropertyDetailContextProviderProps): ReactElement {
   const [selectedDateRange, setSelectedDateRange] = useState<
-    DateRange | undefined
+    DateRangeView | undefined
   >(undefined)
   const calendarPrices = useMemo(
     () => getCalendarPrices(property.priceDetails),

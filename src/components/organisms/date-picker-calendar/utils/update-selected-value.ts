@@ -1,16 +1,30 @@
 import { isBefore } from 'date-fns'
-import { DateRange } from 'react-day-picker'
+
+import { DateRangeView } from '@/features/bookings/booking-detail/providers/booking-detail-context-provider'
+import { formatDateObjectToDateString } from '@/utils/date/format-date-object-to-date-string'
+import { formatSelectedDates } from '@/utils/date/format-selected-dates'
 
 export function updateSelectedValue(
-  prevSelected: DateRange | undefined,
-  date: DateRange,
-): DateRange | undefined {
+  prevSelected: DateRangeView | undefined,
+  date: DateRangeView,
+): DateRangeView | undefined {
+  const formattedSelectedDates = formatSelectedDates({
+    selectedDates: prevSelected,
+  })
+
   // If prevSelected is undefined, just return the new date
   if (!prevSelected) {
-    if (date.from && date.to) {
-      if (isBefore(date.from as Date, date.to as Date)) {
+    if (formattedSelectedDates.from && formattedSelectedDates.to) {
+      if (
+        isBefore(
+          formattedSelectedDates.from as Date,
+          formattedSelectedDates.to as Date,
+        )
+      ) {
         return {
-          from: date.to,
+          from: formatDateObjectToDateString({
+            date: formattedSelectedDates.to,
+          }),
           to: undefined,
         }
       }
@@ -22,26 +36,47 @@ export function updateSelectedValue(
   const toChanged = prevSelected?.to !== date.to
 
   if (fromChanged) {
-    if (isBefore(date.from as Date, date.to as Date)) {
+    if (
+      isBefore(
+        formattedSelectedDates.from as Date,
+        formattedSelectedDates.to as Date,
+      )
+    ) {
       return {
-        from: date.from,
+        from: formatDateObjectToDateString({
+          date: formattedSelectedDates.from,
+        }),
         to: undefined,
       }
     }
   }
 
   if (toChanged) {
-    if (isBefore(date.to as Date, date.from as Date)) {
+    if (
+      isBefore(
+        formattedSelectedDates.to as Date,
+        formattedSelectedDates.from as Date,
+      )
+    ) {
       return {
-        from: date.to,
+        from: formatDateObjectToDateString({
+          date: formattedSelectedDates.to,
+        }),
         to: undefined,
       }
     }
   }
 
-  if (isBefore(date.from as Date, date.to as Date)) {
+  if (
+    isBefore(
+      formattedSelectedDates.from as Date,
+      formattedSelectedDates.to as Date,
+    )
+  ) {
     return {
-      from: date.to,
+      from: formatDateObjectToDateString({
+        date: formattedSelectedDates.to,
+      }),
       to: undefined,
     }
   }

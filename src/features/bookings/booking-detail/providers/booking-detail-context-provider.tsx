@@ -1,6 +1,5 @@
 'use client'
 
-import { parse } from 'date-fns'
 import {
   createContext,
   PropsWithChildren,
@@ -8,10 +7,13 @@ import {
   useContext,
   useState,
 } from 'react'
-import { DateRange } from 'react-day-picker'
 
-import { DATE_FORMAT_SEARCH_PARAMS } from '@/constants/dates'
 import { PublicProperty } from '@/features/properties/types/public-property'
+
+export type DateRangeView = {
+  from?: string
+  to?: string
+}
 
 export type TotalPricePerNight = {
   nightAmount: number
@@ -23,8 +25,8 @@ type BookingDetailContextType = {
   property: PublicProperty
   totalGuestsAmount: GuestsAmount
   updateGuestsAmount: (newGuestsAmount: GuestsAmount) => void
-  selectedDates?: DateRange
-  updateSelectedDates: (newSelectedDates: DateRange | undefined) => void
+  selectedDates?: DateRangeView
+  updateSelectedDates: (newSelectedDates: DateRangeView | undefined) => void
   bookingSuccess: boolean
   setBookingSuccess: (newBookingSuccess: boolean) => void
 }
@@ -42,8 +44,8 @@ export type GuestsAmount = {
 
 type BookingDetailContextProviderProps = PropsWithChildren<{
   property: PublicProperty
-  startDate: string | null
-  endDate: string | null
+  startDate?: string
+  endDate?: string
   guestsAmount: GuestsAmount
 }>
 
@@ -54,25 +56,20 @@ export function BookingDetailContextProvider({
   endDate,
   guestsAmount,
 }: BookingDetailContextProviderProps): ReactElement {
-  const formattedStartDate = startDate
-    ? parse(startDate, DATE_FORMAT_SEARCH_PARAMS, new Date())
-    : null
-  const formattedEndDate = endDate
-    ? parse(endDate, DATE_FORMAT_SEARCH_PARAMS, new Date())
-    : null
   const [totalGuestsAmount, setTotalGuestsAmount] =
     useState<GuestsAmount>(guestsAmount)
-  const [selectedDates, setSelectedDates] = useState<DateRange | undefined>({
-    from: formattedStartDate ?? undefined,
-    to: formattedEndDate ?? undefined,
-  })
+  const [selectedDates, setSelectedDates] = useState<DateRangeView | undefined>(
+    { from: startDate, to: endDate },
+  )
   const [bookingSuccess, setBookingSuccess] = useState(false)
 
   function updateGuestsAmount(newGuestsAmount: GuestsAmount): void {
     setTotalGuestsAmount({ ...guestsAmount, ...newGuestsAmount })
   }
 
-  function updateSelectedDates(newSelectedDates: DateRange | undefined): void {
+  function updateSelectedDates(
+    newSelectedDates: DateRangeView | undefined,
+  ): void {
     setSelectedDates(
       newSelectedDates
         ? {
